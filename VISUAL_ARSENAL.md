@@ -1,3 +1,56 @@
+# VISUAL ARSENAL
+
+Purpose: A single-page cheat sheet for the founder to deliver the Doha demo flawlessly.
+
+**THE ONE COMMAND:**
+
+Run the full demo (generates data and launches HUDs):
+
+```bash
+./launch_war_room.sh
+```
+
+**THE 4-STEP NARRATIVE:**
+
+1. Calm — Baseline: All KPIs Green, system idle; visuals show stable green map and low alert rate.
+2. Cut — Early Signal: Golden Thread anomalies appear; KPI flicker to yellow; explain brief model uncertainty.
+3. Trigger — Confirmed Alert: Precision alert transmits (4.2s shown); dashboard flips Red; transparency view and field form pop for human validation.
+4. Payout — Response & Audit: Field validation recorded, legal ledger updated, visuals move from Red → Green as containment metrics recover.
+
+Visual cue mapping: Green → Yellow → Red (Calm → Cut → Trigger → Payout).
+
+**GOVERNANCE TALKING POINTS:**
+
+- **GDPR Art. 9 (Special categories):** We process sensitive health data only under strict lawful bases and implement purpose-limiting technical controls.
+- **KDPA (Sovereign Data Protection):** Enforced via SovereignGuardrail policy engine and local ledgering to keep data under national control.
+- **HIPAA (Operational Privacy):** Technical and administrative safeguards for handling PHI; auditing and field validation provide breach detection and mitigation.
+
+Note: mention SHAP transparency during clinical validation to highlight interpretability for care teams.
+
+**THE FAILURE SCENARIO:**
+
+If the dashboard crashes, restart sequence:
+
+1. Stop current run (if running in foreground): press Ctrl+C
+2. From the project root re-launch the dashboard:
+
+```bash
+streamlit run dashboard.py
+```
+
+If you need to restart the whole demo (regenerates data and launches everything):
+
+```bash
+./launch_war_room.sh
+```
+
+**KEY METRIC EXPLANATIONS (one-liners):**
+
+- **Z-Score:** A standardized score indicating how many standard deviations a current observation lies from the historical mean — used to quantify anomaly severity.
+- **Golden Thread:** The end-to-end provenance trail that links raw sensor events through model inferences to governance decisions and legal ledger entries.
+- **Parametric Bond:** A financial instrument construct used here as a notional risk-transfer primitive whose payout is triggered by verifiable parametric alerts from the system.
+
+— End of cheat sheet —
 # 🎭 War Room Demo: The Visual Arsenal
 
 ## The Three Components
