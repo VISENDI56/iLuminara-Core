@@ -1,0 +1,223 @@
+version: '3.8'
+
+# iLuminara-Core Docker Compose Configuration
+# Deployment Target: NVIDIA Jetson Orin (ARM64)
+# Architecture: arm64v8
+# Purpose: Edge-based sovereign health intelligence platform
+
+services:
+  iluminara-core:
+    build:
+      context: .
+      dockerfile: Dockerfile.arm64
+      args:
+        PLATFORM: "linux/arm64"
+    container_name: iluminara-core-main
+    image: visendi56/iluminara-core:latest-arm64
+    
+    environment:
+      # Governance Configuration
+      - JURISDICTION=GLOBAL_DEFAULT
+      - COMPLIANCE_MODE=STRICT
+      - AUDIT_LOG_LEVEL=INFO
+      
+      # Data Fusion Configuration
+      - GOLDEN_THREAD_ENABLED=true
+      - RETENTION_POLICY_DAYS=180
+      - DATA_FUSION_TIMEOUT=30
+      
+      # Edge Node Configuration
+      - EDGE_NODE_MODE=offline-first
+      - VECTOR_STORE_BACKEND=local
+      - LORA_MESH_ENABLED=true
+      - FRENASA_INFERENCE_TIMEOUT=18ms
+      
+      # Logging
+      - LOG_LEVEL=INFO
+      - LOG_FORMAT=json
+      - AUDIT_TRAIL_ENABLED=true
+      
+      # Security
+      - TPM_ATTESTATION_ENABLED=true
+      - ENCRYPTION_ALGORITHM=AES-256-GCM
+      - TLS_VERSION=1.3
+      
+    ports:
+      - "8080:8080"      # Main API
+      - "8443:8443"      # HTTPS
+      - "9090:9090"      # Prometheus metrics
+      - "5000:5000"      # Governance service
+      - "5001:5001"      # Data fusion service
+    
+    volumes:
+      # Source code
+      - ./governance_kernel:/app/governance_kernel:ro
+      - ./edge_node:/app/edge_node:ro
+      - ./cloud_oracle:/app/cloud_oracle:ro
+      - ./hardware:/app/hardware:ro
+      
+      # Persistent data volumes
+      - iluminara-hot-storage:/data/hot       # Recent records (HOT)
+      - iluminara-cold-storage:/data/cold     # Archived records (COLD)
+      - iluminara-vector-db:/data/vectors     # Vector database
+      - iluminara-audit-logs:/data/audit      # Compliance audit trail
+      
+      # Configuration
+      - ./config:/app/config:ro
+      
+    # Resource constraints for Jetson Orin
+    deploy:
+      resources:
+        limits:
+          cpus: '4'          # Up to 4 CPU cores
+          memory: 8G         # Up to 8GB RAM
+        reservations:
+          cpus: '2'          # Reserve 2 CPU cores
+          memory: 4G         # Reserve 4GB RAM
+    
+    # Network configuration
+    networks:
+      - iluminara-network
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    # Restart policy
+    restart: unless-stopped
+    
+    # Device access (for TPM if available)
+    devices:
+      - /dev/tpm0:/dev/tpm0  # TPM attestation (optional)
+    
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+        labels: "service=iluminara-core"
+
+  # Optional: Prometheus for metrics collection
+  prometheus:
+    image: prom/prometheus:latest-arm64
+    container_name: iluminara-prometheus
+    ports:
+      - "9091:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    networks:
+      - iluminara-network
+    restart: unless-stopped
+    depends_on:
+      - iluminara-core
+
+  # Optional: Grafana for visualization
+  grafana:
+    image: grafana/grafana:latest-arm64
+    container_name: iluminara-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=iluminara
+      - GF_INSTALL_PLUGINS=
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks:
+      - iluminara-network
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+
+  # Optional: Nginx reverse proxy
+  nginx:
+    image: nginx:latest-arm64
+    container_name: iluminara-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    networks:
+      - iluminara-network
+    restart: unless-stopped
+    depends_on:
+      - iluminara-core
+
+volumes:
+  # Data volumes for persistence
+  iluminara-hot-storage:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: size=2G  # 2GB tmpfs for hot data (fast access)
+  
+  iluminara-cold-storage:
+    driver: local
+  
+  iluminara-vector-db:
+    driver: local
+  
+  iluminara-audit-logs:
+    driver: local
+  
+  # Monitoring volumes
+  prometheus-data:
+    driver: local
+  
+  grafana-storage:
+    driver: local
+
+networks:
+  iluminara-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+# Deployment instructions:
+# 
+# 1. On NVIDIA Jetson Orin, ensure Docker and Docker Compose are installed:
+#    curl -fsSL https://get.docker.com -o get-docker.sh
+#    sudo sh get-docker.sh
+#    sudo apt-get install -y docker-compose-plugin
+#
+# 2. Build and deploy:
+#    docker-compose up -d
+#
+# 3. Verify deployment:
+#    docker-compose logs -f iluminara-core
+#    curl http://localhost:8080/health
+#
+# 4. Access services:
+#    - Main API: http://localhost:8080
+#    - Grafana: http://localhost:3000
+#    - Prometheus: http://localhost:9091
+#    - Nginx: http://localhost:80
+#
+# 5. For production TLS:
+#    - Place certificate in ./ssl/server.crt
+#    - Place key in ./ssl/server.key
+#    - Update nginx.conf with certificate paths
+#
+# 6. Stop deployment:
+#    docker-compose down -v
+#
+# Architecture Notes:
+# - All images use arm64v8 base images for ARM64 compatibility
+# - Hot storage uses tmpfs for <18ms latency on fresh records
+# - Cold storage persists to disk for compliance (GDPR Art. 17)
+# - Volume size can be adjusted based on available storage
+# - Network isolation ensures compliance audit trail integrity
+# - Health checks enable automatic recovery on failure
+
