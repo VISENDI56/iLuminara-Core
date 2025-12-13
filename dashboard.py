@@ -21,6 +21,11 @@ st.markdown("""
         .status-ok { color: #00FF41; }
         .status-warn { color: #FFD700; }
         .status-crit { color: #FF0000; text-shadow: 0 0 10px #FF0000; }
+        /* Banner styling for immediate visual triage */
+        .status-banner { padding: 10px 16px; border-radius: 6px; color: white; font-weight: 800; font-size: 20px; text-align:center; }
+        .status-banner.ok { background: linear-gradient(90deg,#006400,#008000); }
+        .status-banner.crit { background: linear-gradient(90deg,#7f0000,#ff0000); box-shadow: 0 0 18px rgba(255,0,0,0.6); animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
     </style>
     """, unsafe_allow_html=True)
 
@@ -55,15 +60,17 @@ with col_head1:
     st.markdown("### NODE: **JOR-47 (DADAAB)** | LATENCY: **18ms**")
 
 with col_head2:
+    # Prominent banner: surface immediate triage
     if current_state['payout_status'] == "LOCKED":
-        st.markdown("## STATUS: <span class='status-ok'>SECURE</span>", unsafe_allow_html=True)
+        st.markdown("<div class='status-banner ok'>STATUS: SECURE</div>", unsafe_allow_html=True)
     else:
-        st.markdown("## STATUS: <span class='status-crit'>CRITICAL</span>", unsafe_allow_html=True)
+        st.markdown("<div class='status-banner crit'>STATUS: CRITICAL — ACTION REQUIRED</div>", unsafe_allow_html=True)
 
 st.divider()
 
-# --- KPI ROW (6 Columns) ---
-kpi1, kpi2, kpi3, kpi4, kpi5, kpi6 = st.columns(6)
+# --- KPI ROW (6 Columns w/ visual hierarchy) ---
+# Make the first two KPIs visually dominant for CEO demo clarity
+kpi1, kpi2, kpi3, kpi4, kpi5, kpi6 = st.columns([1.5, 1.5, 1, 1, 1, 1])
 
 z_score = current_state['z_score']
 z_color = "status-ok"
@@ -111,15 +118,17 @@ with viz1:
     r, g = 0, 255
     if z_score > 3.5: r, g = 255, 0
     elif z_score > 1.5: r, g = 255, 215
-    
-    view_state = pdk.ViewState(latitude=0.0512, longitude=40.3129, zoom=11, pitch=50)
+
+    # Zoom into the affected zone when severity is high
+    zoom_level = 9 if z_score > 3.5 else (10 if z_score > 1.5 else 11)
+    view_state = pdk.ViewState(latitude=0.0512, longitude=40.3129, zoom=zoom_level, pitch=50)
     layer = pdk.Layer("ScatterplotLayer", data=pd.DataFrame([current_state]), get_position=["lon", "lat"],
                       get_color=[r, g, 0, 160], get_radius=1000 + (z_score * 500), pickable=True)
 
     st.pydeck_chart(pdk.Deck(map_style='mapbox://styles/mapbox/dark-v10', initial_view_state=view_state, layers=[layer]))
 
 with viz2:
-    st.markdown("### 📉 THE GOLDEN THREAD")
+    st.markdown("### 📉 THE GOLDEN THREAD: Resolution of Agentic Conflict (CBS vs. EMR)")
     chart_data = historical_data[['hour', 'cbs_signals', 'z_score']]
     fig = px.line(chart_data, x='hour', y=['cbs_signals', 'z_score'], 
                   color_discrete_map={"cbs_signals": "#FFD700", "z_score": "#FF0000"})

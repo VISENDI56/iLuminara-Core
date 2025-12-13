@@ -26,7 +26,7 @@ st.markdown("""
 """)
 
 st.subheader("Time-to-Action Metric")
-st.markdown("**Alert Transmission Speed:** 4.2 seconds")
+st.markdown("**Alert Transmission Speed:** <span style='font-family: \"Courier New\", monospace; font-size:28px; color:#00FFB3;'>4.2s</span>", unsafe_allow_html=True)
 
 st.subheader("Consent Preservation Check (Dignity Guardrail)")
 st.markdown("""
@@ -38,6 +38,7 @@ Data is Anonymous & Stored Locally
 
 st.markdown("---")
 
+st.markdown("---")
 st.subheader("Precision Alert Timeline (5s chain)")
 
 try:
@@ -53,4 +54,27 @@ except FileNotFoundError:
     st.error("precision_alert_sequence.json not found. Run the simulator to generate the precision sequence.")
 
 st.markdown("---")
-st.write("Goal: Reduce Decision Anxiety by making the "Why" and "How Fast" visible to clinical staff.")
+
+# Governance Kernel Log expander (simulated list of 14 protocols)
+with st.expander('Governance Kernel Log: 14 Protocols Active', expanded=False):
+    import pandas as _pd
+    protocols = [
+        ('GDPR Art 9', 'ENFORCED'),
+        ('KDPA §37', 'ENFORCED'),
+        ('HIPAA Section 164', 'ENFORCED'),
+        ('PIPEDA', 'ENFORCED'),
+        ('POPIA', 'ENFORCED'),
+        ('Local Consent Guard', 'ENFORCED'),
+        ('Retention Policy (180d)', 'ENFORCED'),
+        ('Data Minimization', 'ENFORCED'),
+        ('Purpose Limitation', 'ENFORCED'),
+        ('Access Control', 'ENFORCED'),
+        ('Audit Trail Integrity', 'ENFORCED'),
+        ('SHAP Transparency', 'ENABLED'),
+        ('Golden Thread Anchoring', 'ENABLED'),
+        ('Anomaly Thresholds', 'ENFORCED')
+    ]
+    dfp = _pd.DataFrame(protocols, columns=['Protocol', 'Status'])
+    st.table(dfp)
+
+st.write("Goal: Reduce Decision Anxiety by making the 'Why' and 'How Fast' visible to clinical staff.")

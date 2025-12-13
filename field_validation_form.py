@@ -73,9 +73,19 @@ local_priority_score = st.slider(
 # --- 4. SUBMISSION LOGIC ---
 if st.button('Submit Validation & Sync to Edge Node'):
     # Simulate data merging logic
-    st.success(f'✅ VALIDATION SUBMITTED ({confirmed_cases} Cases). **CERTAINTY ACHIEVED.** Data merged into Golden Thread.')
+    from datetime import datetime
+    sync_id = '947F_DADAAB'
+    ts = datetime.utcnow().isoformat() + 'Z'
+    st.markdown("""
+        <div style='border:2px solid #004400; background:#E8FFF0; padding:16px; border-radius:8px;'>
+            <h3 style='color:#006400; margin:0;'>✅ VALIDATION RECEIPT</h3>
+            <p style='margin:6px 0;'><strong>Cases:</strong> %d</p>
+            <p style='margin:6px 0;'><strong>SYNC_ID:</strong> <code>%s</code></p>
+            <p style='margin:6px 0;'><strong>Timestamp:</strong> <code>%s</code></p>
+            <p style='margin:6px 0; color:#004400;'>CERTAINTY ACHIEVED — Data merged into Golden Thread and queued for sovereign anchoring.</p>
+        </div>
+    """ % (confirmed_cases, sync_id, ts), unsafe_allow_html=True)
     st.balloons()
-    
     st.markdown("---")
     # --- 5. SOVEREIGN INTEGRITY NOTE ---
     st.caption('Note: Data transmission is secured by LoRaWAN mesh and governed by KDPA protocol. All submissions are encrypted at source.')
