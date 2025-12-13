@@ -118,11 +118,8 @@ services:
     ports:
       - "9091:9090"
     volumes:
-      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - prometheus-data:/prometheus
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
+    # Using default command; custom config mount removed for local demo
     networks:
       - iluminara-network
     restart: unless-stopped
