@@ -152,9 +152,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./ssl:/etc/nginx/ssl:ro
+    # No host nginx.conf/ssl bind mounts for local demo (use container defaults)
     networks:
       - iluminara-network
     restart: unless-stopped
