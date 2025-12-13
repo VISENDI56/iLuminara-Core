@@ -1,5 +1,3 @@
-version: '3.8'
-
 # iLuminara-Core Docker Compose Configuration
 # Deployment Target: NVIDIA Jetson Orin (ARM64)
 # Architecture: arm64v8
@@ -7,6 +5,7 @@ version: '3.8'
 
 services:
   iluminara-core:
+    platform: linux/arm64
     build:
       context: .
       dockerfile: Dockerfile.arm64
@@ -48,6 +47,11 @@ services:
       - "9090:9090"      # Prometheus metrics
       - "5000:5000"      # Governance service
       - "5001:5001"      # Data fusion service
+
+    # Runtime limits for standalone docker-compose (adjusted for local hosts)
+    mem_limit: 8g
+    mem_reservation: 4g
+    cpus: '1.5'
     
     volumes:
       # Source code
@@ -66,13 +70,17 @@ services:
       - ./config:/app/config:ro
       
     # Resource constraints for Jetson Orin
+    # NOTE: The `deploy` section is honored by Docker Swarm / Compose v2 in swarm mode.
+    # On a single-node docker-compose (non-swarm), these limits are NOT enforced.
+    # If you want to enforce limits on standalone compose, consider using the 'mem_limit' and 'cpus'
+    # service options or run under swarm/kubernetes for production.
     deploy:
       resources:
         limits:
-          cpus: '4'          # Up to 4 CPU cores
+          cpus: '1.5'        # Up to 1.5 CPU cores (adjusted for 2-CPU hosts)
           memory: 8G         # Up to 8GB RAM
         reservations:
-          cpus: '2'          # Reserve 2 CPU cores
+          cpus: '1'          # Reserve 1 CPU core
           memory: 4G         # Reserve 4GB RAM
     
     # Network configuration
@@ -81,7 +89,8 @@ services:
     
     # Health check
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      # Use CMD-SHELL so minimal container images can execute shell commands (curl fallback)
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -100,11 +109,13 @@ services:
       options:
         max-size: "100m"
         max-file: "10"
-        labels: "service=iluminara-core"
+    labels:
+      - "service=iluminara-core"
 
   # Optional: Prometheus for metrics collection
   prometheus:
-    image: prom/prometheus:latest-arm64
+    platform: linux/arm64
+    image: prom/prometheus:2.45.0
     container_name: iluminara-prometheus
     ports:
       - "9091:9090"
@@ -122,7 +133,8 @@ services:
 
   # Optional: Grafana for visualization
   grafana:
-    image: grafana/grafana:latest-arm64
+    platform: linux/arm64
+    image: grafana/grafana:9.5.7
     container_name: iluminara-grafana
     ports:
       - "3000:3000"
@@ -139,7 +151,8 @@ services:
 
   # Optional: Nginx reverse proxy
   nginx:
-    image: nginx:latest-arm64
+    platform: linux/arm64
+    image: nginx:1.26.2
     container_name: iluminara-nginx
     ports:
       - "80:80"
@@ -160,7 +173,7 @@ volumes:
     driver_opts:
       type: tmpfs
       device: tmpfs
-      o: size=2G  # 2GB tmpfs for hot data (fast access)
+      o: size=2g  # 2GB tmpfs for hot data (fast access)
   
   iluminara-cold-storage:
     driver: local
