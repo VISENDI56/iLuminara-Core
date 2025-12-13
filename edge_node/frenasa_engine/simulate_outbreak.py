@@ -496,6 +496,93 @@ def save_to_file(outbreak_data: Dict[str, Any], filepath: str = "simulated_outbr
     return filepath
 
 
+def generate_precision_event_data(filepath: str = "precision_alert_sequence.json") -> str:
+    """
+    Generate a short precision alert sequence to demonstrate Alert Transmission speed.
+
+    Produces 5 records over ~5 seconds including:
+      - Event A (T=0s): CHV voice alert (Amina Hassan)
+      - Event B (T=4.2s): FRENASA AI Engine voice-to-JSON
+      - Event C (T=5.0s): OpenMRS EMR clinical correlation
+      - plus two lightweight ACK/log entries to show chain completeness
+
+    Saves `precision_alert_sequence.json` for the Transparency Dashboard.
+    """
+    base = datetime.utcnow()
+    seq = []
+
+    # Event A: CHV Voice Alert (T=0s)
+    seq.append(
+        {
+            "id": "A",
+            "timestamp": (base).isoformat() + "Z",
+            "offset_seconds": 0.0,
+            "source": "Amina Hassan (CHV)",
+            "flow": "CHV Voice Alert",
+            "value": 1,
+            "note": "Initiated by community health volunteer",
+        }
+    )
+
+    # ACK from CHV system (T=1s)
+    seq.append(
+        {
+            "id": "A_ACK",
+            "timestamp": (base + timedelta(seconds=1)).isoformat() + "Z",
+            "offset_seconds": 1.0,
+            "source": "Local Gateway",
+            "flow": "CHV Alert ACK",
+            "value": 1,
+            "note": "Local gateway received voice packet",
+        }
+    )
+
+    # Event B: FRENASA AI Engine (T=4.2s)
+    seq.append(
+        {
+            "id": "B",
+            "timestamp": (base + timedelta(seconds=4.2)).isoformat() + "Z",
+            "offset_seconds": 4.2,
+            "source": "FRENASA AI Engine",
+            "flow": "Voice-to-JSON Conversion",
+            "value": 1,
+            "note": "Transcribed and structured CHV voice alert",
+        }
+    )
+
+    # FRENASA ACK (T=4.6s)
+    seq.append(
+        {
+            "id": "B_ACK",
+            "timestamp": (base + timedelta(seconds=4.6)).isoformat() + "Z",
+            "offset_seconds": 4.6,
+            "source": "FRENASA AI Engine",
+            "flow": "Processing ACK",
+            "value": 1,
+            "note": "Voice-to-JSON pipeline acknowledged",
+        }
+    )
+
+    # Event C: OpenMRS EMR (T=5.0s)
+    seq.append(
+        {
+            "id": "C",
+            "timestamp": (base + timedelta(seconds=5)).isoformat() + "Z",
+            "offset_seconds": 5.0,
+            "source": "OpenMRS EMR",
+            "flow": "Clinical Correlation",
+            "value": 1,
+            "note": "EMR correlated incoming alert to clinical case",
+        }
+    )
+
+    with open(filepath, "w") as f:
+        json.dump({"precision_sequence": seq, "note": "Demonstrates 4.2s alert transmission & 90min detection reduction"}, f, indent=2, default=str)
+
+    print(f"💾 Precision alert sequence saved to: {filepath}")
+    return filepath
+
+
 if __name__ == "__main__":
     print("═" * 80)
     print("iLuminara Outbreak Simulator: Ground Truth Generation")
@@ -507,6 +594,12 @@ if __name__ == "__main__":
 
     # Save to file
     save_to_file(outbreak_data)
+
+    # Generate precision alert sequence for Transparency Dashboard
+    try:
+        generate_precision_event_data()
+    except Exception as e:
+        print(f"Warning: precision sequence generation failed: {e}")
 
     print("\n" + "═" * 80)
     print("🎬 Ready for Dashboard Visualization")

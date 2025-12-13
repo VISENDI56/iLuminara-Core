@@ -1,0 +1,50 @@
+{
+  "precision_sequence": [
+    {
+      "id": "A",
+      "timestamp": "2025-12-13T09:35:29.015559Z",
+      "offset_seconds": 0.0,
+      "source": "Amina Hassan (CHV)",
+      "flow": "CHV Voice Alert",
+      "value": 1,
+      "note": "Initiated by community health volunteer"
+    },
+    {
+      "id": "A_ACK",
+      "timestamp": "2025-12-13T09:35:30.015559Z",
+      "offset_seconds": 1.0,
+      "source": "Local Gateway",
+      "flow": "CHV Alert ACK",
+      "value": 1,
+      "note": "Local gateway received voice packet"
+    },
+    {
+      "id": "B",
+      "timestamp": "2025-12-13T09:35:33.215559Z",
+      "offset_seconds": 4.2,
+      "source": "FRENASA AI Engine",
+      "flow": "Voice-to-JSON Conversion",
+      "value": 1,
+      "note": "Transcribed and structured CHV voice alert"
+    },
+    {
+      "id": "B_ACK",
+      "timestamp": "2025-12-13T09:35:33.615559Z",
+      "offset_seconds": 4.6,
+      "source": "FRENASA AI Engine",
+      "flow": "Processing ACK",
+      "value": 1,
+      "note": "Voice-to-JSON pipeline acknowledged"
+    },
+    {
+      "id": "C",
+      "timestamp": "2025-12-13T09:35:34.015559Z",
+      "offset_seconds": 5.0,
+      "source": "OpenMRS EMR",
+      "flow": "Clinical Correlation",
+      "value": 1,
+      "note": "EMR correlated incoming alert to clinical case"
+    }
+  ],
+  "note": "Demonstrates 4.2s alert transmission & 90min detection reduction"
+}

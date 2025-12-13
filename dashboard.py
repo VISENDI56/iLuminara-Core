@@ -109,7 +109,7 @@ def get_z_score_color(z_score):
 
 def render_header(data):
     """Render the command console header."""
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4, col5 = st.columns([1,1,1,1,0.8])
 
     with col1:
         st.markdown(
@@ -203,6 +203,31 @@ def render_metrics(data):
             """,
             unsafe_allow_html=True,
         )
+
+    with col5:
+        # Governance Kernel metric + action
+        st.markdown(
+            f"""
+            <div class='info-card'>
+            <h4 style='color: #00ff88;'>Governance Kernel</h4>
+            <h2 style='color: #00ff88; font-size: 28px;'>14 Protocols Active</h2>
+            <small>Legal Shield Visible</small>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        if st.button("VIEW LEGAL LEDGER"):
+            try:
+                from pathlib import Path
+                ledger_path = Path("governance_kernel/vector_ledger.py")
+                content = ledger_path.read_text()
+                st.markdown("<hr/>", unsafe_allow_html=True)
+                st.subheader("Sovereign Legal Ledger (excerpt)")
+                st.code(content[:4000], language="python")
+                st.info("Run `streamlit run transparency_view.py` to open the Protocol Validation Console.")
+            except Exception as e:
+                st.error(f"Unable to open legal ledger: {e}")
 
 
 def render_map(data):
