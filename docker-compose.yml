@@ -99,9 +99,7 @@ services:
     # Restart policy
     restart: unless-stopped
     
-    # Device access (for TPM if available)
-    devices:
-      - /dev/tpm0:/dev/tpm0  # TPM attestation (optional)
+    # Device access (for TPM if available) - removed for local hosts without TPM
     
     # Logging configuration
     logging:
