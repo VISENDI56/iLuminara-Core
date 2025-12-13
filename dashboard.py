@@ -1,545 +1,131 @@
-"""
-iLuminara Sovereign Command Console
-═════════════════════════════════════════════════════════════════════════════
-
-A dark-mode, industrial-aesthetic dashboard for visualizing real-time surveillance
-and outbreak detection. Designed to be projected in a war room for investor demos.
-
-Key Visualizations:
-1. Command Header: Node status, uptime, compliance status
-2. Hexagon Map: Spatial distribution of cases, color-coded by Z-score
-3. Golden Thread: Timeline showing CBS signals leading to EMR confirmation
-4. Parametric Bond Trigger: Bond payout status (LOCKED → RELEASED)
-5. Metrics: Real-time Z-score, case counts, alert levels
-
-Run with: streamlit run dashboard.py
-"""
-
 import streamlit as st
-import json
 import pandas as pd
-import numpy as np
-from datetime import datetime
-from pathlib import Path
 import pydeck as pdk
+import json
+import plotly.express as px
 
-# Page configuration
+# --- CONFIGURATION: THE SOVEREIGN AESTHETIC ---
 st.set_page_config(
-    page_title="iLuminara Command Console",
+    page_title="iLuminara Sovereign Command",
     page_icon="🛡️",
     layout="wide",
-    initial_sidebar_state="collapsed",
+    initial_sidebar_state="collapsed"
 )
 
-# Dark mode CSS
-st.markdown(
-    """
+# Custom CSS for industrial look
+st.markdown("""
     <style>
-    [data-testid="stAppViewContainer"] {
-        background-color: #0a0e27;
-        color: #e0e6ed;
-    }
-    [data-testid="stSidebar"] {
-        background-color: #0f1229;
-    }
-    .stMetric {
-        background-color: #1a1f3a;
-        padding: 15px;
-        border-radius: 8px;
-        border-left: 4px solid #00ff88;
-    }
-    .stTabs [data-baseweb="tab-list"] {
-        background-color: #0f1229;
-    }
-    .stTabs [aria-selected="true"] {
-        border-bottom-color: #00ff88;
-    }
-    h1, h2, h3 {
-        color: #00ff88;
-        font-family: 'Courier New', monospace;
-    }
-    .green-text { color: #00ff88; }
-    .yellow-text { color: #ffff00; }
-    .red-text { color: #ff3366; }
-    .info-card {
-        background: linear-gradient(135deg, #1a1f3a 0%, #0f1229 100%);
-        padding: 20px;
-        border-radius: 10px;
-        border: 1px solid #00ff88;
-        margin-bottom: 15px;
-    }
+        .stApp {background-color: #0e1117; color: #00FF41;}
+        .metric-container {border: 1px solid #333; padding: 10px; background-color: #161b22; border-radius: 5px;}
+        .big-font {font-size: 24px !important; font-weight: bold; font-family: 'Courier New', monospace;}
+        .status-ok { color: #00FF41; }
+        .status-warn { color: #FFD700; }
+        .status-crit { color: #FF0000; text-shadow: 0 0 10px #FF0000; }
     </style>
-    """,
-    unsafe_allow_html=True,
-)
+    """, unsafe_allow_html=True)
 
-
-@st.cache_resource
-def load_outbreak_data():
-    """Load simulated outbreak data from JSON."""
-    filepath = Path("simulated_outbreak.json")
-    if not filepath.exists():
-        st.error("❌ simulated_outbreak.json not found. Run: python edge_node/frenasa_engine/simulate_outbreak.py")
-        return None
-
-    with open(filepath) as f:
-        return json.load(f)
-
-
-def format_timestamp(iso_string):
-    """Convert ISO timestamp to readable format."""
+# --- DATA LOADER ---
+@st.cache_data
+def load_data():
     try:
-        dt = datetime.fromisoformat(iso_string.replace("Z", "+00:00"))
-        return dt.strftime("%H:%M:%S")
-    except:
-        return iso_string
+        with open('simulated_outbreak.json', 'r') as f:
+            data = json.load(f)
+        return pd.DataFrame(data['events'])
+    except FileNotFoundError:
+        st.error("⚠️ DATA NOT FOUND. RUN 'python edge_node/frenasa_engine/simulate_outbreak.py' FIRST.")
+        return pd.DataFrame()
 
+df = load_data()
 
-def get_z_score_color(z_score):
-    """Return color based on Z-score alert level."""
-    if z_score < 1.0:
-        return "#00ff88"  # GREEN
-    elif z_score < 2.576:
-        return "#ffff00"  # YELLOW
-    elif z_score < 4.0:
-        return "#ff9900"  # ORANGE
+if df.empty:
+    st.stop()
+
+# --- SIDEBAR CONTROL ---
+st.sidebar.header("🕹️ TIME TRAVEL CONTROL")
+current_hour = st.sidebar.slider("Operation Hour", 0, 72, 36)
+
+# Filter data for current hour
+current_state = df[df['hour'] == current_hour].iloc[0] if len(df[df['hour'] == current_hour]) > 0 else df.iloc[0]
+historical_data = df[df['hour'] <= current_hour]
+
+# --- HEADER SECTION ---
+col_head1, col_head2 = st.columns([3, 1])
+with col_head1:
+    st.markdown("## 🛡️ iLUMINARA SOVEREIGN COMMAND")
+    st.markdown("### NODE: **JOR-47 (DADAAB)** | LATENCY: **18ms**")
+
+with col_head2:
+    if current_state['payout_status'] == "LOCKED":
+        st.markdown("## STATUS: <span class='status-ok'>SECURE</span>", unsafe_allow_html=True)
     else:
-        return "#ff3366"  # RED
-
-
-def render_header(data):
-    """Render the command console header."""
-    col1, col2, col3, col4, col5 = st.columns([1,1,1,1,0.8])
-
-    with col1:
-        st.markdown(
-            f"<h2 class='green-text'>⚡ iLuminara Sovereign Command</h2>",
-            unsafe_allow_html=True,
-        )
-
-    with col2:
-        node_status = "🟢 ONLINE"
-        st.markdown(
-            f"<div class='info-card'><strong>Node:</strong> JOR-47 (Dadaab)<br/><strong>Status:</strong> {node_status}</div>",
-            unsafe_allow_html=True,
-        )
-
-    with col3:
-        uptime = datetime.utcnow() - datetime.fromisoformat(
-            data["simulation_metadata"]["generated_at"]
-        )
-        st.markdown(
-            f"<div class='info-card'><strong>Uptime:</strong> {uptime.seconds // 3600}h {(uptime.seconds % 3600) // 60}m</div>",
-            unsafe_allow_html=True,
-        )
-
-    with col4:
-        compliance = "🛡️ COMPLIANT"
-        st.markdown(
-            f"<div class='info-card'><strong>Compliance:</strong> {compliance}</div>",
-            unsafe_allow_html=True,
-        )
-
-
-def render_metrics(data):
-    """Render key performance metrics."""
-    st.markdown("---")
-    st.markdown("<h3 class='green-text'>📊 Real-Time Metrics</h3>", unsafe_allow_html=True)
-
-    z_scores = data["z_score_timeline"]
-    current_z = z_scores[-1]["z_score"]
-    max_z = max(z["z_score"] for z in z_scores)
-    total_cases = sum(z["cases"] for z in z_scores)
-    bond_status = data["parametric_bond_trigger"]["status"]
-
-    col1, col2, col3, col4 = st.columns(4)
-
-    with col1:
-        status_color = "#00ff88" if current_z < 2.576 else "#ff3366"
-        st.markdown(
-            f"""
-            <div class='info-card'>
-            <h4 style='color: {status_color};'>Current Z-Score</h4>
-            <h2 style='color: {status_color}; font-size: 48px;'>{current_z:.2f}</h2>
-            <small>Threshold: 2.576 (99%)</small>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    with col2:
-        st.markdown(
-            f"""
-            <div class='info-card'>
-            <h4 style='color: #ffff00;'>Peak Z-Score</h4>
-            <h2 style='color: #ffff00; font-size: 48px;'>{max_z:.2f}</h2>
-            <small>Since simulation start</small>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    with col3:
-        st.markdown(
-            f"""
-            <div class='info-card'>
-            <h4 style='color: #00ff88;'>Total Cases</h4>
-            <h2 style='color: #00ff88; font-size: 48px;'>{total_cases}</h2>
-            <small>Across all zones</small>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    with col4:
-        bond_color = "#ff3366" if bond_status == "PAYOUT_RELEASED" else "#00ff88"
-        st.markdown(
-            f"""
-            <div class='info-card'>
-            <h4 style='color: {bond_color};'>Bond Status</h4>
-            <h2 style='color: {bond_color}; font-size: 36px;'>{bond_status}</h2>
-            <small>Parametric Insurance</small>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    with col5:
-        # Governance Kernel metric + action
-        st.markdown(
-            f"""
-            <div class='info-card'>
-            <h4 style='color: #00ff88;'>Governance Kernel</h4>
-            <h2 style='color: #00ff88; font-size: 28px;'>14 Protocols Active</h2>
-            <small>Legal Shield Visible</small>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-        if st.button("VIEW LEGAL LEDGER"):
-            try:
-                from pathlib import Path
-                ledger_path = Path("governance_kernel/vector_ledger.py")
-                content = ledger_path.read_text()
-                st.markdown("<hr/>", unsafe_allow_html=True)
-                st.subheader("Sovereign Legal Ledger (excerpt)")
-                st.code(content[:4000], language="python")
-                st.info("Run `streamlit run transparency_view.py` to open the Protocol Validation Console.")
-            except Exception as e:
-                st.error(f"Unable to open legal ledger: {e}")
-
-
-def render_map(data):
-    """Render pydeck hexagon map of Dadaab."""
-    st.markdown("---")
-    st.markdown("<h3 class='green-text'>🗺️ Geographic Surveillance Map</h3>", unsafe_allow_html=True)
-
-    # Get geographic data
-    geographic = data["geographic_data"]
-
-    # Create DataFrame for pydeck
-    map_data = []
-    for zone in geographic:
-        map_data.append(
-            {
-                "lat": zone["latitude"],
-                "lon": zone["longitude"],
-                "cases": zone["cases"],
-                "zone": zone["zone"],
-                "attack_rate": zone["attack_rate"],
-            }
-        )
-
-    df_map = pd.DataFrame(map_data)
-
-    # Create hexagon layer
-    hexagon_layer = pdk.Layer(
-        "HexagonLayer",
-        data=df_map,
-        get_position=["lon", "lat"],
-        radius=5000,  # 5km hexagon size
-        elevation_scale=100,
-        elevation_range=[0, 1000],
-        pickable=True,
-        extruded=True,
-        get_fill_color="[cases * 20, 200, 200 - cases * 15]",  # Color intensity by cases
-    )
-
-    # Tooltip
-    tooltip = {
-        "html": "<b>{zone}</b><br/>Cases: {cases}<br/>Attack Rate: {attack_rate:.2%}",
-        "style": {
-            "backgroundColor": "#0a0e27",
-            "color": "#00ff88",
-            "fontSize": "12px",
-        },
-    }
-
-    # Create map
-    view_state = pdk.ViewState(
-        longitude=40.33,
-        latitude=2.79,
-        zoom=10,
-        min_zoom=9,
-        max_zoom=12,
-        pitch=45,
-        bearing=0,
-    )
-
-    st.pydeck_chart(
-        pdk.Deck(
-            layers=[hexagon_layer],
-            initial_view_state=view_state,
-            tooltip=tooltip,
-            map_provider="mapbox",
-            map_style="mapbox://styles/mapbox/dark-v10",
-        )
-    )
-
-
-def render_z_score_timeline(data):
-    """Render Z-score progression over time."""
-    st.markdown("---")
-    st.markdown("<h3 class='green-text'>📈 Z-Score Outbreak Detection Timeline</h3>", unsafe_allow_html=True)
-
-    z_scores = data["z_score_timeline"]
-    df_z = pd.DataFrame(z_scores)
-
-    # Create chart data
-    chart_data = df_z[["hour", "z_score", "cases"]].copy()
-
-    # Plot using Streamlit's line chart
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.line_chart(
-            chart_data.set_index("hour")[["z_score"]],
-            use_container_width=True,
-            height=300,
-        )
-        st.caption("Z-Score Progression (99% threshold at 2.576)")
-
-    with col2:
-        st.line_chart(
-            chart_data.set_index("hour")[["cases"]],
-            use_container_width=True,
-            height=300,
-        )
-        st.caption("Cases per Hour (Exponential Growth Phase)")
-
-    # Add timeline table
-    st.markdown("**Detailed Z-Score Timeline**")
-    display_cols = ["hour", "timestamp", "cases", "z_score", "alert_level"]
-    st.dataframe(
-        df_z[display_cols].tail(20),
-        use_container_width=True,
-        height=300,
-    )
-
-
-def render_golden_thread(data):
-    """Render Golden Thread fusion examples."""
-    st.markdown("---")
-    st.markdown("<h3 class='green-text'>🔗 Golden Thread: CBS → EMR Fusion</h3>", unsafe_allow_html=True)
-
-    fusion_examples = data["golden_thread_examples"]
-
-    for i, fusion in enumerate(fusion_examples[:5]):
-        col1, col2, col3 = st.columns([2, 1, 2])
-
-        with col1:
-            cbs = fusion["cbs_signal"]
-            st.markdown(
-                f"""
-                <div class='info-card'>
-                <strong>📡 CBS Signal #{i+1}</strong><br/>
-                <small>Community Report</small><br/>
-                ⏰ {format_timestamp(cbs['timestamp'])}<br/>
-                📍 {cbs['location']}<br/>
-                🔍 {cbs['symptom']}
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-
-        with col2:
-            score = fusion["verification_score"]
-            color = "#00ff88" if score == 1.0 else "#ffff00"
-            st.markdown(
-                f"""
-                <div class='info-card' style='text-align: center;'>
-                <h3 style='color: {color};'>✓</h3>
-                <small>VERIFIED</small><br/>
-                Score: {score:.1%}
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-
-        with col3:
-            emr = fusion["emr_record"]
-            st.markdown(
-                f"""
-                <div class='info-card'>
-                <strong>📋 EMR Confirmation #{i+1}</strong><br/>
-                <small>Clinical Diagnosis</small><br/>
-                ⏰ {format_timestamp(emr['timestamp'])}<br/>
-                📍 {emr['location']}<br/>
-                🩺 {emr['diagnosis']}
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-
-
-def render_alert_timeline(data):
-    """Render alert progression timeline."""
-    st.markdown("---")
-    st.markdown("<h3 class='green-text'>🚨 Alert Progression</h3>", unsafe_allow_html=True)
-
-    # Categorize events by alert level and time
-    events = data["events"]
-    events_df = pd.DataFrame(events)
-
-    # Group by hour and alert level
-    alert_timeline = []
-    for hour in sorted(set(int(e["hour"]) for e in events)):
-        hour_events = [e for e in events if int(e["hour"]) == hour]
-        alert_level = max(
-            (e.get("alert_level", "UNKNOWN") for e in hour_events),
-            key=lambda x: ["UNKNOWN", "WATCH", "ALERT", "CRITICAL"].index(x),
-        )
-
-        alert_timeline.append(
-            {
-                "hour": hour,
-                "events": len(hour_events),
-                "alert_level": alert_level,
-            }
-        )
-
-    df_alerts = pd.DataFrame(alert_timeline)
-
-    # Color by alert level
-    colors = {
-        "WATCH": "#ffff00",
-        "ALERT": "#ff9900",
-        "CRITICAL": "#ff3366",
-        "UNKNOWN": "#888888",
-    }
-
-    col1, col2 = st.columns([2, 1])
-
-    with col1:
-        st.bar_chart(df_alerts.set_index("hour")[["events"]], use_container_width=True, height=250)
-        st.caption("Events per Hour During Surveillance Period")
-
-    with col2:
-        alert_counts = df_alerts["alert_level"].value_counts()
-        st.markdown("**Alert Summary**")
-        for level, count in alert_counts.items():
-            color = colors.get(level, "#888888")
-            st.markdown(f"<span style='color: {color};'>●</span> {level}: {count}", unsafe_allow_html=True)
-
-
-def render_compliance_panel(data):
-    """Render compliance and governance status."""
-    st.markdown("---")
-    st.markdown("<h3 class='green-text'>🛡️ Compliance & Governance</h3>", unsafe_allow_html=True)
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.markdown(
-            """
-            <div class='info-card'>
-            <h4 style='color: #00ff88;'>Active Frameworks</h4>
-            ✓ GDPR Art. 9 (Data Sovereignty)<br/>
-            ✓ Kenya DPA §37 (Transfer Restrictions)<br/>
-            ✓ HIPAA §164.312 (Safeguards)<br/>
-            ✓ EU AI Act §6 (Right to Explanation)<br/>
-            <strong style='color: #00ff88;'>14/14 Frameworks Active</strong>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    with col2:
-        st.markdown(
-            """
-            <div class='info-card'>
-            <h4 style='color: #00ff88;'>Audit Trail</h4>
-            ✓ All events logged<br/>
-            ✓ Consent validated<br/>
-            ✓ Data sovereignty enforced<br/>
-            ✓ Explainability tracked<br/>
-            <strong style='color: #00ff88;'>100% Auditable</strong>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-
-# ═════════════════════════════════════════════════════════════════════════════
-# Main Dashboard
-# ═════════════════════════════════════════════════════════════════════════════
-
-def main():
-    # Load data
-    data = load_outbreak_data()
-
-    if data is None:
-        st.error(
-            """
-            ❌ Cannot load outbreak data.
-            
-            Run the data generator first:
-            ```
-            python edge_node/frenasa_engine/simulate_outbreak.py
-            ```
-            """
-        )
-        return
-
-    # Render dashboard
-    render_header(data)
-    render_metrics(data)
-    render_map(data)
-
-    # Tabs for different views
-    tab1, tab2, tab3, tab4 = st.tabs(
-        ["📈 Z-Score Timeline", "🔗 Golden Thread", "🚨 Alerts", "🛡️ Compliance"]
-    )
-
-    with tab1:
-        render_z_score_timeline(data)
-
-    with tab2:
-        render_golden_thread(data)
-
-    with tab3:
-        render_alert_timeline(data)
-
-    with tab4:
-        render_compliance_panel(data)
-
-    # Footer
-    st.markdown("---")
-    st.markdown(
-        """
-        <div style='text-align: center; color: #888; font-size: 12px; margin-top: 30px;'>
-        iLuminara Sovereign Command Console | Node: JOR-47 | Status: ONLINE<br/>
-        <span style='color: #00ff88;'>█ Active</span> | 
-        <span style='color: #ffff00;'>⚠ Watch</span> | 
-        <span style='color: #ff9900;'>⚠ Alert</span> | 
-        <span style='color: #ff3366;'>🚨 Critical</span><br/>
-        "Transform preventable suffering from statistical inevitability to historical anomaly."
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-if __name__ == "__main__":
-    main()
+        st.markdown("## STATUS: <span class='status-crit'>CRITICAL</span>", unsafe_allow_html=True)
+
+st.divider()
+
+# --- KPI ROW (6 Columns) ---
+kpi1, kpi2, kpi3, kpi4, kpi5, kpi6 = st.columns(6)
+
+z_score = current_state['z_score']
+z_color = "status-ok"
+if z_score > 2.0: z_color = "status-warn"
+if z_score > 3.5: z_color = "status-crit"
+
+# Logic for Field Validation Status
+validation_status = "PENDING"
+validation_color = "status-warn"
+if current_hour >= 40:
+    validation_status = "COMPLETED"
+    validation_color = "status-ok"
+
+with kpi1:
+    st.markdown(f"<div class='metric-container'>Risk Z-Score<br><span class='big-font {z_color}'>{z_score:.2f}</span></div>", unsafe_allow_html=True)
+
+with kpi2:
+    payout_color = "status-crit" if current_state['payout_status'] == "RELEASED" else "status-ok"
+    st.markdown(f"<div class='metric-container'>Parametric Bond<br><span class='big-font {payout_color}'>{current_state['payout_status']}</span></div>", unsafe_allow_html=True)
+
+with kpi3:
+    st.markdown(f"<div class='metric-container'>CBS Signals<br><span class='big-font'>{int(current_state['cbs_signals'])}</span></div>", unsafe_allow_html=True)
+
+with kpi4:
+    st.markdown(f"<div class='metric-container'>EMR Confirmed<br><span class='big-font'>{int(current_state['emr_confirmations'])}</span></div>", unsafe_allow_html=True)
+
+with kpi5:
+    st.markdown(f"<div class='metric-container'>Governance Kernel<br><span class='big-font status-ok'>14 ACTIVE</span></div>", unsafe_allow_html=True)
+    if st.button("VIEW LEGAL LEDGER"):
+        st.info("💡 Concept: This would navigate to the Transparency View.")
+
+# NEW Field Validation KPI
+with kpi6:
+    st.markdown(f"<div class='metric-container'>Field Validation<br><span class='big-font {validation_color}'>{validation_status}</span></div>", unsafe_allow_html=True)
+
+st.write("")  # Spacer
+
+# --- MAIN VISUALIZATION ROW ---
+viz1, viz2 = st.columns([2, 1])
+
+# PyDeck Map
+with viz1:
+    st.markdown("### 🗺️ SPATIOTEMPORAL RISK MAP")
+    
+    r, g = 0, 255
+    if z_score > 3.5: r, g = 255, 0
+    elif z_score > 1.5: r, g = 255, 215
+    
+    view_state = pdk.ViewState(latitude=0.0512, longitude=40.3129, zoom=11, pitch=50)
+    layer = pdk.Layer("ScatterplotLayer", data=pd.DataFrame([current_state]), get_position=["lon", "lat"],
+                      get_color=[r, g, 0, 160], get_radius=1000 + (z_score * 500), pickable=True)
+
+    st.pydeck_chart(pdk.Deck(map_style='mapbox://styles/mapbox/dark-v10', initial_view_state=view_state, layers=[layer]))
+
+with viz2:
+    st.markdown("### 📉 THE GOLDEN THREAD")
+    chart_data = historical_data[['hour', 'cbs_signals', 'z_score']]
+    fig = px.line(chart_data, x='hour', y=['cbs_signals', 'z_score'], 
+                  color_discrete_map={"cbs_signals": "#FFD700", "z_score": "#FF0000"})
+    fig.update_layout(plot_bgcolor='#0e1117', paper_bgcolor='#0e1117', font_color='#00FF41', margin=dict(l=20, r=20, t=20, b=20), legend=dict(orientation="h"))
+    st.plotly_chart(fig, use_container_width=True)
+
+# --- FOOTER ---
+st.divider()
+st.markdown(f"**SYSTEM LOG:** Simulated Outbreak Scenario v1.0 | Offline Protocol: **ACTIVE** | Frame: {current_hour}/72")
