@@ -1,0 +1,81 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# GitHub
+.github
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv
+venv/
+ENV/
+env/
+
+# IDEs
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Logs
+logs/
+*.log
+
+# Data files (unless needed for demo)
+*.json
+!precision_alert_sequence.json
+
+# Docker
+docker-compose.yml
+Dockerfile.arm64
+
+# Shell scripts (deployment only)
+*.sh
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large simulation files
+simulated_outbreak.json
+
+# Temporary files
+tmp/
+temp/
+*.tmp
