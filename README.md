@@ -60,7 +60,12 @@ Vector database for semantic health information retrieval.
 Low-bandwidth mesh networking for deployment in resource-constrained environments.
 
 #### `/cloud_oracle/`
-Parametric bond pricing engine for health economics (optional cloud integration).
+Multi-scale outbreak forecasting system with Google Cloud Platform integration:
+- **BigQuery**: Historical outbreak data storage + real-time streaming ingestion
+- **Vertex AI Time Series**: Predictive modeling across spatial hierarchies (community → national)
+- **Dataflow**: Real-time data fusion combining CBS, EMR, and environmental streams
+- **72-hour forecasting**: Predict outbreak trajectories with 95% confidence intervals
+- **Hierarchical forecasting**: Bottom-up aggregation ensures spatial consistency
 
 #### `/hardware/`
 TPM attestation and bill-of-materials ledger for hardware-rooted trust.
@@ -170,7 +175,72 @@ print(f"Verification Score: {fused.verification_score}")  # 1.0 (CONFIRMED)
 print(fused.to_dict())
 ```
 
-### 4. Deploy to NVIDIA Jetson Orin
+### 4. Multi-scale Outbreak Forecasting
+
+```python
+from cloud_oracle.bigquery_integration import BigQueryIntegration
+from cloud_oracle.vertex_ai_forecasting import VertexAIForecasting, create_spatial_hierarchy_example
+
+# Initialize BigQuery for historical data
+bq = BigQueryIntegration(
+    project_id='my-project',
+    dataset_id='outbreak_surveillance'
+)
+
+# Load historical outbreak data
+bq.batch_load_events(historical_events)
+
+# Initialize Vertex AI forecasting
+forecaster = VertexAIForecasting(
+    project_id='my-project',
+    location='us-central1'
+)
+
+# Create spatial hierarchy (community → district → region → national)
+hierarchy = create_spatial_hierarchy_example()
+
+# Generate multi-scale forecast
+forecast = forecaster.multi_scale_forecast(
+    time_series_data=time_series_by_level,
+    spatial_hierarchy=hierarchy,
+    forecast_horizon=72  # 72-hour forecast
+)
+
+# Access forecasts by spatial level
+community_forecast = forecast['forecasts_by_level']['community']
+district_forecast = forecast['forecasts_by_level']['district']
+
+print(f"Community forecast: {community_forecast['ifo_camp']['forecast_values']}")
+print(f"District forecast: {district_forecast['dadaab_district']['forecast_values']}")
+```
+
+### 5. Real-time Data Fusion with Dataflow
+
+```python
+from cloud_oracle.dataflow_pipeline import DataflowPipeline, create_pubsub_topics
+
+# Create Pub/Sub topics for data ingestion
+create_pubsub_topics(project_id='my-project')
+
+# Initialize Dataflow pipeline
+pipeline = DataflowPipeline(
+    project_id='my-project',
+    region='us-central1'
+)
+
+# Create and run pipeline (fuses CBS + EMR + Environmental streams)
+pipeline.create_pipeline()
+
+# Pipeline will:
+# 1. Ingest from Pub/Sub topics
+# 2. Apply 5-minute windowing
+# 3. Fuse co-located events
+# 4. Enrich with spatial/temporal context
+# 5. Write to BigQuery
+# 6. Trigger alerts for high-risk events
+```
+
+### 6. Deploy to NVIDIA Jetson Orin
 
 ```bash
 docker-compose up -d
@@ -224,6 +294,30 @@ Merges three data streams into one verified timeline:
 IF cbs.location == emr.location AND |cbs.timestamp - emr.timestamp| < 24h
     THEN verification_score = 1.0 (CONFIRMED)
     ELSE score degrades based on conflict severity
+```
+
+### Multi-scale Outbreak Forecasting
+Cloud Oracle integrates with Google Cloud Platform for predictive analytics:
+- **BigQuery**: Historical outbreak data storage + real-time streaming (time-partitioned, H3-clustered)
+- **Vertex AI**: AutoML time-series forecasting across spatial hierarchies
+- **Dataflow**: Real-time data fusion combining CBS, EMR, and environmental streams
+
+**Forecasting Capabilities:**
+- **72-hour forecast horizon** with 95% confidence intervals
+- **Multi-scale predictions**: Community → District → Region → National
+- **Hierarchical consistency**: Bottom-up aggregation ensures spatial coherence
+- **Environmental integration**: Water quality, climate, and other risk factors
+- **Real-time alerts**: Sub-minute latency for high-risk events
+
+**Spatial Hierarchy:**
+```
+Community (Ifo Camp)      → Event count: 15  → Forecast: [18, 22, 27]
+    ↓
+District (Dadaab)         → Event count: 45  → Forecast: [55, 68, 82]
+    ↓
+Region (Garissa)          → Event count: 120 → Forecast: [145, 175, 210]
+    ↓
+National (Kenya)          → Event count: 450 → Forecast: [550, 680, 820]
 ```
 
 ### The 6-Month Rule
