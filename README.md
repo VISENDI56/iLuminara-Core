@@ -40,6 +40,9 @@ Built on four foundational pillars:
 #### `/governance_kernel/`
 The ethical engine of iLuminara. Encodes 14 global legal frameworks into Python logic.
 - **`vector_ledger.py`** — `SovereignGuardrail` class enforces GDPR, KDPA, PIPEDA, POPIA, HIPAA, HITECH, CCPA, NIST CSF, ISO 27001, SOC 2, and EU AI Act compliance
+- **`crisis_decision_agent.py`** — AI agent for autonomous crisis decisions with humanitarian law compliance
+- **`fairness_constraints.py`** — Fairness constraint engine ensuring equitable resource allocation
+- **`ai_agent_coordinator.py`** — Integrated coordinator for multi-layer ethical validation
 - Validates every action against sovereign dignity constraints
 - Raises `SovereigntyViolationError` with specific legal citations
 
@@ -234,6 +237,158 @@ Records older than 180 days transition to **COLD storage**:
 ```python
 retention_status = 'HOT' if (now - record.timestamp).days <= 180 else 'COLD'
 ```
+
+---
+
+## 🤖 AI Agents with Ethical Guardrails
+
+iLuminara-Core includes autonomous AI agents designed for crisis response scenarios with built-in ethical constraints, humanitarian law compliance, and fairness enforcement.
+
+### Crisis Decision Agent
+
+Autonomous decision-making system that enforces international humanitarian law:
+
+```python
+from governance_kernel.crisis_decision_agent import CrisisDecisionAgent, DecisionType
+
+agent = CrisisDecisionAgent()
+
+decision = agent.make_decision(
+    decision_type=DecisionType.RESOURCE_ALLOCATION,
+    context={
+        'affected_population': 5000,
+        'location': 'Dadaab_Refugee_Camp',
+        'resources': {'medical_supplies': 2000},
+        'time_sensitivity': 'urgent'
+    },
+    affected_groups=[
+        {
+            'name': 'Children_Under_5',
+            'size': 800,
+            'need_level': 0.9,
+            'is_protected_group': True
+        },
+        {
+            'name': 'Adults',
+            'size': 4200,
+            'need_level': 0.6,
+            'is_protected_group': False
+        }
+    ]
+)
+
+print(f"Decision: {decision.recommendation}")
+print(f"Confidence: {decision.confidence_score}")
+print(f"Requires Human Approval: {decision.requires_human_approval}")
+```
+
+**Key Features:**
+- Enforces Geneva Conventions and International Humanitarian Law
+- Implements 7 core humanitarian principles (humanity, impartiality, neutrality, distinction, proportionality, precaution, independence)
+- Blocks prohibited actions (collective punishment, discrimination, arbitrary detention)
+- Prioritizes protected groups (children, elderly, disabled, pregnant women, medical personnel)
+- Full audit trail with legal citations for transparency
+
+### Fairness Constraint Engine
+
+Ensures equitable resource allocation with bias detection:
+
+```python
+from governance_kernel.fairness_constraints import FairnessConstraintEngine, PopulationGroup
+
+engine = FairnessConstraintEngine(fairness_threshold=0.8)
+
+groups = [
+    PopulationGroup(
+        group_id="vulnerable",
+        name="Vulnerable_Population",
+        size=1000,
+        vulnerability_score=1.5,
+        need_level=0.9,
+        is_protected_group=True,
+        proposed_allocation=1500
+    ),
+    PopulationGroup(
+        group_id="general",
+        name="General_Population",
+        size=5000,
+        vulnerability_score=1.0,
+        need_level=0.5,
+        is_protected_group=False,
+        proposed_allocation=5000
+    )
+]
+
+assessment = engine.evaluate_fairness(
+    groups=groups,
+    allocation_plan={},
+    enforce_constraints=True
+)
+
+print(f"Overall Fairness Score: {assessment.overall_fairness_score}")
+print(f"Equity Gaps: {len(assessment.equity_gaps)}")
+print(f"Bias Indicators: {assessment.bias_indicators}")
+```
+
+**Fairness Metrics:**
+- **Demographic Parity**: Equal per-capita allocation across groups
+- **Equal Opportunity**: All groups with need receive resources
+- **Proportional Allocation**: Resources match need levels
+- **Protected Group Fairness**: Vulnerable populations not disadvantaged
+- **Vulnerability Equity**: Higher vulnerability receives more support
+
+### Integrated AI Agent Coordinator
+
+Multi-layer ethical validation system:
+
+```python
+from governance_kernel.ai_agent_coordinator import AIAgentCoordinator, CrisisScenarioType
+
+coordinator = AIAgentCoordinator(
+    fairness_threshold=0.8,
+    confidence_threshold=0.7
+)
+
+result = coordinator.execute_crisis_decision(
+    scenario_type=CrisisScenarioType.DISEASE_OUTBREAK,
+    decision_type=DecisionType.RESOURCE_ALLOCATION,
+    affected_area="Dadaab_Refugee_Camp",
+    population_groups=[...],
+    resources_available={'medical_supplies': 5000},
+    jurisdiction="KDPA_KE"
+)
+
+print(f"Approval Status: {result.approval_status}")
+print(f"Fairness Score: {result.fairness_assessment.overall_fairness_score}")
+print(f"Legal Compliance: {result.sovereignty_compliance['compliant']}")
+print(f"\nEthical Summary:\n{result.ethical_summary}")
+```
+
+**Decision Pipeline:**
+1. **Crisis Decision Agent** generates recommendation with humanitarian law constraints
+2. **Fairness Constraint Engine** validates equity and detects bias
+3. **Sovereign Guardrail** ensures legal compliance (GDPR, KDPA, HIPAA, etc.)
+4. **Coordinator** synthesizes final decision with full audit trail
+5. **Human Approval Check** determines if oversight required
+
+**Humanitarian Law Enforcement:**
+- Geneva Conventions (1949) - Protection of civilians
+- UN OCHA Humanitarian Principles
+- WHO Emergency Response Framework
+- Core Humanitarian Standard (CHS)
+- International Health Regulations (2005)
+
+### Run the Demo
+
+```bash
+python examples/ai_agent_crisis_response_demo.py
+```
+
+This demonstrates a cholera outbreak scenario in Dadaab refugee camp with:
+- 6 population groups with different vulnerability levels
+- Fair resource allocation with ethical constraints
+- Multi-layer validation (humanitarian law + fairness + sovereignty)
+- Complete audit trail and legal citations
 
 ---
 
