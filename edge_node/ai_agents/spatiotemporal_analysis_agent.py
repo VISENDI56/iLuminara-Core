@@ -353,8 +353,10 @@ class SpatiotemporalAnalysisAgent:
             gi_star, p_value = self._calculate_gi_star(cell_data, grid)
             
             # Significant hotspot if p < 0.05 and positive Gi*
-            if p_value < 0.05 and gi_star > 0:
-                intensity = "High" if gi_star > 2.58 else ("Medium" if gi_star > 1.96 else "Low")
+            if p_value < P_VALUE_SIGNIFICANT and gi_star > 0:
+                intensity = "High" if gi_star > GI_STAR_CRITICAL_VALUE_99 else (
+                    "Medium" if gi_star > GI_STAR_CRITICAL_VALUE_95 else "Low"
+                )
                 
                 timestamps = [
                     self._parse_timestamp(case.get("timestamp"))
