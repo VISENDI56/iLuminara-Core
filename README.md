@@ -40,8 +40,10 @@ Built on four foundational pillars:
 #### `/governance_kernel/`
 The ethical engine of iLuminara. Encodes 14 global legal frameworks into Python logic.
 - **`vector_ledger.py`** — `SovereignGuardrail` class enforces GDPR, KDPA, PIPEDA, POPIA, HIPAA, HITECH, CCPA, NIST CSF, ISO 27001, SOC 2, and EU AI Act compliance
+- **`audit_trail.py`** — Tamper-proof audit trail with Bigtable, Cloud Spanner, and Cloud KMS integration
 - Validates every action against sovereign dignity constraints
 - Raises `SovereigntyViolationError` with specific legal citations
+- Cryptographically signs all audit entries for non-repudiation
 
 #### `/edge_node/sync_protocol/`
 The "Golden Thread" — merges EMR, CBS, and IDSR data streams.
@@ -170,7 +172,44 @@ print(f"Verification Score: {fused.verification_score}")  # 1.0 (CONFIRMED)
 print(fused.to_dict())
 ```
 
-### 4. Deploy to NVIDIA Jetson Orin
+### 4. Enable Tamper-proof Audit Trail
+
+```python
+from governance_kernel.vector_ledger import SovereignGuardrail
+from governance_kernel.audit_trail import TamperProofAuditTrail, AuditEventType
+
+# Initialize with tamper-proof audit trail
+guardrail = SovereignGuardrail(enable_tamper_proof_audit=True)
+
+# All validation actions are automatically logged with:
+# - Bigtable: High-throughput ledger storage
+# - Cloud Spanner: Cross-region synchronization
+# - Cloud KMS: Cryptographic signing for non-repudiation
+
+# Perform validation (automatically logged)
+guardrail.validate_action(
+    action_type='High_Risk_Inference',
+    payload={
+        'actor': 'ml_system',
+        'resource': 'patient_diagnosis',
+        'explanation': 'SHAP values: [0.8, 0.1, 0.1]',
+        'confidence_score': 0.95,
+        'evidence_chain': ['fever', 'cough', 'positive_test'],
+        'consent_token': 'valid_token',
+        'consent_scope': 'diagnosis'
+    },
+    jurisdiction='EU_AI_ACT'
+)
+
+# Retrieve tamper-proof audit history
+history = guardrail.get_tamper_proof_audit_history(limit=10)
+
+# Verify cryptographic chain integrity
+integrity = guardrail.verify_audit_chain_integrity()
+print(f"Chain valid: {integrity['chain_valid']}")  # True if no tampering
+```
+
+### 5. Deploy to NVIDIA Jetson Orin
 
 ```bash
 docker-compose up -d
@@ -178,7 +217,7 @@ docker-compose up -d
 
 ---
 
-## 📋 The Three Pillars of Compliance
+## 📋 The Four Pillars of Compliance
 
 ### Pillar 1: Data Sovereignty
 **Rule 1 from `SovereignGuardrail`:**
@@ -209,6 +248,43 @@ if not payload.get('consent_token'):
     )
 ```
 
+### Pillar 4: Tamper-proof Audit Trail
+**NEW: Cryptographic Proof of Compliance**
+
+```python
+# Every sovereignty decision is cryptographically logged with:
+# 1. SHA-256 hash chain (immutable)
+# 2. Cloud KMS signature (non-repudiation)
+# 3. Bigtable storage (high-throughput)
+# 4. Spanner sync (cross-region consistency)
+
+# Initialize with tamper-proof audit
+guardrail = SovereignGuardrail(enable_tamper_proof_audit=True)
+
+# All actions are automatically logged
+guardrail.validate_action(...)  # Logged to Bigtable + Spanner + KMS signed
+
+# Verify no tampering
+integrity = guardrail.verify_audit_chain_integrity()
+if not integrity['chain_valid']:
+    alert("CRITICAL: Audit trail compromised!")
+```
+
+**Key Features:**
+- 🔐 **Cryptographic Signatures**: KMS-backed HSM signatures on every entry
+- 🔗 **Hash Chain**: Each entry links to previous (blockchain-style)
+- 🌍 **Cross-Region Sync**: Spanner ensures global consistency
+- ⚡ **High Performance**: Bigtable handles 10,000+ writes/sec
+- 🛡️ **Tamper Detection**: Any modification breaks the chain mathematically
+
+**Compliance Coverage:**
+- GDPR Art. 30 (Records of Processing) ✅
+- HIPAA §164.312 (Audit Controls) ✅
+- SOC 2 (Security Monitoring) ✅
+- ISO 27001 A.12.4 (Logging) ✅
+- EU AI Act §12 (Record Keeping) ✅
+
+---
 ---
 
 ## 🔐 Key Concepts

@@ -1,0 +1,14 @@
+# iLuminara-Core Requirements
+# Python dependencies for the iLuminara-Core sovereign health architecture
+
+# Testing
+pytest>=7.0.0
+
+# Google Cloud Platform (optional, for production deployment)
+# Uncomment these for production use with real GCP resources:
+# google-cloud-bigtable>=2.0.0
+# google-cloud-spanner>=3.0.0
+# google-cloud-kms>=2.0.0
+
+# Note: The system runs in simulation mode by default (no GCP credentials required)
+# For development and testing, simulation mode provides full functionality
