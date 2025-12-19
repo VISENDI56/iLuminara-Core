@@ -4,6 +4,25 @@
 
 ---
 
+## 🎯 NEW: Google Cloud Prototype (v1.0)
+
+**Run the complete iLuminara stack in 30 seconds:**
+
+```bash
+./run_demo.sh
+```
+
+Access the **Compassionate UI Dashboard** at http://localhost:8501
+
+**Features:**
+- 🎤 **Sentry Mode**: Voice-to-JSON processing with entity extraction
+- 🗺️ **HSTPU Map**: Interactive 3D outbreak visualization with risk metrics
+- ⚖️ **Ethical Audit**: Active Inference decision validation with humanitarian constraints
+
+**See:** [QUICKSTART_GCP.md](QUICKSTART_GCP.md) | [GCP_PROTOTYPE.md](GCP_PROTOTYPE.md) | [Deploy to GCP](gcp_scripts/deploy.sh)
+
+---
+
 ## 🏗️ The Fortress: Architecture Overview
 
 iLuminara-Core is a **globally sovereign, compliance-first health intelligence platform** designed to operate identically in Toronto, Cape Town, and California without changing a single line of code.
@@ -36,6 +55,13 @@ Built on four foundational pillars:
 ```
 
 ### Core Modules
+
+#### `/app/` **[NEW: GCP Prototype]**
+Production-ready Google Cloud Platform deployment.
+- **`app/backend/`** — FastAPI microservices (Voice Processing, HSTPU Forecasting, Ethical Engine)
+- **`app/frontend/`** — Streamlit Compassionate UI dashboard
+- **`gcp_scripts/`** — Cloud Run deployment automation
+- Mock GCP services for local development without credentials
 
 #### `/governance_kernel/`
 The ethical engine of iLuminara. Encodes 14 global legal frameworks into Python logic.
