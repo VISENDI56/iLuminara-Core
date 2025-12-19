@@ -433,7 +433,11 @@ class GoldenThread:
         Records older than 6 months (180 days) transition to COLD storage.
         This preserves hot memory performance while maintaining auditability.
         """
-        days_since_record = (datetime.utcnow() - record_timestamp).days
+        # Make both timestamps timezone-naive for comparison
+        now = datetime.utcnow()
+        record_ts = record_timestamp.replace(tzinfo=None) if record_timestamp.tzinfo else record_timestamp
+        
+        days_since_record = (now - record_ts).days
 
         if days_since_record > self.retention_policy_days:
             return "COLD"
@@ -448,7 +452,11 @@ class GoldenThread:
 
         Philosophy: "Hot memory is for recent events. Cold storage for history."
         """
-        days_since = (datetime.utcnow() - record_date).days
+        # Make both timestamps timezone-naive for comparison
+        now = datetime.utcnow()
+        record_ts = record_date.replace(tzinfo=None) if record_date.tzinfo else record_date
+        
+        days_since = (now - record_ts).days
         should_remain_hot = days_since <= self.retention_policy_days
 
         if not should_remain_hot:

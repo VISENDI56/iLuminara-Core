@@ -49,12 +49,16 @@ echo "✅ Python 3 detected: $(python3 --version)"
 if [ ! -d ".venv" ]; then
     echo "⚠️  Virtual environment not found. Creating..."
     python3 -m venv .venv
-    source .venv/bin/activate
+    if [ -f ".venv/bin/activate" ]; then
+        source .venv/bin/activate
+    fi
     pip install --upgrade pip
     pip install streamlit pandas numpy
 else
     echo "✅ Virtual environment exists"
-    source .venv/bin/activate
+    if [ -f ".venv/bin/activate" ]; then
+        source .venv/bin/activate
+    fi
 fi
 
 # Verify core modules exist
