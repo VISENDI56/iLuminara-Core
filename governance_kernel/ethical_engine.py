@@ -17,7 +17,7 @@ Philosophy: "First, do no harm. Second, maximize human dignity in crisis."
 
 import json
 import os
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from dataclasses import dataclass
 from datetime import datetime, timezone
 import numpy as np

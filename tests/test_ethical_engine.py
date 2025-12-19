@@ -9,7 +9,6 @@ Tests the EthicalEngine class to ensure proper application of:
 """
 
 import pytest
-from datetime import datetime
 from governance_kernel.ethical_engine import (
     EthicalEngine,
     HumanitarianViolationError,
