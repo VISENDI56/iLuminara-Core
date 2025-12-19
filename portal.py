@@ -122,7 +122,11 @@ if page == "🛡️ Command Console":
     
     # Get current state from z_score_timeline for metrics
     if not z_score_df.empty:
-        z_score_state = z_score_df[z_score_df['hour'] <= current_hour].iloc[-1] if len(z_score_df[z_score_df['hour'] <= current_hour]) > 0 else z_score_df.iloc[0]
+        filtered_df = z_score_df[z_score_df['hour'] <= current_hour]
+        if len(filtered_df) > 0:
+            z_score_state = filtered_df.iloc[-1]
+        else:
+            z_score_state = z_score_df.iloc[0]
         z_score = z_score_state['z_score']
         cases = z_score_state['cases']
     else:
@@ -202,11 +206,21 @@ if page == "🛡️ Command Console":
     with viz1:
         st.markdown("### 🗺️ SPATIOTEMPORAL RISK MAP")
         
+        # Determine color based on z-score
         r, g = 0, 255
-        if z_score > 3.5: r, g = 255, 0
-        elif z_score > 1.5: r, g = 255, 215
+        if z_score > 3.5:
+            r, g = 255, 0
+        elif z_score > 1.5:
+            r, g = 255, 215
         
-        zoom_level = 9 if z_score > 3.5 else (10 if z_score > 1.5 else 11)
+        # Determine zoom level based on z-score
+        if z_score > 3.5:
+            zoom_level = 9
+        elif z_score > 1.5:
+            zoom_level = 10
+        else:
+            zoom_level = 11
+        
         view_state = pdk.ViewState(latitude=lat, longitude=lon, zoom=zoom_level, pitch=50)
         layer = pdk.Layer("ScatterplotLayer", data=pd.DataFrame([{'lat': lat, 'lon': lon}]), 
                           get_position=["lon", "lat"],
@@ -340,15 +354,15 @@ elif page == "📱 Field Validation":
     if st.button('Submit Validation & Sync to Edge Node'):
         sync_id = '947F_DADAAB'
         ts = datetime.utcnow().isoformat() + 'Z'
-        st.markdown("""
+        st.markdown(f"""
             <div style='border:2px solid #004400; background:#E8FFF0; padding:16px; border-radius:8px;'>
                 <h3 style='color:#006400; margin:0;'>✅ VALIDATION RECEIPT</h3>
-                <p style='margin:6px 0;'><strong>Cases:</strong> %d</p>
-                <p style='margin:6px 0;'><strong>SYNC_ID:</strong> <code>%s</code></p>
-                <p style='margin:6px 0;'><strong>Timestamp:</strong> <code>%s</code></p>
+                <p style='margin:6px 0;'><strong>Cases:</strong> {confirmed_cases}</p>
+                <p style='margin:6px 0;'><strong>SYNC_ID:</strong> <code>{sync_id}</code></p>
+                <p style='margin:6px 0;'><strong>Timestamp:</strong> <code>{ts}</code></p>
                 <p style='margin:6px 0; color:#004400;'>CERTAINTY ACHIEVED — Data merged into Golden Thread and queued for sovereign anchoring.</p>
             </div>
-        """ % (confirmed_cases, sync_id, ts), unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
         st.balloons()
         st.markdown("---")
     
