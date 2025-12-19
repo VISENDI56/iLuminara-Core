@@ -40,6 +40,10 @@ Built on four foundational pillars:
 #### `/governance_kernel/`
 The ethical engine of iLuminara. Encodes 14 global legal frameworks into Python logic.
 - **`vector_ledger.py`** — `SovereignGuardrail` class enforces GDPR, KDPA, PIPEDA, POPIA, HIPAA, HITECH, CCPA, NIST CSF, ISO 27001, SOC 2, and EU AI Act compliance
+- **`humanitarian_constraints.py`** — Humanitarian constraint encoding with three GCP integrations:
+  - **Vertex AI Explainable AI**: SHAP analysis for decision transparency (EU AI Act § 6 compliance)
+  - **Cloud Functions**: Real-time constraint checking (WHO, ICRC, Sphere Standards)
+  - **Secret Manager**: Secure storage of humanitarian protocols
 - Validates every action against sovereign dignity constraints
 - Raises `SovereigntyViolationError` with specific legal citations
 
@@ -62,11 +66,18 @@ Low-bandwidth mesh networking for deployment in resource-constrained environment
 #### `/cloud_oracle/`
 Parametric bond pricing engine for health economics (optional cloud integration).
 
+#### `/cloud_functions/`
+Serverless humanitarian constraint checking deployed as Google Cloud Functions.
+- Real-time validation of humanitarian protocols
+- HTTP-triggered constraint enforcement
+- Integration with Vertex AI and Secret Manager
+
 #### `/hardware/`
 TPM attestation and bill-of-materials ledger for hardware-rooted trust.
 
 #### `/docs/`
 Philosophical architecture, RFP specifications, and global compliance matrix.
+- **`HUMANITARIAN_CONSTRAINTS.md`** — Complete guide to humanitarian constraint encoding system
 
 ---
 
@@ -170,7 +181,41 @@ print(f"Verification Score: {fused.verification_score}")  # 1.0 (CONFIRMED)
 print(fused.to_dict())
 ```
 
-### 4. Deploy to NVIDIA Jetson Orin
+### 4. Use Humanitarian Constraint Encoding
+
+```python
+from governance_kernel.humanitarian_constraints import (
+    VertexAIExplainableAI,
+    CloudFunctionConstraintChecker
+)
+
+# Generate SHAP explanation for AI decisions
+explainer = VertexAIExplainableAI()
+explanation = explainer.explain_prediction(
+    model_id='outbreak-predictor',
+    input_data={'cbs_signals': 45, 'z_score': 3.8},
+    prediction='OUTBREAK_LIKELY',
+    feature_names=['cbs_signals', 'z_score']
+)
+
+# Real-time humanitarian constraint checking
+checker = CloudFunctionConstraintChecker()
+is_valid, violation = checker.check_constraint(
+    protocol_id='MEDICAL_TRIAGE',
+    action_data={
+        'patient_id': 'PAT-001',
+        'medical_severity': 'CRITICAL',
+        'decision_factors': ['respiratory_distress', 'vitals']
+    }
+)
+
+if not is_valid:
+    print(f"❌ Constraint Violation: {violation.description}")
+```
+
+See [Humanitarian Constraints Documentation](docs/HUMANITARIAN_CONSTRAINTS.md) for full guide.
+
+### 5. Deploy to NVIDIA Jetson Orin
 
 ```bash
 docker-compose up -d
@@ -311,6 +356,9 @@ iLuminara-Core is production-ready for:
 | **Mobile Health Apps** | REST API + FHIR | ✅ In dev |
 | **Vector Databases** | Weaviate/Pinecone integration | ✅ In dev |
 | **Government Health Dashboards** | BI export (PowerBI/Tableau) | ✅ In dev |
+| **Google Cloud Vertex AI** | SHAP explainability for AI decisions | ✅ Ready |
+| **Google Cloud Functions** | Real-time humanitarian constraint checking | ✅ Ready |
+| **Google Secret Manager** | Secure humanitarian protocol storage | ✅ Ready |
 
 ---
 
