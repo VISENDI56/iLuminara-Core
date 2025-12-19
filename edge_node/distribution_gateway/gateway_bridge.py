@@ -7,7 +7,6 @@ existing content rails (SMS/Web), bypassing the 'App Store Death Valley'.
 """
 
 import random
-import time
 from dataclasses import dataclass
 from typing import Dict, Any
 
@@ -26,6 +25,11 @@ class DistributionBridge:
     MAX_PROPAGATION_MS = 120
     RIC_REDUCTION_FACTOR = 0.06  # 6% of base CAC (94% reduction)
     LIVE_STATS_VARIANCE = 500  # User count fluctuation range
+    
+    # Network statistics constants
+    BASELINE_ACTIVE_USERS = 13900000
+    BASELINE_CONVERSION_RATE = 0.42
+    BASELINE_RIC_REDUCTION = 94.0
     
     def __init__(self):
         self.network_nodes = {
@@ -79,9 +83,9 @@ def get_live_network_stats() -> ChannelStats:
     )
     return ChannelStats(
         channel_name="5DM_AFRICA_OMNI",
-        active_users=13900000 + variance,
-        conversion_rate=0.42,
-        ric_reduction=94.0
+        active_users=DistributionBridge.BASELINE_ACTIVE_USERS + variance,
+        conversion_rate=DistributionBridge.BASELINE_CONVERSION_RATE,
+        ric_reduction=DistributionBridge.BASELINE_RIC_REDUCTION
     )
 
 
