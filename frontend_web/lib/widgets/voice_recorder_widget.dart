@@ -32,8 +32,11 @@ class _VoiceRecorderWidgetState extends State<VoiceRecorderWidget> {
         _isProcessing = true;
       });
 
-      // Simulate recording stop and save
-      // In a real implementation, use the record package
+      // TODO: Stop actual recording
+      // Example implementation:
+      // final path = await _recorder.stop();
+      // final file = File(path);
+      // final audioData = await file.readAsBytes();
       await _saveRecording();
 
       setState(() {
@@ -42,8 +45,12 @@ class _VoiceRecorderWidgetState extends State<VoiceRecorderWidget> {
       });
     } else {
       // Start recording
-      // In a real implementation, request microphone permissions
-      // and start recording using the record package
+      // TODO: Request microphone permission and start recording
+      // Example implementation:
+      // final hasPermission = await Permission.microphone.request().isGranted;
+      // if (hasPermission) {
+      //   await _recorder.start();
+      // }
       setState(() {
         _isRecording = true;
       });
@@ -55,11 +62,14 @@ class _VoiceRecorderWidgetState extends State<VoiceRecorderWidget> {
       final storageService = context.read<StorageService>();
       final authService = context.read<AuthService>();
 
-      // Simulate audio data (in real app, get from recorder)
-      final audioData = Uint8List.fromList([1, 2, 3, 4, 5]);
+      // TODO: Replace with actual audio recording using record package
+      // Example: final audioData = await _recorder.stop();
+      final audioData = Uint8List.fromList([1, 2, 3, 4, 5]); // Placeholder
       
-      // Simulate GPS coordinates (in real app, use geolocator)
-      const latitude = -1.2921;  // Nairobi coordinates as example
+      // TODO: Replace with actual GPS using geolocator package
+      // Example: final position = await Geolocator.getCurrentPosition();
+      // For now, using example coordinates (Nairobi, Kenya)
+      const latitude = -1.2921;
       const longitude = 36.8219;
 
       final metadata = {

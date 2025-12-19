@@ -49,14 +49,14 @@ class StorageService extends ChangeNotifier {
   }) async {
     try {
       final voiceNote = VoiceNote(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        id: DateTime.now().toUtc().millisecondsSinceEpoch.toString(),
         userId: userId,
         audioData: audioData,
         latitude: latitude,
         longitude: longitude,
         patientId: patientId,
         metadata: metadata ?? {},
-        timestamp: DateTime.now(),
+        timestamp: DateTime.now().toUtc(), // Use UTC for consistency across regions
         isSynced: false,
       );
 
