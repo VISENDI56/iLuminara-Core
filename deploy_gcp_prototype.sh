@@ -43,10 +43,7 @@ echo ""
 
 SERVICES=(
   "aiplatform.googleapis.com"
-  "speech.googleapis.com"
   "bigquery.googleapis.com"
-  "pubsub.googleapis.com"
-  "cloudfunctions.googleapis.com"
   "run.googleapis.com"
   "firestore.googleapis.com"
 )

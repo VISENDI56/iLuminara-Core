@@ -2,10 +2,17 @@
 """
 iLuminara BigQuery Demo Data Creator
 Creates realistic outbreak simulation data for GCP prototype
+
+Geographic coordinates are based on Dadaab refugee complex area in Kenya
+Base coordinates: 0.4°N, 40.2°E (approximating the outbreak zone)
 """
 
 import sys
 from datetime import datetime
+
+# Geographic base coordinates (Dadaab region, Kenya)
+BASE_LATITUDE = 0.4
+BASE_LONGITUDE = 40.2
 
 def create_demo_outbreak_data():
     """Create demo outbreak simulation in BigQuery."""
@@ -39,11 +46,11 @@ def create_demo_outbreak_data():
         
         # Create outbreak simulation table
         print("📊 Creating outbreak_simulations table...")
-        query = """
+        query = f"""
         CREATE OR REPLACE TABLE iluminara.outbreak_simulations AS
         SELECT 
             TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL n HOUR) as timestamp,
-            ST_GEOGPOINT(40.2 + RAND()/10, 0.4 + RAND()/10) as location,
+            ST_GEOGPOINT({BASE_LONGITUDE} + RAND()/10, {BASE_LATITUDE} + RAND()/10) as location,
             ARRAY<STRING>['diarrhea', 'fever', 'dehydration'][OFFSET(MOD(n, 3))] as symptoms,
             RAND() * 100 as water_contamination,
             30 + RAND() * 15 as temperature
