@@ -9,6 +9,7 @@ existing content rails (SMS/Web), bypassing the 'App Store Death Valley'.
 import random
 import time
 from dataclasses import dataclass
+from typing import Dict, Any
 
 
 @dataclass
@@ -20,25 +21,38 @@ class ChannelStats:
 
 
 class DistributionBridge:
+    # Configuration constants
+    MIN_PROPAGATION_MS = 45
+    MAX_PROPAGATION_MS = 120
+    RIC_REDUCTION_FACTOR = 0.06  # 6% of base CAC (94% reduction)
+    LIVE_STATS_VARIANCE = 500  # User count fluctuation range
+    
     def __init__(self):
         self.network_nodes = {
             "KENYA_SMS_CLUSTER": 4500000,
             "NIGERIA_WEB_CLUSTER": 8200000,
-            "GHANA_WATSAPP_BOT": 1200000
+            "GHANA_WHATSAPP_BOT": 1200000
         }
         self.base_cac = 15.00  # Standard Industry CAC ($15)
         
-    def inject_signal(self, health_alert_json):
+    def inject_signal(self, health_alert_json: Dict[str, Any]) -> Dict[str, str]:
         """
         Injects the FRENASA health signal into the 5DM stream.
+        
+        Args:
+            health_alert_json: Dictionary containing health alert data
+                              (e.g., {'alert': 'CHOLERA_SPIKE_ZONE_4'})
+        
+        Returns:
+            Dictionary with propagation status, reach, latency, cost metrics
         """
         # Simulation of propagation
         impact_nodes = sum(self.network_nodes.values())
-        propagation_time_ms = random.randint(45, 120)
+        propagation_time_ms = random.randint(self.MIN_PROPAGATION_MS, self.MAX_PROPAGATION_MS)
         
         # Calculate 'Resonance Ignition Cost' (The New CAC)
         # We leverage existing trust, reducing CAC by ~94%
-        current_ric = self.base_cac * 0.06 
+        current_ric = self.base_cac * self.RIC_REDUCTION_FACTOR 
         
         return {
             "status": "PROPAGATED",
@@ -51,9 +65,18 @@ class DistributionBridge:
 
 
 # Simulation for Dashboard
-def get_live_network_stats():
+def get_live_network_stats() -> ChannelStats:
+    """
+    Retrieves live network statistics for dashboard display.
+    
+    Returns:
+        ChannelStats object with current network metrics
+    """
     # Fluctuate user count slightly to show 'Live' activity
-    variance = random.randint(-500, 500)
+    variance = random.randint(
+        -DistributionBridge.LIVE_STATS_VARIANCE,
+        DistributionBridge.LIVE_STATS_VARIANCE
+    )
     return ChannelStats(
         channel_name="5DM_AFRICA_OMNI",
         active_users=13900000 + variance,
