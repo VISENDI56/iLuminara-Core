@@ -11,8 +11,14 @@ For production: Integrates with real Google Cloud services.
 
 from typing import Dict, List, Any, Optional
 import random
+import os
 from datetime import datetime, timedelta
 from .mock_gcp import MockGCP
+
+# Configuration from environment
+GCP_PROJECT_ID = os.getenv("GCP_PROJECT_ID", "iluminara-project")
+GCP_REGION = os.getenv("GCP_REGION", "us-central1")
+VERTEX_ENDPOINT = os.getenv("VERTEX_ENDPOINT", "")
 
 
 class HstpuForecaster:
@@ -91,7 +97,7 @@ class HstpuForecaster:
             predictions = self.vertex_client.predict(instances)
         else:
             # Real Vertex AI endpoint call
-            endpoint = "projects/PROJECT_ID/locations/REGION/endpoints/ENDPOINT_ID"
+            endpoint = VERTEX_ENDPOINT or f"projects/{GCP_PROJECT_ID}/locations/{GCP_REGION}/endpoints/ENDPOINT_ID"
             predictions = self.vertex_client.predict(
                 endpoint=endpoint,
                 instances=instances

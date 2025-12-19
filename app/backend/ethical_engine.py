@@ -11,22 +11,22 @@ Integrates with the governance_kernel for compliance validation.
 from typing import Dict, List, Any, Optional
 from datetime import datetime
 from enum import Enum
-import sys
-import os
-
-# Add parent directory to path for imports
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
 try:
-    from governance_kernel.vector_ledger import SovereignGuardrail, SovereigntyViolationError
-except ImportError:
-    # Fallback if governance_kernel not available
-    class SovereignGuardrail:
-        def validate_action(self, *args, **kwargs):
-            return True
-    
-    class SovereigntyViolationError(Exception):
-        pass
+    # Use relative import when installed as package
+    from ...governance_kernel.vector_ledger import SovereignGuardrail, SovereigntyViolationError
+except (ImportError, ValueError):
+    # Fallback for standalone execution or if governance_kernel not available
+    try:
+        from governance_kernel.vector_ledger import SovereignGuardrail, SovereigntyViolationError
+    except ImportError:
+        # Mock implementation for testing
+        class SovereignGuardrail:
+            def validate_action(self, *args, **kwargs):
+                return True
+        
+        class SovereigntyViolationError(Exception):
+            pass
 
 
 class ActionType(Enum):

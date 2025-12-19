@@ -18,8 +18,12 @@ import plotly.express as px
 import plotly.graph_objects as go
 import requests
 import json
+import os
 from datetime import datetime
 import random
+
+# Configuration from environment
+API_BASE_URL = os.getenv("BACKEND_URL", "http://localhost:8000")
 
 # ══════════════════════════════════════════════════════════════════════════
 # CONFIGURATION: THE SOVEREIGN AESTHETIC (Industrial Cyberpunk)
@@ -170,8 +174,6 @@ st.markdown("""
 # ══════════════════════════════════════════════════════════════════════════
 # UTILITY FUNCTIONS
 # ══════════════════════════════════════════════════════════════════════════
-
-API_BASE_URL = "http://localhost:8000"
 
 def call_api(endpoint: str, method: str = "GET", data: dict = None):
     """Call backend API with error handling."""

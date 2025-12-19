@@ -74,29 +74,6 @@ echo -e "${GREEN}✓ Project set${NC}\n"
 
 echo -e "${YELLOW}[3/6] Building and deploying backend service...${NC}"
 
-# Create Dockerfile for backend if it doesn't exist
-if [ ! -f "Dockerfile.backend" ]; then
-    cat > Dockerfile.backend << 'EOF'
-FROM python:3.11-slim
-
-WORKDIR /app
-
-# Copy requirements
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy application code
-COPY app/ ./app/
-COPY governance_kernel/ ./governance_kernel/
-
-# Expose port
-EXPOSE 8000
-
-# Run FastAPI
-CMD ["uvicorn", "app.backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
-EOF
-fi
-
 # Deploy backend to Cloud Run
 gcloud run deploy "$SERVICE_NAME_BACKEND" \
     --source . \
@@ -125,28 +102,6 @@ echo -e "${GREEN}✓ Backend deployed at: $BACKEND_URL${NC}\n"
 # ══════════════════════════════════════════════════════════════════════════
 
 echo -e "${YELLOW}[4/6] Building and deploying frontend service...${NC}"
-
-# Create Dockerfile for frontend if it doesn't exist
-if [ ! -f "Dockerfile.frontend" ]; then
-    cat > Dockerfile.frontend << 'EOF'
-FROM python:3.11-slim
-
-WORKDIR /app
-
-# Copy requirements
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy application code
-COPY app/ ./app/
-
-# Expose port
-EXPOSE 8501
-
-# Run Streamlit
-CMD ["streamlit", "run", "app/frontend/main.py", "--server.port=8501", "--server.address=0.0.0.0"]
-EOF
-fi
 
 # Deploy frontend to Cloud Run
 gcloud run deploy "$SERVICE_NAME_FRONTEND" \

@@ -5,7 +5,7 @@
 # ══════════════════════════════════════════════════════════════════════════
 # Starts the backend API and frontend dashboard for local testing
 
-set -e
+set -euo pipefail
 
 # Colors
 GREEN='\033[0;32m'
