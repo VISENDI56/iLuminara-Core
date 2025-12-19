@@ -403,9 +403,8 @@ class CloudSchedulerIntegration:
         """
         cycles = self.cycle_history
         
-        if schedule_id:
-            # Filter by schedule (would need to add schedule_id to cycle)
-            pass
+        # Note: schedule_id filtering not implemented as OptimizationCycle 
+        # doesn't currently track schedule_id - can be added if needed
         
         if status:
             cycles = [c for c in cycles if c.status == status]

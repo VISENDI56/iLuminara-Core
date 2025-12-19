@@ -326,10 +326,11 @@ def test_compliance_validation():
     
     # Validate policy has explainability (GDPR Art. 22, EU AI Act §6)
     assert 'explanation' in result, "Missing explainability"
-    # Note: evidence_chain may be in the policy itself, not explanation
+    
+    # Verify evidence chain or confidence basis exists for transparency
     has_evidence = ('evidence_chain' in result['explanation'] or 
                    'confidence_basis' in result['explanation'])
-    assert has_evidence, "Missing evidence chain or confidence basis"
+    assert has_evidence, "Missing evidence chain or confidence basis for GDPR/EU AI Act compliance"
     
     print(f"✓ GDPR Art. 22 compliance: Explainability present")
     print(f"✓ EU AI Act §6 compliance: Transparency provided")

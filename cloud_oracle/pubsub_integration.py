@@ -240,7 +240,7 @@ class PubSubIntegration:
         Returns:
             PubSubTopic configuration
         """
-        topic_id = f"topic-{datetime.utcnow().strftime('%Y%m%d%H%M%S%f')}"  # Added microseconds
+        topic_id = f"topic-{datetime.utcnow().strftime('%Y%m%d%H%M%S%f')}"
         
         topic = PubSubTopic(
             topic_id=topic_id,
@@ -277,7 +277,7 @@ class PubSubIntegration:
         if topic_id not in self.topics:
             raise ValueError(f"Topic {topic_id} not found")
         
-        subscription_id = f"sub-{datetime.utcnow().strftime('%Y%m%d%H%M%S%f')}"  # Added microseconds
+        subscription_id = f"sub-{datetime.utcnow().strftime('%Y%m%d%H%M%S%f')}"
         
         subscription = Subscription(
             subscription_id=subscription_id,
