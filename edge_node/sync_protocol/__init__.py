@@ -10,7 +10,7 @@ Components:
 """
 
 from .golden_thread import GoldenThread, TimeseriesRecord, DataSourceType, VerificationScore
-from .sovereign_sync import SovereignSync
+from .sovereign_sync import SovereignSync, CloudUnavailableError
 
 __all__ = [
     'GoldenThread',
@@ -18,4 +18,5 @@ __all__ = [
     'DataSourceType',
     'VerificationScore',
     'SovereignSync',
+    'CloudUnavailableError',
 ]
