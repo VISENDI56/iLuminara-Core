@@ -17,5 +17,9 @@ pandas>=2.0.0
 # HTTP Client
 requests>=2.31.0
 
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
 # Existing dependencies (if any)
 # Add existing requirements here
