@@ -98,6 +98,19 @@ class GoldenThread:
             patient_id='PATIENT_12345'
         )
     """
+    
+    # Quantum Entanglement Configuration
+    TEMPORAL_DECAY_RATE = -0.05  # Exponential decay: ~50% every 12 hours
+    TEMPORAL_WEIGHT = 0.7  # Weight for temporal proximity in entanglement score
+    CONTENT_WEIGHT = 0.3  # Weight for symptom-diagnosis alignment
+    ENTANGLEMENT_THRESHOLD_HIGH = 0.85  # Threshold for ENTANGLED status
+    ENTANGLEMENT_THRESHOLD_MEDIUM = 0.5  # Threshold for PROBABLE LINK status
+    
+    # Symptom-Diagnosis Mapping (for Active Inference)
+    SYMPTOM_DIAGNOSIS_MAP = {
+        "watery_stool": ["Cholera", "Acute Diarrhea"],
+        "fever": ["Malaria", "Typhoid"]
+    }
 
     def __init__(self):
         """Initialize the Golden Thread with fusion rules."""
@@ -123,22 +136,20 @@ class GoldenThread:
         time_emr = datetime.fromisoformat(emr_event['timestamp'].replace('Z', ''))
         delta_hours = abs((time_cbs - time_emr).total_seconds()) / 3600
         
-        # Decay function: Probability drops by 50% every 12 hours
-        temporal_weight = math.exp(-0.05 * delta_hours)
+        # Decay function: Probability drops exponentially over time
+        temporal_weight = math.exp(self.TEMPORAL_DECAY_RATE * delta_hours)
 
-        # 2. Symptom Vector Alignment (Simple heuristic for demo)
-        symptom_map = {
-            "watery_stool": ["Cholera", "Acute Diarrhea"],
-            "fever": ["Malaria", "Typhoid"]
-        }
+        # 2. Symptom Vector Alignment (content-based matching)
+        content_weight = 0.1  # Default low weight for non-matching symptoms
+        symptom = cbs_event.get('symptom')
+        diagnosis = emr_event.get('diagnosis')
         
-        content_weight = 0.1
-        if cbs_event.get('symptom') in symptom_map:
-            if emr_event.get('diagnosis') in symptom_map[cbs_event['symptom']]:
-                content_weight = 1.0
+        if symptom in self.SYMPTOM_DIAGNOSIS_MAP:
+            if diagnosis in self.SYMPTOM_DIAGNOSIS_MAP[symptom]:
+                content_weight = 1.0  # High weight for matching symptom-diagnosis pairs
 
-        # Final Entanglement Score
-        return (temporal_weight * 0.7) + (content_weight * 0.3)
+        # Final Entanglement Score (weighted combination)
+        return (temporal_weight * self.TEMPORAL_WEIGHT) + (content_weight * self.CONTENT_WEIGHT)
 
     def fuse_data(self, cbs_data: List[Dict], emr_data: List[Dict]):
         """
@@ -163,10 +174,11 @@ class GoldenThread:
                     highest_entanglement = score
                     best_match = emr
             
+            # Determine status based on configurable thresholds
             status = "UNVERIFIED"
-            if highest_entanglement > 0.85:
+            if highest_entanglement > self.ENTANGLEMENT_THRESHOLD_HIGH:
                 status = "ENTANGLED (Active Inference)"
-            elif highest_entanglement > 0.5:
+            elif highest_entanglement > self.ENTANGLEMENT_THRESHOLD_MEDIUM:
                 status = "PROBABLE LINK"
             
             fused_log.append({
