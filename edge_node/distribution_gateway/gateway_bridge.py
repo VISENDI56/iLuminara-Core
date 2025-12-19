@@ -45,7 +45,7 @@ class DistributionBridge:
             "channel": "5DM_AFRICA_MAINNET",
             "reach": f"{impact_nodes:,}",
             "latency": f"{propagation_time_ms}ms",
-            "ric_cost": f"${current_ric:.2f} (vs ${self.base_cac}.00)",
+            "ric_cost": f"${current_ric:.2f} (vs ${self.base_cac:.2f})",
             "message": "🚀 SIGNAL INJECTED INTO 5DM RAIL. ZERO FRICTION ACHIEVED."
         }
 
