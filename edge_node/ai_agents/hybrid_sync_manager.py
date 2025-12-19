@@ -91,7 +91,8 @@ class HybridSyncManager:
                     payload={
                         'data_type': 'De_Identified_Medical_Query',
                         'destination': f'Google_Cloud_{self.location}',
-                        'has_phi': False
+                        'has_phi': False,
+                        'consent_token': query.get('consent_token', 'GENERAL_RESEARCH_CONSENT')
                     },
                     jurisdiction='GDPR_EU'
                 )

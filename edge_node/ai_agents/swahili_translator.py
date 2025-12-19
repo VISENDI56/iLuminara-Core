@@ -39,14 +39,17 @@ class SwahiliMedicalTranslator:
             project_id: Google Cloud project ID
             location: Google Cloud region (default: europe-west4 for GDPR compliance)
         """
-        if not GOOGLE_CLOUD_AVAILABLE:
-            raise ImportError("google-cloud-translate is required. Install: pip install google-cloud-translate")
-        
         self.project_id = project_id
         self.location = location
-        self.client = translate_v3.TranslationServiceClient()
-        self.parent = f"projects/{project_id}/locations/{location}"
         self.guardrail = SovereignGuardrail()
+        
+        # Initialize Google Cloud client if available
+        if GOOGLE_CLOUD_AVAILABLE:
+            self.client = translate_v3.TranslationServiceClient()
+            self.parent = f"projects/{project_id}/locations/{location}"
+        else:
+            self.client = None
+            self.parent = None
         
         # Cache for common translations (offline capability)
         self.translation_cache = self._load_common_translations()
@@ -110,6 +113,11 @@ class SwahiliMedicalTranslator:
         # Check cache first for offline capability
         if use_cache and text.lower() in self.translation_cache:
             return self.translation_cache[text.lower()]
+        
+        # If Google Cloud not available, return None
+        if not GOOGLE_CLOUD_AVAILABLE or self.client is None:
+            print(f"⚠️  Cloud translation not available. Text not in cache: {text}")
+            return None
         
         # Validate sovereignty compliance
         try:
