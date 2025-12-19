@@ -12,7 +12,7 @@ Philosophy: "Every decision affecting human welfare must be transparent and audi
 
 from typing import Dict, Any, List, Optional, Tuple
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 import json
 import hashlib
@@ -53,7 +53,7 @@ class HumanitarianProtocol:
     constraint_function: str  # Name of the validation function
     parameters: Dict[str, Any] = field(default_factory=dict)
     legal_citations: List[str] = field(default_factory=list)
-    created_at: datetime = field(default_factory=datetime.utcnow)
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     version: str = "1.0"
 
 
@@ -70,7 +70,7 @@ class SHAPExplanation:
     base_value: float
     shap_values: Dict[str, float]  # feature_name -> SHAP value
     feature_values: Dict[str, Any]  # feature_name -> actual value
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     
     def get_top_contributors(self, n: int = 5) -> List[Tuple[str, float]]:
         """Get top N features contributing to the decision."""
@@ -107,7 +107,7 @@ class ConstraintViolation:
     description: str
     affected_entities: List[str]  # Patient IDs, location IDs, etc.
     remediation_steps: List[str]
-    detected_at: datetime = field(default_factory=datetime.utcnow)
+    detected_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     resolved: bool = False
     shap_explanation: Optional[SHAPExplanation] = None
 
@@ -561,7 +561,7 @@ class CloudFunctionConstraintChecker:
     
     def _generate_violation_id(self, protocol_id: str) -> str:
         """Generate unique violation ID."""
-        timestamp = datetime.utcnow().isoformat()
+        timestamp = datetime.now(timezone.utc).isoformat()
         hash_obj = hashlib.sha256(f"{protocol_id}:{timestamp}".encode())
         return f"VIOLATION-{hash_obj.hexdigest()[:16]}"
     
@@ -693,15 +693,31 @@ class SecretManagerProtocolStore:
         """
         Simulate encryption for Secret Manager storage.
         
-        In production, Secret Manager handles encryption automatically
-        using Google-managed or customer-managed keys (CMEK).
+        ⚠️ SECURITY NOTE: This is a SIMULATION using base64 encoding, which is
+        NOT encryption and provides NO security. This is for framework demonstration
+        only.
+        
+        In production:
+        - Use Google Cloud Secret Manager API directly
+        - Secret Manager provides automatic encryption at rest using AES-256
+        - Supports customer-managed encryption keys (CMEK) for additional control
+        - All secrets are encrypted automatically by Google's infrastructure
+        - Access controlled via IAM policies
+        - Audit logging for all secret access
+        
+        Do NOT use base64 encoding as encryption in production systems.
         """
         # Simple base64-like simulation (NOT SECURE - for framework only)
         import base64
         return base64.b64encode(data.encode()).decode()
     
     def _simulate_decryption(self, encrypted_data: str) -> str:
-        """Simulate decryption for Secret Manager retrieval."""
+        """
+        Simulate decryption for Secret Manager retrieval.
+        
+        In production, this would use Secret Manager API which handles
+        decryption transparently with proper authentication and authorization.
+        """
         import base64
         return base64.b64decode(encrypted_data.encode()).decode()
 

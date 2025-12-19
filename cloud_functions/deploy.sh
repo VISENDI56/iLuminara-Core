@@ -34,6 +34,13 @@ echo "════════════════════════�
 echo "1️⃣  Deploying Constraint Checker Function"
 echo "═══════════════════════════════════════════════════════════════════════"
 echo ""
+echo "⚠️  WARNING: Deploying with --allow-unauthenticated for development."
+echo "   For production humanitarian systems, implement proper authentication:"
+echo "   - Remove --allow-unauthenticated flag"
+echo "   - Add IAM policies for authorized users/services"
+echo "   - Use Cloud Identity-Aware Proxy (IAP) for web access"
+echo "   - Implement API keys or OAuth for service-to-service calls"
+echo ""
 
 gcloud functions deploy humanitarian-constraint-checker \
     --gen2 \

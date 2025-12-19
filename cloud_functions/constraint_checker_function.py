@@ -120,10 +120,11 @@ def check_humanitarian_constraint(request):
             "valid": is_valid,
             "protocol_id": protocol_id,
             "violation": None,
-            "timestamp": checker.violation_log[-1].detected_at.isoformat() if violation else None,
+            "timestamp": datetime.utcnow().isoformat(),
         }
         
         if violation:
+            response["timestamp"] = violation.detected_at.isoformat()
             response["violation"] = {
                 "violation_id": violation.violation_id,
                 "severity": violation.severity.value,
