@@ -18,19 +18,22 @@ def generate_narrative(seq_data):
     # 1. Extract Core Facts from the Log
     start_time = seq_data[0]['timestamp']
     trigger_time = seq_data[-1]['timestamp']
-    duration = 4.2
+    # Calculate duration from the sequence data (default to 4.2 if offset_seconds not available)
+    duration = seq_data[-1].get('offset_seconds', 4.2)
     
     # 2. Check for Azure Configuration (The Cloud Oracle)
     # You get these from your Azure AI Foundry dashboard
     AZURE_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT") 
     AZURE_KEY = os.getenv("AZURE_OPENAI_API_KEY")
+    AZURE_MODEL = os.getenv("AZURE_OPENAI_MODEL", "gpt-4o")
+    AZURE_API_VERSION = os.getenv("AZURE_OPENAI_API_VERSION", "2024-02-15-preview")
     
     if AZURE_ENDPOINT and AZURE_KEY:
         try:
             client = AzureOpenAI(
                 azure_endpoint=AZURE_ENDPOINT, 
                 api_key=AZURE_KEY,  
-                api_version="2024-02-15-preview"
+                api_version=AZURE_API_VERSION
             )
             
             # The Prompt: "Think like a Chief Auditor"
@@ -48,7 +51,7 @@ def generate_narrative(seq_data):
             """
             
             response = client.chat.completions.create(
-                model="gpt-4o", # Or your specific deployment name
+                model=AZURE_MODEL,
                 messages=[
                     {"role": "system", "content": "You are iLuminara Sovereign AI."},
                     {"role": "user", "content": prompt}
