@@ -136,6 +136,12 @@ class EthicalEngine:
                     "outbreak_multiplier": 1.3,  # Increase margin in outbreak
                     "capacity_reduction_factor": 0.5,  # Reduce action when capacity low
                 }
+            },
+            "operational_parameters": {
+                "description": "Operational thresholds and defaults",
+                "low_capacity_threshold": 0.5,  # Threshold for triggering capacity constraints
+                "default_review_period_days": 14,  # Default review period for time-limited measures
+                "default_review_interval_days": 7,  # Default review frequency
             }
         }
 
@@ -270,7 +276,8 @@ class EthicalEngine:
                 ]
         
         # Reduce scope if healthcare capacity is low
-        if context.healthcare_capacity < 0.5:
+        low_capacity_threshold = self.protocols["operational_parameters"]["low_capacity_threshold"]
+        if context.healthcare_capacity < low_capacity_threshold:
             if 'scope' in action:
                 action['scope'] = 'limited'
                 action['capacity_constraint'] = f"Reduced due to {context.healthcare_capacity:.0%} capacity"
@@ -339,10 +346,11 @@ class EthicalEngine:
         
         # Enforce time limits
         if protocol["constraints"]["time_limited"]:
+            operational_params = self.protocols["operational_parameters"]
             if 'duration_days' not in action:
-                action['duration_days'] = 14  # Default 2-week review period
+                action['duration_days'] = operational_params["default_review_period_days"]
             action['review_required'] = True
-            action['review_interval_days'] = 7
+            action['review_interval_days'] = operational_params["default_review_interval_days"]
         
         return action
 

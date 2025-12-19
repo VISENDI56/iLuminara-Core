@@ -6,10 +6,11 @@
 # Deploys the Ethical Validator as a Google Cloud Function
 #
 # Usage:
-#   ./deploy_cloud_function.sh [PROJECT_ID] [REGION]
+#   ./deploy_cloud_function.sh [PROJECT_ID] [REGION] [RUNTIME]
 #
 # Example:
-#   ./deploy_cloud_function.sh iluminara us-central1
+#   ./deploy_cloud_function.sh iluminara us-central1 python310
+#   ./deploy_cloud_function.sh iluminara us-central1 python311
 #
 # ═════════════════════════════════════════════════════════════════════════════
 
@@ -18,8 +19,8 @@ set -e  # Exit on error
 # Configuration
 PROJECT_ID="${1:-iluminara}"
 REGION="${2:-us-central1}"
+RUNTIME="${3:-python310}"
 FUNCTION_NAME="ethical-validator"
-RUNTIME="python310"
 ENTRY_POINT="validate_action"
 PROTOCOL_VERSION="2025.1"
 
@@ -28,8 +29,8 @@ echo "Deploying Ethical Validator Cloud Function"
 echo "═══════════════════════════════════════════════════════════════════════════"
 echo "Project ID: $PROJECT_ID"
 echo "Region: $REGION"
-echo "Function Name: $FUNCTION_NAME"
 echo "Runtime: $RUNTIME"
+echo "Function Name: $FUNCTION_NAME"
 echo "Protocol Version: $PROTOCOL_VERSION"
 echo ""
 

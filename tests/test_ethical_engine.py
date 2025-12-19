@@ -303,7 +303,7 @@ class TestIntegrationScenarios:
             'severity_score': 0.75
         }
         context = {
-            'conflict_zone': False,  # Dadaab is not a conflict zone
+            'conflict_zone': False,  # Non-conflict zone scenario
             'outbreak_suspected': True,
             'civilian_population': 200000,
             'healthcare_capacity': 0.5  # Limited capacity
