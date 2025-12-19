@@ -9,11 +9,18 @@ Philosophy: "Cloud when available, edge when necessary, never lose data."
 """
 
 from google.cloud import firestore
+from google.auth.exceptions import DefaultCredentialsError
 import json
 import hashlib
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, Any, Optional
 import socket
+import uuid
+
+
+class CloudUnavailableError(Exception):
+    """Raised when cloud connectivity is unavailable."""
+    pass
 
 
 class SovereignSync:
@@ -40,7 +47,7 @@ class SovereignSync:
         self.local_cache = {}
         try:
             self.firestore_client = firestore.Client()
-        except Exception:
+        except (DefaultCredentialsError, ImportError, Exception) as e:
             # If Firestore initialization fails (e.g., no credentials), set to None
             # This allows the system to function in fully offline mode
             self.firestore_client = None
@@ -69,17 +76,19 @@ class SovereignSync:
                 return "cloud_synced"
             else:
                 # No client or no connectivity - fall back to local
-                raise Exception("Cloud unavailable")
-        except Exception as e:
+                raise CloudUnavailableError("Cloud unavailable")
+        except CloudUnavailableError:
             # Fall back to local storage with HSML format
+            # Generate unique cache key combining location and timestamp
+            cache_key = f"{location}_{uuid.uuid4().hex[:8]}"
             hsml_entry = {
                 'data': data,
                 'location': location,
-                'timestamp': datetime.now(),
+                'timestamp': datetime.now(timezone.utc),
                 'sync_pending': True,
                 'hash': self._calculate_hash(data)
             }
-            self.local_cache[location] = hsml_entry
+            self.local_cache[cache_key] = hsml_entry
             return "edge_stored_with_hsml"
     
     def batch_sync_when_connected(self) -> Dict[str, Any]:
@@ -99,24 +108,21 @@ class SovereignSync:
         """
         synced_count = 0
         failed_count = 0
-        locations_to_remove = []
+        cache_keys_to_remove = []
         
-        for location, entry in list(self.local_cache.items()):
-            if self._check_connectivity():
+        for cache_key, entry in list(self.local_cache.items()):
+            if self._check_connectivity() and self.firestore_client is not None:
                 try:
                     # Extract data from HSML entry
                     data = entry['data']
                     
-                    # Sync to cloud
-                    result = self.sync_with_edge_fallback(data, location)
+                    # Sync directly to cloud (avoid recursion)
+                    doc_ref = self.firestore_client.collection('field_data').document()
+                    doc_ref.set(data)
                     
-                    if result == "cloud_synced":
-                        # Mark for removal from cache
-                        locations_to_remove.append(location)
-                        synced_count += 1
-                    else:
-                        # Still couldn't sync
-                        failed_count += 1
+                    # Mark for removal from cache
+                    cache_keys_to_remove.append(cache_key)
+                    synced_count += 1
                 except Exception as e:
                     # Sync failed, keep in cache
                     failed_count += 1
@@ -125,8 +131,8 @@ class SovereignSync:
                 break
         
         # Remove successfully synced entries
-        for location in locations_to_remove:
-            del self.local_cache[location]
+        for cache_key in cache_keys_to_remove:
+            del self.local_cache[cache_key]
         
         return {
             'synced_count': synced_count,
