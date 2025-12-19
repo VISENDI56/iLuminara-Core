@@ -10,11 +10,11 @@ import subprocess
 import sys
 import time
 
-# Dashboard URLs
+# Dashboard URLs (using localhost for browser compatibility)
 DASHBOARDS = [
-    ("http://0.0.0.0:8501", "Command Console"),
-    ("http://0.0.0.0:8502", "Transparency Audit"),
-    ("http://0.0.0.0:8503", "Field Validation"),
+    ("http://localhost:8501", "Command Console"),
+    ("http://localhost:8502", "Transparency Audit"),
+    ("http://localhost:8503", "Field Validation"),
 ]
 
 def open_dashboards_in_chrome():
@@ -48,27 +48,21 @@ def open_dashboards_in_chrome():
         print("   Please install Chrome or Chromium to use this feature")
         return False
     
-    # Open all dashboards in Chrome
-    # First dashboard opens a new window, subsequent ones open as new tabs
-    for i, (url, name) in enumerate(DASHBOARDS):
-        try:
-            if i == 0:
-                # Open first dashboard in new window
-                subprocess.Popen([chrome_cmd, '--new-window', url], 
-                               stdout=subprocess.DEVNULL, 
-                               stderr=subprocess.DEVNULL)
-                print(f"   ✅ Opened {name}: {url}")
-                time.sleep(0.5)  # Small delay to ensure window opens first
-            else:
-                # Open subsequent dashboards as new tabs
-                subprocess.Popen([chrome_cmd, '--new-tab', url], 
-                               stdout=subprocess.DEVNULL, 
-                               stderr=subprocess.DEVNULL)
-                print(f"   ✅ Opened {name}: {url}")
-                time.sleep(0.3)  # Small delay between tabs
-        except Exception as e:
-            print(f"   ❌ Failed to open {name}: {e}")
-            return False
+    # Collect all URLs to open
+    urls = [url for url, _ in DASHBOARDS]
+    
+    # Open all dashboards in Chrome (opens first in new window, rest as tabs)
+    try:
+        subprocess.Popen([chrome_cmd] + urls, 
+                       stdout=subprocess.DEVNULL, 
+                       stderr=subprocess.DEVNULL)
+        time.sleep(0.5)  # Brief delay to let Chrome start
+        
+        for _, name in DASHBOARDS:
+            print(f"   ✅ Opened {name}")
+    except Exception as e:
+        print(f"   ❌ Failed to open dashboards: {e}")
+        return False
     
     print("")
     print("✅ All dashboards opened in Chrome!")
