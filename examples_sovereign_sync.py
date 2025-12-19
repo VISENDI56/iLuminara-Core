@@ -14,7 +14,7 @@ This example shows:
 """
 
 from edge_node.sync_protocol.sovereign_sync import SovereignSync
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 def main():
@@ -37,7 +37,7 @@ def main():
         'diagnosis': 'malaria',
         'symptoms': ['fever', 'chills', 'headache'],
         'lab_result': 'positive',
-        'timestamp': datetime.now().isoformat(),
+        'timestamp': datetime.now(timezone.utc).isoformat(),
         'severity': 'moderate'
     }
     
@@ -57,7 +57,7 @@ def main():
         'diagnosis': 'dengue',
         'symptoms': ['fever', 'joint_pain', 'rash'],
         'lab_result': 'positive',
-        'timestamp': datetime.now().isoformat(),
+        'timestamp': datetime.now(timezone.utc).isoformat(),
         'severity': 'mild'
     }
     
