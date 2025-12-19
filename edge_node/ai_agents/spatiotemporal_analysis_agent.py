@@ -21,6 +21,16 @@ from datetime import datetime, timedelta
 from enum import Enum
 import math
 
+# Statistical constants for Getis-Ord Gi* hotspot detection
+GI_STAR_CRITICAL_VALUE_99 = 2.58  # 99% confidence level (p < 0.01)
+GI_STAR_CRITICAL_VALUE_95 = 1.96  # 95% confidence level (p < 0.05)
+P_VALUE_HIGHLY_SIGNIFICANT = 0.01
+P_VALUE_SIGNIFICANT = 0.05
+P_VALUE_MARGINALLY_SIGNIFICANT = 0.1
+
+# Risk calculation constants
+RISK_NORMALIZATION_FACTOR = 10000  # Population exposure risk normalization
+
 
 class SpatialScale(Enum):
     """Spatial analysis scales."""
@@ -558,7 +568,7 @@ class SpatiotemporalAnalysisAgent:
         elif isinstance(timestamp, str):
             try:
                 return datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
-            except:
+            except (ValueError, AttributeError):
                 return datetime.utcnow()
         else:
             return datetime.utcnow()
@@ -585,7 +595,7 @@ class SpatiotemporalAnalysisAgent:
         """Calculate risk score for a cluster."""
         # Risk factors: case density, population exposure
         case_density = case_count / (math.pi * radius_km ** 2) if radius_km > 0 else case_count
-        exposure_risk = min(1.0, (case_density * population_density) / 10000)
+        exposure_risk = min(1.0, (case_density * population_density) / RISK_NORMALIZATION_FACTOR)
         
         return min(1.0, max(0.0, exposure_risk))
     
@@ -660,8 +670,13 @@ class SpatiotemporalAnalysisAgent:
         
         gi_star = (cell_cases - mean_cases) / std_cases
         
-        # Convert to p-value (approximate)
-        p_value = 0.01 if abs(gi_star) > 2.58 else (0.05 if abs(gi_star) > 1.96 else 0.1)
+        # Convert to p-value based on z-score thresholds
+        if abs(gi_star) > GI_STAR_CRITICAL_VALUE_99:
+            p_value = P_VALUE_HIGHLY_SIGNIFICANT
+        elif abs(gi_star) > GI_STAR_CRITICAL_VALUE_95:
+            p_value = P_VALUE_SIGNIFICANT
+        else:
+            p_value = P_VALUE_MARGINALLY_SIGNIFICANT
         
         return gi_star, p_value
     

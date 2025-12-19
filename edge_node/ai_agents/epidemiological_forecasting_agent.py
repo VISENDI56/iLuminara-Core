@@ -21,6 +21,12 @@ from enum import Enum
 import json
 import math
 
+# Environmental adjustment constants for disease transmission
+# Heavy rainfall threshold that increases waterborne disease risk (e.g., cholera)
+RAINFALL_RISK_THRESHOLD_MM = 50
+# Transmission rate multiplier when rainfall exceeds threshold
+RAINFALL_TRANSMISSION_MULTIPLIER = 1.3
+
 
 class ForecastModel(Enum):
     """Forecasting model types."""
@@ -422,8 +428,8 @@ class EpidemiologicalForecastingAgent:
         # Water-borne diseases (cholera) increase with rainfall
         if disease.lower() == "cholera" and "rainfall_mm" in env_factors:
             rainfall = env_factors["rainfall_mm"]
-            if rainfall > 50:  # Heavy rainfall
-                adjusted_beta *= 1.3
+            if rainfall > RAINFALL_RISK_THRESHOLD_MM:
+                adjusted_beta *= RAINFALL_TRANSMISSION_MULTIPLIER
         
         # Vector-borne diseases (malaria) affected by temperature and humidity
         if disease.lower() == "malaria":

@@ -21,6 +21,17 @@ from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from enum import Enum
 
+# Environmental risk thresholds
+# Heavy rainfall increases cholera transmission risk through water contamination
+HEAVY_RAINFALL_THRESHOLD_MM = 100
+# Optimal temperature range for mosquito breeding (malaria vectors)
+VECTOR_OPTIMAL_TEMP_MIN_C = 25
+VECTOR_OPTIMAL_TEMP_MAX_C = 30
+# High humidity threshold for mosquito activity
+HIGH_HUMIDITY_THRESHOLD_PCT = 60
+# Cold weather threshold for respiratory disease transmission
+COLD_WEATHER_THRESHOLD_C = 15
+
 
 class AlertSeverity(Enum):
     """Alert severity levels."""
@@ -367,7 +378,7 @@ class EarlyWarningSystemAgent:
         
         if rainfall_readings:
             avg_rainfall = sum(rainfall_readings) / len(rainfall_readings)
-            if avg_rainfall > 100:  # Heavy rainfall threshold
+            if avg_rainfall > HEAVY_RAINFALL_THRESHOLD_MM:
                 alert = EarlyWarningAlert(
                     alert_id=f"ENV_ALERT_{datetime.utcnow().strftime('%Y%m%d%H%M%S')}",
                     severity=AlertSeverity.MEDIUM.value,
@@ -400,7 +411,7 @@ class EarlyWarningSystemAgent:
         
         if temp_readings:
             avg_temp = sum(temp_readings) / len(temp_readings)
-            if 25 <= avg_temp <= 30:  # Optimal mosquito breeding range
+            if VECTOR_OPTIMAL_TEMP_MIN_C <= avg_temp <= VECTOR_OPTIMAL_TEMP_MAX_C:
                 humidity_readings = [
                     s.readings.get("humidity_pct", 0)
                     for s in recent_env_sensors
@@ -409,7 +420,7 @@ class EarlyWarningSystemAgent:
                 
                 if humidity_readings:
                     avg_humidity = sum(humidity_readings) / len(humidity_readings)
-                    if avg_humidity > 60:  # High humidity
+                    if avg_humidity > HIGH_HUMIDITY_THRESHOLD_PCT:
                         alert = EarlyWarningAlert(
                             alert_id=f"ENV_ALERT_{datetime.utcnow().strftime('%Y%m%d%H%M%S')}_2",
                             severity=AlertSeverity.MEDIUM.value,
@@ -777,7 +788,7 @@ class EarlyWarningSystemAgent:
         elif isinstance(timestamp, str):
             try:
                 return datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
-            except:
+            except (ValueError, AttributeError):
                 return datetime.utcnow()
         else:
             return datetime.utcnow()
