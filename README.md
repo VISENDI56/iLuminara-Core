@@ -33,9 +33,25 @@ Built on four foundational pillars:
          │  Data Fusion Engine    │
          │ (Verified Timeline)    │
          └────────────────────────┘
+                    ▲
+                    │
+         ┌──────────┴──────────┐
+         │  FLUTTER WEB UI     │
+         │  (Cloud Run)        │
+         │  Compassionate CHW  │
+         │  Interface          │
+         └─────────────────────┘
 ```
 
 ### Core Modules
+
+#### `/frontend_web/`
+Flutter Web frontend with compassionate UI for Community Health Workers.
+- **Firebase Authentication** — Secure CHW login with offline capabilities
+- **Cloud Storage** — Voice notes and location-tagged data
+- **Offline-First** — Service Worker + Hive for full offline support
+- **Deployed on Cloud Run** — Scalable, serverless hosting
+- **See:** [Flutter Web README](frontend_web/README.md) and [Deployment Guide](docs/FLUTTER_WEB_DEPLOYMENT.md)
 
 #### `/governance_kernel/`
 The ethical engine of iLuminara. Encodes 14 global legal frameworks into Python logic.
