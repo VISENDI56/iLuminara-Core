@@ -228,11 +228,13 @@ def predict():
         
     except Exception as e:
         logger.error(f"Error processing request: {str(e)}")
-        logger.error(traceback.format_exc())
+        
+        # Only log full stack trace in development
+        if app.debug:
+            logger.error(traceback.format_exc())
         
         return jsonify({
-            "error": "Internal server error",
-            "message": str(e)
+            "error": "Internal server error"
         }), 500
 
 

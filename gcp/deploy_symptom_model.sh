@@ -13,7 +13,7 @@ echo ""
 REGION="${GCP_REGION:-us-central1}"
 MODEL_NAME="${MODEL_NAME:-frenasa-symptom-extractor}"
 DISPLAY_NAME="${DISPLAY_NAME:-FRENASA-Symptom-Extractor}"
-CONTAINER_IMAGE="${CONTAINER_IMAGE:-gcr.io/PROJECT_ID/frenasa-symptom:latest}"
+CONTAINER_IMAGE_TEMPLATE="${CONTAINER_IMAGE:-gcr.io/PROJECT_ID/frenasa-symptom:latest}"
 
 # Check if gcloud is installed
 if ! command -v gcloud &> /dev/null; then
@@ -28,8 +28,8 @@ if [ -z "$PROJECT_ID" ]; then
     exit 1
 fi
 
-# Replace PROJECT_ID in container image URI
-CONTAINER_IMAGE="${CONTAINER_IMAGE/PROJECT_ID/$PROJECT_ID}"
+# Substitute PROJECT_ID in container image URI using sed
+CONTAINER_IMAGE=$(echo "$CONTAINER_IMAGE_TEMPLATE" | sed "s/PROJECT_ID/${PROJECT_ID}/g")
 
 echo "📋 Configuration:"
 echo "   Project: $PROJECT_ID"

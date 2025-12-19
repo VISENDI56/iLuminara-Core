@@ -20,7 +20,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy FRENASA engine code
 COPY edge_node/frenasa_engine /app/frenasa_engine
 COPY edge_node/speech_recognition /app/speech_recognition
-COPY governance_kernel /app/governance_kernel
 
 # Set Python path
 ENV PYTHONPATH=/app

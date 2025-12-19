@@ -3,7 +3,7 @@ Tests for Swahili Speech Recognition Module
 """
 
 import unittest
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import Mock, patch, MagicMock, mock_open
 import sys
 import os
 
@@ -96,7 +96,7 @@ class TestSwahiliRecognizer(unittest.TestCase):
         recognizer.client = mock_client
         
         # Test transcription
-        with patch('builtins.open', unittest.mock.mock_open(read_data=b'fake audio')):
+        with patch('builtins.open', mock_open(read_data=b'fake audio')):
             result = recognizer.transcribe_audio("test.wav")
         
         self.assertEqual(result["transcript"], "Mgonjwa ana homa")
@@ -117,7 +117,7 @@ class TestSwahiliRecognizer(unittest.TestCase):
         recognizer = SwahiliRecognizer()
         recognizer.client = mock_client
         
-        with patch('builtins.open', unittest.mock.mock_open(read_data=b'fake audio')):
+        with patch('builtins.open', mock_open(read_data=b'fake audio')):
             result = recognizer.transcribe_audio("test.wav")
         
         self.assertEqual(result["transcript"], "")
