@@ -84,9 +84,13 @@ st.header("📝 AUTO-GENERATED SOVEREIGNTY REPORT")
 
 # Narrative Construction
 def generate_narrative(seq_data):
+    if not seq_data:
+        raise ValueError("Sequence data is empty")
+    
     start_time = seq_data[0]['timestamp']
     trigger_time = seq_data[-1]['timestamp']
-    duration = 4.2 # from deck
+    # Calculate duration from actual sequence data
+    duration = seq_data[-1]['offset_seconds']
     
     narrative = f"""
     **INCIDENT REPORT: DADAAB-ZONE-04**
@@ -105,7 +109,7 @@ def generate_narrative(seq_data):
 
 # Load data to feed the narrative
 try:
-    with open('precision_alert_sequence.json') as f:
+    with open('precision_alert_sequence.json', 'r') as f:
         data = json.load(f)
         narrative_text = generate_narrative(data['precision_sequence'])
         
