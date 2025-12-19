@@ -193,12 +193,15 @@ class FRENASASymptomExtractor:
         """
         Extract symptoms using Vertex AI custom model.
         
-        This method would call the deployed Vertex AI endpoint.
-        For now, falls back to rule-based extraction.
+        NOTE: Vertex AI endpoint deployment is not included in this release.
+        This method serves as a placeholder for future integration.
+        Falls back to rule-based extraction.
         """
         try:
-            # TODO: Implement actual Vertex AI endpoint call
-            # endpoint = self.client.Endpoint(endpoint_name=self.model_id)
+            # Placeholder for Vertex AI endpoint call
+            # Future implementation:
+            # from google.cloud import aiplatform
+            # endpoint = aiplatform.Endpoint(endpoint_name=f"projects/{self.project_id}/locations/{self.location}/endpoints/{self.model_id}")
             # prediction = endpoint.predict(instances=[{"text": transcription_text}])
             # return self._parse_vertex_ai_response(prediction)
             

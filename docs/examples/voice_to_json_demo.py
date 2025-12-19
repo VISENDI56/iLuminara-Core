@@ -89,28 +89,36 @@ def demo_complete_pipeline():
         
         # Transcription results
         print("🎤 Transcription:")
-        print(f"   Text: {result.transcription.get('text', 'N/A')}")
-        print(f"   Confidence: {result.transcription.get('confidence', 0):.2%}")
-        print(f"   Time: {result.transcription_time_ms:.2f}ms")
+        if result.transcription:
+            print(f"   Text: {result.transcription.get('text', 'N/A')}")
+            print(f"   Confidence: {result.transcription.get('confidence', 0):.2%}")
+            print(f"   Time: {result.transcription_time_ms:.2f}ms")
+        else:
+            print("   No transcription available")
         
         # Symptom extraction results
         print("\n🔬 Extracted Symptoms:")
-        symptoms = result.symptoms.get('symptoms', [])
-        print(f"   Count: {len(symptoms)}")
-        for symptom in symptoms:
-            print(f"   - {symptom['symptom']} ({symptom['severity']})")
-        print(f"   Urgency: {result.symptoms.get('urgency', 'N/A')}")
-        print(f"   Disease Suspicion: {result.symptoms.get('disease_suspicion', 'None')}")
-        print(f"   Time: {result.extraction_time_ms:.2f}ms")
+        if result.symptoms:
+            symptoms = result.symptoms.get('symptoms', [])
+            print(f"   Count: {len(symptoms)}")
+            for symptom in symptoms:
+                print(f"   - {symptom['symptom']} ({symptom['severity']})")
+            print(f"   Urgency: {result.symptoms.get('urgency', 'N/A')}")
+            print(f"   Disease Suspicion: {result.symptoms.get('disease_suspicion', 'None')}")
+            print(f"   Time: {result.extraction_time_ms:.2f}ms")
+        else:
+            print("   No symptoms extracted")
         
         # Golden Thread fusion
         print("\n🧵 Golden Thread Record:")
-        gt = result.golden_thread_record
-        if gt:
+        if result.golden_thread_record and isinstance(result.golden_thread_record, dict):
+            gt = result.golden_thread_record
             print(f"   Record ID: {gt.get('record_id', 'N/A')}")
             print(f"   Verification Score: {gt.get('verification_score', 0):.2f}")
             print(f"   Retention Status: {gt.get('retention_status', 'N/A')}")
             print(f"   Time: {result.fusion_time_ms:.2f}ms")
+        else:
+            print("   No Golden Thread record available")
         
         # Governance
         print("\n🛡️  Governance:")

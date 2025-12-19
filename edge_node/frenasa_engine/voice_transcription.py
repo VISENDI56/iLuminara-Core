@@ -30,7 +30,7 @@ class TranscriptionResult:
     timestamp: datetime
     audio_duration_seconds: float
     is_final: bool = True
-    alternatives: list = None
+    alternatives: Optional[list] = None
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for JSON serialization."""
@@ -170,7 +170,7 @@ class SwahiliTranscriber:
                 confidence=alternative.confidence,
                 language_code=self.language_code,
                 timestamp=datetime.utcnow(),
-                audio_duration_seconds=len(audio_data) / (sample_rate_hertz * 2),  # Estimate
+                audio_duration_seconds=len(audio_data) / (sample_rate_hertz * 2.0),  # 2 bytes per sample (LINEAR16)
                 is_final=True,
                 alternatives=alternatives
             )
