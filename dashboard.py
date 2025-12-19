@@ -73,11 +73,11 @@ st.sidebar.header("⛓️ PARAMETRIC ORACLE")
 # Smart Contract Simulation
 contract_address = "0x7a23...F9"
 oracle_status = "LISTENING"
-gas_fee = "0.00 Gwei (Private Chain)"
 
 if z_score > 4.2:
     oracle_status = "EXECUTING PAYOUT"
-    tx_hash = f"0x{int(z_score*1000)}...9928"
+    # Generate deterministic transaction hash from z_score
+    tx_hash = f"0x{int(z_score*1000):05d}...9928"
     st.sidebar.success(f"💸 PAYOUT RELEASED")
     st.sidebar.code(f"TX: {tx_hash}\nVAL: $500,000.00 USDC\nBLK: 1928374", language="text")
 else:
@@ -114,7 +114,12 @@ if z_score > 4.2:
 
 # --- 📊 ENHANCED METRICS (REPLACES OLD METRIC ROW) ---
 col1, col2, col3, col4 = st.columns(4)
-col1.metric("RISK Z-SCORE", f"{z_score:.2f}", delta=f"{z_score - 0.5:.2f} (24h)", delta_color="inverse")
+
+# Calculate 24h delta (comparing to previous data point if available)
+z_score_24h_ago = historical_data.iloc[-2]['z_score'] if len(historical_data) > 1 else z_score
+z_score_delta = z_score - z_score_24h_ago
+
+col1.metric("RISK Z-SCORE", f"{z_score:.2f}", delta=f"{z_score_delta:.2f} (24h)", delta_color="inverse")
 col2.metric("CONFIRMED CASES", f"{current_state['emr_confirmations']}", "EMR VERIFIED")
 col3.metric("ENTANGLEMENT", "94.7%", "+2.1% (AI Confidence)")
 col4.metric("BOND STATUS", "RELEASED" if z_score > 4.2 else "LOCKED", "USDC POOL")
