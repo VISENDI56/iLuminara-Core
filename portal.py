@@ -87,16 +87,22 @@ page = st.sidebar.radio(
 
 st.sidebar.divider()
 
-# Shared time control
-if 'events' in outbreak_data:
-    df = pd.DataFrame(outbreak_data['events'])
-    max_hour = int(df['hour'].max()) if not df.empty else 72
+# Shared time control - handle both old and new data formats
+if isinstance(outbreak_data, dict) and 'events' in outbreak_data:
+    # New format with nested structure
+    events_df = pd.DataFrame(outbreak_data['events'])
+    z_score_df = pd.DataFrame(outbreak_data.get('z_score_timeline', []))
+    max_hour = int(z_score_df['hour'].max()) if not z_score_df.empty else 72
     current_hour = st.sidebar.slider("Operation Hour", 0, max_hour, max_hour // 2)
-else:
-    # Fallback for old format
-    df = pd.DataFrame(outbreak_data if isinstance(outbreak_data, list) else [])
-    max_hour = 72
+elif isinstance(outbreak_data, list):
+    # Old format - list of events
+    events_df = pd.DataFrame(outbreak_data)
+    z_score_df = pd.DataFrame()
+    max_hour = int(events_df['hour'].max()) if not events_df.empty else 72
     current_hour = st.sidebar.slider("Operation Hour", 0, max_hour, 36)
+else:
+    st.error("Unknown data format")
+    st.stop()
 
 st.sidebar.markdown(f"**System Time:** Hour {current_hour}/{max_hour}")
 st.sidebar.divider()
@@ -110,13 +116,35 @@ st.sidebar.markdown("**Protocol:** ACTIVE")
 # PAGE 1: COMMAND CONSOLE (Leadership Dashboard)
 # ============================================================================
 if page == "🛡️ Command Console":
-    if df.empty:
+    if events_df.empty:
         st.error("No outbreak data available.")
         st.stop()
     
-    # Filter data for current hour
-    current_state = df[df['hour'] <= current_hour].iloc[-1] if len(df[df['hour'] <= current_hour]) > 0 else df.iloc[0]
-    historical_data = df[df['hour'] <= current_hour]
+    # Get current state from z_score_timeline for metrics
+    if not z_score_df.empty:
+        z_score_state = z_score_df[z_score_df['hour'] <= current_hour].iloc[-1] if len(z_score_df[z_score_df['hour'] <= current_hour]) > 0 else z_score_df.iloc[0]
+        z_score = z_score_state['z_score']
+        cases = z_score_state['cases']
+    else:
+        z_score = 0.0
+        cases = 0
+    
+    # Count CBS and EMR signals up to current hour
+    historical_events = events_df[events_df['hour'] <= current_hour]
+    cbs_signals = len(historical_events[historical_events['source'] == 'CBS'])
+    emr_signals = len(historical_events[historical_events['source'] == 'EMR'])
+    
+    # Determine payout status based on z_score
+    payout_status = "RELEASED" if z_score > 4.2 else "LOCKED"
+    
+    # Get geographic center from data
+    if 'geographic_data' in outbreak_data and outbreak_data['geographic_data']:
+        geo_center = outbreak_data['geographic_data'][0]
+        lat = geo_center['latitude']
+        lon = geo_center['longitude']
+    else:
+        lat = 2.7673  # Default to Ifo Camp
+        lon = 40.3264
     
     # --- HEADER SECTION ---
     col_head1, col_head2 = st.columns([3, 1])
@@ -125,7 +153,6 @@ if page == "🛡️ Command Console":
         st.markdown("### NODE: **JOR-47 (DADAAB)** | LATENCY: **18ms**")
     
     with col_head2:
-        payout_status = current_state.get('payout_status', 'LOCKED')
         if payout_status == "LOCKED":
             st.markdown("<div class='status-banner ok'>STATUS: SECURE</div>", unsafe_allow_html=True)
         else:
@@ -136,7 +163,6 @@ if page == "🛡️ Command Console":
     # --- KPI ROW ---
     kpi1, kpi2, kpi3, kpi4, kpi5, kpi6 = st.columns([1.5, 1.5, 1, 1, 1, 1])
     
-    z_score = current_state.get('z_score', 0.0)
     z_color = "status-ok"
     if z_score > 2.0: z_color = "status-warn"
     if z_score > 3.5: z_color = "status-crit"
@@ -156,12 +182,10 @@ if page == "🛡️ Command Console":
         st.markdown(f"<div class='metric-container'>Parametric Bond<br><span class='big-font {payout_color}'>{payout_status}</span></div>", unsafe_allow_html=True)
     
     with kpi3:
-        cbs_signals = current_state.get('cbs_signals', 0)
         st.markdown(f"<div class='metric-container'>CBS Signals<br><span class='big-font'>{int(cbs_signals)}</span></div>", unsafe_allow_html=True)
     
     with kpi4:
-        emr_confirmations = current_state.get('emr_confirmations', 0)
-        st.markdown(f"<div class='metric-container'>EMR Confirmed<br><span class='big-font'>{int(emr_confirmations)}</span></div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='metric-container'>EMR Confirmed<br><span class='big-font'>{int(emr_signals)}</span></div>", unsafe_allow_html=True)
     
     with kpi5:
         st.markdown(f"<div class='metric-container'>Governance Kernel<br><span class='big-font status-ok'>14 ACTIVE</span></div>", unsafe_allow_html=True)
@@ -177,9 +201,6 @@ if page == "🛡️ Command Console":
     # PyDeck Map
     with viz1:
         st.markdown("### 🗺️ SPATIOTEMPORAL RISK MAP")
-        
-        lat = current_state.get('lat', 0.0512)
-        lon = current_state.get('lon', 40.3129)
         
         r, g = 0, 255
         if z_score > 3.5: r, g = 255, 0
@@ -198,10 +219,11 @@ if page == "🛡️ Command Console":
         st.markdown("### 📉 THE GOLDEN THREAD")
         st.markdown("**Resolution of Agentic Conflict (CBS vs. EMR)**")
         
-        if 'cbs_signals' in historical_data.columns and 'z_score' in historical_data.columns:
-            chart_data = historical_data[['hour', 'cbs_signals', 'z_score']].copy()
-            fig = px.line(chart_data, x='hour', y=['cbs_signals', 'z_score'], 
-                          color_discrete_map={"cbs_signals": "#FFD700", "z_score": "#FF0000"})
+        if not z_score_df.empty:
+            # Create chart from z_score timeline
+            chart_data = z_score_df[z_score_df['hour'] <= current_hour][['hour', 'cases', 'z_score']].copy()
+            fig = px.line(chart_data, x='hour', y=['cases', 'z_score'], 
+                          color_discrete_map={"cases": "#FFD700", "z_score": "#FF0000"})
             fig.update_layout(plot_bgcolor='#0e1117', paper_bgcolor='#0e1117', 
                               font_color='#00FF41', margin=dict(l=20, r=20, t=20, b=20), 
                               legend=dict(orientation="h"))
