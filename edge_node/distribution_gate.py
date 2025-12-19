@@ -12,8 +12,8 @@ class NetworkStats:
     active_users: int = 0
     growth_rate: float = 0.0
     ric_cost: float = 0.0
-    
-    
+
+
 def get_live_network_stats():
     """
     Returns live network statistics for the distribution network.

@@ -79,8 +79,8 @@ st.sidebar.caption(f"System v4.2 | {azure_status}")
 
 st.sidebar.markdown("---")
 st.sidebar.header("🌍 DISTRIBUTION (5DM)")
-st.sidebar.metric("Active Nodes", f"{net_stats.active_users:,}", "+1.2k/sec")
-st.sidebar.metric("RIC (Acq Cost)", "$0.90", "-94% vs Std")
+st.sidebar.metric("Active Nodes", f"{net_stats.active_users:,}", f"+{net_stats.growth_rate}k/sec")
+st.sidebar.metric("RIC (Acq Cost)", f"${net_stats.ric_cost:.2f}", "-94% vs Std")
 
 st.sidebar.markdown("---")
 st.sidebar.header("🧬 BIO-SOVEREIGNTY")
