@@ -1,2 +1,2 @@
-openai
-azure-identity
+openai==2.14.0
+azure-identity==1.25.1
