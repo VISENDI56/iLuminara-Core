@@ -132,14 +132,25 @@ class GoldenThread:
             
         Returns:
             float: Entanglement score between 0 and 1
+            
+        Raises:
+            KeyError: If required 'timestamp' key is missing from events
         """
+        # Validate required keys
+        if 'timestamp' not in cbs_event:
+            raise KeyError("CBS event missing required 'timestamp' key")
+        if 'timestamp' not in emr_event:
+            raise KeyError("EMR event missing required 'timestamp' key")
+        
         # 1. Temporal Decay (The further apart, the weaker the link)
-        # Parse timestamps using same logic as _parse_timestamp for consistency
-        time_cbs_str = cbs_event['timestamp'].replace('Z', '+00:00')
-        time_emr_str = emr_event['timestamp'].replace('Z', '+00:00')
-        time_cbs = datetime.fromisoformat(time_cbs_str).replace(tzinfo=None)
-        time_emr = datetime.fromisoformat(time_emr_str).replace(tzinfo=None)
-        delta_hours = abs((time_cbs - time_emr).total_seconds()) / 3600
+        # Parse timestamps - reuse logic from _parse_timestamp
+        cbs_timestamp = self._parse_timestamp(cbs_event, "cbs")
+        emr_timestamp = self._parse_timestamp(emr_event, "emr")
+        
+        if not cbs_timestamp or not emr_timestamp:
+            raise ValueError("Unable to parse timestamps from events")
+        
+        delta_hours = abs((cbs_timestamp - emr_timestamp).total_seconds()) / 3600
         
         # Decay function: Probability drops exponentially over time
         temporal_weight = math.exp(self.TEMPORAL_DECAY_RATE * delta_hours)
@@ -154,6 +165,7 @@ class GoldenThread:
                 content_weight = 1.0  # High weight for matching symptom-diagnosis pairs
 
         # Final Entanglement Score (weighted combination)
+        # Note: Score is always in [0, 1] range due to exponential decay and weight normalization
         return (temporal_weight * self.TEMPORAL_WEIGHT) + (content_weight * self.CONTENT_WEIGHT)
 
     def fuse_data(self, cbs_data: List[Dict], emr_data: List[Dict]) -> List[Dict[str, Any]]:
