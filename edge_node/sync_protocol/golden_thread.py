@@ -103,6 +103,7 @@ class GoldenThread:
     TEMPORAL_DECAY_RATE = -0.05  # Exponential decay: ~50% every 12 hours
     TEMPORAL_WEIGHT = 0.7  # Weight for temporal proximity in entanglement score
     CONTENT_WEIGHT = 0.3  # Weight for symptom-diagnosis alignment
+    CONTENT_WEIGHT_DEFAULT = 0.1  # Default weight for non-matching symptoms
     ENTANGLEMENT_THRESHOLD_HIGH = 0.85  # Threshold for ENTANGLED status
     ENTANGLEMENT_THRESHOLD_MEDIUM = 0.5  # Threshold for PROBABLE LINK status
     
@@ -117,6 +118,7 @@ class GoldenThread:
         self.fused_records = {}  # patient_id -> list of TimeseriesRecord
         self.fusion_log = []
         self.retention_policy_days = 180  # 6-month rule
+        # entanglement_matrix: Reserved for future graph-based entanglement tracking
         self.entanglement_matrix: List[EntanglementNode] = []
 
     def calculate_entanglement(self, cbs_event: Dict, emr_event: Dict) -> float:
@@ -132,15 +134,18 @@ class GoldenThread:
             float: Entanglement score between 0 and 1
         """
         # 1. Temporal Decay (The further apart, the weaker the link)
-        time_cbs = datetime.fromisoformat(cbs_event['timestamp'].replace('Z', ''))
-        time_emr = datetime.fromisoformat(emr_event['timestamp'].replace('Z', ''))
+        # Parse timestamps using same logic as _parse_timestamp for consistency
+        time_cbs_str = cbs_event['timestamp'].replace('Z', '+00:00')
+        time_emr_str = emr_event['timestamp'].replace('Z', '+00:00')
+        time_cbs = datetime.fromisoformat(time_cbs_str).replace(tzinfo=None)
+        time_emr = datetime.fromisoformat(time_emr_str).replace(tzinfo=None)
         delta_hours = abs((time_cbs - time_emr).total_seconds()) / 3600
         
         # Decay function: Probability drops exponentially over time
         temporal_weight = math.exp(self.TEMPORAL_DECAY_RATE * delta_hours)
 
         # 2. Symptom Vector Alignment (content-based matching)
-        content_weight = 0.1  # Default low weight for non-matching symptoms
+        content_weight = self.CONTENT_WEIGHT_DEFAULT  # Default low weight for non-matching symptoms
         symptom = cbs_event.get('symptom')
         diagnosis = emr_event.get('diagnosis')
         
@@ -151,9 +156,11 @@ class GoldenThread:
         # Final Entanglement Score (weighted combination)
         return (temporal_weight * self.TEMPORAL_WEIGHT) + (content_weight * self.CONTENT_WEIGHT)
 
-    def fuse_data(self, cbs_data: List[Dict], emr_data: List[Dict]):
+    def fuse_data(self, cbs_data: List[Dict], emr_data: List[Dict]) -> List[Dict[str, Any]]:
         """
         Fuses data streams using Active Inference.
+        
+        NOTE: O(n*m) complexity - for large datasets, consider spatial indexing.
         
         Args:
             cbs_data: List of CBS events
@@ -168,6 +175,7 @@ class GoldenThread:
             best_match = None
             highest_entanglement = 0.0
             
+            # Find best matching EMR record for this CBS signal
             for emr in emr_data:
                 score = self.calculate_entanglement(cbs, emr)
                 if score > highest_entanglement:
@@ -181,12 +189,17 @@ class GoldenThread:
             elif highest_entanglement > self.ENTANGLEMENT_THRESHOLD_MEDIUM:
                 status = "PROBABLE LINK"
             
+            # Extract diagnosis safely
+            predicted_diagnosis = "Unknown"
+            if best_match and isinstance(best_match, dict):
+                predicted_diagnosis = best_match.get('diagnosis', 'Unknown')
+            
             fused_log.append({
                 "time": cbs['timestamp'],
                 "cbs_signal": cbs.get('symptom', 'Unknown'),
                 "entanglement_score": round(highest_entanglement, 4),
                 "status": status,
-                "predicted_diagnosis": best_match.get('diagnosis') if best_match else "Unknown"
+                "predicted_diagnosis": predicted_diagnosis
             })
             
         return fused_log
