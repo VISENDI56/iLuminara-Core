@@ -10,10 +10,11 @@ inference while respecting data sovereignty constraints.
 Philosophy: "Predict outbreaks across space and time with hierarchical precision."
 """
 
-from typing import Dict, Any, List, Optional, Union
+from typing import Dict, Any, List, Optional, Union, Tuple
 from dataclasses import dataclass, field
 from datetime import datetime
 import logging
+import re
 
 # Google Cloud imports (with fallback for environments without GCP)
 try:
@@ -54,15 +55,81 @@ class MultiScaleDataset:
     iot_sensors_table: str
     project_id: Optional[str] = None
     dataset_id: Optional[str] = None
+    # Configurable column mappings
+    community_columns: Optional[Dict[str, str]] = None
+    emr_columns: Optional[Dict[str, str]] = None
+    iot_columns: Optional[Dict[str, str]] = None
     
     def __post_init__(self):
-        """Validate table references."""
+        """Validate table references and set default column mappings."""
         if not self.community_symptoms_table:
             raise ValueError("community_symptoms_table is required")
         if not self.emr_data_table:
             raise ValueError("emr_data_table is required")
         if not self.iot_sensors_table:
             raise ValueError("iot_sensors_table is required")
+        
+        # Validate table names to prevent SQL injection
+        for table_name in [self.community_symptoms_table, self.emr_data_table, self.iot_sensors_table]:
+            if not self._is_valid_table_reference(table_name):
+                raise ValueError(f"Invalid table reference: {table_name}")
+        
+        # Set default column mappings if not provided
+        if self.community_columns is None:
+            self.community_columns = {
+                'timestamp': 'timestamp',
+                'location': 'location',
+                'geography': 'geography',
+                'symptoms': 'symptoms'
+            }
+        
+        if self.emr_columns is None:
+            self.emr_columns = {
+                'patient_id': 'patient_id',
+                'onset_time': 'onset_time'
+            }
+        
+        if self.iot_columns is None:
+            self.iot_columns = {
+                'geography': 'geography',
+                'water_quality': 'water_quality',
+                'temperature': 'temperature'
+            }
+    
+    @staticmethod
+    def _is_valid_table_reference(table_ref: str) -> bool:
+        """
+        Validate BigQuery table reference format.
+        
+        Valid formats:
+        - `table_name`
+        - `project.dataset.table`
+        - dataset.table
+        
+        Args:
+            table_ref: Table reference string
+            
+        Returns:
+            True if valid, False otherwise
+        """
+        if not table_ref:
+            return False
+        
+        # Remove backticks if present
+        clean_ref = table_ref.strip('`')
+        
+        # Check for basic SQL injection patterns
+        dangerous_chars = [';', '--', '/*', '*/', 'DROP', 'DELETE', 'INSERT', 'UPDATE']
+        for pattern in dangerous_chars:
+            if pattern.upper() in clean_ref.upper():
+                return False
+        
+        # Valid table reference should contain only alphanumeric, dots, underscores, and hyphens
+        import re
+        if not re.match(r'^[a-zA-Z0-9._-]+$', clean_ref):
+            return False
+        
+        return True
 
 
 @dataclass
@@ -148,18 +215,22 @@ class HierarchicalSpatiotemporalModel:
         
         logger.info("HierarchicalSpatiotemporalModel initialized")
     
-    def _build_multiscale_query(self) -> str:
+    def _build_multiscale_query(self) -> Tuple[str, Dict[str, Any]]:
         """
-        Construct SQL query for multi-scale data fusion.
+        Construct SQL query for multi-scale data fusion with parameterization.
         
         Combines community surveillance, clinical records, and environmental
         sensors using spatial joins (ST_DWithin) and temporal alignment.
         
         Returns:
-            SQL query string for BigQuery execution
+            Tuple of (SQL query string, query parameters dictionary)
         """
-        radius = self.forecast_config.spatial_radius_meters
+        # Get column mappings
+        c_cols = self.dataset_config.community_columns
+        e_cols = self.dataset_config.emr_columns
+        i_cols = self.dataset_config.iot_columns
         
+        # Build query using column mappings (tables already validated in __post_init__)
         query = f"""
         WITH community AS (
             SELECT * FROM `{self.dataset_config.community_symptoms_table}`
@@ -171,22 +242,27 @@ class HierarchicalSpatiotemporalModel:
             SELECT * FROM `{self.dataset_config.iot_sensors_table}`
         )
         SELECT 
-            c.timestamp,
-            c.location,
-            c.symptoms,
-            e.water_quality,
-            e.temperature,
-            COUNT(DISTINCT p.patient_id) as case_count
+            c.{c_cols['timestamp']} as timestamp,
+            c.{c_cols['location']} as location,
+            c.{c_cols['symptoms']} as symptoms,
+            e.{i_cols['water_quality']} as water_quality,
+            e.{i_cols['temperature']} as temperature,
+            COUNT(DISTINCT p.{e_cols['patient_id']}) as case_count
         FROM community c
         LEFT JOIN environmental e 
-            ON ST_DWithin(c.geography, e.geography, {radius})
+            ON ST_DWithin(c.{c_cols['geography']}, e.{i_cols['geography']}, @spatial_radius)
         LEFT JOIN clinical p 
-            ON DATE(p.onset_time) = DATE(c.timestamp)
+            ON DATE(p.{e_cols['onset_time']}) = DATE(c.{c_cols['timestamp']})
         GROUP BY 1, 2, 3, 4, 5
-        ORDER BY c.timestamp DESC
+        ORDER BY c.{c_cols['timestamp']} DESC
         """
         
-        return query
+        # Query parameters for safe parameterization
+        query_parameters = {
+            'spatial_radius': self.forecast_config.spatial_radius_meters
+        }
+        
+        return query, query_parameters
     
     def create_multiscale_dataset(self) -> Any:
         """
@@ -201,13 +277,25 @@ class HierarchicalSpatiotemporalModel:
         Raises:
             SpatiotemporalModelError: If query execution fails
         """
-        query = self._build_multiscale_query()
+        query, query_params = self._build_multiscale_query()
         
         logger.info("Executing multi-scale data fusion query...")
         logger.debug(f"Query: {query}")
+        logger.debug(f"Parameters: {query_params}")
         
         try:
-            query_job = self.client.query(query)
+            # Configure query job with parameters
+            job_config = bigquery.QueryJobConfig(
+                query_parameters=[
+                    bigquery.ScalarQueryParameter(
+                        "spatial_radius",
+                        "FLOAT64",
+                        query_params['spatial_radius']
+                    )
+                ]
+            )
+            
+            query_job = self.client.query(query, job_config=job_config)
             dataset = query_job.to_dataframe()
             
             logger.info(f"Retrieved {len(dataset)} records from multi-scale dataset")
@@ -229,11 +317,22 @@ class HierarchicalSpatiotemporalModel:
         Uses Vertex AI time series models to learn spatiotemporal patterns
         with hierarchical structure by location.
         
+        Note: This method provides a simplified interface to Vertex AI's time
+        series capabilities. The actual Vertex AI API may require additional
+        configuration such as specifying the data source format, preprocessing
+        steps, or using AutoML Tables for time series forecasting.
+        
+        For production use, refer to the Vertex AI documentation for the
+        specific time series forecasting API you're using:
+        - AutoML Tables for time series
+        - Vertex AI Forecasting
+        - Custom training with time series data
+        
         Args:
             dataset: pandas.DataFrame with multi-scale observations
         
         Returns:
-            Trained forecaster model (Vertex AI TimeSeriesDataset)
+            Trained forecaster model (Vertex AI forecasting model)
         
         Raises:
             SpatiotemporalModelError: If training fails
@@ -247,7 +346,11 @@ class HierarchicalSpatiotemporalModel:
         logger.info("Training hierarchical time series forecaster...")
         
         try:
-            # Create time series dataset
+            # Note: The actual implementation depends on which Vertex AI
+            # time series API you're using. This is a simplified interface
+            # that may need adjustment based on the specific API.
+            
+            # Example using Vertex AI time series (adjust as needed)
             ts_dataset = time_series.TimeSeriesDataset(dataset)
             
             # Train with hierarchical structure
