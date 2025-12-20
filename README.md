@@ -4,6 +4,22 @@
 
 ---
 
+## 🎯 NEW: Google Cloud Prototype (v1.0)
+
+**Run the complete iLuminara stack in 30 seconds:**
+
+```bash
+./run_demo.sh
+```
+
+Access the **Compassionate UI Dashboard** at http://localhost:8501
+
+**Features:**
+- 🎤 **Sentry Mode**: Voice-to-JSON processing with entity extraction
+- 🗺️ **HSTPU Map**: Interactive 3D outbreak visualization with risk metrics
+- ⚖️ **Ethical Audit**: Active Inference decision validation with humanitarian constraints
+
+**See:** [QUICKSTART_GCP.md](QUICKSTART_GCP.md) | [GCP_PROTOTYPE.md](GCP_PROTOTYPE.md) | [Deploy to GCP](gcp_scripts/deploy.sh)
 ## 🚀 The Nuclear IP Stack
 
 iLuminara implements a revolutionary "Nuclear IP Stack" of proprietary innovations:
@@ -68,6 +84,12 @@ Built on four foundational pillars:
 
 ### Core Modules
 
+#### `/app/` **[NEW: GCP Prototype]**
+Production-ready Google Cloud Platform deployment.
+- **`app/backend/`** — FastAPI microservices (Voice Processing, HSTPU Forecasting, Ethical Engine)
+- **`app/frontend/`** — Streamlit Compassionate UI dashboard
+- **`gcp_scripts/`** — Cloud Run deployment automation
+- Mock GCP services for local development without credentials
 #### `/frontend_web/`
 Flutter Web frontend with compassionate UI for Community Health Workers.
 - **Firebase Authentication** — Secure CHW login with offline capabilities

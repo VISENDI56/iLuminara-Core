@@ -60,12 +60,25 @@ share/python-wheels/
 *.egg
 MANIFEST
 
+# Virtual Environments
+.venv/
+.venv_test/
 # Virtual Environment
 # Virtual environments
 .venv/
 venv/
 ENV/
 env/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+.hypothesis/
+
+# Streamlit
+.streamlit/
 
 # IDE
 # IDEs
@@ -134,6 +147,12 @@ temp/
 Thumbs.db
 
 # Logs
+*.log
+logs/*.log
+/tmp/
+
+# GCP
+.gcloud/
 logs/
 *.log
 
@@ -154,6 +173,10 @@ service-account*.json
 !simulated_outbreak.json
 !precision_alert_sequence.json
 
+# Temporary files
+*.tmp
+*.temp
+nohup.out
 # Test outputs
 voice_to_json_result.json
 tmp/
