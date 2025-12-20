@@ -47,12 +47,17 @@ env/
 *.swo
 *~
 
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
 
 *~
 
 # Logs
 *.log
 logs/
+
 # Generated simulation data
 simulated_outbreak.json
 precision_alert_sequence.json
