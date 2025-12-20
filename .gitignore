@@ -19,6 +19,12 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
 # Virtual environments
 .venv/
@@ -27,6 +33,7 @@ ENV/
 env/
 
 # IDE
+# IDEs
 .vscode/
 .idea/
 *.swp
@@ -40,6 +47,8 @@ Thumbs.db
 # Logs
 *.log
 logs/
+logs/
+*.log
 
 # Test coverage
 .coverage
@@ -51,4 +60,6 @@ htmlcov/
 
 # Temporary files
 /tmp/
+# Temporary files
+tmp/
 *.tmp
