@@ -92,6 +92,8 @@ venv.bak/
 venv/
 ENV/
 env/
+
+# IDE
 .virtualenv
 
 
@@ -236,6 +238,19 @@ coverage.xml
 *.log
 logs/
 
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Node modules (if any JS tooling)
+node_modules/
 # Environment
 .env
 .env.local
