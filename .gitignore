@@ -1,9 +1,12 @@
+# Python cache files
 __pycache__/
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
+
+# Virtual environment
 .Python
 build/
 develop-eggs/
@@ -41,6 +44,7 @@ env/
 .idea/
 *.swp
 *.swo
+
 *~
 
 # Logs
@@ -69,6 +73,12 @@ Thumbs.db
 Thumbs.db
 
 # Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+/tmp/
 logs/
 *.log
 

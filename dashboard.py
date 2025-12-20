@@ -3,6 +3,28 @@ import pandas as pd
 import pydeck as pdk
 import json
 import plotly.express as px
+from edge_node.distribution_gate import get_live_network_stats
+import os
+
+# --- MOCK DATA STRUCTURES FOR COMMAND TOWER ---
+# In production, these would connect to actual bio-sovereignty and flux monitoring systems
+
+# Mock Acorn status (bio-lock authentication)
+acorn_status = {
+    'access_token': True  # Simulated authenticated state
+}
+
+# Mock bio-telemetry data (HRV monitoring)
+class BioTelemetry:
+    def __init__(self):
+        self.heart_rate_variability = 72.5  # milliseconds, simulated coherent state
+
+bio_telemetry = BioTelemetry()
+
+# Mock flux status (mental state monitoring)
+flux_status = {
+    'status': 'FLOW_STATE_ACTIVE'  # Can be 'FLUX_ACTIVE' or 'FLOW_STATE_ACTIVE'
+}
 
 # --- CONFIGURATION: THE SOVEREIGN AESTHETIC ---
 st.set_page_config(
@@ -28,6 +50,12 @@ st.markdown("""
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
     </style>
     """, unsafe_allow_html=True)
+
+# --- AZURE STATUS CHECK ---
+azure_status = "🟢 ONLINE (GPT-4o)" if os.getenv("AZURE_OPENAI_API_KEY") else "🟡 OFFLINE (Sovereign Mode)"
+
+# --- GET NETWORK STATS ---
+net_stats = get_live_network_stats()
 
 # --- DATA LOADER ---
 @st.cache_data
@@ -55,7 +83,31 @@ df = load_data()
 if df.empty:
     st.stop()
 
-# --- SIDEBAR CONTROL ---
+# --- SIDEBAR: SOVEREIGN COMMAND TOWER ---
+st.sidebar.title("🛡️ SOVEREIGN COMMAND")
+st.sidebar.caption(f"System v4.2 | {azure_status}")
+
+st.sidebar.markdown("---")
+st.sidebar.header("🌍 DISTRIBUTION (5DM)")
+st.sidebar.metric("Active Nodes", f"{net_stats.active_users:,}", f"+{net_stats.growth_rate}k/sec")
+st.sidebar.metric("RIC (Acq Cost)", f"${net_stats.ric_cost:.2f}", "-94% vs Std")
+
+st.sidebar.markdown("---")
+st.sidebar.header("🧬 BIO-SOVEREIGNTY")
+if acorn_status['access_token']:
+    st.sidebar.success("BIO-LOCK: OPEN")
+    st.sidebar.metric("Operator HRV", f"{int(bio_telemetry.heart_rate_variability)} ms", "COHERENT")
+else:
+    st.sidebar.error("BIO-LOCK: SEALED")
+
+st.sidebar.markdown("---")
+st.sidebar.header("🧠 MENTAL GUARDRAILS")
+if flux_status["status"] == "FLUX_ACTIVE":
+    st.sidebar.error("SILENT FLUX ACTIVE")
+else:
+    st.sidebar.success("FLOW STATE ACTIVE")
+
+st.sidebar.markdown("---")
 st.sidebar.header("🕹️ TIME TRAVEL CONTROL")
 current_hour = st.sidebar.slider("Operation Hour", 0, 72, 36)
 
