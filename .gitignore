@@ -70,6 +70,8 @@ share/python-wheels/
 MANIFEST
 
 # Virtual environments
+.env
+.venv
 .venv/
 env/
 venv/
@@ -110,6 +112,7 @@ htmlcov/
 *.swp
 *.swo
 *~
+.DS_Store
 
 # Logs
 logs/
@@ -133,6 +136,21 @@ nohup.out
 htmlcov/
 .tox/
 
+# Logs
+*.log
+logs/
+
+# Google Cloud
+.gcloud/
+*.json.key
+service-account*.json
+
+# Docker
+.dockerignore
+
+# Temporary files
+tmp/
+temp/
 *~
 
 # Logs

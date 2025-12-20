@@ -1,3 +1,4 @@
+"""iLuminara Test Suite"""
 """
 Unit Tests for Swahili AI Agents
 ═════════════════════════════════════════════════════════════════════════════
