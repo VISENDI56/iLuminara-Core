@@ -43,6 +43,9 @@ env/
 *.swo
 *~
 
+# Logs
+*.log
+logs/
 # Generated simulation data
 simulated_outbreak.json
 precision_alert_sequence.json
@@ -58,6 +61,9 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
+
+# Streamlit
+.streamlit/
 # OS
 .DS_Store
 Thumbs.db
