@@ -177,6 +177,25 @@ iLuminara-Core is engineered to be **natively compliant** across 14 global legal
 
 ## 🚀 Quick Start
 
+### Launch All Services (Complete System)
+
+```bash
+chmod +x launch_all_services.sh
+./launch_all_services.sh
+```
+
+This launches the complete iLuminara system:
+- **3 Streamlit Dashboards** (Ports 8501-8503)
+  - Command Console: http://0.0.0.0:8501
+  - Transparency Audit: http://0.0.0.0:8502
+  - Field Validation: http://0.0.0.0:8503
+- **Docker Services** (if available)
+  - Core API, Prometheus, Grafana, Nginx
+- **Support Services** (Port forwarder, etc.)
+
+See **[COMPLETE_LAUNCH_GUIDE.md](COMPLETE_LAUNCH_GUIDE.md)** for detailed instructions.
+
+### 1. Scaffold the Repository (If Needed)
 ### Option 1: Launch Full Sovereign Stack (Recommended)
 
 ```bash
