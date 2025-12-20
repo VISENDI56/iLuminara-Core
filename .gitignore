@@ -44,6 +44,8 @@ env/
 .idea/
 *.swp
 *.swo
+*~
+
 
 *~
 
@@ -73,6 +75,12 @@ Thumbs.db
 Thumbs.db
 
 # Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
 *.log
 logs/
 
