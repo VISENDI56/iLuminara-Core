@@ -14,3 +14,16 @@ functions-framework>=3.4.0
 
 # Testing
 pytest-cov>=4.1.0
+openai==2.14.0
+azure-identity==1.25.1
+# iLuminara-Core Requirements
+# Core dependencies for AI Agents module
+
+# Scientific computing
+numpy>=1.24.0
+
+# Optional dependencies for full functionality
+# streamlit>=1.28.0  # For dashboard
+# pandas>=2.0.0  # For data handling
+# pydeck>=0.8.0  # For geospatial visualization
+# plotly>=5.17.0  # For plotting
