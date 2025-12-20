@@ -1,0 +1,10 @@
+# Cloud Functions requirements
+# These are the dependencies needed for the constraint checker Cloud Functions
+
+# No external dependencies required for basic functionality
+# The humanitarian_constraints module uses only Python standard library
+
+# Optional: Add these if using production GCP services
+# google-cloud-secret-manager==2.16.0
+# google-cloud-aiplatform==1.38.0
+# google-cloud-functions==1.13.0

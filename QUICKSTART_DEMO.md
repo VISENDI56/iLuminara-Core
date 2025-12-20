@@ -13,8 +13,19 @@ python edge_node/frenasa_engine/simulate_outbreak.py
 # Output: simulated_outbreak.json (7.2 MB, 11,776 events)
 ```
 
-## Launch the Command Console
+## Launch the Full War Room Suite
 
+### Option 1: Auto-Launch (Recommended)
+```bash
+./launch_war_room.sh
+```
+
+This single command will:
+1. Generate fresh outbreak data
+2. Start all three dashboards
+3. **Automatically open all dashboards in Chrome**
+
+### Option 2: Manual Launch (Single Dashboard)
 ```bash
 streamlit run dashboard.py
 ```

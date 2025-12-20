@@ -1,0 +1,51 @@
+name: iluminara_web
+description: iLuminara Community Health Worker compassionate UI for offline-first health surveillance
+version: 1.0.0+1
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # Firebase dependencies
+  firebase_core: ^2.24.0
+  firebase_auth: ^4.15.0
+  firebase_storage: ^11.5.0
+  cloud_firestore: ^4.13.0
+  
+  # State management
+  provider: ^6.1.1
+  
+  # UI components
+  cupertino_icons: ^1.0.6
+  google_fonts: ^6.1.0
+  
+  # Offline support
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  connectivity_plus: ^5.0.2
+  
+  # Location and media
+  geolocator: ^10.1.0
+  record: ^5.0.4
+  permission_handler: ^11.1.0
+  
+  # Utilities
+  intl: ^0.18.1
+  uuid: ^4.2.2
+  path_provider: ^2.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+  build_runner: ^2.4.7
+  hive_generator: ^2.0.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/

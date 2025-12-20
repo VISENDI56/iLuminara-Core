@@ -15,6 +15,14 @@ from enum import Enum
 from dataclasses import dataclass
 from datetime import datetime
 
+# Import tamper-proof audit trail
+try:
+    from governance_kernel.audit_trail import TamperProofAuditTrail, AuditEventType
+except ImportError:
+    # Fallback if audit_trail not available
+    TamperProofAuditTrail = None
+    AuditEventType = None
+
 
 class SovereigntyViolationError(Exception):
     """
@@ -68,10 +76,24 @@ class SovereignGuardrail:
         )
     """
 
-    def __init__(self):
-        """Initialize the sovereign guardrail with global compliance matrix."""
+    def __init__(self, enable_tamper_proof_audit: bool = False):
+        """
+        Initialize the sovereign guardrail with global compliance matrix.
+        
+        Args:
+            enable_tamper_proof_audit: If True, enable tamper-proof audit trail
+                                       with Bigtable, Spanner, and KMS integration
+        """
         self.compliance_matrix = self._build_compliance_matrix()
         self.audit_log = []
+        
+        # Initialize tamper-proof audit trail if enabled
+        self.tamper_proof_audit_enabled = enable_tamper_proof_audit
+        self.tamper_proof_trail = None
+        if enable_tamper_proof_audit and TamperProofAuditTrail is not None:
+            # Initialize in simulation mode by default
+            self.tamper_proof_trail = TamperProofAuditTrail(simulate=True)
+            print("✅ Tamper-proof audit trail enabled (simulation mode)")
 
     def _build_compliance_matrix(self) -> Dict[str, Dict[str, Any]]:
         """
@@ -190,6 +212,24 @@ class SovereignGuardrail:
                 "status": "PASSED",
             }
         )
+        
+        # Log to tamper-proof audit trail if enabled
+        if self.tamper_proof_audit_enabled and self.tamper_proof_trail:
+            try:
+                self.tamper_proof_trail.log_event(
+                    event_type=self._map_action_to_audit_event(action_type),
+                    actor=payload.get("actor", "system"),
+                    resource=payload.get("resource", "unknown"),
+                    action=action_type,
+                    jurisdiction=jurisdiction,
+                    outcome="SUCCESS",
+                    metadata={
+                        "payload_summary": self._sanitize_payload_for_audit(payload),
+                        "compliance_rules_applied": list(compliance_rules.keys())
+                    }
+                )
+            except Exception as e:
+                print(f"⚠️  Failed to log to tamper-proof audit trail: {e}")
 
         return True
 
@@ -213,6 +253,27 @@ class SovereignGuardrail:
                 f"Kenya DPA §37 (Transfer Restrictions), "
                 f"HIPAA §164.312(a)(2)(ii) (Encryption in Transit)"
             )
+            
+            # Log violation to tamper-proof audit trail
+            if self.tamper_proof_audit_enabled and self.tamper_proof_trail:
+                try:
+                    self.tamper_proof_trail.log_event(
+                        event_type=AuditEventType.DATA_TRANSFER if AuditEventType else "Data_Transfer",
+                        actor=payload.get("actor", "system"),
+                        resource=payload.get("resource", "PHI_data"),
+                        action="BLOCKED_FOREIGN_TRANSFER",
+                        jurisdiction=jurisdiction,
+                        outcome="VIOLATION",
+                        metadata={
+                            "violation_type": "DATA_SOVEREIGNTY",
+                            "data_type": payload.get("data_type"),
+                            "destination": payload.get("destination"),
+                            "legal_citation": citation
+                        }
+                    )
+                except Exception as e:
+                    print(f"⚠️  Failed to log violation to audit trail: {e}")
+            
             raise SovereigntyViolationError(
                 f"❌ SOVEREIGNTY VIOLATION: Protected health data cannot be transferred "
                 f"to foreign cloud infrastructure.\n"
@@ -320,6 +381,59 @@ class SovereignGuardrail:
     def clear_audit_log(self):
         """Clear the audit log (for testing or privacy)."""
         self.audit_log = []
+    
+    def _map_action_to_audit_event(self, action_type: str):
+        """Map action type to AuditEventType enum."""
+        if AuditEventType is None:
+            return action_type
+        
+        mapping = {
+            "Data_Transfer": AuditEventType.DATA_TRANSFER,
+            "High_Risk_Inference": AuditEventType.HIGH_RISK_INFERENCE,
+            "Consent_Validation": AuditEventType.CONSENT_VALIDATION,
+        }
+        return mapping.get(action_type, AuditEventType.SOVEREIGNTY_CHECK)
+    
+    def _sanitize_payload_for_audit(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Sanitize payload for audit logging (remove sensitive data).
+        
+        Returns a summary without PHI or sensitive details.
+        """
+        # Only include non-sensitive metadata
+        sanitized = {}
+        safe_fields = ["data_type", "destination", "action", "consent_scope"]
+        for field in safe_fields:
+            if field in payload:
+                sanitized[field] = payload[field]
+        return sanitized
+    
+    def get_tamper_proof_audit_history(self, limit: int = 100) -> list:
+        """
+        Get tamper-proof audit history if enabled.
+        
+        Args:
+            limit: Maximum number of entries to retrieve
+            
+        Returns:
+            List of audit entries or empty list if not enabled
+        """
+        if self.tamper_proof_audit_enabled and self.tamper_proof_trail:
+            entries = self.tamper_proof_trail.get_audit_history(limit=limit)
+            return [entry.to_dict() for entry in entries]
+        return []
+    
+    def verify_audit_chain_integrity(self) -> Dict[str, Any]:
+        """
+        Verify integrity of tamper-proof audit chain.
+        
+        Returns:
+            Verification result or error if not enabled
+        """
+        if self.tamper_proof_audit_enabled and self.tamper_proof_trail:
+            entries = self.tamper_proof_trail.get_audit_history(limit=1000)
+            return self.tamper_proof_trail.verify_chain_integrity(entries)
+        return {"error": "Tamper-proof audit trail not enabled"}
 
 
 # ═════════════════════════════════════════════════════════════════════════════

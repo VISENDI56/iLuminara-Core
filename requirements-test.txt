@@ -1,0 +1,12 @@
+# Test dependencies for iLuminara Swahili AI Agents
+# ═════════════════════════════════════════════════════════════════════════════
+
+# Testing framework
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.0
+
+# Code quality
+flake8>=6.0.0
+black>=23.7.0
+mypy>=1.4.0
