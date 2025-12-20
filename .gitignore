@@ -69,6 +69,15 @@ share/python-wheels/
 *.egg
 MANIFEST
 
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
 # Virtual Environments
 .venv/
 .venv_test/
@@ -103,6 +112,13 @@ htmlcov/
 *~
 
 # Logs
+logs/
+*.log
+
+# Temporary files
+/tmp/
+*.tmp
+
 *.log
 nohup.out
 
@@ -169,6 +185,20 @@ temp/
 .DS_Store
 Thumbs.db
 
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Test coverage
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
 # Logs
 *.log
 logs/

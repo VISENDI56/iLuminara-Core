@@ -125,6 +125,11 @@ The "Golden Thread" — merges EMR, CBS, and IDSR data streams.
 - Auto-generates IDSR reports for government health submissions
 
 #### `/edge_node/ai_agents/`
+**Specialized AI agents for disease surveillance and outbreak response:**
+- **`epidemiological_forecasting_agent.py`** — Outbreak prediction using SEIR, SIR, and ARIMA models; R0 estimation
+- **`spatiotemporal_analysis_agent.py`** — Multi-scale spatial clustering, hotspot detection, transmission pathway inference
+- **`early_warning_system_agent.py`** — Real-time alert generation integrating IoT sensors + CBS + EMR data
+- **`agent_orchestrator.py`** — Coordinates all agents for comprehensive analysis and reporting
 **NEW**: Autonomous AI agents for offline operation and federated learning.
 - **`offline_agent.py`** — Agents that operate without continuous connectivity
 - **`federated_client.py`** — Privacy-preserving federated learning with differential privacy
@@ -388,6 +393,54 @@ print(f"Verification Score: {fused.verification_score}")  # 1.0 (CONFIRMED)
 
 # View fused record
 print(fused.to_dict())
+```
+
+### 4. Use AI Agents for Disease Surveillance
+
+```python
+from edge_node.ai_agents import (
+    EpidemiologicalForecastingAgent,
+    SpatiotemporalAnalysisAgent,
+    EarlyWarningSystemAgent,
+    AgentOrchestrator
+)
+
+# Initialize orchestrator to coordinate all agents
+orchestrator = AgentOrchestrator(
+    location="Nairobi",
+    population_size=100000,
+    enable_compliance_checking=True
+)
+
+# Ingest case data
+orchestrator.ingest_case_data(case_records)
+orchestrator.ingest_cbs_reports(chv_reports)
+orchestrator.ingest_iot_data(sensor_readings)
+
+# Run comprehensive analysis
+result = orchestrator.run_full_analysis(
+    diseases=["cholera", "malaria"],
+    forecast_horizon_days=14
+)
+
+# Generate report
+print(f"Status: {result.summary['overall_status']}")
+print(f"Alerts: {result.summary['total_alerts']}")
+print(f"Max Risk: {result.summary['max_risk_score']}")
+
+# Or run individual agents
+forecast_agent = EpidemiologicalForecastingAgent(location="Nairobi", population_size=100000)
+forecast = forecast_agent.forecast_outbreak(
+    disease="cholera",
+    historical_data=historical_cases,
+    forecast_horizon_days=14
+)
+print(f"R0: {forecast.estimated_r0:.2f}")
+```
+
+Run the AI agents example:
+```bash
+python -m edge_node.ai_agents.example_usage
 ```
 
 ### 4. Launch the Complete War Room Demo
@@ -871,6 +924,40 @@ docker-compose up -d
 
 ---
 
+## 🤖 AI Agents for Disease Surveillance
+
+iLuminara-Core now includes specialized AI agents that provide autonomous disease surveillance and outbreak response:
+
+### 1. **Epidemiological Forecasting Agent**
+- SEIR, SIR, and ARIMA time-series forecasting
+- R0 (basic reproduction number) estimation
+- Outbreak trajectory prediction with confidence intervals
+- Environmental factor integration (rainfall, temperature, humidity)
+
+### 2. **Spatiotemporal Analysis Agent**
+- Multi-scale spatial clustering (hyperlocal to national)
+- Hotspot detection using Getis-Ord Gi* statistics
+- Temporal trend analysis and seasonality detection
+- Transmission pathway inference between clusters
+
+### 3. **Early Warning System Agent**
+- Real-time multi-source data fusion (IoT + CBS + EMR)
+- Automated alert generation with severity classification
+- <5 second latency from signal to alert
+- Stakeholder notification routing
+
+### 4. **Agent Orchestrator**
+- Coordinates all agents for comprehensive analysis
+- Integrated compliance checking via SovereignGuardrail
+- Generates markdown and JSON reports
+- System-wide monitoring and status
+
+**Quick Demo:**
+```bash
+python -m edge_node.ai_agents.example_usage
+```
+
+For detailed documentation, see [`edge_node/ai_agents/README.md`](edge_node/ai_agents/README.md)
 ## 🎤 Swahili Voice-to-JSON Pipeline
 
 iLuminara-Core includes a complete pipeline for transforming Swahili voice notes from Community Health Volunteers (CHVs) into structured JSON data.
@@ -943,6 +1030,12 @@ python -m pytest tests/test_vector_ledger.py -v
 python -m pytest tests/test_golden_thread.py -v
 ```
 
+### Test AI Agents
+
+```bash
+python -m edge_node.ai_agents.example_usage
+```
+
 ---
 
 ## 📚 Documentation
@@ -950,6 +1043,7 @@ python -m pytest tests/test_golden_thread.py -v
 - **[Philosophical Architecture](docs/philosophical_architecture.md)** — Design philosophy and ethical framework
 - **[RFP Specifications](docs/rfp_specs.md)** — Requirements for government health departments
 - **[Global Compliance Matrix](docs/compliance_matrix.md)** — Detailed mapping of all 14 frameworks
+- **[AI Agents Documentation](edge_node/ai_agents/README.md)** — Comprehensive guide to AI surveillance agents
 
 ---
 
