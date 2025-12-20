@@ -1,3 +1,6 @@
+__pycache__/
+*.pyc
+*.pyo
 # Flutter Web build artifacts
 frontend_web/build/
 frontend_web/.dart_tool/
