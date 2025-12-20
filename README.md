@@ -63,6 +63,7 @@ Built on four foundational pillars:
 #### `/governance_kernel/`
 The ethical engine of iLuminara. Encodes 14 global legal frameworks into Python logic.
 - **`vector_ledger.py`** — `SovereignGuardrail` class enforces GDPR, KDPA, PIPEDA, POPIA, HIPAA, HITECH, CCPA, NIST CSF, ISO 27001, SOC 2, and EU AI Act compliance
+- **`ethical_engine.py`** — `EthicalEngine` class applies Geneva Convention Article 3 and WHO IHR (2005) constraints with humanitarian margin calculations
 - **`humanitarian_constraints.py`** — Humanitarian constraint encoding with three GCP integrations:
   - **Vertex AI Explainable AI**: SHAP analysis for decision transparency (EU AI Act § 6 compliance)
   - **Cloud Functions**: Real-time constraint checking (WHO, ICRC, Sphere Standards)
@@ -72,7 +73,7 @@ The ethical engine of iLuminara. Encodes 14 global legal frameworks into Python 
 - **`fairness_constraints.py`** — Fairness constraint engine ensuring equitable resource allocation
 - **`ai_agent_coordinator.py`** — Integrated coordinator for multi-layer ethical validation
 - Validates every action against sovereign dignity constraints
-- Raises `SovereigntyViolationError` with specific legal citations
+- Raises `SovereigntyViolationError` and `HumanitarianViolationError` with specific legal citations
 
 #### `/edge_node/sync_protocol/`
 The "Golden Thread" — merges EMR, CBS, and IDSR data streams.
@@ -229,7 +230,41 @@ except SovereigntyViolationError as e:
     # Raises: "Violates GDPR Art. 9 (Processing of special categories)"
 ```
 
-### 3. Fuse Data Streams
+### 3. Apply Humanitarian Constraints
+
+```python
+from governance_kernel.ethical_engine import EthicalEngine, HumanitarianViolationError
+
+engine = EthicalEngine()
+
+# Example: Validate cholera outbreak response in refugee camp
+try:
+    result = engine.apply_constraints(
+        action={
+            'type': 'cholera_response',
+            'scope': 'refugee_camp',
+            'estimated_civilian_impact': 0.3,
+            'medical_benefit': 0.85,
+            'attack_rate': 0.04,  # 4% attack rate
+            'r_effective': 2.8,
+            'severity_score': 0.75
+        },
+        context={
+            'conflict_zone': False,
+            'outbreak_suspected': True,
+            'civilian_population': 200000,
+            'healthcare_capacity': 0.5
+        }
+    )
+    
+    print(f"✅ Approved - Margin: {result['humanitarian_margin']['margin']:.2%}")
+    print(f"   Constraints: {', '.join(result['constraints_applied'])}")
+    
+except HumanitarianViolationError as e:
+    print(f"❌ {e}")
+```
+
+### 4. Fuse Data Streams
 
 ```python
 from edge_node.sync_protocol.golden_thread import GoldenThread

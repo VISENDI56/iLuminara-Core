@@ -51,6 +51,7 @@ env/
 .pytest_cache/
 .coverage
 htmlcov/
+.tox/
 
 *~
 
@@ -74,6 +75,12 @@ logs/
 .DS_Store
 Thumbs.db
 
+# Cloud Function artifacts
+.gcloudignore
+
+# Temporary files
+tmp/
+temp/
 # Streamlit
 .streamlit/
 # OS
