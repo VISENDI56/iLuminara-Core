@@ -50,6 +50,16 @@ The "Golden Thread" — merges EMR, CBS, and IDSR data streams.
 - Cross-source verification (CONFIRMED when cbs.location == emr.location AND time_delta < 24h)
 - Auto-generates IDSR reports for government health submissions
 
+#### `/edge_node/ai_agents/`
+**NEW**: Autonomous AI agents for offline operation and federated learning.
+- **`offline_agent.py`** — Agents that operate without continuous connectivity
+- **`federated_client.py`** — Privacy-preserving federated learning with differential privacy
+- **`agent_registry.py`** — Discovery service for capability-based agent matching
+- Intermittent connectivity handling with exponential backoff
+- Edge-to-cloud synchronization when network is available
+- Privacy guarantees: (ε, δ)-differential privacy for collaborative learning
+- [📖 Full Documentation](docs/AI_AGENTS.md)
+
 #### `/edge_node/frenasa_engine/`
 Machine learning inference engine (edge-based, locally-sovereign).
 
