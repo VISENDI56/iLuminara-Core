@@ -170,6 +170,22 @@ temp/
 Thumbs.db
 
 # Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
+.env.*.local
+!.env.swahili-ai.example
+
+# Google Cloud
+gcp-service-account.json
+secrets/
+
+# Temporary files
+tmp/
+temp/
 logs/
 *.log
 
