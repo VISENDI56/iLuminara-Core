@@ -89,6 +89,10 @@ The "Golden Thread" — merges EMR, CBS, and IDSR data streams.
 
 #### `/edge_node/frenasa_engine/`
 Machine learning inference engine (edge-based, locally-sovereign).
+- **`voice_transcription.py`** — Real-time Swahili speech-to-text using Cloud Speech-to-Text API
+- **`symptom_extraction.py`** — FRENASA symptom extraction from Swahili transcriptions using Vertex AI
+- **`voice_to_json.py`** — Complete pipeline: voice → transcription → symptoms → structured JSON
+- **NEW:** Swahili voice note to structured JSON transformation with edge fallback
 - **`silent_flux.py`** — **IP-04: Silent Flux** - Anxiety-regulated AI output controller that prevents information overload
 - **`five_dm_bridge.py`** — **IP-06: 5DM Bridge** - API-level injection into 14M+ African mobile nodes (94% CAC reduction)
 - **`simulate_outbreak.py`** — Outbreak simulation engine for testing and validation
@@ -100,6 +104,8 @@ Vector database for semantic health information retrieval.
 Low-bandwidth mesh networking for deployment in resource-constrained environments.
 
 #### `/cloud_oracle/`
+Parametric bond pricing engine for health economics (optional cloud integration).
+- **`voice_processor.py`** — Cloud Functions trigger-based voice note processing with edge fallback
 Hybrid cloud reasoning engine for forensic narrative generation.
 - **`azure_oracle.py`** — **Azure Oracle** - Maintains data sovereignty while leveraging cloud intelligence for pattern recognition
 
@@ -488,7 +494,65 @@ docker-compose up -d
 
 ---
 
+## 🎤 Swahili Voice-to-JSON Pipeline
+
+iLuminara-Core includes a complete pipeline for transforming Swahili voice notes from Community Health Volunteers (CHVs) into structured JSON data.
+
+### Features
+
+- **Real-time Swahili transcription** using Google Cloud Speech-to-Text API
+- **FRENASA symptom extraction** using Vertex AI custom models
+- **Edge fallback simulation** for offline/sovereign scenarios
+- **Golden Thread integration** for cross-source verification
+- **Sovereignty compliance validation** at every stage
+
+### Quick Example
+
+```python
+from edge_node.frenasa_engine.voice_to_json import VoiceToJSONPipeline
+
+# Initialize pipeline (works without cloud connectivity)
+pipeline = VoiceToJSONPipeline(mode="edge", jurisdiction="KDPA_KE")
+
+# Process voice note
+with open("voice_note.wav", "rb") as f:
+    audio_data = f.read()
+
+result = pipeline.process(
+    audio_data=audio_data,
+    patient_id="PATIENT_001",
+    location="Dadaab",
+    chv_id="CHV_AMINA_HASSAN"
+)
+
+# Get structured JSON output
+if result.success:
+    print(f"Transcription: {result.transcription['text']}")
+    print(f"Symptoms: {len(result.symptoms['symptoms'])}")
+    print(f"Urgency: {result.symptoms['urgency']}")
+    print(result.to_json())
+```
+
+### Documentation
+
+See [Voice-to-JSON Documentation](docs/VOICE_TO_JSON.md) for complete usage guide, architecture, and examples.
+
+### Demo
+
+```bash
+cd /home/runner/work/iLuminara-Core/iLuminara-Core
+PYTHONPATH=. python3 docs/examples/voice_to_json_demo.py
+```
+
+---
+
 ## 🧪 Testing & Validation
+
+### Test Voice-to-JSON Pipeline
+
+```bash
+PYTHONPATH=. python3 edge_node/frenasa_engine/voice_to_json.py
+```
 
 ### Test Governance Engine
 

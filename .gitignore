@@ -32,6 +32,7 @@ share/python-wheels/
 *.egg
 MANIFEST
 
+# Virtual Environment
 # Virtual environments
 .venv/
 venv/
@@ -79,6 +80,16 @@ logs/
 *.log
 
 # Temporary files
+/tmp/
+*.tmp
+
+# Google Cloud credentials (never commit)
+*.json
+!simulated_outbreak.json
+!precision_alert_sequence.json
+
+# Test outputs
+voice_to_json_result.json
 tmp/
 temp/
 *.log
