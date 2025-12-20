@@ -19,6 +19,8 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# Virtual Environment
 pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
@@ -40,6 +42,13 @@ env/
 *.swo
 *~
 
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
 # OS
 .DS_Store
 Thumbs.db
