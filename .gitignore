@@ -51,6 +51,13 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
 MANIFEST
 
 
@@ -77,6 +84,10 @@ env/
 .pytest_cache/
 .coverage
 htmlcov/
+.tox/
+.hypothesis/
+
+# IDE
 *.cover
 .hypothesis/
 
@@ -162,6 +173,9 @@ Thumbs.db
 logs/
 *.log
 
+# Environment variables
+.env
+.env.local
 # Test
 .pytest_cache/
 .coverage
