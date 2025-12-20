@@ -137,6 +137,14 @@ Thumbs.db
 logs/
 *.log
 
+# GCP
+.gcp/
+*.json.key
+*-key.json
+service-account*.json
+
+# Temporary files
+/tmp/
 # Temporary files
 /tmp/
 *.tmp
