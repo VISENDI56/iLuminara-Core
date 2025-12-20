@@ -92,6 +92,8 @@ venv.bak/
 venv/
 ENV/
 env/
+.virtualenv
+
 
 # IDE
 # Testing
@@ -138,6 +140,12 @@ nohup.out
 .coverage
 htmlcov/
 .tox/
+.nox/
+
+# Logs
+logs/
+*.log
+
 
 # Logs
 *.log
@@ -187,6 +195,10 @@ dist/
 tmp/
 temp/
 *.tmp
+
+# OS
+.DS_Store
+Thumbs.db
 *.bak
 *.swp
 *~

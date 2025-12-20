@@ -924,6 +924,41 @@ docker-compose up -d
 
 ---
 
+## ☁️ Google Cloud Platform Deployment
+
+For rapid prototyping and cloud-native deployment, use the GCP deployment script:
+
+```bash
+chmod +x deploy_gcp_prototype.sh
+./deploy_gcp_prototype.sh
+```
+
+This script will:
+1. **Enable required GCP services**: Vertex AI, BigQuery, Cloud Run, Firestore, etc.
+2. **Deploy FRENASA AI Engine** to Cloud Run (serverless API endpoint)
+3. **Setup HSTPU Forecaster** on Vertex AI (requires pre-trained model)
+4. **Create HSML Ledger** using Cloud Spanner (distributed ledger simulation)
+5. **Generate demo outbreak data** in BigQuery (168 hours of simulation)
+6. **Launch dashboard** on Cloud Run (compassionate UI)
+
+### Prerequisites
+
+- [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) installed and configured
+- Active GCP project with billing enabled
+- Required dependencies: `pip install -r requirements.txt`
+
+### Post-Deployment
+
+Access your deployed services:
+```bash
+# View all Cloud Run services
+gcloud run services list
+
+# Query demo outbreak data
+bq query --use_legacy_sql=false 'SELECT * FROM iluminara.outbreak_simulations LIMIT 10'
+
+# Monitor FRENASA logs
+gcloud run services logs read frenasa-engine --limit=50
 ## 🤖 AI Agents for Disease Surveillance
 
 iLuminara-Core now includes specialized AI agents that provide autonomous disease surveillance and outbreak response:
