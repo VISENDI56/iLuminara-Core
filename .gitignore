@@ -19,6 +19,12 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
 # Virtual environments
 .venv/
@@ -27,6 +33,7 @@ ENV/
 env/
 
 # IDE
+# IDEs
 .vscode/
 .idea/
 *.swp
@@ -46,3 +53,19 @@ logs/
 
 # Temp files
 /tmp/
+logs/
+*.log
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints
+
+# Temporary files
+/tmp/
+# Temporary files
+tmp/
+*.tmp
