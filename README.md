@@ -390,6 +390,22 @@ print(f"Verification Score: {fused.verification_score}")  # 1.0 (CONFIRMED)
 print(fused.to_dict())
 ```
 
+### 4. Launch the Complete War Room Demo
+
+```bash
+chmod +x launch_war_room.sh
+./launch_war_room.sh
+```
+
+This will:
+- Generate fresh outbreak simulation data
+- Launch all three dashboards (Command Console, Transparency Audit, Field Validation)
+- **Automatically open all dashboards in Chrome browser**
+
+The complete demo suite includes:
+- **Command Console** (http://0.0.0.0:8501) — Leadership dashboard with real-time risk metrics
+- **Transparency Audit** (http://0.0.0.0:8502) — Clinical staff view with decision reasoning
+- **Field Validation** (http://0.0.0.0:8503) — CHW mobile interface for field data entry
 ### 4. Enable Tamper-proof Audit Trail
 
 ```python
