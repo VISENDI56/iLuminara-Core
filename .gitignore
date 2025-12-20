@@ -43,6 +43,14 @@ env/
 *.swo
 *~
 
+# Generated simulation data
+simulated_outbreak.json
+precision_alert_sequence.json
+
+# Logs
+logs/
+*.log
+nohup.out
 # Logs
 logs/
 *.log
