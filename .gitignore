@@ -88,6 +88,15 @@ htmlcov/
 *.swo
 *~
 
+# Logs
+*.log
+nohup.out
+
+# Test files
+/tmp/
+*.wav
+*.mp3
+
 # Testing
 .pytest_cache/
 .coverage
@@ -146,6 +155,9 @@ temp/
 .DS_Store
 Thumbs.db
 
+# Build artifacts
+*.pyc
+.pytest_cache/
 # Logs
 *.log
 logs/*.log

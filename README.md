@@ -252,6 +252,18 @@ This creates the directory structure with all `__init__.py` markers:
 iLuminara-Core/
 ├── edge_node/
 │   ├── frenasa_engine/
+│   │   ├── voice_processor.py      # Voice-to-JSON conversion
+│   │   └── simulate_outbreak.py    # Outbreak simulation
+│   ├── vector_store/
+│   ├── lora_mesh/
+│   └── sync_protocol/
+│       └── golden_thread.py         # Data fusion engine
+├── governance_kernel/
+│   └── vector_ledger.py             # The Ethical Engine
+├── cloud_oracle/
+│   ├── outbreak_predictor.py        # Z-score outbreak prediction
+│   └── pubsub_alerts.py             # Real-time alerts
+├── api_service.py                   # Flask API endpoints
 │   │   ├── silent_flux.py         # IP-04: Anxiety-regulated AI
 │   │   ├── five_dm_bridge.py      # IP-06: 5DM Bridge
 │   │   └── simulate_outbreak.py
@@ -271,6 +283,24 @@ iLuminara-Core/
 └── launch_final.sh               # Full deployment script
 ```
 
+### 2. Start the API Service (New!)
+
+```bash
+# Install dependencies
+pip install Flask flask-cors
+
+# Start the API
+python api_service.py
+```
+
+The API service provides three endpoints:
+- `GET /health` - Health check
+- `POST /process-voice` - Voice processing (audio/wav → structured JSON)
+- `POST /predict` - Outbreak prediction (location + symptoms → risk assessment)
+
+See [API_DOCUMENTATION.md](API_DOCUMENTATION.md) for full details.
+
+### 3. Initialize the Governance Engine
 #### 2. Initialize the Governance Engine
 
 ```python
@@ -354,6 +384,26 @@ print(f"Verification Score: {fused.verification_score}")  # 1.0 (CONFIRMED)
 
 # View fused record
 print(fused.to_dict())
+```
+
+### 4. Test Voice Processing & Outbreak Prediction (New!)
+
+```bash
+# Generate test audio
+python generate_test_audio.py
+
+# Test voice processing
+curl -X POST http://localhost:8080/process-voice \
+  -H "Content-Type: audio/wav" \
+  --data-binary @swahili-symptom.wav
+
+# Test outbreak prediction
+curl -X POST http://localhost:8080/predict \
+  -H "Content-Type: application/json" \
+  -d '{"location": {"lat": 0.4221, "lng": 40.2255}, "symptoms": ["diarrhea", "vomiting"]}'
+
+# Run full test suite
+./test_api.sh
 ```
 
 ### 4. Multi-scale Outbreak Forecasting
