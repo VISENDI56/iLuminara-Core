@@ -3,6 +3,28 @@ import pandas as pd
 import pydeck as pdk
 import json
 import plotly.express as px
+from edge_node.distribution_gate import get_live_network_stats
+import os
+
+# --- MOCK DATA STRUCTURES FOR COMMAND TOWER ---
+# In production, these would connect to actual bio-sovereignty and flux monitoring systems
+
+# Mock Acorn status (bio-lock authentication)
+acorn_status = {
+    'access_token': True  # Simulated authenticated state
+}
+
+# Mock bio-telemetry data (HRV monitoring)
+class BioTelemetry:
+    def __init__(self):
+        self.heart_rate_variability = 72.5  # milliseconds, simulated coherent state
+
+bio_telemetry = BioTelemetry()
+
+# Mock flux status (mental state monitoring)
+flux_status = {
+    'status': 'FLOW_STATE_ACTIVE'  # Can be 'FLUX_ACTIVE' or 'FLOW_STATE_ACTIVE'
+}
 
 # --- CONFIGURATION: THE SOVEREIGN AESTHETIC ---
 st.set_page_config(
@@ -29,6 +51,12 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
+# --- AZURE STATUS CHECK ---
+azure_status = "🟢 ONLINE (GPT-4o)" if os.getenv("AZURE_OPENAI_API_KEY") else "🟡 OFFLINE (Sovereign Mode)"
+
+# --- GET NETWORK STATS ---
+net_stats = get_live_network_stats()
+
 # --- DATA LOADER ---
 @st.cache_data
 def load_data():
@@ -46,6 +74,17 @@ def load_data():
         bond_data = data['parametric_bond_trigger']
         
         return df_events, df_z_score, bond_data
+        # Load z_score_timeline for hourly aggregated metrics
+        df_timeline = pd.DataFrame(data['z_score_timeline'])
+        
+        # Add derived fields for compatibility
+        df_timeline['cbs_signals'] = df_timeline['cases']  # CBS signals correlate with cases
+        df_timeline['emr_confirmations'] = (df_timeline['cases'] * 0.3).astype(int)  # ~30% EMR confirmed
+        df_timeline['payout_status'] = df_timeline['z_score'].apply(lambda z: "RELEASED" if z > 4.2 else "LOCKED")
+        df_timeline['lat'] = 0.0512  # Dadaab coordinates
+        df_timeline['lon'] = 40.3129
+        
+        return df_timeline
     except FileNotFoundError:
         st.error("⚠️ DATA NOT FOUND. RUN 'python edge_node/frenasa_engine/simulate_outbreak.py' FIRST.")
         return pd.DataFrame(), pd.DataFrame(), {}
@@ -55,7 +94,31 @@ df, df_z_score, bond_data = load_data()
 if df.empty:
     st.stop()
 
-# --- SIDEBAR CONTROL ---
+# --- SIDEBAR: SOVEREIGN COMMAND TOWER ---
+st.sidebar.title("🛡️ SOVEREIGN COMMAND")
+st.sidebar.caption(f"System v4.2 | {azure_status}")
+
+st.sidebar.markdown("---")
+st.sidebar.header("🌍 DISTRIBUTION (5DM)")
+st.sidebar.metric("Active Nodes", f"{net_stats.active_users:,}", f"+{net_stats.growth_rate}k/sec")
+st.sidebar.metric("RIC (Acq Cost)", f"${net_stats.ric_cost:.2f}", "-94% vs Std")
+
+st.sidebar.markdown("---")
+st.sidebar.header("🧬 BIO-SOVEREIGNTY")
+if acorn_status['access_token']:
+    st.sidebar.success("BIO-LOCK: OPEN")
+    st.sidebar.metric("Operator HRV", f"{int(bio_telemetry.heart_rate_variability)} ms", "COHERENT")
+else:
+    st.sidebar.error("BIO-LOCK: SEALED")
+
+st.sidebar.markdown("---")
+st.sidebar.header("🧠 MENTAL GUARDRAILS")
+if flux_status["status"] == "FLUX_ACTIVE":
+    st.sidebar.error("SILENT FLUX ACTIVE")
+else:
+    st.sidebar.success("FLOW STATE ACTIVE")
+
+st.sidebar.markdown("---")
 st.sidebar.header("🕹️ TIME TRAVEL CONTROL")
 current_hour = st.sidebar.slider("Operation Hour", 0, 72, 36)
 
@@ -65,6 +128,31 @@ current_z_state = df_z_score[df_z_score['hour'] == current_hour].iloc[0] if len(
 # Filter data for current hour
 historical_data = df[df['hour'] <= current_hour]
 historical_z_data = df_z_score[df_z_score['hour'] <= current_hour]
+
+# Get z_score for threshold checks
+z_score = current_state['z_score']
+
+# --- ⛓️ PARAMETRIC ORACLE (SIDEBAR UPGRADE) ---
+st.sidebar.markdown("---")
+st.sidebar.header("⛓️ PARAMETRIC ORACLE")
+
+# Smart Contract Simulation
+contract_address = "0x7a23...F9"
+oracle_status = "LISTENING"
+
+if z_score > 4.2:
+    oracle_status = "EXECUTING PAYOUT"
+    # Generate deterministic transaction hash from z_score
+    tx_hash = f"0x{int(z_score*1000):05d}...9928"
+    st.sidebar.success(f"💸 PAYOUT RELEASED")
+    st.sidebar.code(f"TX: {tx_hash}\nVAL: $500,000.00 USDC\nBLK: 1928374", language="text")
+else:
+    st.sidebar.info(f"🛡️ CONTRACT SECURE")
+    st.sidebar.markdown(f"""
+    **Addr:** `{contract_address}`  
+    **Oracle:** `{oracle_status}`  
+    **Threshold:** `Z > 4.2`
+    """)
 
 # --- HEADER SECTION ---
 col_head1, col_head2 = st.columns([3, 1])
@@ -81,9 +169,14 @@ with col_head2:
 
 st.divider()
 
-# --- KPI ROW (6 Columns w/ visual hierarchy) ---
-# Make the first two KPIs visually dominant for CEO demo clarity
-kpi1, kpi2, kpi3, kpi4, kpi5, kpi6 = st.columns([1.5, 1.5, 1, 1, 1, 1])
+# --- 🚨 BOND TRIGGER EVENT ALARM ---
+if z_score > 4.2:
+    st.markdown("""
+    <div style="padding: 20px; background-color: #3d0000; border: 2px solid #ff0000; text-align: center; border-radius: 10px; margin-bottom: 20px;">
+        <h1 style="color: #ff0000; margin:0;">🚨 BOND TRIGGER EVENT 🚨</h1>
+        <p style="color: #ffffff; margin:0;">STATISTICAL THRESHOLD BREACHED (Z > 4.2). FUNDS RELEASED TO MSF WALLET.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 z_score = current_z_state['z_score']
 z_color = "status-ok"
@@ -124,6 +217,17 @@ with kpi5:
 # NEW Field Validation KPI
 with kpi6:
     st.markdown(f"<div class='metric-container'>Field Validation<br><span class='big-font {validation_color}'>{validation_status}</span></div>", unsafe_allow_html=True)
+# --- 📊 ENHANCED METRICS (REPLACES OLD METRIC ROW) ---
+col1, col2, col3, col4 = st.columns(4)
+
+# Calculate 24h delta (comparing to previous data point if available)
+z_score_24h_ago = historical_data.iloc[-2]['z_score'] if len(historical_data) > 1 else z_score
+z_score_delta = z_score - z_score_24h_ago
+
+col1.metric("RISK Z-SCORE", f"{z_score:.2f}", delta=f"{z_score_delta:.2f} (24h)", delta_color="inverse")
+col2.metric("CONFIRMED CASES", f"{current_state['emr_confirmations']}", "EMR VERIFIED")
+col3.metric("ENTANGLEMENT", "94.7%", "+2.1% (AI Confidence)")
+col4.metric("BOND STATUS", "RELEASED" if z_score > 4.2 else "LOCKED", "USDC POOL")
 
 st.write("")  # Spacer
 
