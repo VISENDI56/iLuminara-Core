@@ -1,0 +1,75 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    // User profiles - only owner can access
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+      
+      // Allow user to read their own data
+      match /{document=**} {
+        allow read: if isOwner(userId);
+        allow write: if isOwner(userId);
+      }
+    }
+    
+    // Voice notes metadata
+    match /voice_notes/{noteId} {
+      allow create: if isAuthenticated() && 
+                      request.resource.data.userId == request.auth.uid;
+      
+      allow read, update, delete: if isAuthenticated() && 
+                                     resource.data.userId == request.auth.uid;
+      
+      // Validate data structure
+      allow create, update: if request.resource.data.keys().hasAll(['userId', 'timestamp', 'latitude', 'longitude']) &&
+                              request.resource.data.userId is string &&
+                              request.resource.data.timestamp is timestamp &&
+                              request.resource.data.latitude is number &&
+                              request.resource.data.longitude is number &&
+                              request.resource.data.latitude >= -90 && request.resource.data.latitude <= 90 &&
+                              request.resource.data.longitude >= -180 && request.resource.data.longitude <= 180;
+    }
+    
+    // CHW (Community Health Worker) profiles
+    match /chw_profiles/{chwId} {
+      allow read: if isAuthenticated();
+      allow write: if isOwner(chwId) || 
+                     (isAuthenticated() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin');
+    }
+    
+    // Patients - only associated CHW can access
+    match /patients/{patientId} {
+      allow read, write: if isAuthenticated() && 
+                           (resource.data.assignedChw == request.auth.uid || 
+                            get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin');
+    }
+    
+    // Health observations
+    match /observations/{observationId} {
+      allow create: if isAuthenticated() && 
+                      request.resource.data.chwId == request.auth.uid;
+      
+      allow read: if isAuthenticated() && 
+                    (resource.data.chwId == request.auth.uid || 
+                     get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin');
+      
+      allow update, delete: if isAuthenticated() && 
+                              resource.data.chwId == request.auth.uid;
+    }
+    
+    // Deny all other access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
