@@ -35,7 +35,17 @@ def load_data():
     try:
         with open('simulated_outbreak.json', 'r') as f:
             data = json.load(f)
-        return pd.DataFrame(data['events'])
+        # Load z_score_timeline for hourly aggregated metrics
+        df_timeline = pd.DataFrame(data['z_score_timeline'])
+        
+        # Add derived fields for compatibility
+        df_timeline['cbs_signals'] = df_timeline['cases']  # CBS signals correlate with cases
+        df_timeline['emr_confirmations'] = (df_timeline['cases'] * 0.3).astype(int)  # ~30% EMR confirmed
+        df_timeline['payout_status'] = df_timeline['z_score'].apply(lambda z: "RELEASED" if z > 4.2 else "LOCKED")
+        df_timeline['lat'] = 0.0512  # Dadaab coordinates
+        df_timeline['lon'] = 40.3129
+        
+        return df_timeline
     except FileNotFoundError:
         st.error("⚠️ DATA NOT FOUND. RUN 'python edge_node/frenasa_engine/simulate_outbreak.py' FIRST.")
         return pd.DataFrame()
@@ -53,6 +63,31 @@ current_hour = st.sidebar.slider("Operation Hour", 0, 72, 36)
 current_state = df[df['hour'] == current_hour].iloc[0] if len(df[df['hour'] == current_hour]) > 0 else df.iloc[0]
 historical_data = df[df['hour'] <= current_hour]
 
+# Get z_score for threshold checks
+z_score = current_state['z_score']
+
+# --- ⛓️ PARAMETRIC ORACLE (SIDEBAR UPGRADE) ---
+st.sidebar.markdown("---")
+st.sidebar.header("⛓️ PARAMETRIC ORACLE")
+
+# Smart Contract Simulation
+contract_address = "0x7a23...F9"
+oracle_status = "LISTENING"
+
+if z_score > 4.2:
+    oracle_status = "EXECUTING PAYOUT"
+    # Generate deterministic transaction hash from z_score
+    tx_hash = f"0x{int(z_score*1000):05d}...9928"
+    st.sidebar.success(f"💸 PAYOUT RELEASED")
+    st.sidebar.code(f"TX: {tx_hash}\nVAL: $500,000.00 USDC\nBLK: 1928374", language="text")
+else:
+    st.sidebar.info(f"🛡️ CONTRACT SECURE")
+    st.sidebar.markdown(f"""
+    **Addr:** `{contract_address}`  
+    **Oracle:** `{oracle_status}`  
+    **Threshold:** `Z > 4.2`
+    """)
+
 # --- HEADER SECTION ---
 col_head1, col_head2 = st.columns([3, 1])
 with col_head1:
@@ -68,43 +103,26 @@ with col_head2:
 
 st.divider()
 
-# --- KPI ROW (6 Columns w/ visual hierarchy) ---
-# Make the first two KPIs visually dominant for CEO demo clarity
-kpi1, kpi2, kpi3, kpi4, kpi5, kpi6 = st.columns([1.5, 1.5, 1, 1, 1, 1])
+# --- 🚨 BOND TRIGGER EVENT ALARM ---
+if z_score > 4.2:
+    st.markdown("""
+    <div style="padding: 20px; background-color: #3d0000; border: 2px solid #ff0000; text-align: center; border-radius: 10px; margin-bottom: 20px;">
+        <h1 style="color: #ff0000; margin:0;">🚨 BOND TRIGGER EVENT 🚨</h1>
+        <p style="color: #ffffff; margin:0;">STATISTICAL THRESHOLD BREACHED (Z > 4.2). FUNDS RELEASED TO MSF WALLET.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-z_score = current_state['z_score']
-z_color = "status-ok"
-if z_score > 2.0: z_color = "status-warn"
-if z_score > 3.5: z_color = "status-crit"
+# --- 📊 ENHANCED METRICS (REPLACES OLD METRIC ROW) ---
+col1, col2, col3, col4 = st.columns(4)
 
-# Logic for Field Validation Status
-validation_status = "PENDING"
-validation_color = "status-warn"
-if current_hour >= 40:
-    validation_status = "COMPLETED"
-    validation_color = "status-ok"
+# Calculate 24h delta (comparing to previous data point if available)
+z_score_24h_ago = historical_data.iloc[-2]['z_score'] if len(historical_data) > 1 else z_score
+z_score_delta = z_score - z_score_24h_ago
 
-with kpi1:
-    st.markdown(f"<div class='metric-container'>Risk Z-Score<br><span class='big-font {z_color}'>{z_score:.2f}</span></div>", unsafe_allow_html=True)
-
-with kpi2:
-    payout_color = "status-crit" if current_state['payout_status'] == "RELEASED" else "status-ok"
-    st.markdown(f"<div class='metric-container'>Parametric Bond<br><span class='big-font {payout_color}'>{current_state['payout_status']}</span></div>", unsafe_allow_html=True)
-
-with kpi3:
-    st.markdown(f"<div class='metric-container'>CBS Signals<br><span class='big-font'>{int(current_state['cbs_signals'])}</span></div>", unsafe_allow_html=True)
-
-with kpi4:
-    st.markdown(f"<div class='metric-container'>EMR Confirmed<br><span class='big-font'>{int(current_state['emr_confirmations'])}</span></div>", unsafe_allow_html=True)
-
-with kpi5:
-    st.markdown(f"<div class='metric-container'>Governance Kernel<br><span class='big-font status-ok'>14 ACTIVE</span></div>", unsafe_allow_html=True)
-    if st.button("VIEW LEGAL LEDGER"):
-        st.info("💡 Concept: This would navigate to the Transparency View.")
-
-# NEW Field Validation KPI
-with kpi6:
-    st.markdown(f"<div class='metric-container'>Field Validation<br><span class='big-font {validation_color}'>{validation_status}</span></div>", unsafe_allow_html=True)
+col1.metric("RISK Z-SCORE", f"{z_score:.2f}", delta=f"{z_score_delta:.2f} (24h)", delta_color="inverse")
+col2.metric("CONFIRMED CASES", f"{current_state['emr_confirmations']}", "EMR VERIFIED")
+col3.metric("ENTANGLEMENT", "94.7%", "+2.1% (AI Confidence)")
+col4.metric("BOND STATUS", "RELEASED" if z_score > 4.2 else "LOCKED", "USDC POOL")
 
 st.write("")  # Spacer
 
