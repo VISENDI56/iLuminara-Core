@@ -1,3 +1,30 @@
+# Flutter Web build artifacts
+frontend_web/build/
+frontend_web/.dart_tool/
+frontend_web/.flutter-plugins
+frontend_web/.flutter-plugins-dependencies
+frontend_web/.packages
+frontend_web/pubspec.lock
+
+# Hive databases
+*.hive
+*.lock
+
+# Firebase config (use environment variables instead)
+frontend_web/lib/firebase_options.dart
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+
 # Python cache files
 __pycache__/
 # Python
@@ -5,6 +32,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.so
+.Python
 
 # Virtual environment
 .Python
@@ -24,6 +52,15 @@ wheels/
 .installed.cfg
 *.egg
 
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+MANIFEST
+
+
 # Virtual Environment
 pip-wheel-metadata/
 share/python-wheels/
@@ -32,12 +69,30 @@ share/python-wheels/
 *.egg
 MANIFEST
 
+# Virtual Environments
+.venv/
+.venv_test/
 # Virtual Environment
 # Virtual environments
 .venv/
 venv/
 ENV/
 env/
+
+# IDE
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# IDE
+*.cover
+.hypothesis/
+
+# Streamlit
+.streamlit/
 
 # IDE
 # IDEs
@@ -47,10 +102,20 @@ env/
 *.swo
 *~
 
+# Logs
+*.log
+nohup.out
+
+# Test files
+/tmp/
+*.wav
+*.mp3
+
 # Testing
 .pytest_cache/
 .coverage
 htmlcov/
+.tox/
 
 *~
 
@@ -74,6 +139,30 @@ logs/
 .DS_Store
 Thumbs.db
 
+# Docker
+*.dockerfile.bak
+
+# Build artifacts
+dist/
+*.wasm
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*~
+
+# Large data files
+simulated_outbreak.json
+*.json.gz
+# Cloud Function artifacts
+.gcloudignore
+
+# Temporary files
+tmp/
+temp/
 # Streamlit
 .streamlit/
 # OS
@@ -100,6 +189,37 @@ temp/
 logs/
 *.log
 
+# Environment variables
+.env
+.env.local
+# Test
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Temporary files
+/tmp/
+# Build artifacts
+*.pyc
+.pytest_cache/
+# Logs
+*.log
+logs/*.log
+/tmp/
+
+# GCP
+.gcloud/
+logs/
+*.log
+
+# GCP
+.gcp/
+*.json.key
+*-key.json
+service-account*.json
+
+# Temporary files
+/tmp/
 # Temporary files
 /tmp/
 *.tmp
@@ -109,6 +229,10 @@ logs/
 !simulated_outbreak.json
 !precision_alert_sequence.json
 
+# Temporary files
+*.tmp
+*.temp
+nohup.out
 # Test outputs
 voice_to_json_result.json
 tmp/
