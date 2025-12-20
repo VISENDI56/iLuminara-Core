@@ -47,6 +47,12 @@ Thumbs.db
 # Logs
 *.log
 logs/
+
+# Streamlit
+.streamlit/
+
+# Temp files
+/tmp/
 logs/
 *.log
 
