@@ -1,8 +1,12 @@
+# Python cache files
+__pycache__/
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
+
+# Virtual environment
 .Python
 build/
 develop-eggs/
@@ -21,18 +25,51 @@ wheels/
 *.egg
 
 # Virtual Environment
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
 .venv/
 venv/
 ENV/
 env/
 
 # IDE
+# IDEs
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
+
+*~
+
+# Logs
+*.log
+logs/
+# Generated simulation data
+simulated_outbreak.json
+precision_alert_sequence.json
+
+# Logs
+logs/
+*.log
+nohup.out
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Streamlit
+.streamlit/
 # OS
 .DS_Store
 Thumbs.db
@@ -44,4 +81,40 @@ logs/
 # Temporary files
 tmp/
 temp/
+*.log
+logs/
+
+# Temporary files
+*.tmp
+/tmp/
+logs/
+*.log
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+logs/
+
+# Streamlit
+.streamlit/
+
+# Temp files
+/tmp/
+logs/
+*.log
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints
+
+# Temporary files
+/tmp/
+# Temporary files
+tmp/
 *.tmp
