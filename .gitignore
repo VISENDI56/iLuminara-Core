@@ -16,6 +16,9 @@ parts/
 sdist/
 var/
 wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
@@ -29,6 +32,7 @@ venv/
 ENV/
 env/
 
+# IDE
 # IDEs
 .vscode/
 .idea/
@@ -41,6 +45,8 @@ env/
 Thumbs.db
 
 # Logs
+*.log
+logs/
 logs/
 *.log
 
@@ -49,6 +55,11 @@ logs/
 htmlcov/
 .pytest_cache/
 
+# Jupyter
+.ipynb_checkpoints
+
+# Temporary files
+/tmp/
 # Temporary files
 tmp/
 *.tmp
