@@ -29,13 +29,13 @@ class VoiceProcessor:
     def __init__(self):
         """Initialize the voice processor with symptom mapping."""
         self.symptom_keywords = {
-            'diarrhea': ['diarrhea', 'watery stool', 'loose stool', 'kuharisha'],
-            'vomiting': ['vomiting', 'throwing up', 'kutapika'],
-            'fever': ['fever', 'hot', 'temperature', 'homa'],
-            'cough': ['cough', 'coughing', 'kikohozi'],
-            'headache': ['headache', 'head pain', 'maumivu ya kichwa'],
-            'dehydration': ['dehydration', 'thirsty', 'dry mouth', 'ukame'],
-            'body_ache': ['body ache', 'pain', 'maumivu']
+            'diarrhea': ['diarrhea', 'watery stool', 'loose stool', 'kuharisha', 'kuhara', 'tumbo la kuhara'],
+            'vomiting': ['vomiting', 'throwing up', 'kutapika', 'tapika'],
+            'fever': ['fever', 'hot', 'temperature', 'homa', 'joto'],
+            'cough': ['cough', 'coughing', 'kikohozi', 'kohozi'],
+            'headache': ['headache', 'head pain', 'maumivu ya kichwa', 'kichwa kinaumwa'],
+            'dehydration': ['dehydration', 'thirsty', 'dry mouth', 'ukame', 'kiu'],
+            'body_ache': ['body ache', 'pain', 'maumivu', 'maumivu ya mwili']
         }
         
         self.language_support = ['english', 'swahili', 'somali']
@@ -44,7 +44,8 @@ class VoiceProcessor:
         self, 
         audio_data: bytes,
         language: str = 'swahili',
-        location: Optional[Dict[str, float]] = None
+        location: Optional[Dict[str, float]] = None,
+        transcription_override: Optional[str] = None
     ) -> Dict[str, Any]:
         """
         Process audio data and extract structured health information.
@@ -59,9 +60,11 @@ class VoiceProcessor:
         """
         processing_start = datetime.utcnow()
         
-        # Simulate voice-to-text transcription
-        # In production, this would use Google Speech-to-Text or similar
-        transcription = self._simulate_transcription(audio_data, language)
+        # Use provided transcription or simulate voice-to-text
+        if transcription_override:
+            transcription = transcription_override
+        else:
+            transcription = self._simulate_transcription(audio_data, language)
         
         # Extract symptoms from transcription
         symptoms = self._extract_symptoms(transcription)
