@@ -44,7 +44,14 @@ echo "================================================"
 echo "✅ LAUNCH SUCCESSFUL"
 echo "================================================"
 echo ""
-echo "🌐 Access the applications via your Codespace Ports:"
+
+# 6. Auto-open all dashboards in Chrome
+echo "6. Opening dashboards in Chrome..."
+python3 tools/open_dashboards.py
+sleep 1
+
+echo ""
+echo "🌐 Dashboards are now open in Chrome:"
 echo ""
 echo "   Tab 1 (COMMAND CONSOLE):"
 echo "   http://0.0.0.0:8501"

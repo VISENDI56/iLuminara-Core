@@ -1,0 +1,18 @@
+# iLuminara Core - Swahili AI Agents Dependencies
+# ═════════════════════════════════════════════════════════════════════════════
+# Google Cloud AI dependencies for Swahili medical tasks
+# Install: pip install -r requirements-swahili-ai.txt
+
+# Core Google Cloud AI services
+google-cloud-translate>=3.12.0
+google-cloud-aiplatform>=1.38.0
+google-cloud-dialogflow-cx>=1.20.0
+google-cloud-storage>=2.10.0
+google-generativeai>=0.3.0
+
+# Data processing
+protobuf>=4.24.0
+grpcio>=1.59.0
+
+# Existing iLuminara dependencies (if not already installed)
+# Add these to main requirements.txt if needed
