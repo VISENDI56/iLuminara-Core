@@ -1,3 +1,4 @@
+__pycache__/
 # Python
 __pycache__/
 *.py[cod]
@@ -21,12 +22,21 @@ wheels/
 *.egg
 
 # Virtual Environment
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
 .venv/
 venv/
 ENV/
 env/
 
 # IDE
+# IDEs
 .vscode/
 .idea/
 *.swp
@@ -41,7 +51,39 @@ precision_alert_sequence.json
 logs/
 *.log
 nohup.out
+# Logs
+logs/
+*.log
 
 # OS
 .DS_Store
 Thumbs.db
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Streamlit
+.streamlit/
+
+# Temp files
+/tmp/
+logs/
+*.log
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints
+
+# Temporary files
+/tmp/
+# Temporary files
+tmp/
+*.tmp
