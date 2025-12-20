@@ -20,6 +20,14 @@ From the repository root, execute the single command below to generate demo data
 ./launch_war_room.sh
 ```
 
+This command will:
+1. Generate fresh outbreak data (simulated_outbreak.json)
+2. Start port forwarding services
+3. Launch Command Console (port 8501)
+4. Launch Transparency Audit (port 8502)
+5. Launch Field Validation (port 8503)
+6. **Automatically open all three dashboards in Chrome browser**
+
 Presentation Exit Protocol
 --------------------------
 To stop all running Streamlit services after the presentation:
