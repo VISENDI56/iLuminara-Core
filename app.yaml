@@ -1,0 +1,13 @@
+runtime: python310
+service: iluminara-core
+instance_class: F2  # High memory for FRENASA models
+
+env_variables:
+  MODE: "CLOUD_ORACLE"
+  NEURO_SWITCH_TARGET: "gemini-1.5-pro"
+  SIGSTORE_ROOT_KEY: "secret://iluminara-keys/root-v1"
+  JURISDICTION: "KENYA_DPA_2019"
+
+automatic_scaling:
+  min_instances: 1
+  max_instances: 10
