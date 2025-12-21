@@ -1,16 +1,14 @@
-THE NEURO-SWITCH v4.0: FEDERATED SPLIT-INFERENCE
+"""
+THE NEURO-SWITCH v4.0: FEDERATED SPLIT-INFERENCE (FINAL)
 Architecture: Edge Sanitization (Gemma 2) -> Cloud Prediction (Gemini 1.5)
-
-
+"""
 import re
-import random
 import time
 
 class NeuroSwitch:
     def __init__(self):
         self.edge_model = "gemma2:9b-quantized"
         self.cloud_model = "gemini-1.5-pro-002"
-        self.connectivity = True # Simulated
 
     def _sanitize_payload(self, text):
         """
@@ -19,23 +17,22 @@ class NeuroSwitch:
         # 1. Regex Redaction (Determinism)
         text = re.sub(r'\b(ID|P)-?\d+\b', '[REDACTED_ID]', text)
         text = re.sub(r'\b(Amina|Omar|Fatuma)\b', '[REDACTED_NAME]', text)
+        text = re.sub(r'\b(07\d{8})\b', '[REDACTED_PHONE]', text)
         
-        # 2. Gemma 2 Confirmation (Simulation)
-        # "Gemma, does this text contain PII?" -> "No"
-        sanitization_latency = 0.045 # 45ms on Jetson Orin
+        # 2. Gemma 2 Confirmation (Simulation of Edge Inference)
+        # "Gemma, verify sanitization complete." -> "YES"
+        edge_latency = 0.045 # 45ms on Jetson Orin
         
-        return text, sanitization_latency
+        return text, edge_latency
 
-    def route_task(self, task_type, query, context=None):
-        """
-        The Split-Inference Pipeline
-        """
+    def route_task(self, task_type, query):
+        """The Split-Inference Pipeline"""
         start_time = time.time()
         
         # STEP 1: EDGE SANITIZATION (The Firewall)
         clean_query, edge_lat = self._sanitize_payload(query)
         
-        # If task is purely local/sensitive, stay on Edge
+        # If task is sensitive/local, stay on Edge
         if task_type in ["BIO_LOCK", "TRIAGE"]:
              return {
                 "source": "🛡️ SOVEREIGN EDGE",
@@ -46,7 +43,8 @@ class NeuroSwitch:
 
         # STEP 2: CLOUD INFERENCE (The Oracle)
         # Only sanitized data leaves the device
-        cloud_response = self._call_cloud_oracle(clean_query)
+        # Simulating Vertex AI Call
+        cloud_response = f"Based on '{clean_query}', Outbreak Probability is 94.2%. Z-Score: 4.8."
         total_lat = time.time() - start_time
         
         return {
@@ -57,8 +55,3 @@ class NeuroSwitch:
             "response": cloud_response,
             "latency": f"{total_lat*1000:.0f}ms"
         }
-
-    def _call_cloud_oracle(self, clean_query):
-        """Simulates Vertex AI call with sanitized data"""
-        # Gemini 1.5 Pro analyzes the pattern, not the person
-        return f"Based on '{clean_query}', Outbreak Probability is 94.2%. Z-Score: 4.8."
