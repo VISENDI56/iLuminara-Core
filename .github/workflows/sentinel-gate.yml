@@ -1,0 +1,121 @@
+name: Sentinel v3.0 Security Gate
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+permissions:
+  contents: read
+  security-events: write
+  pull-requests: write
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Full history for integrity checks
+    
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+    
+    - name: Cache integrity baseline
+      uses: actions/cache@v3
+      with:
+        path: enterprise/integrity_ledger.json
+        key: integrity-ledger-${{ github.ref }}-${{ github.sha }}
+        restore-keys: |
+          integrity-ledger-${{ github.ref }}-
+          integrity-ledger-
+    
+    - name: Run Sentinel Security Scan
+      id: sentinel_scan
+      continue-on-error: true
+      run: |
+        echo "🔒 Initiating Sentinel v3.0 Security Scan..."
+        python3 enterprise/sentinel.py --mode SCAN
+      
+    - name: Upload SARIF to GitHub Security
+      if: always()
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: sentinel_report.sarif
+        category: sentinel-v3
+    
+    - name: Archive SARIF report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: sentinel-security-report
+        path: sentinel_report.sarif
+        retention-days: 90  # 90-day audit trail retention
+    
+    - name: Generate PR Comment
+      if: github.event_name == 'pull_request' && always()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          let comment = '## 🔒 Sentinel v3.0 Security Scan Results\n\n';
+          
+          try {
+            if (fs.existsSync('sentinel_report.sarif')) {
+              const sarif = JSON.parse(fs.readFileSync('sentinel_report.sarif', 'utf8'));
+              const results = sarif.runs[0].results || [];
+              
+              const critical = results.filter(r => r.level === 'critical').length;
+              const errors = results.filter(r => r.level === 'error').length;
+              const warnings = results.filter(r => r.level === 'warning').length;
+              
+              if (results.length === 0) {
+                comment += '✅ **SYSTEM SECURE** - No security issues detected\n\n';
+                comment += '- 🔐 Secret Scanning: PASSED\n';
+                comment += '- 🛡️ SAST Analysis: PASSED\n';
+                comment += '- 🔍 Integrity Check: PASSED\n';
+              } else {
+                comment += '❌ **SECURITY GATE FAILED**\n\n';
+                comment += `**Summary:**\n`;
+                comment += `- 🔴 Critical: ${critical}\n`;
+                comment += `- 🟠 Errors: ${errors}\n`;
+                comment += `- 🟡 Warnings: ${warnings}\n`;
+                comment += `- 📊 Total Issues: ${results.length}\n\n`;
+                
+                comment += '**Action Required:** Please review and remediate security findings before merging.\n\n';
+                comment += '**View Details:** Check the Security tab for full SARIF report.\n';
+              }
+            } else {
+              comment += '⚠️ Scan completed but no report generated.\n';
+            }
+          } catch (error) {
+            comment += `⚠️ Error reading scan results: ${error.message}\n`;
+          }
+          
+          comment += '\n---\n';
+          comment += '*Powered by Sentinel v3.0 | NIST SP 800-208 Compliant*\n';
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          });
+    
+    - name: Enforce Security Gate
+      if: steps.sentinel_scan.outcome == 'failure'
+      run: |
+        echo "❌ SECURITY GATE BLOCKED: Critical security issues detected"
+        echo "⚠️  Deployment prevented - Review findings in GitHub Security tab"
+        exit 1
+    
+    - name: Security Gate Passed
+      if: steps.sentinel_scan.outcome == 'success'
+      run: |
+        echo "✅ SECURITY GATE PASSED: System validated"
+        echo "🚀 Deployment authorized"

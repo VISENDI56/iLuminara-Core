@@ -352,3 +352,7 @@ htmlcov/
 # Temporary files
 tmp/
 *.tmp
+
+# Sentinel SARIF reports
+sentinel_report.sarif
+*.sarif
