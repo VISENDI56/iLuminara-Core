@@ -1,5 +1,6 @@
-iLuminara Data Ingestion Layer v2.0
-Scientific Kernel: Spatio-Temporal Decay & Source Weighting (Rift Valley Fever Model)
+iLuminara Data Ingestion Layer v2.0 (FINAL)
+Scientific Kernel: Spatio-Temporal Decay & Source Weighting
+Reference: Rift Valley Fever Vector Models (Linthicum et al.)
 
 
 import random
@@ -8,7 +9,6 @@ from datetime import datetime, timedelta
 
 class IngestionEngine:
     def __init__(self):
-        # Simulated Data Lake
         self.data_lake = {"EMR": [], "CBS": [], "IDSR": []}
 
     def _generate_coords(self):
@@ -33,7 +33,7 @@ class IngestionEngine:
 
     def fetch_cbs_data(self):
         """SOURCE 2: CBS (Community Rumors)"""
-        # Simulate a slight time lag (1-3 days ago)
+        # Simulate lag (Community reports are often delayed)
         lag = random.randint(0, 72)
         signal = {
             "source": "SENTRY_AMINA",
@@ -77,15 +77,14 @@ class IngestionEngine:
         cbs = self.fetch_cbs_data()
         idsr = self.fetch_idsr_data()
 
-        # 1. Temporal Decay (Lambda based on Cholera incubation ~5 days)
-        # Formula: e^(-0.5 * (delta_days / 5)^2)
+        # 1. Temporal Decay: e^(-0.5 * (delta_days / 5)^2)
+        # 5 days is the serial interval for Cholera
         delta_t_days = (emr['timestamp'] - cbs['timestamp']).total_seconds() / 86400
         temporal_weight = math.exp(-0.5 * (abs(delta_t_days) / 5)**2)
 
-        # 2. Spatial Weight (Inverse Distance)
+        # 2. Spatial Weight: Inverse Distance
         dist_km = self._calculate_haversine(emr['coords'], cbs['coords'])
-        # Weight degrades rapidly after 2km (slum density)
-        spatial_weight = 1 / (1 + (dist_km * 2))
+        spatial_weight = 1 / (1 + (dist_km * 2)) # Degrades fast after 2km
 
         # 3. Base Confidence
         base_conf = 0.98 if emr['confirmed'] else 0.4
@@ -93,11 +92,10 @@ class IngestionEngine:
         # Final Fusion Score
         fusion_score = base_conf * temporal_weight * spatial_weight
         
-        # Determine Narrative
         if fusion_score > 0.8:
             note = f"CRITICAL CONVERGENCE ({dist_km:.2f}km radius). Lab & Field match."
         elif fusion_score > 0.5:
-            note = f"Moderate Correlation. Spatio-temporal decay active ({delta_t_days:.1f} day lag)."
+            note = f"Moderate Correlation. Spatio-temporal decay active ({delta_t_days:.1f}d lag)."
         else:
             note = "Weak Signal Correlation. Sources likely independent."
 
@@ -107,3 +105,6 @@ class IngestionEngine:
             "live_feeds": [emr, cbs, idsr],
             "physics": {"dist_km": round(dist_km, 2), "time_lag_h": round(delta_t_days*24, 1)}
         }
+
+Current Date and Time (UTC - YYYY-MM-DD HH:MM:SS formatted): 2025-12-21 19:06:03
+Current User's Login: VISENDI56
