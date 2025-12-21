@@ -49,8 +49,9 @@ class Sentinel:
             if file_size == 0:
                 return "EMPTY_FILE"
                 
+            # Use 64KB chunks for better I/O performance
             with open(filepath, "rb") as f:
-                for chunk in iter(lambda: f.read(4096), b""):
+                for chunk in iter(lambda: f.read(65536), b""):
                     sha256.update(chunk)
             return sha256.hexdigest()
         except (OSError, IOError) as e:
@@ -59,6 +60,8 @@ class Sentinel:
 
     def scan_sast_patterns(self, content, filepath):
         """Static Application Security Testing (SAST)"""
+        # Note: Patterns are designed to catch common credential formats
+        # Some false positives may occur for pattern definitions in code/docs
         patterns = [
             (r"eval\(", "CWE-95", "Code Injection Risk (eval)"),
             (r"exec\(", "CWE-95", "Code Injection Risk (exec)"),
@@ -136,9 +139,10 @@ class Sentinel:
                             )
                     
                     # SAST & Secret Scanning (only on code files)
-                    if file.endswith((".py", ".sh", ".json", ".md", ".yaml", ".yml", ".env")):
+                    if file.endswith((".py", ".sh", ".json", ".md", ".yaml", ".yml", ".env", 
+                                     ".js", ".ts", ".php", ".rb", ".go", ".java")):
                         try:
-                            with open(path, "r", errors="ignore") as f:
+                            with open(path, "r", errors="replace") as f:
                                 content = f.read()
                                 self.scan_sast_patterns(content, relative_path)
                         except Exception as e:

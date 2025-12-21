@@ -30,7 +30,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: enterprise/integrity_ledger.json
-        key: integrity-ledger-${{ github.ref }}-${{ github.sha }}
+        key: integrity-ledger-${{ github.ref }}-${{ hashFiles('enterprise/integrity_ledger.json') }}
         restore-keys: |
           integrity-ledger-${{ github.ref }}-
           integrity-ledger-

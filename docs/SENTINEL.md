@@ -277,7 +277,7 @@ MAX_FILE_SIZE_MB = 10  # Skip model weights and large binaries
 def _calculate_hash(self, filepath):
     sha256 = hashlib.sha256()
     with open(filepath, "rb") as f:
-        for chunk in iter(lambda: f.read(4096), b""):  # 4KB chunks
+        for chunk in iter(lambda: f.read(65536), b""):  # 64KB chunks
             sha256.update(chunk)
     return sha256.hexdigest()
 ```
