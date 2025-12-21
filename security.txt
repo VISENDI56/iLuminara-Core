@@ -1,0 +1,6 @@
+Contact: mailto:security@iluminara.org
+Encryption: https://iluminara.org/pgp-key.txt
+Preferred-Languages: en, sw
+Policy: https://iluminara.org/disclosure
+Source: https://github.com/VISENDI56/iLuminara-Core
+Sovereignty-Proof: https://sigstore.dev/verify?repo=iluminara
