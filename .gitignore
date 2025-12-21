@@ -306,6 +306,7 @@ service-account*.json
 *.json
 !simulated_outbreak.json
 !precision_alert_sequence.json
+!enterprise/integrity_ledger.json
 
 # Temporary files
 *.tmp
@@ -352,3 +353,7 @@ htmlcov/
 # Temporary files
 tmp/
 *.tmp
+
+# Sentinel SARIF reports
+sentinel_report.sarif
+*.sarif
