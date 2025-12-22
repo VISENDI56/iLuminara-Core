@@ -50,7 +50,7 @@ pydeck==0.8.1b0
 
 # HTTP Requests
 requests==2.32.4
-httpx==0.25.0
+httpx==0.28.1
 
 # Audio Processing
 librosa>=0.10.0
