@@ -26,7 +26,7 @@ google-cloud-bigquery==3.13.0
 google-cloud-storage==3.7.0
 google-cloud-aiplatform==1.132.0
 google-cloud-pubsub==2.34.0
-google-cloud-firestore==2.13.1
+google-cloud-firestore==2.22.0
 google-cloud-speech>=2.21.0
 google-cloud-secret-manager>=2.16.0
 
