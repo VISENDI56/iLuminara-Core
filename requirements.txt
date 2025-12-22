@@ -4,7 +4,7 @@
 # Consolidated and deduplicated requirements
 
 # Core Web Framework
-fastapi==0.104.1
+fastapi==0.127.0
 uvicorn[standard]==0.40.0
 pydantic==2.5.0
 Flask==3.0.0
