@@ -18,7 +18,7 @@ pydeck==0.8.1b0
 plotly==6.5.0
 
 # Data Processing
-pandas==2.1.4
+pandas==2.3.3
 numpy==2.4.0
 
 # Google Cloud Services
@@ -40,7 +40,7 @@ Werkzeug==3.1.4
 gunicorn>=21.2.0
 
 # Data Processing (FIXED: consolidated pandas versions)
-pandas==2.1.4
+pandas==2.3.3
 numpy==2.4.0
 
 # Visualization
