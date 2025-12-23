@@ -32,7 +32,7 @@ google-cloud-secret-manager>=2.16.0
 
 # HTTP Requests
 requests==2.32.5
-httpx==0.25.2
+httpx==0.28.1
 # Web Framework
 Flask==3.0.0
 flask-cors==6.0.0
