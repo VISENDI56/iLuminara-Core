@@ -15,7 +15,7 @@ gunicorn>=21.2.0
 # Frontend Dashboard
 streamlit==1.52.2
 pydeck==0.8.1b0
-plotly==5.18.0
+plotly==6.5.0
 
 # Data Processing
 pandas==2.1.4
@@ -45,7 +45,7 @@ numpy==2.4.0
 
 # Visualization
 streamlit==1.52.2
-plotly==5.18.0
+plotly==6.5.0
 pydeck==0.8.1b0
 
 # HTTP Requests
