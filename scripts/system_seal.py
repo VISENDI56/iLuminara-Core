@@ -280,6 +280,9 @@ class ViralSymbioticAPIInfusion:
     peer networks using graph theory and epidemiological models.
     """
     
+    # Network transmission probability constant
+    TRANSMISSION_PROBABILITY = 0.7  # 70% chance of successful alert transmission
+    
     def __init__(self):
         self.network_graph = {}  # Simplified network representation
         self.propagation_history = []
@@ -321,7 +324,7 @@ class ViralSymbioticAPIInfusion:
                 
                 for _ in range(contacts):
                     # Simulate random contact with probability of transmission
-                    if np.random.random() < 0.7 and len(infected) < network_size:
+                    if np.random.random() < self.TRANSMISSION_PROBABILITY and len(infected) < network_size:
                         peer_id = f"peer_{len(infected):03d}"
                         if peer_id not in infected:
                             next_wave.add(peer_id)
