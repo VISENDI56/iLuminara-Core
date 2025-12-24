@@ -20,6 +20,9 @@ from typing import List, Dict, Tuple, Set
 # Repository root
 REPO_ROOT = Path(__file__).parent.parent
 
+# Supported documentation file extensions
+DOC_EXTENSIONS = [".mdx", ".md"]
+
 
 class DocumentationVerifier:
     """Verifies documentation structure integrity."""
@@ -109,10 +112,8 @@ class DocumentationVerifier:
         """Verify a single page exists."""
         # Try different extensions
         possible_paths = [
-            REPO_ROOT / f"{page_path}.mdx",
-            REPO_ROOT / f"{page_path}.md",
-            REPO_ROOT / page_path,
-        ]
+            REPO_ROOT / f"{page_path}{ext}" for ext in DOC_EXTENSIONS
+        ] + [REPO_ROOT / page_path]
         
         found = False
         actual_path = None
@@ -148,31 +149,33 @@ class DocumentationVerifier:
             if not directory.exists():
                 continue
             
-            for mdx_file in directory.rglob("*.mdx"):
-                if name in mdx_file.stem or mdx_file.stem in name:
-                    rel_path = mdx_file.relative_to(REPO_ROOT)
-                    similar.append(str(rel_path))
+            for ext in DOC_EXTENSIONS:
+                for doc_file in directory.rglob(f"*{ext}"):
+                    if name in doc_file.stem or doc_file.stem in name:
+                        rel_path = doc_file.relative_to(REPO_ROOT)
+                        similar.append(str(rel_path))
         
         return similar
     
     def check_orphaned_files(self):
-        """Check for MDX files not referenced in navigation."""
+        """Check for documentation files not referenced in navigation."""
         print("\n📂 Checking for orphaned files...")
         print()
         
-        all_mdx_files = set()
+        all_doc_files = set()
         
-        # Find all MDX files
+        # Find all documentation files
         for directory in [REPO_ROOT / "docs", REPO_ROOT / "api-reference"]:
             if not directory.exists():
                 continue
             
-            for mdx_file in directory.rglob("*.mdx"):
-                rel_path = str(mdx_file.relative_to(REPO_ROOT))
-                all_mdx_files.add(rel_path)
+            for ext in DOC_EXTENSIONS:
+                for doc_file in directory.rglob(f"*{ext}"):
+                    rel_path = str(doc_file.relative_to(REPO_ROOT))
+                    all_doc_files.add(rel_path)
         
         # Find orphaned files
-        orphaned = all_mdx_files - self.checked_files
+        orphaned = all_doc_files - self.checked_files
         
         if orphaned:
             print("⚠️  Found files not in navigation:")

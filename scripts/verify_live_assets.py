@@ -143,7 +143,13 @@ class AssetVerifier:
         
         try:
             headers = {"User-Agent": USER_AGENT}
-            response = requests.get(url, headers=headers, timeout=TIMEOUT, allow_redirects=True)
+            response = requests.get(
+                url, 
+                headers=headers, 
+                timeout=TIMEOUT, 
+                allow_redirects=True,
+                verify=True  # Explicit SSL/TLS certificate verification
+            )
             
             result["status_code"] = response.status_code
             result["response_time_ms"] = int(response.elapsed.total_seconds() * 1000)
