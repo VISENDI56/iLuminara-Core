@@ -168,10 +168,24 @@ class QuantumNexus:
         for conflict_key, conflict_data in self.conflict_matrix.items():
             laws_in_conflict = conflict_key.split("_vs_")
             
-            # Check if both laws in conflict are applicable
-            if all(any(law_id in law_name for law_name in laws_in_conflict) 
-                   for law_id in applicable_laws if len(applicable_laws) >= 2):
-                
+            # Map conflict key names to law IDs
+            # E.g., "GDPR" in key maps to "LAW-006", "HIPAA" to "LAW-007"
+            law_name_to_id = {
+                "GDPR": "LAW-006",
+                "HIPAA": "LAW-007",
+                "MALABO": "LAW-003",
+                "IHR": "LAW-002"
+            }
+            
+            conflict_law_ids = []
+            for law_name in laws_in_conflict:
+                for key, law_id in law_name_to_id.items():
+                    if key in law_name:
+                        conflict_law_ids.append(law_id)
+                        break
+            
+            # Check if the laws from conflict matrix are in applicable laws
+            if len(conflict_law_ids) >= 2 and all(law_id in applicable_laws for law_id in conflict_law_ids):
                 conflict_id = f"CONFLICT-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')}"
                 
                 return LawConflict(
@@ -441,8 +455,9 @@ class QuantumNexus:
         
         if time_range is None:
             # Default to last 90 days
+            from datetime import timedelta
             end_time = datetime.now(timezone.utc)
-            start_time = end_time.replace(day=end_time.day - 90)
+            start_time = end_time - timedelta(days=90)
             time_range = (start_time, end_time)
         
         violations_found = 0

@@ -380,10 +380,9 @@ def test_retroactive_alignment(nexus: QuantumNexus):
         if audit_result.remediation_required:
             print(f"\n   Remediation Required: {len(audit_result.remediation_required)} records")
             print(f"   Sample Remediation Actions:")
-            if audit_result.remediation_required:
-                sample = audit_result.remediation_required[0]
-                for i, action in enumerate(sample['remediation_actions'][:3], 1):
-                    print(f"      {i}. {action}")
+            sample = audit_result.remediation_required[0]
+            for i, action in enumerate(sample['remediation_actions'][:3], 1):
+                print(f"      {i}. {action}")
         
         print(f"\n✅ Retroactive alignment test completed")
         return audit_result
