@@ -20,6 +20,7 @@ plotly==6.5.0
 # Data Processing
 pandas==2.3.3
 numpy==2.4.0
+scipy==1.15.2
 
 # Google Cloud Services
 google-cloud-bigquery==3.39.0
