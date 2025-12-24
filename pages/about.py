@@ -1,0 +1,168 @@
+"""About page for the demo"""
+import streamlit as st
+
+def render():
+    st.title("ℹ️ About This Demo")
+    st.markdown("**Understanding the iLuminara Interactive Dashboard**")
+    
+    st.markdown("---")
+    
+    st.subheader("🎯 Purpose")
+    
+    st.markdown("""
+    This Streamlit dashboard provides an **interactive demonstration** of the iLuminara 
+    Sovereign Health Interface's core capabilities. It showcases the Nuclear IP Stack 
+    and Governance Kernel in action through simulated scenarios.
+    """)
+    
+    st.markdown("---")
+    
+    st.subheader("🔧 What This Demo Is")
+    
+    st.success("""
+    ✅ **Interactive Visualization**: Real-time demonstrations of RCO, STA, ECF, VSAI, and law auditing
+    
+    ✅ **Concept Validation**: Proves the technical feasibility of self-governing compliance
+    
+    ✅ **Educational Tool**: Helps stakeholders understand the Nuclear IP Stack architecture
+    
+    ✅ **Sandbox Environment**: Safe environment to experiment with system parameters
+    """)
+    
+    st.markdown("---")
+    
+    st.subheader("⚠️ Limitations & Sandbox Constraints")
+    
+    st.warning("""
+    **This is a demonstration environment with the following constraints:**
+    
+    🔸 **Simulated Data**: Uses synthetic scenarios, not real patient data
+    
+    🔸 **Mock Implementations**: Core algorithms use simplified versions for visualization
+    
+    🔸 **No Persistence**: Data is not saved between sessions
+    
+    🔸 **Codespace Environment**: Runs in GitHub Codespace with limited external connectivity
+    
+    🔸 **Not Production-Ready**: This is a proof-of-concept, not a deployed healthcare system
+    """)
+    
+    st.markdown("---")
+    
+    st.subheader("🚀 Path to Production Deployment")
+    
+    st.markdown("""
+    The full iLuminara system is designed for:
+    
+    ### Offline/Edge Deployment
+    - **NVIDIA Jetson Devices**: Edge nodes with offline-first architecture
+    - **Community Health Workers**: Tablet/mobile deployment in remote areas
+    - **Field Operations**: No cloud dependency for core functions
+    
+    ### Cloud Integration (Optional)
+    - **Google Cloud Platform**: Vertex AI, BigQuery, Cloud Functions
+    - **Data Synchronization**: Eventual consistency when connectivity available
+    - **Centralized Analytics**: Aggregate insights across deployments
+    
+    ### Regulatory Compliance
+    - **Real Implementations**: Full 45-Law Quantum Nexus with actual legal frameworks
+    - **Continuous Monitoring**: Live RCO scanning for regulatory drift
+    - **Auto-Patching**: Automated compliance hotfix deployment
+    """)
+    
+    st.markdown("---")
+    
+    st.subheader("📚 Repository Structure")
+    
+    st.code("""
+iLuminara-Core/
+├── governance_kernel/          # Self-governing compliance system
+│   ├── rco_engine.py          # Regenerative Compliance Oracle
+│   ├── guardrail.py           # Sovereign Guardrail v3.0
+│   ├── quantum_nexus.py       # Multi-law harmonization
+│   └── sectoral_laws.json     # 45-Law registry
+│
+├── scripts/                    # Verification & testing
+│   ├── system_seal.py         # End-to-end integration test
+│   ├── verify_singularity.py  # RCO verification
+│   └── verify_49_laws.py      # Law registry audit
+│
+├── docs/                       # Mintlify documentation
+│   ├── introduction.mdx
+│   ├── architecture.mdx
+│   └── nuclear-ip/            # IP Stack docs
+│
+├── pages/                      # Streamlit demo pages
+│   ├── overview.py
+│   ├── compliance_simulator.py
+│   ├── authentication_demo.py
+│   ├── signal_fusion.py
+│   ├── law_audit.py
+│   └── network_propagation.py
+│
+└── demo_dashboard.py           # Main Streamlit app
+    """, language="bash")
+    
+    st.markdown("---")
+    
+    st.subheader("🏗️ Technology Stack")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("""
+        **Frontend:**
+        - Streamlit 1.52.2
+        - Plotly 6.5.0
+        - Pydeck 0.9.1
+        
+        **Backend:**
+        - Python 3.10+
+        - FastAPI 0.127.0
+        - NetworkX 3.4.2
+        """)
+    
+    with col2:
+        st.markdown("""
+        **AI/ML:**
+        - scikit-learn 1.6.1
+        - scipy 1.15.2
+        - pgmpy 0.1.28
+        
+        **Security:**
+        - cryptography 44.0.0
+        - Zero CodeQL alerts
+        """)
+    
+    st.markdown("---")
+    
+    st.subheader("🔗 Resources")
+    
+    st.markdown("""
+    - **Documentation**: [https://visendi56.mintlify.app/](https://visendi56.mintlify.app/)
+    - **Repository**: [github.com/VISENDI56/iLuminara-Core](https://github.com/VISENDI56/iLuminara-Core)
+    - **Nuclear IP Stack**: See docs/NUCLEAR_IP_STACK.md
+    - **Security**: See SECURITY.md and SECURITY_SUMMARY.md
+    """)
+    
+    st.markdown("---")
+    
+    st.subheader("💡 Next Steps")
+    
+    st.info("""
+    **To explore further:**
+    
+    1. **Run Verification Scripts**: Execute system_seal.py, verify_singularity.py, verify_49_laws.py
+    2. **Review Documentation**: Read the Mintlify docs for architectural details
+    3. **Experiment with Demo**: Adjust parameters in each module to see system behavior
+    4. **Contact for Production**: Reach out to discuss full deployment architecture
+    """)
+    
+    st.markdown("---")
+    
+    st.success("""
+    **🏛️ The Fortress is Sealed. The Singularity is Complete.**
+    
+    This demo represents the technical foundation for a $85M valuation thesis: 
+    a self-governing compliance system capable of autonomous regulatory management.
+    """)

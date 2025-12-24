@@ -1,6 +1,12 @@
+# Python
 __pycache__/
 *.pyc
 *.pyo
+*.py[cod]
+*$py.class
+*.so
+.Python
+
 # Flutter Web build artifacts
 frontend_web/build/
 frontend_web/.dart_tool/
