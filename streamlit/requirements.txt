@@ -1,0 +1,23 @@
+# iLuminara-Core Streamlit Demo Requirements
+# Dependencies for hosted demo on Streamlit Community Cloud
+
+# Core Streamlit
+streamlit>=1.30.0
+
+# Data processing
+pandas>=1.5,<2.2
+numpy<2.0
+# Additional utilities
+python-dateutil>=2.8.0
+
+# Ensure pip is up to date
+--upgrade pip
+
+# Visualization
+plotly>=5.15.0
+
+# Graph visualization
+graphviz>=0.20.0
+
+# Additional utilities
+python-dateutil>=2.8.0
