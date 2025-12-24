@@ -197,7 +197,7 @@ class LawStackAuditor:
             
             # Check if RCO has access to law registry
             health_score = self.rco.get_compliance_health_score()
-            print(f"   Compliance Health Score: {health_score:.2f}%")
+            print(f"   Compliance Health Score: {health_score * 100:.2f}%")
             
             return True
         except Exception as e:
