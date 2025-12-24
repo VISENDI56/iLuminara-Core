@@ -17,10 +17,18 @@ streamlit==1.52.2
 pydeck==0.9.1
 plotly==6.5.0
 
-# Data Processing
+# Data Processing & Scientific Computing
 pandas==2.3.3
 numpy==2.4.0
 scipy==1.15.2
+
+# Machine Learning & AI
+scikit-learn==1.6.1
+networkx==3.4.2
+pgmpy==0.1.28
+
+# Security & Cryptography
+cryptography==44.0.0
 
 # Google Cloud Services
 google-cloud-bigquery==3.39.0
@@ -30,24 +38,6 @@ google-cloud-pubsub==2.34.0
 google-cloud-firestore==2.22.0
 google-cloud-speech>=2.21.0
 google-cloud-secret-manager>=2.16.0
-
-# HTTP Requests
-requests==2.32.5
-httpx==0.28.1
-# Web Framework
-Flask==3.1.2
-flask-cors==6.0.2
-Werkzeug==3.1.4
-gunicorn>=21.2.0
-
-# Data Processing (FIXED: consolidated pandas versions)
-pandas==2.3.3
-numpy==2.4.0
-
-# Visualization
-streamlit==1.52.2
-plotly==6.5.0
-pydeck==0.9.1
 
 # HTTP Requests
 requests==2.32.5
@@ -78,21 +68,4 @@ pytest==9.0.2
 pytest-asyncio==1.3.0
 pytest-cov>=4.1.0
 pytest-flask==1.3.0
-# Logging and Monitoring
-structlog==23.2.0
 
-# Testing
-pytest==9.0.2
-pytest-asyncio==1.3.0
-pytest-cov>=4.1.0
-pytest-flask==1.3.0
-
-# Utilities
-python-dateutil==2.9.0.post0
-python-multipart>=0.0.6
-aiofiles>=23.2.0
-functions-framework>=3.4.0
-
-# AI/ML Services
-openai==2.14.0
-azure-identity==1.25.1
