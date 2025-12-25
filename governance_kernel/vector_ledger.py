@@ -33,7 +33,8 @@ class SovereigntyViolationError(Exception):
 
 
 class JurisdictionFramework(Enum):
-    """Global legal frameworks encoded in the sovereign guardrail."""
+    """Global legal frameworks encoded in the sovereign guardrail (45+ frameworks)."""
+    # Core Privacy & Data Protection (14 frameworks)
     GDPR_EU = "GDPR (EU)"  # General Data Protection Regulation
     KDPA_KE = "KDPA (Kenya)"  # Kenya Data Protection Act
     PIPEDA_CA = "PIPEDA (Canada)"  # Personal Information Protection & Electronic Documents Act
@@ -41,11 +42,59 @@ class JurisdictionFramework(Enum):
     HIPAA_US = "HIPAA (USA)"  # Health Insurance Portability & Accountability Act
     HITECH_US = "HITECH (USA)"  # Health Information Technology for Economic & Clinical Health
     CCPA_US = "CCPA (USA)"  # California Consumer Privacy Act
+    CPRA_US = "CPRA (USA)"  # California Privacy Rights Act
+    LGPD_BR = "LGPD (Brazil)"  # Lei Geral de Proteção de Dados
+    PDPA_SG = "PDPA (Singapore)"  # Personal Data Protection Act
+    APPI_JP = "APPI (Japan)"  # Act on the Protection of Personal Information
+    PIPL_CN = "PIPL (China)"  # Personal Information Protection Law
+    PDPA_MY = "PDPA (Malaysia)"  # Personal Data Protection Act
+    DPD_UK = "DPD (UK)"  # Data Protection Act 2018
+
+    # Cybersecurity & Information Security (8 frameworks)
     NIST_CSF = "NIST CSF (USA)"  # Cybersecurity Framework
     ISO_27001 = "ISO 27001"  # Information Security Management
     SOC_2 = "SOC 2 (USA)"  # Service Organization Control 2
+    CIS_CONTROLS = "CIS Controls"  # Center for Internet Security
+    MITRE_ATTACK = "MITRE ATT&CK"  # Adversarial Tactics, Techniques & Common Knowledge
+    ISO_22301 = "ISO 22301"  # Business Continuity Management
+    NIST_800_53 = "NIST 800-53"  # Security and Privacy Controls
+    COBIT = "COBIT"  # Control Objectives for Information Technology
+
+    # AI Ethics & Governance (6 frameworks)
     EU_AI_ACT = "EU AI Act"  # Artificial Intelligence Act
-    GDPR_ART9 = "GDPR Article 9 (Special Categories)"  # Sensitive Data
+    IEEE_ETHICS = "IEEE Ethics"  # Ethically Aligned Design
+    UNESCO_AI = "UNESCO AI"  # Recommendation on the Ethics of Artificial Intelligence
+    OECD_AI = "OECD AI"  # AI Principles
+    ISO_IEC_42001 = "ISO/IEC 42001"  # AI Management Systems
+    NIST_AI_RMF = "NIST AI RMF"  # AI Risk Management Framework
+
+    # Healthcare-Specific (5 frameworks)
+    GDPR_ART9 = "GDPR Article 9 (Special Categories)"  # Sensitive Health Data
+    FDA_21_CFR_PART_11 = "FDA 21 CFR Part 11"  # Electronic Records & Signatures
+    GxP_COMPLIANCE = "GxP Compliance"  # Good Practice Guidelines
+    HIPAA_SECURITY_RULE = "HIPAA Security Rule"  # Technical Safeguards
+    ISO_27799 = "ISO 27799"  # Health Informatics Security
+
+    # International Standards (4 frameworks)
+    ISO_9001 = "ISO 9001"  # Quality Management Systems
+    ISO_14001 = "ISO 14001"  # Environmental Management
+    ISO_45001 = "ISO 45001"  # Occupational Health & Safety
+    ISO_31000 = "ISO 31000"  # Risk Management
+
+    # Regional & Sector-Specific (8+ frameworks)
+    AFRICAN_UNION_DATA_POLICY = "African Union Data Policy"  # Continental Data Governance
+    ASEAN_DATA_PRIVACY = "ASEAN Data Privacy"  # Association of Southeast Asian Nations
+    CARICOM_DATA_PROTECTION = "CARICOM Data Protection"  # Caribbean Community
+    MERCOSUR_DATA_PROTECTION = "MERCOSUR Data Protection"  # Southern Common Market
+    EFTA_DATA_PROTECTION = "EFTA Data Protection"  # European Free Trade Association
+    APEC_PRIVACY_FRAMEWORK = "APEC Privacy Framework"  # Asia-Pacific Economic Cooperation
+    FTC_ACT = "FTC Act (USA)"  # Federal Trade Commission Act
+    CAN_SPAM = "CAN-SPAM Act (USA)"  # Controlling Assault of Non-Solicited Pornography
+
+    # Humanitarian & Ethical (2+ frameworks)
+    GENEVA_CONVENTION = "Geneva Convention"  # International Humanitarian Law
+    IHR_2005 = "IHR (2005)"  # International Health Regulations
+
     GLOBAL_DEFAULT = "GLOBAL_DEFAULT"  # Baseline sovereignty rules
 
 
