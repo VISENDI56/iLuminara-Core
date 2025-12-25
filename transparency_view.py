@@ -21,6 +21,7 @@ import json
 import os
 from datetime import datetime
 from openai import AzureOpenAI
+from state.shared_memory import load_state, get_shared, set_shared
 
 # --- MINTLIFY GUIDANCE SIDEBAR ---
 st.sidebar.header("📚 Mintlify Guidance")
@@ -227,3 +228,9 @@ try:
 
 except Exception as e:
     st.warning("Awaiting Precision Sequence Data for Narrative Generation...")
+
+# --- SOVEREIGN SHARED MEMORY SIDEBAR ---
+state = load_state()
+st.sidebar.markdown("---")
+st.sidebar.subheader("🧠 Sovereign Shared Memory")
+st.sidebar.json(state, expanded=False)

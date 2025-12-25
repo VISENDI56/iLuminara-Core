@@ -5,7 +5,7 @@ import time
 import json
 import os
 from utils.theme_manager import apply_circadian_theme
-from state.shared_memory import load_state
+from state.shared_memory import load_state, get_shared, set_shared
 from edge_node.data_ingestion_layer import IngestionEngine
 
 # --- CLASS-5 CONFIGURATION ---
@@ -48,10 +48,16 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# --- LOAD ENGINES ---
+
+# --- LOAD ENGINES & SOVEREIGN MEMORY ---
 state = load_state()
 ingestor = IngestionEngine()
 fusion = ingestor.fuse_data_streams()
+
+# --- SIDEBAR: SOVEREIGN SHARED MEMORY ---
+st.sidebar.markdown("---")
+st.sidebar.subheader("🧠 Sovereign Shared Memory")
+st.sidebar.json(state, expanded=False)
 
 # --- 1. THE NUCLEAR IP STACK STATUS ---
 st.subheader("📡 NUCLEAR IP STACK STATUS")

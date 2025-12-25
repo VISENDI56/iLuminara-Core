@@ -1,4 +1,3 @@
-
 try:
     from utils.theme_manager import apply_circadian_theme
     apply_circadian_theme()
@@ -91,3 +90,11 @@ if st.button('Submit Validation & Sync to Edge Node'):
     st.markdown("---")
     # --- 5. SOVEREIGN INTEGRITY NOTE ---
     st.caption('Note: Data transmission is secured by LoRaWAN mesh and governed by KDPA protocol. All submissions are encrypted at source.')
+
+from state.shared_memory import load_state, get_shared, set_shared
+
+# --- SOVEREIGN SHARED MEMORY SIDEBAR ---
+state = load_state()
+st.sidebar.markdown("---")
+st.sidebar.subheader("🧠 Sovereign Shared Memory")
+st.sidebar.json(state, expanded=False)

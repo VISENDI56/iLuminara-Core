@@ -23,6 +23,7 @@ except Exception:
     """, unsafe_allow_html=True)
 
 from governance_kernel.rco_engine import RegenerativeComplianceOracle
+from state.shared_memory import load_state, get_shared, set_shared
 
 st.set_page_config(page_title="Hyper-Law Oracle", page_icon="⚖️", layout="wide")
 st.title("⚖️ Hyper-Law Oracle — Regenerative Compliance Singularity")
@@ -36,6 +37,12 @@ st.markdown("""
 
 # Load RCO
 rco = RegenerativeComplianceOracle()
+
+# --- SOVEREIGN SHARED MEMORY SIDEBAR ---
+state = load_state()
+st.sidebar.markdown("---")
+st.sidebar.subheader("🧠 Sovereign Shared Memory")
+st.sidebar.json(state, expanded=False)
 
 # Sidebar: Select Law & Clause
 with st.sidebar:
