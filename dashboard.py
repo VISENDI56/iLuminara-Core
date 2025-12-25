@@ -12,6 +12,23 @@ from edge_node.data_ingestion_layer import IngestionEngine
 st.set_page_config(page_title="iLuminara Command", page_icon="🏛️", layout="wide")
 apply_circadian_theme()
 
+# --- MINTLIFY GUIDANCE SIDEBAR ---
+with st.sidebar:
+    st.header("📚 Mintlify Guidance")
+    with st.expander("🏛️ Architecture / Command Decision", expanded=False):
+        st.markdown("""
+        **Command Console Overview:**
+        The sovereign command center orchestrates real-time health intelligence decisions across jurisdictional boundaries. Features include:
+        - Multi-source data fusion with probabilistic outbreak prediction
+        - Active inference engine for clinical decision support
+        - Zero-latency alert distribution to field teams
+        - Regulatory compliance monitoring with 45+ frameworks
+        
+        *This console demonstrates iLuminara's nuclear IP stack in action.*
+        """)
+        if st.button("📖 Open Full Architecture Docs", key="arch_docs"):
+            st.markdown("[https://visendi56.mintlify.app/architecture](https://visendi56.mintlify.app/architecture)")
+
 # --- SECURITY HEADER (SENTINEL v3.0) ---
 def get_integrity_status():
     if os.path.exists("sentinel_report.sarif"):

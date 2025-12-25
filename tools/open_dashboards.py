@@ -17,57 +17,25 @@ DASHBOARDS = [
     ("http://localhost:8503", "Field Validation"),
 ]
 
-def open_dashboards_in_chrome():
-    """Open all three dashboards in Chrome browser tabs"""
-    print("🌐 Opening iLuminara dashboards in Chrome...")
+def open_dashboards_in_browser():
+    """Open all three dashboards in the default browser"""
+    print("🌐 Opening iLuminara dashboards in default browser...")
     print("")
     
-    # Try to find Chrome executable
-    chrome_paths = [
-        'google-chrome',
-        'chrome',
-        'chromium-browser',
-        'chromium',
-        '/usr/bin/google-chrome',
-        '/usr/bin/chromium-browser',
-    ]
-    
-    chrome_cmd = None
-    for path in chrome_paths:
+    for url, name in DASHBOARDS:
         try:
-            # Check if command exists
-            result = subprocess.run(['which', path], capture_output=True, text=True)
-            if result.returncode == 0:
-                chrome_cmd = path
-                break
-        except Exception:
-            continue
-    
-    if not chrome_cmd:
-        print("❌ ERROR: Chrome/Chromium not found on system")
-        print("   Please install Chrome or Chromium to use this feature")
-        return False
-    
-    # Collect all URLs to open
-    urls = [url for url, _ in DASHBOARDS]
-    
-    # Open all dashboards in Chrome (opens first in new window, rest as tabs)
-    try:
-        subprocess.Popen([chrome_cmd] + urls, 
-                       stdout=subprocess.DEVNULL, 
-                       stderr=subprocess.DEVNULL)
-        time.sleep(0.5)  # Brief delay to let Chrome start
-        
-        for _, name in DASHBOARDS:
-            print(f"   ✅ Opened {name}")
-    except Exception as e:
-        print(f"   ❌ Failed to open dashboards: {e}")
-        return False
+            # Use $BROWSER environment variable for dev container compatibility
+            subprocess.run(['bash', '-c', f'$BROWSER "{url}"'], 
+                         capture_output=True, check=True)
+            print(f"   ✅ Opened {name}: {url}")
+            time.sleep(0.5)  # Brief delay between opens
+        except Exception as e:
+            print(f"   ❌ Failed to open {name}: {e}")
     
     print("")
-    print("✅ All dashboards opened in Chrome!")
+    print("✅ All dashboards opened in browser!")
     return True
 
 if __name__ == "__main__":
-    success = open_dashboards_in_chrome()
+    success = open_dashboards_in_browser()
     sys.exit(0 if success else 1)

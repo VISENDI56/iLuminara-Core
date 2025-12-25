@@ -8,6 +8,22 @@ import os
 from datetime import datetime
 from openai import AzureOpenAI
 
+# --- MINTLIFY GUIDANCE SIDEBAR ---
+st.sidebar.header("📚 Mintlify Guidance")
+with st.sidebar.expander("🔒 Governance Kernel / Security", expanded=False):
+    st.markdown("""
+    **Transparency Audit Overview:**
+    The governance kernel provides complete audit trails and regulatory compliance monitoring. Key features:
+    - Real-time regulatory health scoring across 45+ frameworks
+    - Chrono-audit trails with retroactive compliance patching
+    - Sovereign data sovereignty with zero external dependencies
+    - RCO (Regulatory Compliance Oracle) for adaptive governance
+    
+    *This view demonstrates iLuminara's unbreakable security and transparency protocols.*
+    """)
+    if st.button("📖 Open Full Governance Docs", key="gov_docs"):
+        st.markdown("[https://visendi56.mintlify.app/governance-kernel](https://visendi56.mintlify.app/governance-kernel)")
+
 def generate_narrative(seq_data):
     """
     Hybrid Narrative Engine:

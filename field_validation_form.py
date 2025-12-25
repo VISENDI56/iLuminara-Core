@@ -7,6 +7,22 @@ st.set_page_config(
     layout="centered",  # Optimized for mobile/smaller screens
 )
 
+# --- MINTLIFY GUIDANCE SIDEBAR ---
+st.sidebar.header("📚 Mintlify Guidance")
+with st.sidebar.expander("🤖 AI Agents / Validation", expanded=False):
+    st.markdown("""
+    **Field Validation Overview:**
+    AI agents enable human-in-the-loop validation for clinical accuracy. Core capabilities:
+    - Swahili language processing for East African CHWs
+    - Behavioral biometrics for field authentication
+    - Real-time clinical decision support with uncertainty quantification
+    - Cascade AI propagation for network effects
+    
+    *This form demonstrates iLuminara's AI agent ecosystem in field conditions.*
+    """)
+    if st.button("📖 Open Full AI Agents Docs", key="ai_docs"):
+        st.markdown("[https://visendi56.mintlify.app/ai-agents](https://visendi56.mintlify.app/ai-agents)")
+
 # Custom CSS for high-contrast mobile look
 st.markdown("""
     <style>
