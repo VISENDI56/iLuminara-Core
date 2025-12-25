@@ -34,7 +34,17 @@ with st.sidebar.expander("🤖 AI Agents / Validation", expanded=False):
     if st.button("📖 Open Full AI Agents Docs", key="ai_docs"):
         st.markdown("[https://visendi56.mintlify.app/ai-agents](https://visendi56.mintlify.app/ai-agents)")
 
-
+st.sidebar.markdown("### Sovereign Documentation")
+with st.sidebar.expander("Field Validation Excerpt", expanded=False):
+    st.markdown("""
+    **Field Validation:**
+    - Human-in-the-loop validation for clinical accuracy
+    - Swahili language processing for CHWs
+    - Real-time clinical decision support
+    - See [Mintlify Field Validation](https://visendi56.mintlify.app/field-validation)
+    """)
+if st.sidebar.button("Open Full Docs", key="mintlify_docs_field"):
+    st.markdown("[Mintlify Portal](https://visendi56.mintlify.app/)")
 
 st.title("Field Validation Check")
 st.header("CHW Amina Hassan (Zone 4)")

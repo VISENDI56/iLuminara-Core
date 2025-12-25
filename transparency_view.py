@@ -39,6 +39,18 @@ with st.sidebar.expander("🔒 Governance Kernel / Security", expanded=False):
     if st.button("📖 Open Full Governance Docs", key="gov_docs"):
         st.markdown("[https://visendi56.mintlify.app/governance-kernel](https://visendi56.mintlify.app/governance-kernel)")
 
+st.sidebar.markdown("### Sovereign Documentation")
+with st.sidebar.expander("Transparency Audit Excerpt", expanded=False):
+    st.markdown("""
+    **Transparency Audit:**
+    - Real-time regulatory health scoring across 45+ frameworks
+    - Chrono-audit trails with retroactive compliance patching
+    - RCO (Regulatory Compliance Oracle) for adaptive governance
+    - See [Mintlify Governance Kernel](https://visendi56.mintlify.app/governance-kernel)
+    """)
+if st.sidebar.button("Open Full Docs", key="mintlify_docs_audit"):
+    st.markdown("[Mintlify Portal](https://visendi56.mintlify.app/)")
+
 def generate_narrative(seq_data):
     """
     Hybrid Narrative Engine:

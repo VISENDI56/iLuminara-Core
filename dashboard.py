@@ -13,21 +13,24 @@ st.set_page_config(page_title="iLuminara Command", page_icon="🏛️", layout="
 apply_circadian_theme()
 
 # --- MINTLIFY GUIDANCE SIDEBAR ---
-with st.sidebar:
-    st.header("📚 Mintlify Guidance")
-    with st.expander("🏛️ Architecture / Command Decision", expanded=False):
-        st.markdown("""
-        **Command Console Overview:**
-        The sovereign command center orchestrates real-time health intelligence decisions across jurisdictional boundaries. Features include:
-        - Multi-source data fusion with probabilistic outbreak prediction
-        - Active inference engine for clinical decision support
-        - Zero-latency alert distribution to field teams
-        - Regulatory compliance monitoring with 45+ frameworks
-        
-        *This console demonstrates iLuminara's nuclear IP stack in action.*
-        """)
-        if st.button("📖 Open Full Architecture Docs", key="arch_docs"):
-            st.markdown("[https://visendi56.mintlify.app/architecture](https://visendi56.mintlify.app/architecture)")
+st.sidebar.markdown("### Sovereign Documentation")
+with st.sidebar.expander("Quickstart Excerpt", expanded=False):
+    st.markdown("""
+    **Quickstart:**
+    1. Activate your virtual environment: `python -m venv .venv && source .venv/bin/activate`
+    2. Install dependencies: `pip install -r requirements.txt`
+    3. Launch the War Room: `streamlit run dashboard.py`
+    4. Explore the full Mintlify docs for advanced deployment, architecture, and compliance.
+    """)
+with st.sidebar.expander("Architecture", expanded=False):
+    st.markdown("""
+    **Architecture Overview:**
+    - Command Console orchestrates real-time health intelligence
+    - Multi-source data fusion, active inference, and regulatory compliance
+    - See [Mintlify Architecture](https://visendi56.mintlify.app/architecture)
+    """)
+if st.sidebar.button("Open Full Docs", key="mintlify_docs"):
+    st.markdown("[Mintlify Portal](https://visendi56.mintlify.app/)")
 
 # --- SECURITY HEADER (SENTINEL v3.0) ---
 def get_integrity_status():

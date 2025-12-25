@@ -1,0 +1,11 @@
+name: Streamlit Deploy
+on:
+  push:
+    branches: [ main ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy to Streamlit Community Cloud
+        run: echo "Manual step: Deploy via Streamlit Community Cloud UI (https://share.streamlit.io/)"

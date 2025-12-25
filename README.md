@@ -1170,3 +1170,33 @@ If you use iLuminara-Core in your work, please cite:
 **Last Updated:** December 13, 2025  
 **Status:** Production-Ready for Global Deployment  
 **Compliance Validation:** All 14 Frameworks ✅
+
+---
+
+## 🛡️ Dependency Sovereignty: Virtual Environment Required
+
+To ensure flawless execution and avoid system Python conflicts, always use a virtual environment:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt  # All dependencies, including google-cloud-firestore
+```
+
+- **Interpreter:** In VS Code, select `./.venv/bin/python` (bottom-left corner).
+- **Deactivate:** Run `deactivate` when finished.
+
+---
+
+## Live Documentation
+[![Docs](https://img.shields.io/badge/Docs-Mintlify-teal)](https://visendi56.mintlify.app/)
+Full sovereign documentation with live portals to apps.
+
+| Portal | Link |
+|--------|------|
+| 🏛️ War Room (Command Console) | [iluminara-war-room.streamlit.app](https://iluminara-war-room.streamlit.app) |
+| 🛡️ Transparency Audit | [iluminara-audit.streamlit.app](https://iluminara-audit.streamlit.app) |
+| 🧪 Field Validation | [iluminara-field.streamlit.app](https://iluminara-field.streamlit.app) |
+
+---
