@@ -1,4 +1,16 @@
-import streamlit as st
+
+try:
+    from utils.theme_manager import apply_circadian_theme
+    apply_circadian_theme()
+except Exception:
+    import streamlit as st
+    st.set_page_config(page_title="Field Validation", page_icon="📱", layout="centered")
+    st.markdown("""
+        <style>
+            .stApp { background-color: #0D9488; color: #1e2430; }
+            .stButton>button { background-color: #0D9488; color: white; font-weight: bold; padding: 10px; border-radius: 8px; width: 100%; margin-top: 20px; }
+        </style>
+    """, unsafe_allow_html=True)
 
 # --- CONFIGURATION: MOBILE AESTHETIC ---
 st.set_page_config(
@@ -23,33 +35,7 @@ with st.sidebar.expander("🤖 AI Agents / Validation", expanded=False):
     if st.button("📖 Open Full AI Agents Docs", key="ai_docs"):
         st.markdown("[https://visendi56.mintlify.app/ai-agents](https://visendi56.mintlify.app/ai-agents)")
 
-# Custom CSS for high-contrast mobile look
-st.markdown("""
-    <style>
-        .stApp {
-            background-color: #f0f2f6; /* Light background for field use */
-            color: #1e2430;
-        }
-        .stButton>button {
-            background-color: #008000; /* Green for GO */
-            color: white;
-            font-weight: bold;
-            padding: 10px;
-            border-radius: 8px;
-            width: 100%;
-            margin-top: 20px;
-        }
-        .alert-box {
-            border: 2px solid #FF0000;
-            background-color: #ffe0e0;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            color: #FF0000;
-        }
-    </style>
-    """, unsafe_allow_html=True)
+
 
 st.title("Field Validation Check")
 st.header("CHW Amina Hassan (Zone 4)")

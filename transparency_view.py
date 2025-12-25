@@ -2,7 +2,21 @@
 Transparency / Protocol Validation Console
 Streamlit page to explain decision reasoning and show precision alert timeline.
 """
-import streamlit as st
+
+try:
+    from utils.theme_manager import apply_circadian_theme
+    apply_circadian_theme()
+except Exception:
+    import streamlit as st
+    st.set_page_config(page_title="Protocol Validation Console", layout="wide")
+    st.markdown("""
+        <style>
+            .stApp { background-color: #0D9488; color: #e0e6ed; }
+            .css-1d391kg { background-color: #E0F2F1; }
+            h1, h2, h3 { color: #0D9488; }
+            .stButton>button { background-color: #0D9488; }
+        </style>
+    """, unsafe_allow_html=True)
 import json
 import os
 from datetime import datetime
@@ -98,15 +112,8 @@ def _local_fallback(start_time, duration):
     *Cryptographically signed by iLuminara Kernel (Local).*
     """
 
-st.set_page_config(page_title="Protocol Validation Console", layout="wide")
-
 st.markdown("""
-<style>
-body { background-color: #0a0e27; color: #e0e6ed; }
-.green-box { background-color: #0f3f22; padding: 12px; border-radius: 8px; border-left: 4px solid #00ff88; }
-.metric { color: #00ff88; font-size: 20px; }
-</style>
-""", unsafe_allow_html=True)
+
 
 st.title("Protocol Validation Console | Decision Confidence: 85%")
 
