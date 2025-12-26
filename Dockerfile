@@ -1,5 +1,5 @@
 # STAGE 1: The Sovereign Base
-FROM python:3.10-slim-bullseye as base
+FROM python:3.15-rc-slim-trixie as base
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
