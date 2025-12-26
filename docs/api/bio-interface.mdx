@@ -1,0 +1,20 @@
+---
+title: 'Bio-Interface API'
+description: 'REST Endpoints for Somatic Auth'
+---
+
+## Overview
+The Bio-Interface allows Edge Nodes to submit biometric proofs-of-life.
+
+### Endpoint: /api/v1/somatic/handshake
+- Method: POST
+- Headers:
+  - X-Sovereign-Token: [Kyber-Encrypted-Hash]
+- Body:
+```json
+{
+  "node_id": "NAIROBI-ALPHA",
+  "biometric_vector": "...",
+  "pulse_signature": "72_bpm_verified"
+}
+```
