@@ -11,7 +11,7 @@ google-cloud-storage>=2.10.0
 google-generativeai>=0.3.0
 
 # Data processing
-protobuf>=4.25.8
+protobuf>=6.31.1
 grpcio>=1.59.0
 
 # Existing iLuminara dependencies (if not already installed)
