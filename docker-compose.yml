@@ -134,7 +134,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=iluminara
+      # IMPORTANT: Change this password in production!
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-changeMeNow!}
       - GF_INSTALL_PLUGINS=
     volumes:
       - grafana-storage:/var/lib/grafana

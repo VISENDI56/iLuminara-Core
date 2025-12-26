@@ -1,0 +1,37 @@
+name: CI/CD Deployment Singularity
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Docker images
+        run: |
+          docker build -t iluminara/frenasa-engine:latest -f Dockerfile.frenasa .
+          docker build -t iluminara/api-server:latest -f Dockerfile.api .
+      - name: Scan with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: iluminara/frenasa-engine:latest
+      - name: Scan API image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: iluminara/api-server:latest
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+      - name: Set up Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: 'latest'
+      - name: Deploy via Helm
+        run: |
+          helm upgrade --install iluminara-core infrastructure/k8s/helm-charts/iluminara-core
