@@ -1,5 +1,5 @@
 # STAGE 1: The Sovereign Base
-FROM python:3.15-rc-slim-trixie as base
+FROM python:3.15-rc-alpine3.22 as base
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
