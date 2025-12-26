@@ -1,62 +1,62 @@
 import streamlit as st
 import pandas as pd
-import pydeck as pdk
+import numpy as np
 import time
-import json
-import os
-from utils.theme_manager import apply_circadian_theme
-from state.shared_memory import load_state, get_shared, set_shared
-from edge_node.data_ingestion_layer import IngestionEngine
 
-# --- CLASS-5 CONFIGURATION ---
-st.set_page_config(page_title="iLuminara Command", page_icon="🏛️", layout="wide")
-apply_circadian_theme()
+st.set_page_config(page_title="iLuminara Commander", page_icon="🛡️", layout="wide")
 
-# --- MINTLIFY GUIDANCE SIDEBAR ---
-st.sidebar.markdown("### Sovereign Documentation")
-with st.sidebar.expander("Quickstart Excerpt", expanded=False):
-    st.markdown("""
-    **Quickstart:**
-    1. Activate your virtual environment: `python -m venv .venv && source .venv/bin/activate`
-    2. Install dependencies: `pip install -r requirements.txt`
-    3. Launch the War Room: `streamlit run dashboard.py`
-    4. Explore the full Mintlify docs for advanced deployment, architecture, and compliance.
-    """)
-with st.sidebar.expander("Architecture", expanded=False):
-    st.markdown("""
-    **Architecture Overview:**
-    - Command Console orchestrates real-time health intelligence
-    - Multi-source data fusion, active inference, and regulatory compliance
-    - See [Mintlify Architecture](https://visendi56.mintlify.app/architecture)
-    """)
-if st.sidebar.button("Open Full Docs", key="mintlify_docs"):
-    st.markdown("[Mintlify Portal](https://visendi56.mintlify.app/)")
-
-# --- SECURITY HEADER (SENTINEL v3.0) ---
-def get_integrity_status():
-    if os.path.exists("sentinel_report.sarif"):
-        return "🟢 INTEGRITY: VERIFIED (SHA-256)", "success"
-    return "🟡 INTEGRITY: UNVERIFIED", "warning"
-
-int_status, int_color = get_integrity_status()
-
-# --- HEADER UI ---
-st.markdown(f"""
-    <div style="border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 20px;">
-        <span style="font-size: 24px; font-weight: bold; color: #fff;">🏛️ iLUMINARA: SOVEREIGN COMMAND</span>
-        <span style="float: right; font-family: monospace; color: #00ff88; border: 1px solid #00ff88; padding: 2px 8px; border-radius: 4px;">CLASS-5 DEFENSIVE ASSET</span>
-    </div>
-    <div style="font-family: monospace; font-size: 12px; color: #888; margin-bottom: 20px;">
-        NODE: JOR-47 | JURISDICTION: KENYA_DPA | {int_status}
-    </div>
+# SOVEREIGN STYLING
+st.markdown("""
+    <style>
+        .stApp { background-color: #0E1117; color: #FFFFFF; }
+        .metric-card { border: 1px solid #0D9488; padding: 10px; border-radius: 5px; }
+    </style>
 """, unsafe_allow_html=True)
 
+st.title("🛡️ iLuminara Sovereign Command")
+st.markdown("### planetary_nexus // status: **ONLINE**")
 
-# --- LOAD ENGINES & SOVEREIGN MEMORY ---
-state = load_state()
-ingestor = IngestionEngine()
-fusion = ingestor.fuse_data_streams()
+# REAL-TIME METRICS SIMULATION
+col1, col2, col3, col4 = st.columns(4)
+col1.metric("Active Nodes", "14,205", "+12", help="Live devices on the mesh")
+col2.metric("Threat Level", "MODERATE", "Viral Sig Detected", delta_color="inverse")
+col3.metric("RCO Compliance", "100%", "Regenerative", delta_color="normal")
+col4.metric("Sovereign Fund", "Ξ 45.20", "+2.1%", help="DAO Treasury")
 
+# LIVE MAP SIMULATION
+st.markdown("---")
+st.subheader("🌍 Global Epidemic Heatmap (Live Signal)")
+
+# Generate fake "live" data for the map
+map_data = pd.DataFrame(
+    np.random.randn(100, 2) / [50, 50] + [1.2921, 36.8219], # Nairobi coordinates
+    columns=['lat', 'lon'])
+
+st.map(map_data, zoom=10, color="#0D9488")
+
+# INTERACTIVE WAR ROOM
+st.markdown("---")
+c1, c2 = st.columns(2)
+with c1:
+    st.info("📡 **Signal Intercept**")
+    if st.button("SCAN PLANETARY MESH"):
+        with st.status("Triangulating viral vectors...", expanded=True) as status:
+            time.sleep(1)
+            st.write("Checking Nairobi Node...")
+            time.sleep(1)
+            st.write("Checking Lagos Node...")
+            time.sleep(1)
+            st.write("⚠️ ANOMALY DETECTED IN SECTOR 7G")
+            status.update(label="Scan Complete: 1 Threat Found", state="error")
+with c2:
+    st.success("🧠 **Governance Override**")
+    if st.button("ACTIVATE LOCKDOWN PROTOCOL"):
+        progress_text = "Broadcasting cryptographic lock to 14,000 nodes..."
+        my_bar = st.progress(0, text=progress_text)
+        for percent_complete in range(100):
+            time.sleep(0.01)
+            my_bar.progress(percent_complete + 1, text=progress_text)
+        st.toast("PROTOCOL ACTIVE: Borders Sealed via Smart Contract.")
 # --- SIDEBAR: SOVEREIGN SHARED MEMORY ---
 st.sidebar.markdown("---")
 st.sidebar.subheader("🧠 Sovereign Shared Memory")
@@ -69,7 +69,7 @@ c1, c2, c3, c4 = st.columns(4)
 with c1:
     st.metric("Governance Kernel", "ACTIVE", "SovereignGuardrail")
     st.caption("14 Frameworks Enforced")
-    
+
 with c2:
     st.metric("Intelligence Engine", "LOCKED", "Silent Flux")
     st.caption(f"Fusion Score: {fusion['fusion_score']}")
@@ -93,13 +93,13 @@ g1, g2 = st.columns([2, 1])
 with g1:
     # 3D MAP OF CONVERGENCE
     st.markdown("**Vector Convergence Analysis (Rift Valley Model)**")
-    
+
     # Extract coords for map
     map_data = pd.DataFrame([
         {"lat": feeds[0]['coords'][0], "lon": feeds[0]['coords'][1], "type": "EMR (Clinical)", "radius": 200},
         {"lat": feeds[1]['coords'][0], "lon": feeds[1]['coords'][1], "type": "CBS (Signal)", "radius": 500},
     ])
-    
+
     layer = pdk.Layer(
         "ScatterplotLayer",
         map_data,
@@ -108,7 +108,7 @@ with g1:
         get_radius="radius",
         pickable=True,
     )
-    
+
     view_state = pdk.ViewState(latitude=0.0512, longitude=40.3129, zoom=12, pitch=45)
     st.pydeck_chart(pdk.Deck(layers=[layer], initial_view_state=view_state, tooltip={"text": "{type}"}))
 
@@ -119,7 +119,7 @@ with g2:
 Distance: {fusion['physics']['dist_km']} km
 Time Lag: {fusion['physics']['time_lag_h']} hours
     """, language="text")
-    
+
     if fusion['fusion_score'] > 0.8:
         st.error(f"🚨 **CRITICAL CONVERGENCE**\n{fusion['fusion_note']}")
         if st.button("🔴 AUTHORIZE NUCLEAR RESPONSE", type="primary"):

@@ -5,6 +5,8 @@ Deployed on Streamlit Community Cloud for global access
 """
 import streamlit as st
 
+import plotly.graph_objects as go
+
 # Page configurations
 st.set_page_config(
     page_title="iLuminara Sovereign Health",
