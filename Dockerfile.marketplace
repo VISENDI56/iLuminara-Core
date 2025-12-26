@@ -1,6 +1,6 @@
 # iLuminara Sovereign Container (Marketplace Edition)
 # Base: Python 3.10 Slim (Optimized for Edge/Cloud Hybrid)
-FROM python:3.15-rc-slim-trixie
+FROM python:3.15-rc-alpine3.22
 
 # METADATA (RFC 9116)
 LABEL org.opencontainers.image.title="iLuminara Sovereign Core"
