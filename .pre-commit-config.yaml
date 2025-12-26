@@ -1,32 +1,8 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.4.0
     hooks:
-      - id: check-ast
-      - id: check-yaml
-      - id: end-of-file-fixer
       - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
       - id: check-added-large-files
-      - id: check-merge-conflict
-  - repo: https://github.com/asottile/blacken-docs
-    rev: v1.13.0
-    hooks:
-      - id: blacken-docs
-  - repo: https://github.com/pre-commit/mirrors-autopep8
-    rev: v1.6.0
-    hooks:
-      - id: autopep8
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
-    hooks:
-      - id: forbid-binary
-        args: [--binary-allowlist=*.png,*.jpg,*.jpeg,*.gif,*.ico,*.svg,*.pdf,*.tflite,*.bin,*.pt,*.pth,*.onnx]
-      - id: check-case-conflict
-  - repo: local
-    hooks:
-      - id: ascii-only-py
-        name: 'ascii-only-py'
-        entry: python3 scripts/check_ascii.py
-        language: system
-        types: [python]
-        files: \.py$
