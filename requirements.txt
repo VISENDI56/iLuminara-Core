@@ -23,5 +23,5 @@ google-cloud-firestore>=2.22.0
 # Sovereign Shield: GCP optional dependency
 google-cloud-storage>=2.0.0
 protobuf>=4.25.8
-# Ensure pip is up to date
---upgrade pip
+torch>=2.0.0
+transformers>=4.30.0
