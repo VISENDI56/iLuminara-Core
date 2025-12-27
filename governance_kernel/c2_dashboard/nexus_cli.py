@@ -1,63 +1,73 @@
-import json
+
 import time
-import random
 import os
 import sys
+import random
 
-# Import our agents (simulated import for C2 view)
-# In production: from agents.security_operations.system2_soc import System2SecurityAgent
+# Import the new simulation harness
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+from infrastructure.simulation.data_stream import LiveDataHarness
+from governance_kernel.sovereign_guardrail import SovereignGuardrail
 
-class C2Nexus:
-    """
-    The Command & Control Layer.
-    Aggregates 'Thinking' Agents into 'Actionable' Intelligence.
-    """
+class C2NexusV2:
     def __init__(self):
-        self.status = "ONLINE"
-        self.location = "NAIROBI_NODE_01"
+        self.stream = LiveDataHarness()
+        self.guard = SovereignGuardrail()
+        self.logs = []
 
     def clear_screen(self):
         os.system('cls' if os.name == 'nt' else 'clear')
 
-    def render_dashboard(self):
-        self.clear_screen()
+    def run_live_dashboard(self):
+        try:
+            while True:
+                self.clear_screen()
+                self._render_header()
+                # 1. Process a new Live Event
+                event = self.stream.get_next_event()
+                compliance = self.guard.check_sectoral_compliance(event['context'], event['payload'])
+                # 2. Log result
+                log_entry = self._format_log(event, compliance)
+                self.logs.insert(0, log_entry)
+                if len(self.logs) > 8: self.logs.pop() # Keep last 8 logs
+                # 3. Render Sections
+                self._render_omni_law_feed()
+                print("\n[SECTOR: SYSTEM 2 SECURITY]")
+                self._render_soc_pulse()
+                time.sleep(2) # Refresh rate
+        except KeyboardInterrupt:
+            print("\n[!] C2 NEXUS SHUTDOWN.")
+
+    def _render_header(self):
         print("╔══════════════════════════════════════════════════════════════════╗")
-        print("║   iLUMINARA SOVEREIGN NEXUS (C2) | STATUS: SYSTEM 2 ACTIVE       ║")
+        print("║   iLUMINARA C2 NEXUS V2 | OMNI-LAW MATRIX: ACTIVE (29/29)        ║")
         print("╠══════════════════════════════════════════════════════════════════╣")
-        print(f"║ LOCATION: {self.location:<15} | LATENCY: 12ms | SOVEREIGNTY: 100% ║")
+        print("║   MONITORING: FINANCE | SUPPLY CHAIN | ESG | PUBLIC HEALTH       ║")
         print("╚══════════════════════════════════════════════════════════════════╝")
-        print("\n[SECTOR 1: PUBLIC HEALTH OPERATIONS]")
-        self._render_sanitation_grid()
-        print("\n[SECTOR 2: DIGITAL SOVEREIGNTY]")
-        self._render_sovereignty_checks()
-        print("\n[SECTOR 3: SYSTEM 2 SECURITY]")
-        self._render_soc_activity()
 
-    def _render_sanitation_grid(self):
-        # Visualizing 'TargetedSanitationAgent' (Phase 7)
-        districts = ["District-A", "District-B", "District-C"]
-        risks = [0.12, 0.95, 0.45] # District B is critical
-        print(f"   {'DISTRICT':<15} | {'RISK SCORE':<12} | {'ACTION'}")
-        print("   " + "-"*45)
-        for d, r in zip(districts, risks):
-            action = "🟢 MONITOR"
-            if r > 0.85: action = "🔴 DISPATCH KITS (Auto-Approved)"
-            print(f"   {d:<15} | {r:<12} | {action}")
+    def _format_log(self, event, compliance):
+        timestamp = time.strftime("%H:%M:%S")
+        sector = event['context']
+        status = compliance['status']
+        details = str(compliance.get('alerts', []) or compliance.get('actions_taken', []))
+        icon = "🟢"
+        if status in ["BLOCKED", "FROZEN"]: icon = "🔴"
+        elif status == "FLAG": icon = "🟡"
+        return f"{timestamp} | {icon} {sector:<12} | {status:<8} | {details[:40]}..."
 
-    def _render_sovereignty_checks(self):
-        # Visualizing 'NationalStrategyGuard' (Phase 7)
-        print("   🔹 Data Residency: KENYA (Local) ........ [PASS]")
-        print("   🔹 WHO Alignment: Person-Centric ........ [PASS]")
-        print("   🔹 Bias Check: Rural Coverage > 20% ..... [PASS]")
+    def _render_omni_law_feed(self):
+        print("\n[LIVE INTELLIGENCE FEED]")
+        print("   TIME     | STS | SECTOR       | RESULT   | DETAILS")
+        print("   " + "-"*60)
+        for log in self.logs:
+            print(f"   {log}")
 
-    def _render_soc_activity(self):
-        # Visualizing 'System2SecurityAgent' (Phase 6)
-        print("   🤖 SOC Agent Status: THINKING...")
-        time.sleep(0.5)
-        print("      └─ Planning: 'Isolate Host 192.168.1.5' ... [DONE]")
-        print("      └─ Simulating: 'Effect on Payroll App' .... [SAFE]")
-        print("      └─ Execution: 'APPLYING FIREWALL RULE' .... [ACTIVE]")
+    def _render_soc_pulse(self):
+        # Visualizes the heartbeat of the System 2 Agent
+        statuses = ["Scanning traffic...", "Validating patch...", "Simulating breach...", "Idle"]
+        print(f"   🤖 SOC AGENT: {random.choice(statuses)}")
+        print(f"   🛡️  Active Threats: {random.randint(0, 2)} | Blocked Today: {random.randint(12, 50)}")
 
 if __name__ == "__main__":
-    nexus = C2Nexus()
-    nexus.render_dashboard()
+    nexus = C2NexusV2()
+    nexus.run_live_dashboard()
