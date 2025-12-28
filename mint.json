@@ -12,25 +12,49 @@
             },
               "topbarLinks": [
                     {
-                              "name": "War Room",
+                              "name": "Live War Room",
                                     "url": "https://iluminara-war-room.streamlit.app"
                     }
               ],
                 "navigation": [
                         {
-                                  "group": "Core Ascension",
-                                        "pages": ["intro", "architecture/overview", "governance/compliance"]
+                                  "group": "Introduction",
+                                        "pages": ["intro", "quickstart"]
                         },
                             {
-                                      "group": "47-Framework Matrix",
-                                            "pages": ["governance/omni-law", "governance/hyper-law-singularity"]
+                                      "group": "Sovereign War Rooms (Live Apps)",
+                                            "pages": [
+                                                        {
+                                                                      "name": "Main Nexus Dashboard",
+                                                                                "url": "https://iluminara-war-room.streamlit.app"
+                                                        },
+                                                                {
+                                                                              "name": "FRENASA Diagnostic Engine",
+                                                                                        "url": "https://iluminara-frenasa.streamlit.app"
+                                                                },
+                                                                        {
+                                                                                      "name": "Network Propagation Map",
+                                                                                                "url": "https://iluminara-network.streamlit.app"
+                                                                        }
+                                            ]
                             },
                                 {
-                                          "group": "Clinical Nexus",
-                                                "pages": ["modules/1-20-nexus", "integrations/medgemma-fhir"]
+                                          "group": "Infrastructure & 47-Frameworks",
+                                                "pages": [
+                                                            "architecture/overview",
+                                                                    "governance/compliance-matrix",
+                                                                            "governance/nist-rmf"
+                                                ]
                                 }
                 ],
-                  "footerSocials": {
-                        "github": "https://github.com/VISENDI56/iLuminara-Core"
-                  }
+                  "redirects": [
+                        {
+                                  "source": "/app",
+                                        "destination": "https://iluminara-war-room.streamlit.app"
+                        },
+                            {
+                                      "source": "/frenasa",
+                                            "destination": "https://iluminara-frenasa.streamlit.app"
+                            }
+                  ]
 }
