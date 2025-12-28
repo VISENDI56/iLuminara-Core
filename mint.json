@@ -4,23 +4,23 @@
     "navigation": [
         {
             "group": "The Sovereign Nexus",
-            "pages": ["intro", "architecture/overview"]
+            "pages": ["introduction", "architecture"]
         },
         {
             "group": "47-Framework Governance",
-            "pages": ["governance/omni-law", "governance/pabs-sovereignty", "governance/compliance-audit"]
+            "pages": ["governance/omni-law-matrix", "governance/living-certification", "governance/compliance-oracle"]
         },
         {
             "group": "NVIDIA AI Enterprise (Apex)",
-            "pages": ["ml/monai-imaging", "ml/bionemo-generative", "ml/riva-speech", "ml/parabricks-genomics"]
+            "pages": ["ml-health/health-llm-adapter", "ml-health/drift-monitoring", "ml-health/seir-model"]
         },
         {
             "group": "Kinetic & Spatial Intelligence",
-            "pages": ["geospatial/geoghost-offline", "infrastructure/cuopt-routing", "infrastructure/aerial-6g"]
+            "pages": ["infrastructure/iot-ingestion", "infrastructure/context-engineering"]
         },
         {
             "group": "Physical Sovereignty",
-            "pages": ["infrastructure/igx-safety-island", "infrastructure/hardware-attestation"]
+            "pages": ["nuclear-ip/crypto-shredder", "nuclear-ip/serenity-flow"]
         }
     ],
     "redirects": [
