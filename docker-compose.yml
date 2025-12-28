@@ -1,6 +1,11 @@
 version: "3.9"
 
 services:
+  fleet-command-agent:
+    image: nvcr.io/nvidia/fleet-command-agent:latest
+    runtime: nvidia
+    environment:
+      - CONFIDENTIAL_COMPUTING=TRUE
   # vista3d-nim:
   #   image: nvcr.io/nvidia/clara/vista3d-nim:latest
   #   runtime: nvidia
