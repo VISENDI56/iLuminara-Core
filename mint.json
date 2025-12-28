@@ -1,14 +1,60 @@
 {
-      "name": "iLuminara-Core",
-        "logo": { "dark": "/assets/logo-dark.svg", "light": "/assets/logo-light.svg" },
-          "colors": { "primary": "#00AEA4", "background": "#0F172A", "text": "#E2E8F0" },
-            "ai": { "enabled": true, "model": "advanced" },
-              "navigation": [
-                    { "group": "Live Nexus", "pages": ["getting-started/live-apps", "getting-started/war-room"] },
-                        { "group": "Planetary Architecture", "pages": ["architecture/overview", "architecture/golden-thread"] },
-                            { "group": "47-Framework Sovereignty", "pages": ["governance/compliance-matrix", "governance/regenerative-oracle"] },
-                                { "group": "Nuclear IP Fortress", "pages": ["security/nuclear-stack", "security/acorn-protocol"] }
-              ],
-                "analytics": { "enabled": true },
-                  "feedback": { "enabled": true }
+  "name": "iLuminara-Core",
+  "logo": {
+    "dark": "/assets/logo-dark.svg",
+    "light": "/assets/logo-light.svg"
+  },
+  "colors": {
+    "primary": "#00AEA4",
+    "background": "#0F172A",
+    "text": "#E2E8F0"
+  },
+  "ai": {
+    "enabled": true,
+    "model": "advanced"
+  },
+  "navigation": [
+    {
+      "group": "Live Nexus",
+      "pages": [
+        "getting-started/live-apps",
+        "getting-started/war-room"
+      ]
+    },
+    {
+      "group": "Planetary Architecture",
+      "pages": [
+        "architecture/overview",
+        "architecture/golden-thread"
+      ]
+    },
+    {
+      "group": "47-Framework Sovereignty",
+      "pages": [
+        "governance/compliance-matrix",
+        "governance/regenerative-oracle"
+      ]
+    },
+    {
+      "group": "Nuclear IP Fortress",
+      "pages": [
+        "security/nuclear-stack",
+        "security/acorn-protocol"
+      ]
+    },
+    {
+      "group": "Geo-Infrastructure",
+      "pages": [
+        "geospatial/stac-ingestion",
+        "geospatial/hydro-trace",
+        "geospatial/spatial-privacy"
+      ]
+    }
+  ],
+  "analytics": {
+    "enabled": true
+  },
+  "feedback": {
+    "enabled": true
+  }
 }
