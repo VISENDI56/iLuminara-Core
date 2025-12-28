@@ -73,6 +73,16 @@
         "infrastructure/physics-predict",
         "infrastructure/vision-agent"
       ]
+    },
+    {
+      "group": "Apex NVIDIA Sovereignty",
+      "pages": [
+        "ml/monai-imaging",
+        "ml/bionemo-generative",
+        "ml/riva-speech",
+        "ml/parabricks-genomics",
+        "infrastructure/aerial-5g"
+      ]
     }
   ],
   "analytics": {
