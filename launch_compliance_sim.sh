@@ -1,0 +1,1 @@
+streamlit run streamlit/compliance_simulator/app.py --server.port 8519 --server.address 0.0.0.0

@@ -216,3 +216,18 @@ with tab2:
             st.write(f"• {milestone}")
     else:
         st.info("No milestones recorded yet")
+
+# System 2 Transparency Integration
+from streamlit.about_system2.technical_manifesto import render_system2_vision
+from streamlit.agent_logs.real_time_traces import render_agent_logs
+
+st.sidebar.title("Navigation")
+page = st.sidebar.radio("Sections", ["Main Dashboard", "About: System 2 Vision", "Agent Logs: Transparency"])
+
+if page == "About: System 2 Vision":
+    render_system2_vision()
+elif page == "Agent Logs: Transparency":
+    render_agent_logs()
+else:
+    # Main dashboard content continues above
+    pass
