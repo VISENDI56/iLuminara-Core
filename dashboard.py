@@ -11,7 +11,8 @@ class IngestionEngine:
     def fuse_data_streams(self):
         return {
             "fusion_score": 0.95,
-            "physics": {"dist_km": 45.2},
+            "fusion_note": "High convergence detected in Dadaab region. EMR and CBS signals aligning within 45km radius.",
+            "physics": {"dist_km": 45.2, "time_lag_h": 0.5},
             "live_feeds": [
                 {"coords": [36.8, -1.3], "type": "EMR"},
                 {"coords": [36.8, -1.3], "type": "CBS"}
@@ -109,19 +110,19 @@ with tab1:
         # FUSION CALCULUS
         st.markdown("**Calculus of Truth:**")
         st.code(f"""
-Distance: {fusion['physics']['dist_km']} km
-Time Lag: {fusion['physics']['time_lag_h']} hours
+Distance: {fusion.get('physics', {}).get('dist_km', 0.0)} km
+Time Lag: {fusion.get('physics', {}).get('time_lag_h', 0.0)} hours
         """, language="text")
         
-        if fusion['fusion_score'] > 0.8:
-            st.error(f"🚨 **CRITICAL CONVERGENCE**\n{fusion['fusion_note']}")
+        if fusion.get('fusion_score', 0) > 0.8:
+            st.error(f"🚨 **CRITICAL CONVERGENCE**\n{fusion.get('fusion_note', 'No fusion note available')}")
             if st.button("🔴 AUTHORIZE NUCLEAR RESPONSE", type="primary"):
                 state['protocol_status'] = "AUTHORIZED"
                 st.toast("Response Authorized. Logistics Dispatched.")
                 time.sleep(1)
                 st.rerun()
         else:
-            st.info(f"ℹ️ **Signal Analysis**\n{fusion['fusion_note']}")
+            st.info(f"ℹ️ **Signal Analysis**\n{fusion.get('fusion_note', 'No fusion note available')}")
 
     # --- 3. CRYPTO SHREDDER (The End) ---
     st.divider()
@@ -161,20 +162,20 @@ with tab2:
     with col1:
         iso42001 = cert_data['certifications']['ISO42001']
         st.metric("ISO 42001 (AI)", f"{iso42001['current_score']:.2%}", 
-                  f"Target: {iso42001['target_score']:.0%}", 
                   delta=f"{iso42001['status'].replace('_', ' ').title()}")
+        st.caption(f"Target: {iso42001['target_score']:.0%}")
     
     with col2:
         iso27001 = cert_data['certifications']['ISO27001']
         st.metric("ISO 27001 (Security)", f"{iso27001['current_score']:.2%}", 
-                  f"Target: {iso27001['target_score']:.0%}",
                   delta=f"{iso27001['status'].replace('_', ' ').title()}")
+        st.caption(f"Target: {iso27001['target_score']:.0%}")
     
     with col3:
         iso27701 = cert_data['certifications']['ISO27701']
         st.metric("ISO 27701 (Privacy)", f"{iso27701['current_score']:.2%}", 
-                  f"Target: {iso27701['target_score']:.0%}",
                   delta=f"{iso27701['status'].replace('_', ' ').title()}")
+        st.caption(f"Target: {iso27701['target_score']:.0%}")
     
     st.divider()
     
