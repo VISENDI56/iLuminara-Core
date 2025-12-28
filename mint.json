@@ -67,6 +67,14 @@
         "core/water-sovereignty",
         "governance/tele-justice"
       ]
+    },
+    {
+      "group": "The Nobel Singularities",
+      "pages": [
+        "nobel_dossier/biological",
+        "nobel_dossier/peace",
+        "nobel_dossier/economics"
+      ]
     }
   ],
   "redirects": [
