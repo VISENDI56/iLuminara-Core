@@ -1,6 +1,6 @@
 # Core Engine
 streamlit>=1.30.0
-fastapi>=0.100.0
+fastapi>=0.109.1
 uvicorn>=0.23.0
 networkx>=3.0
 # NVIDIA Apex
@@ -45,3 +45,5 @@ pyserial>=3.5
 protobuf>=4.25.8
 arcgis>=2.4.0
 arcgis-runtime
+anyio>=4.4.0 # not directly required, pinned by Snyk to avoid a vulnerability
+starlette>=0.49.1 # not directly required, pinned by Snyk to avoid a vulnerability
