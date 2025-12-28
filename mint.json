@@ -49,6 +49,14 @@
         "core/refi-substrate",
         "core/zkp-privacy"
       ]
+    },
+    {
+      "group": "Humanitarian Nexus (2026)",
+      "pages": [
+        "humanitarian/shirika-equity",
+        "humanitarian/circular-sovereignty",
+        "humanitarian/migration-forecast"
+      ]
     }
   ],
   "redirects": [
