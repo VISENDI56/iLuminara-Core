@@ -1,2 +1,5 @@
 google-cloud-pubsub>=2.13.0
-requests>=2.28.0
+requests>=2.32.2
+urllib3>=1.26.19 # not directly required, pinned by Snyk to avoid a vulnerability
+protobuf>=4.25.8 # not directly required, pinned by Snyk to avoid a vulnerability
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability

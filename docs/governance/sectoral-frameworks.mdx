@@ -1,0 +1,31 @@
+---
+title: 'Sectoral Frameworks'
+description: 'The 29 Context-Specific Compliance Extensions.'
+---
+
+The Sectoral 29 are specialized frameworks enforced only when specific triggers are met. These are managed by the `sectoral_laws.json` and the Governance Kernel.
+
+<AccordionGroup>
+  <Accordion title="Supply Chain (UFLPA, CSDDD, LkSG)">
+    - UFLPA: U.S. Uyghur Forced Labor Prevention Act
+    - CSDDD: EU Corporate Sustainability Due Diligence Directive
+    - LkSG: German Supply Chain Act
+    - **Trigger:** `if origin == "XUAR": BLOCK`
+  </Accordion>
+  <Accordion title="Finance (OFAC, FATF, AML)">
+    - OFAC: U.S. Office of Foreign Assets Control
+    - FATF: Financial Action Task Force
+    - AML: Anti-Money Laundering
+    - **Trigger:** `if payee in SANCTIONS_DB: FREEZE`
+  </Accordion>
+  <Accordion title="ESG (CBAM, Paris 6.2)">
+    - CBAM: EU Carbon Border Adjustment Mechanism
+    - Paris 6.2: Paris Agreement Article 6.2
+    - **Trigger:** `calculate_carbon_tax(logistics)`
+  </Accordion>
+  <Accordion title="Pharma (EU MDR, FDA Part 11)">
+    - EU MDR: EU Medical Device Regulation
+    - FDA Part 11: U.S. FDA Electronic Records
+    - **Trigger:** `log_post_market_surveillance()`
+  </Accordion>
+</AccordionGroup>

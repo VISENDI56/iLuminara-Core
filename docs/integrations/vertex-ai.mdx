@@ -1,0 +1,18 @@
+---
+title: 'Vertex AI & SHAP'
+description: 'Explainable AI for Viral Forecasting'
+---
+
+## Integration Architecture
+iLuminara utilizes Vertex AI for large-scale model training, but enforces **Sovereign Explainability** using SHAP (SHapley Additive exPlanations).
+
+### The "Black Box" Problem
+Standard AI predictions are opaque. The RCO requires that every lockdown decision be traceable to specific data features.
+
+### Implementation
+```python
+import shap
+# FRENASA Logic
+explainer = shap.TreeExplainer(viral_model)
+shap_values = explainer.shap_values(X)
+```

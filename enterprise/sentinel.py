@@ -91,10 +91,10 @@ class Sentinel:
 
     def run(self):
         """Main execution loop"""
-        print(f"╔════════ SENTINEL v3.0 ({self.mode}) ════════╗")
+        print(f"=== SENTINEL v3.0 ({self.mode}) ===")
         print(f"   Root: {os.path.abspath(self.root_dir)}")
         print(f"   Mode: {self.mode}")
-        print("═" * 48)
+        print("=" * 48)
         
         for root, dirs, files in os.walk(self.root_dir):
             # Prune directories in-place

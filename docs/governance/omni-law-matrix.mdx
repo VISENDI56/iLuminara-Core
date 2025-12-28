@@ -1,0 +1,30 @@
+---
+title: 'The Omni-Law Matrix'
+description: 'Automated Enforcement of 47 Global Frameworks.'
+---
+
+The **Governance Kernel** implements a Sectoral Abstraction Layer that automatically enforces 47 distinct legal frameworks based on transaction context.
+
+## The Core 18 (Privacy & Security)
+These frameworks are enforced on *every* transaction (The Bedrock).
+<AccordionGroup>
+  <Accordion title="GDPR & EU Privacy">
+      Enforces Article 9 (Health Data) and Article 22 (Automated Decision Review).
+  </Accordion>
+  <Accordion title="HIPAA & HITECH">
+      Enforces audit trails (`blockchain_logger.py`) and 60-day breach notification clocks.
+  </Accordion>
+  <Accordion title="Sovereignty (KDPA/POPIA/NDPR)">
+      Enforces Data Residency (e.g., "Data collected in Kenya stays in Kenya").
+  </Accordion>
+</AccordionGroup>
+
+## The Sectoral 29 (Expansion Pack)
+These are context-specific triggers managed by `sectoral_laws.json`.
+
+| Context | Frameworks | Trigger Logic |
+| :--- | :--- | :--- |
+| **Supply Chain** | UFLPA, CSDDD, LkSG | `if origin == "XUAR": BLOCK` |
+| **Finance** | OFAC, FATF, AML | `if payee in SANCTIONS_DB: FREEZE` |
+| **ESG** | CBAM, Paris 6.2 | `calculate_carbon_tax(logistics)` |
+| **Pharma** | EU MDR, FDA Part 11 | `log_post_market_surveillance()` |

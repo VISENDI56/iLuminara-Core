@@ -1,0 +1,11 @@
+name: Netlify Deploy
+on:
+  push:
+    branches: [ main ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy to Netlify
+        run: echo "Manual step: Connect repo to Netlify at https://app.netlify.com/ and import /docs as static site."
