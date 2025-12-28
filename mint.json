@@ -75,6 +75,15 @@
         "nobel_dossier/peace",
         "nobel_dossier/economics"
       ]
+    },
+    {
+      "group": "Nuclear IP Stack (2026)",
+      "pages": [
+        "ml/bionemo-evo2",
+        "infrastructure/holoscan-25h1",
+        "governance/pabs-federated",
+        "core/zkp-circom"
+      ]
     }
   ],
   "redirects": [
