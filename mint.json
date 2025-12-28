@@ -57,6 +57,16 @@
         "humanitarian/circular-sovereignty",
         "humanitarian/migration-forecast"
       ]
+    },
+    {
+      "group": "Civilization OS (2026)",
+      "pages": [
+        "infrastructure/omniverse-twin",
+        "education/knowledge-mesh",
+        "infrastructure/agro-voltaics",
+        "core/water-sovereignty",
+        "governance/tele-justice"
+      ]
     }
   ],
   "redirects": [
