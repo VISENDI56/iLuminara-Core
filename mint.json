@@ -28,6 +28,15 @@
         "infrastructure/tee-security",
         "ml/semantic-sovereignty"
       ]
+    },
+    {
+      "group": "2026 Hyper-Sovereignty",
+      "pages": [
+        "sovereignty/ghost-mode",
+        "sovereignty/digital-twins",
+        "sovereignty/tee-security",
+        "sovereignty/semantic-adapters"
+      ]
     }
   ]
 }
