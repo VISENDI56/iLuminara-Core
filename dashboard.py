@@ -4,6 +4,8 @@ import pydeck as pdk
 import time
 import json
 import os
+import sys
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "streamlit"))
 from infrastructure.ui_engine.theme_manager import apply_circadian_theme
 from state.shared_memory import load_state
 # Mock ingestion engine for dashboard
@@ -218,8 +220,8 @@ with tab2:
         st.info("No milestones recorded yet")
 
 # System 2 Transparency Integration
-from streamlit.about_system2.technical_manifesto import render_system2_vision
-from streamlit.agent_logs.real_time_traces import render_agent_logs
+from about_system2 import render_system2_vision
+from agent_logs import render_agent_logs
 
 st.sidebar.title("Navigation")
 page = st.sidebar.radio("Sections", ["Main Dashboard", "About: System 2 Vision", "Agent Logs: Transparency"])
