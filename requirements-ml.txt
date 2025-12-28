@@ -3,4 +3,4 @@ scipy==1.11.0
 fastapi==0.104.0
 uvicorn==0.23.0
 prometheus-client==0.17.1
-pydantic==2.4.2
+pydantic==2.4.2networkx>=3.0
