@@ -1,0 +1,34 @@
+---
+title: 'Docker Compose Production'
+description: 'Sovereign Multi-Service Orchestration'
+---
+
+## Production Docker Compose
+
+Complete containerized deployment for sovereign health intelligence.
+
+### Services
+
+- **nexus-api**: FastAPI backend with 4 workers
+- **ai-runner**: Ollama with GPU support
+- **nexus-dashboard**: Next.js frontend
+- **iot-gateway**: Eclipse Mosquitto MQTT broker
+- **prometheus**: Metrics collection
+- **grafana**: Visualization dashboard
+- **compliance-oracle**: Autonomous validation
+
+### Networks
+
+- **sovereign-net**: Isolated bridge network
+- GPU passthrough for AI workloads
+
+### Deployment
+
+```bash
+docker-compose up -d
+```
+
+Access points:
+- API: http://localhost:8000
+- Dashboard: http://localhost:3000
+- Monitoring: http://localhost:9090

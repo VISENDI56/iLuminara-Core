@@ -1,0 +1,31 @@
+---
+title: 'Drift Monitoring'
+description: 'Model Performance and Bias Detection'
+---
+
+## AI Model Drift Monitor
+
+Real-time monitoring of AI prediction accuracy and fairness metrics.
+
+### Components
+
+- **ModelDriftMonitor**: Drift detection engine
+- NIST Trustworthiness integration
+- Automated retraining triggers
+
+### Features
+
+- MSE-based drift calculation
+- Fairness monitoring
+- Automatic model updates
+
+### Integration
+
+Feeds into NIST measurement engine for overall trustworthiness scoring.
+
+```python
+from infrastructure.observability.drift_monitor import ModelDriftMonitor
+
+monitor = ModelDriftMonitor()
+status = monitor.check_drift(predictions, actuals)
+```

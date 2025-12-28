@@ -39,7 +39,45 @@
     },
     {
       "group": "Governance Kernel",
-      "pages": ["docs/governance/rco-engine", "docs/governance/45-laws"]
+      "pages": [
+        "docs/governance/rco-engine",
+        "docs/governance/45-laws",
+        "docs/governance/nist-rmf"
+      ]
+    },
+    {
+      "group": "Integrated Management System",
+      "pages": [
+        "docs/governance/ims-kernel",
+        "docs/governance/aims-ethical-drift",
+        "docs/governance/isms-quantum-evidence",
+        "docs/governance/pims-differential-privacy",
+        "docs/governance/compliance-oracle",
+        "docs/governance/living-certification"
+      ]
+    },
+    {
+      "group": "ML Health & Epidemiology",
+      "pages": [
+        "docs/ml-health/seir-model",
+        "docs/ml-health/health-llm-adapter",
+        "docs/ml-health/drift-monitoring"
+      ]
+    },
+    {
+      "group": "Infrastructure & Observability",
+      "pages": [
+        "docs/infrastructure/iot-ingestion",
+        "docs/infrastructure/system2-reasoning",
+        "docs/infrastructure/context-engineering"
+      ]
+    },
+    {
+      "group": "Production Deployment",
+      "pages": [
+        "docs/production/docker-compose",
+        "docs/production/api-dockerfile"
+      ]
     },
     {
       "group": "API Reference",

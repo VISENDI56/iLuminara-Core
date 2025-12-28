@@ -1,0 +1,31 @@
+---
+title: 'Compliance Oracle'
+description: 'Autonomous Compliance Validation and DSPM Dashboard'
+---
+
+## Compliance Oracle & DSPM Dashboard
+
+Continuous validation across all governance frameworks with real-time dashboards.
+
+### Components
+
+- **ComplianceOracle**: Multi-standard validation engine
+- **UnifiedDSPMDashboard**: Data Security Posture Management
+- **AuditBundleGenerator**: Automated audit documentation
+
+### Features
+
+- Real-time compliance scoring
+- NIST Trustworthiness metrics
+- Automated audit bundle generation
+
+### Dashboard Integration
+
+The Compliance Oracle feeds the Streamlit dashboard with live certification status across ISO 42001/27001/27701.
+
+```python
+from governance.compliance_oracle import ComplianceOracle
+
+oracle = ComplianceOracle()
+validation_results = oracle.continuous_validation_loop()
+```
