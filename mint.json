@@ -49,6 +49,13 @@
         "geospatial/hydro-trace",
         "geospatial/spatial-privacy"
       ]
+    },
+    {
+      "group": "NVIDIA AI Enterprise",
+      "pages": [
+        "infrastructure/nvidia-nim",
+        "infrastructure/holoscan-realtime"
+      ]
     }
   ],
   "analytics": {

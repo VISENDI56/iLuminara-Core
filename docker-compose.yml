@@ -1,6 +1,11 @@
 version: "3.9"
 
 services:
+  vista3d-nim:
+    image: nvcr.io/nvidia/clara/vista3d-nim:latest
+    runtime: nvidia
+    ports:
+      - "8008:8000"
   # --- CORE INTELLIGENCE & API ---
   nexus-api:
     build:
