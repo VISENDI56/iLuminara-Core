@@ -81,3 +81,4 @@ fhir.resources>=8.0.0
 psycopg2-binary>=2.9.10
 pyserial>=3.5
 protobuf>=4.25.8
+arcgis>=2.4.0
