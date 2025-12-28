@@ -21,6 +21,8 @@ streamlit run pages/zipline_nexus.py --server.port 8516 --server.address 0.0.0.0
 streamlit run pages/regional_regs.py --server.port 8517 --server.address 0.0.0.0 &
 streamlit run pages/agent_logs.py --server.port 8518 --server.address 0.0.0.0 &
 streamlit run pages/global_sync.py --server.port 8519 --server.address 0.0.0.0 &
+./launch_robustness.sh &
+./launch_audit_evidence.sh &
 
 # API & MLOps
 uvicorn api.server:app --host 0.0.0.0 --port 8000 &
