@@ -48,6 +48,18 @@ httpx>=0.25.0,<1.0.0
 # Audio Processing
 librosa>=0.10.0
 soundfile>=0.12.0
+# Core Engine
+streamlit>=1.30.0
+fastapi>=0.109.1
+uvicorn>=0.23.0
+networkx>=3.0
+# NVIDIA Apex
+arcgis>=2.4.0
+pystac-client>=0.7.0
+# Machine Learning & Health
+monai>=1.3.0
+# Persistence & Governance
+python-dotenv>=1.0.0
 
 # Configuration
 python-dotenv>=1.0.0,<2.0.0
@@ -84,3 +96,5 @@ protobuf>=4.25.8
 arcgis>=2.4.0
 arcgis-runtime
 filelock>=3.20.1 # not directly required, pinned by Snyk to avoid a vulnerability
+anyio>=4.4.0 # not directly required, pinned by Snyk to avoid a vulnerability
+starlette>=0.49.1 # not directly required, pinned by Snyk to avoid a vulnerability
