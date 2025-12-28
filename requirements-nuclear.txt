@@ -1,0 +1,14 @@
+# --- BIOLOGICAL APEX ---
+nvidia-bionemo-llm>=2.0.0  # Evo 2 Foundation Model support
+nvidia-tensorrt-llm>=0.9.0 # FP8 Inference Acceleration
+# --- KINETIC & SENSORY ---
+holoscan-sdk>=2.6.0        # Production Branch 25h1
+nvidia-riva-client>=2.15.0 # NeMo Canary Model support
+cuopt-client>=25.08        # Agentic VRP & Route Optimization
+physics-nemo>=1.0.0        # Formerly Modulus, for Physics-ML
+# --- SPATIAL OMNISCIENCE ---
+arcgis-maps-sdk>=200.5.0   # Native SDK for Offline GeoGhost
+arcgis-learn>=2.4.0        # GeoAI Inference
+# --- GOVERNANCE & SUBSTRATE ---
+web3>=7.0.0                # Hyperledger Besu connection
+snarkjs>=0.7.0             # ZKP Circuit Verification
