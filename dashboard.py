@@ -4,7 +4,7 @@ import pydeck as pdk
 import time
 import json
 import os
-from utils.theme_manager import apply_circadian_theme
+from infrastructure.ui_engine.theme_manager import apply_circadian_theme
 from state.shared_memory import load_state
 from edge_node.data_ingestion_layer import IngestionEngine
 
