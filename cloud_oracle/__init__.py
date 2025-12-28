@@ -19,18 +19,50 @@ __all__ = [
     'MultiScaleDataset',
     'ForecastConfig',
     'SpatiotemporalModelError',
-    'create_spatiotemporal_pipeline'
-Cloud Oracle Module - Autonomous Decision-Making System
+    'create_spatiotemporal_pipeline',
+    'ActiveInferenceEngine',
+    'PolicyType',
+    'Policy',
+    'Belief',
+    'VertexAIIntegration',
+    'ContainerConfig',
+    'InferenceRequest',
+    'InferenceResponse',
+    'CloudSchedulerIntegration',
+    'PubSubIntegration',
+    'AlertManager',
+    'OutbreakPredictor'
+]
+
+from cloud_oracle.active_inference import (
+    ActiveInferenceEngine,
+    PolicyType,
+    Policy,
+    Belief
+)
+
+from cloud_oracle.vertex_ai_integration import (
+    VertexAIIntegration,
+    ContainerConfig,
+    InferenceRequest,
+    InferenceResponse
+)
+
+"""
+Cloud Oracle: Predictive Analytics & Time Series Forecasting
 ═════════════════════════════════════════════════════════════════════════════
 
-Implements autonomous decision-making simulation with:
-- Active Inference Engine (Bayesian policy optimization)
-- Vertex AI Custom Containers (scalable ML inference)
-- Cloud Scheduler (automated optimization cycles)
-- Pub/Sub (real-time alert distribution)
-
-Philosophy: "Autonomous intelligence. Sovereign control. Continuous learning."
+Cloud-based inference and forecasting capabilities for epidemic prediction.
+Includes hierarchical spatiotemporal modeling with Google Cloud integration.
 """
+
+from cloud_oracle.spatiotemporal_model import (
+    HierarchicalSpatiotemporalModel,
+    MultiScaleDataset,
+    ForecastConfig,
+    SpatiotemporalModelError,
+    create_spatiotemporal_pipeline
+)
 
 from cloud_oracle.active_inference import (
     ActiveInferenceEngine,
@@ -68,50 +100,40 @@ from cloud_oracle.autonomous_decision_maker import (
 )
 
 __all__ = [
+    # Spatiotemporal Modeling
+    'HierarchicalSpatiotemporalModel',
+    'MultiScaleDataset',
+    'ForecastConfig',
+    'SpatiotemporalModelError',
+    'create_spatiotemporal_pipeline',
+
     # Active Inference
-    "ActiveInferenceEngine",
-    "PolicyType",
-    "Policy",
-    "Belief",
-    
+    'ActiveInferenceEngine',
+    'PolicyType',
+    'Policy',
+    'Belief',
+
     # Vertex AI
-    "VertexAIIntegration",
-    "ContainerConfig",
-    "InferenceRequest",
-    "InferenceResponse",
-    
+    'VertexAIIntegration',
+    'ContainerConfig',
+    'InferenceRequest',
+    'InferenceResponse',
+
     # Cloud Scheduler
-    "CloudSchedulerIntegration",
-    "ScheduleFrequency",
-    "OptimizationCycle",
-    "ScheduleConfig",
-    
+    'CloudSchedulerIntegration',
+    'ScheduleFrequency',
+    'OptimizationCycle',
+    'ScheduleConfig',
+
     # Pub/Sub
-    "PubSubIntegration",
-    "Alert",
-    "AlertType",
-    "AlertSeverity",
-    "PubSubTopic",
-    "Subscription",
-    
+    'PubSubIntegration',
+    'Alert',
+    'AlertType',
+    'AlertSeverity',
+    'PubSubTopic',
+    'Subscription',
+
     # Orchestrator
-    "AutonomousDecisionMaker",
-    "SimulationConfig"
-Cloud Oracle: Multi-scale Outbreak Forecasting System
-═════════════════════════════════════════════════════════════════════════════
-
-Integration with Google Cloud Platform for predictive outbreak analytics:
-- BigQuery: Historical data storage and real-time streaming
-- Vertex AI: Time-series forecasting across spatial hierarchies
-- Dataflow: Real-time data fusion (CBS + EMR + Environmental)
-
-This module enables iLuminara to forecast outbreak dynamics across scales,
-from community-level early warning to national-level strategic planning.
-"""
-
-__all__ = [
-    'BigQueryIntegration',
-    'VertexAIForecasting',
-    'DataflowPipeline',
-    'get_config',
+    'AutonomousDecisionMaker',
+    'SimulationConfig'
 ]

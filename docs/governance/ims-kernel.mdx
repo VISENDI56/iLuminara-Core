@@ -1,0 +1,29 @@
+---
+title: 'IMS Kernel'
+description: 'Triple-Certification Kernel for ISO 42001/27001/27701'
+---
+
+## Integrated Management System Kernel
+
+The IMS Kernel provides unified control mapping across ISO 42001 (AI), 27001 (Security), and 27701 (Privacy) standards.
+
+### Core Components
+
+- **IMSOrchestrator**: Central orchestration for triple-certification
+- **UnifiedControl**: Single controls satisfying multiple standards
+- **ControlCategory**: Hierarchical control classification
+
+### Key Methods
+
+- `auto_generate_soa()`: Automated Statement of Applicability generation
+- `continuous_certification_monitor()`: Real-time compliance monitoring
+
+### Implementation
+
+```python
+from governance.ims_kernel import IMSOrchestrator
+
+orchestrator = IMSOrchestrator()
+soa = orchestrator.auto_generate_soa()
+status = orchestrator.continuous_certification_monitor()
+```

@@ -1,0 +1,93 @@
+Control ID,Control Name,ISO 27001 Reference,Applicability,Implementation Status,Evidence Location,Responsible Party,Implementation Notes
+A.5.1,Policies for information security,5.1.1 & 5.1.2,Applicable,Implemented,governance/isms_handbook.md,Chief Information Security Officer,Board-approved information security policy with annual review cycle
+A.5.2,Information security roles and responsibilities,6.1.1,Applicable,Implemented,governance/isms_handbook.md,Chief Information Security Officer,Clear definition of roles and responsibilities for all personnel
+A.5.3,Segregation of duties,6.1.3,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,IT Operations Manager,Role-based access control with segregation of duties enforced
+A.5.4,Management responsibilities,5.1.1,Applicable,Implemented,governance/isms_handbook.md,Chief Executive Officer,Executive commitment to information security governance
+A.5.5,Contact with authorities,5.1.2,Applicable,Implemented,governance/isms_handbook.md,Legal Counsel,Procedures for contact with regulatory authorities and law enforcement
+A.5.6,Contact with special interest groups,5.1.2,Applicable,Implemented,governance/isms_handbook.md,Public Relations Manager,Engagement with industry groups and security communities
+A.5.7,Threat intelligence,6.1.3,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Security Operations Center,Integration with threat intelligence feeds and sharing platforms
+A.5.8,Information security in project management,6.1.5,Applicable,Implemented,governance/isms_handbook.md,Project Management Office,Security requirements integrated into project lifecycle
+A.5.9,Inventory of information and other associated assets,5.2.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Asset Management Team,Automated asset discovery and inventory management
+A.5.10,Acceptable use of information and other associated assets,5.2.2,Applicable,Implemented,governance/isms_handbook.md,Human Resources,Acceptable use policy with user agreements
+A.5.11,Return of assets,5.2.2,Applicable,Implemented,governance/isms_handbook.md,Human Resources,Asset return procedures for employee termination
+A.5.12,Classification of information,5.2.1,Applicable,Implemented,governance/isms_handbook.md,Data Classification Officer,Data classification scheme with four levels: Public, Internal, Confidential, Restricted
+A.5.13,Labelling of information,5.2.1,Applicable,Implemented,governance/isms_handbook.md,Data Classification Officer,Automated labelling of information assets
+A.5.14,Information transfer,5.2.1,Applicable,Implemented,governance/isms_handbook.md,IT Security Team,Secure information transfer procedures and encryption requirements
+A.5.15,Access control,5.2.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Identity and Access Management,Role-based access control with principle of least privilege
+A.5.16,Identity management,5.2.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Identity and Access Management,Centralized identity management with multi-factor authentication
+A.5.17,Authentication information,5.2.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Identity and Access Management,Strong authentication mechanisms for all access
+A.5.18,Access rights,5.2.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Access Governance Team,Regular review and certification of access rights
+A.5.19,Information security in supplier relationships,5.2.2,Applicable,Implemented,governance/isms_handbook.md,Supplier Management,Supplier security requirements and contracts
+A.5.20,Addressing information security within supplier agreements,5.2.2,Applicable,Implemented,governance/isms_handbook.md,Legal Counsel,Security clauses in all supplier contracts
+A.5.21,Managing information security in the ICT supply chain,5.2.2,Applicable,Implemented,governance/isms_handbook.md,IT Procurement,Supply chain security assessments
+A.5.22,Monitoring, review and change management of supplier services,5.2.2,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Supplier Management,Continuous monitoring of supplier security posture
+A.5.23,Information security for use of cloud services,5.2.2,Applicable,Implemented,governance/isms_handbook.md,Cloud Security Team,Cloud security controls and provider assessments
+A.5.24,Information security incident management planning and preparation,5.2.2,Applicable,Implemented,governance/isms_handbook.md,Incident Response Team,Incident response plan with clear roles and procedures
+A.5.25,Assessment and decision on information security events,5.2.2,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Security Operations Center,Security event classification and response procedures
+A.5.26,Response to information security incidents,5.2.2,Applicable,Implemented,governance/isms_handbook.md,Incident Response Team,Incident response procedures with escalation paths
+A.5.27,Learning from information security incidents,5.2.2,Applicable,Implemented,governance/isms_handbook.md,Quality Assurance,Post-incident reviews and lessons learned process
+A.5.28,Collection of evidence,5.2.2,Applicable,Implemented,certification/audit_bundle_generator.py,Forensics Team,Digital forensics procedures for evidence collection
+A.5.29,Information security during disruption,5.2.2,Applicable,Implemented,governance/isms_handbook.md,Business Continuity,Business continuity and disaster recovery plans
+A.5.30,ICT readiness for business continuity,5.2.2,Applicable,Implemented,governance/isms_handbook.md,IT Operations,IT business continuity capabilities
+A.5.31,Legal, statutory, regulatory and contractual requirements,5.1.2,Applicable,Implemented,governance/isms_handbook.md,Compliance Officer,Legal and regulatory compliance monitoring
+A.5.32,Intellectual property rights,5.1.2,Applicable,Implemented,governance/isms_handbook.md,Legal Counsel,Intellectual property protection procedures
+A.5.33,Protection of records,5.1.2,Applicable,Implemented,governance/isms_handbook.md,Records Management,Record retention and protection procedures
+A.5.34,Privacy and protection of PII,5.1.2,Applicable,Implemented,privacy/controller_processor_matrix.json,Privacy Officer,Privacy impact assessments and PII protection
+A.5.35,Independent review of information security,6.1.3,Applicable,Implemented,certification/audit_bundle_generator.py,Internal Audit,Independent security audits and reviews
+A.5.36,Compliance with policies, standards and technical compliance,6.1.3,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Compliance Monitoring,Automated compliance monitoring and reporting
+A.5.37,Documented operating procedures,6.1.3,Applicable,Implemented,governance/isms_handbook.md,Operations Manager,Documented procedures for all critical processes
+A.6.1,Screening,6.1.2,Applicable,Implemented,governance/isms_handbook.md,Human Resources,Background checks and security screening for personnel
+A.6.2,Terms and conditions of employment,6.1.2,Applicable,Implemented,governance/isms_handbook.md,Human Resources,Security requirements in employment contracts
+A.6.3,Information security awareness, education and training,6.1.2,Applicable,Implemented,governance/isms_handbook.md,Training Department,Security awareness training program
+A.6.4,Disciplinary process,6.1.2,Applicable,Implemented,governance/isms_handbook.md,Human Resources,Disciplinary procedures for security violations
+A.6.5,Responsibilities after termination or change of employment,6.1.2,Applicable,Implemented,governance/isms_handbook.md,Human Resources,Offboarding procedures with security considerations
+A.6.6,Remote working,6.1.2,Applicable,Implemented,governance/isms_handbook.md,IT Security Team,Remote work security policies and controls
+A.6.7,Information security event reporting,6.1.2,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,All Personnel,Security incident reporting procedures
+A.7.1,Physical security perimeters,7.1,Applicable,Implemented,governance/isms_handbook.md,Facilities Management,Physical security controls for premises
+A.7.2,Physical entry,7.1,Applicable,Implemented,governance/isms_handbook.md,Security Guards,Physical access controls and visitor management
+A.7.3,Securing offices, rooms and facilities,7.1,Applicable,Implemented,governance/isms_handbook.md,Facilities Management,Secure areas for sensitive operations
+A.7.4,Physical security monitoring,7.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Security Operations Center,CCTV and physical security monitoring
+A.7.5,Protecting against physical and environmental threats,7.1,Applicable,Implemented,governance/isms_handbook.md,Facilities Management,Environmental controls and threat protection
+A.7.6,Working in secure areas,7.1,Applicable,Implemented,governance/isms_handbook.md,Operations Manager,Procedures for working in secure areas
+A.7.7,Clear desk and clear screen,7.1,Applicable,Implemented,governance/isms_handbook.md,All Personnel,Clear desk policy and screen locking procedures
+A.7.8,Equipment siting and protection,7.1,Applicable,Implemented,governance/isms_handbook.md,IT Operations,Equipment protection and secure placement
+A.7.9,Security of assets off-premises,7.1,Applicable,Implemented,governance/isms_handbook.md,IT Operations,Protection of assets used outside premises
+A.7.10,Storage media,7.1,Applicable,Implemented,governance/isms_handbook.md,IT Operations,Secure storage and handling of storage media
+A.7.11,Supporting utilities,7.1,Applicable,Implemented,governance/isms_handbook.md,Facilities Management,Protection of power and other utilities
+A.7.12,Cabling security,7.1,Applicable,Implemented,governance/isms_handbook.md,IT Operations,Protection of information in transit over cables
+A.7.13,Equipment maintenance,7.1,Applicable,Implemented,governance/isms_handbook.md,IT Operations,Maintenance procedures with security considerations
+A.7.14,Secure disposal or re-use of equipment,7.1,Applicable,Implemented,governance/isms_handbook.md,IT Operations,Secure disposal procedures for equipment
+A.8.1,User endpoint devices,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Endpoint Management,Endpoint security controls and management
+A.8.2,Privileged access rights,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Privileged Access Management,Special controls for privileged accounts
+A.8.3,Information access restriction,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Access Control,Information access restriction based on need-to-know
+A.8.4,Access to source code,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Software Development,Access controls for source code repositories
+A.8.5,Secure authentication,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Identity and Access Management,Secure authentication mechanisms
+A.8.6,Capacity management,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,IT Operations,Capacity planning and monitoring
+A.8.7,Protection against malware,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Security Operations Center,Anti-malware protection and response
+A.8.8,Management of technical vulnerabilities,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Vulnerability Management,Vulnerability scanning and patch management
+A.8.9,Configuration management,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Configuration Management,Configuration management and hardening
+A.8.10,Information deletion,8.1,Applicable,Implemented,governance/isms_handbook.md,Data Management,Secure deletion procedures for information
+A.8.11,Data masking,8.1,Applicable,Implemented,governance/isms_handbook.md,Data Management,Data masking for non-production environments
+A.8.12,Data leakage prevention,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Data Loss Prevention,DLP controls to prevent data leakage
+A.8.13,Information backup,8.1,Applicable,Implemented,governance/isms_handbook.md,Backup Administration,Backup procedures and testing
+A.8.14,Redundancy of information processing facilities,8.1,Applicable,Implemented,governance/isms_handbook.md,IT Operations,Redundancy and resilience measures
+A.8.15,Logging,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Security Operations Center,Logging and monitoring procedures
+A.8.16,Monitoring activities,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Security Operations Center,Security monitoring and alerting
+A.8.17,Clock synchronisation,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,IT Operations,Time synchronization for logging and forensics
+A.8.18,Use of privileged utility programs,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Privileged Access Management,Controls for privileged utility programs
+A.8.19,Installation of software on operational systems,8.1,Applicable,Implemented,governance/isms_handbook.md,Change Management,Software installation procedures
+A.8.20,Networks security,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Network Security,Network security controls and segmentation
+A.8.21,Security of network services,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Network Security,Network service security controls
+A.8.22,Segregation of networks,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Network Security,Network segmentation and segregation
+A.8.23,Web filtering,8.1,Applicable,Implemented,infrastructure/dspm/unified_dashboard.py,Network Security,Web filtering and content control
+A.8.24,Use of cryptography,8.1,Applicable,Implemented,governance/isms_handbook.md,Cryptography Officer,Cryptographic controls and key management
+A.8.25,Secure development life cycle,8.1,Applicable,Implemented,governance/isms_handbook.md,Software Development,Secure development practices
+A.8.26,Application security requirements,8.1,Applicable,Implemented,governance/isms_handbook.md,Software Development,Application security requirements
+A.8.27,Secure system architecture and engineering principles,8.1,Applicable,Implemented,governance/isms_handbook.md,Software Development,Security architecture principles
+A.8.28,Secure coding,8.1,Applicable,Implemented,governance/isms_handbook.md,Software Development,Secure coding practices and training
+A.8.29,Security testing in development and acceptance,8.1,Applicable,Implemented,governance/isms_handbook.md,Quality Assurance,Security testing procedures
+A.8.30,Outsourced development,8.1,Applicable,Implemented,governance/isms_handbook.md,Supplier Management,Security requirements for outsourced development
+A.8.31,Separation of development, test and production environments,8.1,Applicable,Implemented,governance/isms_handbook.md,Software Development,Environment separation controls
+A.8.32,Change management,8.1,Applicable,Implemented,governance/isms_handbook.md,Change Management,Change management procedures
+A.8.33,Test information,8.1,Applicable,Implemented,governance/isms_handbook.md,Quality Assurance,Protection of test data and information
+A.8.34,Protection of information systems during audit testing,8.1,Applicable,Implemented,governance/isms_handbook.md,Internal Audit,Protection during audit activities

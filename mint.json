@@ -1,0 +1,110 @@
+{
+  "name": "iLuminara-Core",
+  "logo": {
+    "dark": "/assets/logo-dark.svg",
+    "light": "/assets/logo-light.svg"
+  },
+  "colors": {
+    "primary": "#00AEA4",
+    "background": "#0F172A",
+    "text": "#E2E8F0"
+  },
+  "ai": {
+    "enabled": true,
+    "model": "advanced"
+  },
+  "navigation": [
+    {
+      "group": "Live Nexus",
+      "pages": [
+        "getting-started/live-apps",
+        "getting-started/war-room"
+      ]
+    },
+    {
+      "group": "Planetary Architecture",
+      "pages": [
+        "architecture/overview",
+        "architecture/golden-thread"
+      ]
+    },
+    {
+      "group": "47-Framework Sovereignty",
+      "pages": [
+        "governance/compliance-matrix",
+        "governance/regenerative-oracle"
+      ]
+    },
+    {
+      "group": "Nuclear IP Fortress",
+      "pages": [
+        "security/nuclear-stack",
+        "security/acorn-protocol"
+      ]
+    },
+    {
+      "group": "Geo-Infrastructure",
+      "pages": [
+        "geospatial/stac-ingestion",
+        "geospatial/hydro-trace",
+        "geospatial/spatial-privacy"
+      ]
+    },
+    {
+      "group": "NVIDIA AI Enterprise",
+      "pages": [
+        "infrastructure/nvidia-nim",
+        "infrastructure/holoscan-realtime"
+      ]
+    },
+    {
+      "group": "NVIDIA IGX & BioNeMo Ascension",
+      "pages": [
+        "infrastructure/igx-safety",
+        "ml-health/bionemo-genomics",
+        "ml-health/riva-clinical",
+        "ml-health/tao-adaptation"
+      ]
+    },
+    {
+      "group": "Kinetic Logistics & Mfg",
+      "pages": [
+        "infrastructure/cuopt-routing",
+        "infrastructure/physics-predict",
+        "infrastructure/vision-agent"
+      ]
+    },
+    {
+      "group": "Apex NVIDIA Sovereignty",
+      "pages": [
+        "ml/monai-imaging",
+        "ml/bionemo-generative",
+        "ml/riva-speech",
+        "ml/parabricks-genomics",
+        "infrastructure/aerial-5g"
+      ]
+    },
+    {
+      "group": "Planetary Nexus (2026)",
+      "pages": [
+        "governance/planetary-boundaries",
+        "governance/pabs-sovereignty",
+        "infrastructure/igx-safety-island"
+      ]
+    },
+    {
+      "group": "The 2026 Singularity",
+      "pages": [
+        "infrastructure/aerial-6g",
+        "ml/tipping-point-forecasting",
+        "ml/traditional-knowledge-tcim"
+      ]
+    }
+  ],
+  "analytics": {
+    "enabled": true
+  },
+  "feedback": {
+    "enabled": true
+  }
+}

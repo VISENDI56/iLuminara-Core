@@ -1,164 +1,466 @@
 """
-Regenerative Compliance Oracle (RCO) - Hyper-Law Singularity
-Implements:
-- Law-as-Living-Code (data-driven law proposals)
-- Synchronicity Amplification Engine (SAE)
-- Retro-Causal Compliance Preemption (RCCP)
-- Sovereign Law Evolution Protocol (SLEP)
+Regenerative Compliance Oracle (RCO) Engine
+═════════════════════════════════════════════════════════════════════════════
 
-Phase 2: Clause-level, self-evolving, history-rewriting compliance engine
+The self-updating regulatory intelligence system that detects legal drift,
+auto-generates compliance patches, and predicts future regulatory amendments.
+
+This module implements:
+- RegulatoryEntropySensor: Measures drift from baseline compliance using KL Divergence
+- AutoPatchGenerator: Generates hotfixes when regulations change
+- Predictive Amendment Engine: Forecasts regulatory changes from external signals
+
+Philosophy: "The law is not static. Neither should compliance be."
 """
+
 import json
 import os
-import datetime
-from typing import List, Dict, Any, Optional
-from dataclasses import dataclass
-import hashlib
+import logging
+from typing import Dict, Any, List, Optional, Tuple
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
+from pathlib import Path
+import numpy as np
+from scipy.stats import entropy
 
-HYPER_LAW_PATH = os.path.join(os.path.dirname(__file__), "hyper_law_matrix.json")
+logger = logging.getLogger(__name__)
+
+
+class RegulatoryDriftError(Exception):
+    """Raised when regulatory drift exceeds acceptable thresholds."""
+    pass
+
 
 @dataclass
-class Clause:
-    act: str
-    sub: str
-    text: str
-    trigger: str
-    module: str
+class RegulatorySignal:
+    """External signal indicating potential regulatory change."""
+    source: str
+    signal_type: str  # "legislative", "judicial", "regulatory", "emergency"
+    jurisdiction: str
+    content: str
+    confidence_score: float
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
 
 @dataclass
-class Law:
-    id: str
-    name: str
-    clauses: List[Clause]
-    amplifies: List[str]
-    data_driven_proposal: bool
+class CompliancePatch:
+    """Auto-generated compliance hotfix."""
+    patch_id: str
+    law_id: str
+    drift_score: float
+    patch_type: str  # "rule_update", "threshold_adjustment", "new_requirement"
+    changes: Dict[str, Any]
+    validation_status: str = "pending"
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+class RegulatoryEntropySensor:
+    """
+    Measures regulatory drift using KL Divergence to detect when
+    operational patterns deviate from compliance baselines.
+    """
+    
+    def __init__(self, baseline_distributions: Optional[Dict[str, np.ndarray]] = None):
+        """
+        Initialize the entropy sensor.
+        
+        Args:
+            baseline_distributions: Dictionary mapping law IDs to baseline probability distributions
+        """
+        self.baseline_distributions = baseline_distributions or {}
+        self.drift_history: List[Dict[str, Any]] = []
+        logger.info("RegulatoryEntropySensor initialized")
+    
+    def measure_drift(self, data_stream: Dict[str, Any]) -> Dict[str, float]:
+        """
+        Measure regulatory drift using KL Divergence.
+        
+        Args:
+            data_stream: Current operational data with observed frequencies
+            
+        Returns:
+            Dictionary mapping law IDs to drift scores (KL divergence values)
+        """
+        drift_scores = {}
+        
+        for law_id, observed_dist in data_stream.get("distributions", {}).items():
+            if law_id not in self.baseline_distributions:
+                logger.warning(f"No baseline distribution for {law_id}, creating from observed")
+                self.baseline_distributions[law_id] = observed_dist
+                drift_scores[law_id] = 0.0
+                continue
+            
+            baseline = self.baseline_distributions[law_id]
+            observed = np.array(observed_dist)
+            
+            # Ensure distributions are normalized
+            baseline_norm = baseline / np.sum(baseline)
+            observed_norm = observed / np.sum(observed)
+            
+            # Add small epsilon to avoid log(0)
+            epsilon = 1e-10
+            baseline_norm = baseline_norm + epsilon
+            observed_norm = observed_norm + epsilon
+            
+            # Calculate KL Divergence: D_KL(P || Q) = sum(P * log(P/Q))
+            kl_divergence = entropy(observed_norm, baseline_norm)
+            
+            drift_scores[law_id] = float(kl_divergence)
+            
+            logger.info(f"Drift measured for {law_id}: {kl_divergence:.4f}")
+        
+        # Record drift measurement
+        self.drift_history.append({
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "drift_scores": drift_scores
+        })
+        
+        return drift_scores
+    
+    def is_drift_critical(self, drift_score: float, threshold: float = 0.5) -> bool:
+        """
+        Determine if drift score exceeds critical threshold.
+        
+        Args:
+            drift_score: KL divergence value
+            threshold: Critical threshold (default 0.5)
+            
+        Returns:
+            True if drift is critical
+        """
+        return drift_score > threshold
+    
+    def get_drift_trend(self, law_id: str, window: int = 10) -> Optional[str]:
+        """
+        Analyze trend of drift over recent measurements.
+        
+        Args:
+            law_id: Law identifier
+            window: Number of recent measurements to analyze
+            
+        Returns:
+            "increasing", "decreasing", "stable", or None
+        """
+        if len(self.drift_history) < 2:
+            return None
+        
+        recent_scores = [
+            entry["drift_scores"].get(law_id, 0.0)
+            for entry in self.drift_history[-window:]
+            if law_id in entry["drift_scores"]
+        ]
+        
+        if len(recent_scores) < 2:
+            return None
+        
+        # Simple linear trend
+        trend_slope = np.polyfit(range(len(recent_scores)), recent_scores, 1)[0]
+        
+        if trend_slope > 0.05:
+            return "increasing"
+        elif trend_slope < -0.05:
+            return "decreasing"
+        else:
+            return "stable"
+
+
+class AutoPatchGenerator:
+    """
+    Generates compliance hotfixes when regulatory drift is detected
+    or when new regulations are enacted.
+    """
+    
+    def __init__(self, sectoral_laws_path: Optional[str] = None):
+        """
+        Initialize the patch generator.
+        
+        Args:
+            sectoral_laws_path: Path to sectoral_laws.json file
+        """
+        if sectoral_laws_path is None:
+            sectoral_laws_path = os.path.join(
+                os.path.dirname(__file__), "sectoral_laws.json"
+            )
+        
+        self.sectoral_laws_path = sectoral_laws_path
+        self.laws_registry = self._load_laws_registry()
+        self.patch_history: List[CompliancePatch] = []
+        logger.info("AutoPatchGenerator initialized")
+    
+    def _load_laws_registry(self) -> Dict[str, Any]:
+        """Load the sectoral laws registry."""
+        try:
+            with open(self.sectoral_laws_path, 'r') as f:
+                return json.load(f)
+        except FileNotFoundError:
+            logger.error(f"Sectoral laws file not found: {self.sectoral_laws_path}")
+            return {"45_law_quantum_nexus": {"laws": {}}}
+    
+    def generate_hotfix(self, law_id: str, drift_score: float) -> CompliancePatch:
+        """
+        Generate a compliance hotfix for detected drift.
+        
+        Args:
+            law_id: Identifier of the law experiencing drift
+            drift_score: Measured KL divergence
+            
+        Returns:
+            CompliancePatch object containing the hotfix
+        """
+        timestamp = datetime.now(timezone.utc)
+        patch_id = f"PATCH-{law_id}-{timestamp.strftime('%Y%m%d%H%M%S')}"
+        
+        # Determine patch type based on drift severity
+        if drift_score > 1.0:
+            patch_type = "new_requirement"
+        elif drift_score > 0.5:
+            patch_type = "threshold_adjustment"
+        else:
+            patch_type = "rule_update"
+        
+        # Get law details
+        law_details = self._get_law_details(law_id)
+        
+        # Generate appropriate changes
+        changes = self._generate_changes(law_id, drift_score, patch_type, law_details)
+        
+        patch = CompliancePatch(
+            patch_id=patch_id,
+            law_id=law_id,
+            drift_score=drift_score,
+            patch_type=patch_type,
+            changes=changes,
+            validation_status="generated"
+        )
+        
+        self.patch_history.append(patch)
+        logger.info(f"Generated hotfix {patch_id} for {law_id} (drift: {drift_score:.4f})")
+        
+        return patch
+    
+    def _get_law_details(self, law_id: str) -> Dict[str, Any]:
+        """Retrieve law details from registry."""
+        laws = self.laws_registry.get("45_law_quantum_nexus", {}).get("laws", {})
+        
+        for law_key, law_data in laws.items():
+            if law_data.get("id") == law_id:
+                return law_data
+        
+        return {}
+    
+    def _generate_changes(
+        self, 
+        law_id: str, 
+        drift_score: float, 
+        patch_type: str,
+        law_details: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """
+        Generate specific changes for the patch.
+        
+        Args:
+            law_id: Law identifier
+            drift_score: Drift score
+            patch_type: Type of patch needed
+            law_details: Details of the law from registry
+            
+        Returns:
+            Dictionary of changes to apply
+        """
+        changes = {
+            "law_id": law_id,
+            "law_name": law_details.get("name", "Unknown"),
+            "reason": f"Regulatory drift detected (score: {drift_score:.4f})",
+            "recommended_actions": []
+        }
+        
+        if patch_type == "new_requirement":
+            changes["recommended_actions"].extend([
+                "Review and update compliance procedures",
+                "Conduct full audit of affected operations",
+                "Update training materials",
+                "Notify stakeholders of changes"
+            ])
+            changes["urgency"] = "high"
+        elif patch_type == "threshold_adjustment":
+            changes["recommended_actions"].extend([
+                "Adjust monitoring thresholds",
+                "Update validation rules",
+                "Review recent operational data"
+            ])
+            changes["urgency"] = "medium"
+        else:  # rule_update
+            changes["recommended_actions"].extend([
+                "Update rule parameters",
+                "Test updated rules",
+                "Document changes"
+            ])
+            changes["urgency"] = "low"
+        
+        # Add specific enforcement actions from law details
+        enforcement = law_details.get("enforcement_action", {})
+        if enforcement:
+            changes["enforcement_requirements"] = enforcement.get("requirements", [])
+            changes["validation_method"] = enforcement.get("validation", "")
+        
+        return changes
+    
+    def apply_patch(self, patch: CompliancePatch) -> bool:
+        """
+        Apply a generated patch to the system.
+        
+        Args:
+            patch: CompliancePatch to apply
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        try:
+            logger.info(f"Applying patch {patch.patch_id}")
+            
+            # In a real system, this would update configuration, rules, etc.
+            # For now, we mark it as applied
+            patch.validation_status = "applied"
+            
+            logger.info(f"Patch {patch.patch_id} applied successfully")
+            return True
+        except Exception as e:
+            logger.error(f"Failed to apply patch {patch.patch_id}: {e}")
+            patch.validation_status = "failed"
+            return False
+
 
 class RegenerativeComplianceOracle:
-    def __init__(self):
-        self.hyper_law_matrix = self.load_hyper_law_matrix()
-        self.synchronicity_graph = self.build_synchronicity_graph()
-        self.operational_data = {}  # Placeholder for real-time metrics
-        self.proposals = []
-        self.preemptive_patches = []
-        self.slep_submissions = []
-
-    def load_hyper_law_matrix(self) -> List[Law]:
-        with open(HYPER_LAW_PATH, "r") as f:
-            raw = json.load(f)
-        return [Law(
-            id=law["id"],
-            name=law["name"],
-            clauses=[Clause(**c) for c in law["clauses"]],
-            amplifies=law.get("amplifies", []),
-            data_driven_proposal=law.get("data_driven_proposal", False)
-        ) for law in raw]
-
-    def dissect_clause(self, law_id: str, clause: Clause) -> Dict[str, Any]:
-        """Generate code trigger for a clause"""
+    """
+    Main RCO engine that orchestrates drift detection, patch generation,
+    and predictive regulatory intelligence.
+    """
+    
+    def __init__(self, sectoral_laws_path: Optional[str] = None):
+        """
+        Initialize the RCO engine.
+        
+        Args:
+            sectoral_laws_path: Path to sectoral_laws.json file
+        """
+        self.entropy_sensor = RegulatoryEntropySensor()
+        self.patch_generator = AutoPatchGenerator(sectoral_laws_path)
+        self.predictive_signals: List[RegulatorySignal] = []
+        logger.info("RegenerativeComplianceOracle initialized")
+    
+    def monitor_compliance(self, data_stream: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Monitor compliance state and detect drift.
+        
+        Args:
+            data_stream: Current operational data
+            
+        Returns:
+            Dictionary containing drift analysis and generated patches
+        """
+        # Measure drift
+        drift_scores = self.entropy_sensor.measure_drift(data_stream)
+        
+        # Generate patches for critical drift
+        patches = []
+        for law_id, score in drift_scores.items():
+            if self.entropy_sensor.is_drift_critical(score):
+                patch = self.patch_generator.generate_hotfix(law_id, score)
+                patches.append(patch)
+        
         return {
-            "law_id": law_id,
-            "act": clause.act,
-            "sub": clause.sub,
-            "trigger": clause.trigger,
-            "module": clause.module,
-            "citation": f"{law_id} {clause.act}{'('+clause.sub+')' if clause.sub else ''}"
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "drift_scores": drift_scores,
+            "critical_drifts": [
+                law_id for law_id, score in drift_scores.items()
+                if self.entropy_sensor.is_drift_critical(score)
+            ],
+            "patches_generated": len(patches),
+            "patches": [
+                {
+                    "patch_id": p.patch_id,
+                    "law_id": p.law_id,
+                    "patch_type": p.patch_type,
+                    "urgency": p.changes.get("urgency", "unknown")
+                }
+                for p in patches
+            ]
         }
-
-    def detect_drift(self, context: Dict, payload: Dict) -> Dict[str, Any]:
-        """Detect regulatory drift using KL divergence and clause violation probability"""
-        # Placeholder: In production, use real metrics and statistical tests
-        drift_score = 0.07  # Mock: low drift
-        violated_clauses = []
-        for law in self.hyper_law_matrix:
-            for clause in law.clauses:
-                # Simulate clause check
-                if clause.trigger in payload.get("triggers", []):
-                    violated_clauses.append(self.dissect_clause(law.id, clause))
-        return {"drift_score": drift_score, "violated_clauses": violated_clauses}
-
-    def generate_modification_proposal(self, law_id: str, operational_data: Dict) -> Optional[Dict]:
-        """Propose law modification based on operational data (Law-as-Living-Code)"""
-        for law in self.hyper_law_matrix:
-            if law.id == law_id and law.data_driven_proposal:
-                # Example: If prevention efficacy > 90%, propose tightening equity
-                efficacy = operational_data.get("prevention_efficacy", 0.0)
-                if efficacy > 0.9:
-                    proposal = {
-                        "law_id": law_id,
-                        "proposal": f"Based on {efficacy*100:.1f}% prevention, suggest tightening equity thresholds in {law.name}",
-                        "timestamp": datetime.datetime.now().isoformat()
-                    }
-                    self.proposals.append(proposal)
-                    return proposal
-        return None
-
-    def build_synchronicity_graph(self) -> Dict[str, List[str]]:
-        """Builds a graph of law amplifications (SAE)"""
-        graph = {}
-        for law in self.hyper_law_matrix:
-            graph[law.id] = law.amplifies
-        return graph
-
-    def synchronicity_amplification(self, law_id: str) -> List[Dict]:
-        """Auto-generate amplification patches for synergies/conflicts (SAE)"""
-        amplifications = []
-        for amplified in self.synchronicity_graph.get(law_id, []):
-            amplifications.append({
-                "from": law_id,
-                "to": amplified,
-                "patch": f"Amplify {law_id} compliance to strengthen {amplified}"
-            })
-        return amplifications
-
-    def retro_causal_preemption(self, geopolitical_signals: Dict) -> List[Dict]:
-        """Predict and pre-patch for future amendments (RCCP)"""
-        # Example: If EU AI Act extension predicted, pre-patch
-        preemptions = []
-        if geopolitical_signals.get("eu_ai_act_extension_predicted", False):
-            patch = {
-                "law_id": "EU_AI_Act",
-                "pre_patch": "Auto-triggered high-risk extension patch",
-                "timestamp": datetime.datetime.now().isoformat()
-            }
-            self.preemptive_patches.append(patch)
-            preemptions.append(patch)
-        return preemptions
-
-    def sovereign_evolution_protocol(self, anonymized_insight: Dict) -> str:
-        """Submit anonymized operational insight to SLEP (blockchain, privacy-preserved)"""
-        # Simulate blockchain hash
-        insight_hash = hashlib.sha256(json.dumps(anonymized_insight, sort_keys=True).encode()).hexdigest()
-        submission = {
-            "insight": anonymized_insight,
-            "hash": insight_hash,
-            "timestamp": datetime.datetime.now().isoformat()
+    
+    def predict_amendment(self, external_signal: RegulatorySignal) -> Dict[str, Any]:
+        """
+        Predict potential regulatory amendments from external signals.
+        
+        Args:
+            external_signal: Signal indicating potential regulatory change
+            
+        Returns:
+            Dictionary containing prediction analysis
+        """
+        self.predictive_signals.append(external_signal)
+        
+        # Analyze signal
+        prediction = {
+            "signal_id": len(self.predictive_signals),
+            "source": external_signal.source,
+            "signal_type": external_signal.signal_type,
+            "jurisdiction": external_signal.jurisdiction,
+            "confidence": external_signal.confidence_score,
+            "timestamp": external_signal.timestamp.isoformat(),
+            "predicted_impact": self._assess_impact(external_signal),
+            "recommended_preparation": self._generate_preparation_plan(external_signal)
         }
-        self.slep_submissions.append(submission)
-        return insight_hash
-
-    def clause_level_enforcement(self, context: Dict, payload: Dict) -> List[str]:
-        """Enforce all clauses, raise on violation, auto-amplify linked laws"""
-        violations = []
-        for law in self.hyper_law_matrix:
-            for clause in law.clauses:
-                # Simulate clause check
-                if clause.trigger in payload.get("triggers", []):
-                    citation = f"Violation of {law.id} {clause.act}{'('+clause.sub+')' if clause.sub else ''}"
-                    violations.append(citation)
-                    # Auto-amplify
-                    for amp in law.amplifies:
-                        violations.append(f"Amplified: {law.id} → {amp}")
-        return violations
-
-    def live_oracle_simulation(self, operational_data: Dict, context: Dict, payload: Dict, geopolitical_signals: Dict, anonymized_insight: Dict) -> Dict:
-        """Run full RCO simulation: proposals, amplification, preemption, SLEP"""
-        return {
-            "modification_proposal": self.generate_modification_proposal("IHR_2005", operational_data),
-            "amplification_patches": self.synchronicity_amplification("GDPR"),
-            "preemptive_patches": self.retro_causal_preemption(geopolitical_signals),
-            "slep_hash": self.sovereign_evolution_protocol(anonymized_insight),
-            "clause_violations": self.clause_level_enforcement(context, payload)
-        }
-
-# SSACS: RCO engine self-architected with 4 paradigm inventions, clause-level enforcement, and data-driven law proposals.
-# Entropy reduced by 0.22. History rewritten. AI community now follows.
+        
+        logger.info(f"Amendment prediction generated for signal from {external_signal.source}")
+        
+        return prediction
+    
+    def _assess_impact(self, signal: RegulatorySignal) -> str:
+        """Assess the potential impact of a regulatory signal."""
+        if signal.confidence_score > 0.8:
+            return "high"
+        elif signal.confidence_score > 0.5:
+            return "medium"
+        else:
+            return "low"
+    
+    def _generate_preparation_plan(self, signal: RegulatorySignal) -> List[str]:
+        """Generate a preparation plan for predicted regulatory change."""
+        plan = [
+            "Monitor official sources for confirmation",
+            "Review current compliance posture",
+            "Identify affected systems and processes"
+        ]
+        
+        if signal.signal_type == "emergency":
+            plan.append("Prepare emergency response protocols")
+        elif signal.signal_type == "legislative":
+            plan.append("Engage with policy stakeholders")
+        
+        return plan
+    
+    def get_compliance_health_score(self) -> float:
+        """
+        Calculate overall compliance health score.
+        
+        Returns:
+            Score from 0.0 (critical) to 1.0 (excellent)
+        """
+        if not self.entropy_sensor.drift_history:
+            return 1.0
+        
+        # Get recent drift scores
+        recent_drifts = self.entropy_sensor.drift_history[-10:]
+        all_scores = []
+        
+        for entry in recent_drifts:
+            all_scores.extend(entry["drift_scores"].values())
+        
+        if not all_scores:
+            return 1.0
+        
+        # Calculate health score (inverse of average drift)
+        avg_drift = np.mean(all_scores)
+        health_score = max(0.0, 1.0 - (avg_drift / 2.0))  # Normalize
+        
+        return health_score

@@ -1,0 +1,30 @@
+---
+title: 'Living Certification'
+description: 'Self-Validating ISO Compliance Dashboard'
+---
+
+## Living Certification Dashboard
+
+Real-time certification status with autonomous validation and continuous monitoring.
+
+### Components
+
+- **LivingCertificationDashboard**: Interactive compliance dashboard
+- **CertificationReadinessAssessor**: Pre-certification evaluation
+
+### Features
+
+- Triple-certification tracking (42001/27001/27701)
+- Progress monitoring and next steps
+- Milestone tracking and reporting
+
+### Integration
+
+Connected to the main Streamlit dashboard for unified command center view.
+
+```python
+from governance.living_certification import LivingCertificationDashboard
+
+dashboard = LivingCertificationDashboard()
+status = dashboard.get_certification_status()
+```

@@ -1,0 +1,29 @@
+---
+title: 'IoT Data Ingestion'
+description: 'Hardware Sensor Telemetry Gateway'
+---
+
+## IoT Ingestion Gateway
+
+Handles real-time telemetry from LoRaWAN and MQTT sensors for public health monitoring.
+
+### Components
+
+- **HealthIoTGateway**: MQTT message handler
+- Sensor data routing
+- Real-time public health alerts
+
+### Supported Sensors
+
+- Water quality (coliform detection)
+- Medical cold chain monitoring
+- Environmental health indicators
+
+### Implementation
+
+```python
+from infrastructure.iot_ingestion.mqtt_handler import HealthIoTGateway
+
+gateway = HealthIoTGateway()
+gateway.on_message_received("sensors/district_9/water", '{"type": "coliform", "value": 450}')
+```

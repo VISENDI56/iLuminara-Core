@@ -1,230 +1,105 @@
-# iLuminara-Core Docker Compose Configuration
-# Deployment Target: NVIDIA Jetson Orin (ARM64)
-# Architecture: arm64v8
-# Purpose: Edge-based sovereign health intelligence platform
+version: "3.9"
 
 services:
-  iluminara-core:
-    platform: linux/arm64
+  fleet-command-agent:
+    image: nvcr.io/nvidia/fleet-command-agent:latest
+    runtime: nvidia
+    environment:
+      - CONFIDENTIAL_COMPUTING=TRUE
+  # vista3d-nim:
+  #   image: nvcr.io/nvidia/clara/vista3d-nim:latest
+  #   runtime: nvidia
+  #   ports:
+  #     - "8008:8000"
+  # --- CORE INTELLIGENCE & API ---
+  nexus-api:
     build:
       context: .
-      dockerfile: Dockerfile.arm64
-      args:
-        PLATFORM: "linux/arm64"
-    container_name: iluminara-core-main
-    image: visendi56/iluminara-core:latest-arm64
-    
-    environment:
-      # Governance Configuration
-      - JURISDICTION=GLOBAL_DEFAULT
-      - COMPLIANCE_MODE=STRICT
-      - AUDIT_LOG_LEVEL=INFO
-      
-      # Data Fusion Configuration
-      - GOLDEN_THREAD_ENABLED=true
-      - RETENTION_POLICY_DAYS=180
-      - DATA_FUSION_TIMEOUT=30
-      
-      # Edge Node Configuration
-      - EDGE_NODE_MODE=offline-first
-      - VECTOR_STORE_BACKEND=local
-      - LORA_MESH_ENABLED=true
-      - FRENASA_INFERENCE_TIMEOUT=18ms
-      
-      # Logging
-      - LOG_LEVEL=INFO
-      - LOG_FORMAT=json
-      - AUDIT_TRAIL_ENABLED=true
-      
-      # Security
-      - TPM_ATTESTATION_ENABLED=true
-      - ENCRYPTION_ALGORITHM=AES-256-GCM
-      - TLS_VERSION=1.3
-      
+      dockerfile: api/Dockerfile
     ports:
-      - "8080:8080"      # Main API
-      - "8443:8443"      # HTTPS
-      - "9090:9090"      # Prometheus metrics
-      - "5000:5000"      # Governance service
-      - "5001:5001"      # Data fusion service
+      - "8000:8000"
+    environment:
+      - NODE_ENV=production
+      - ISO_STANDARDS=42001,27001,27701
+      - NIST_SCORE_TARGET=0.9
+    depends_on:
+      - ai-runner
+    networks:
+      - sovereign-net
 
-    # Runtime limits for standalone docker-compose (adjusted for local hosts)
-    mem_limit: 8g
-    mem_reservation: 4g
-    cpus: '1.5'
-    
+  # --- LOCALIZED AI RUNNER (Sovereign Edge) ---
+  ai-runner:
+    image: ollama/ollama:latest # Or internal OCI-compliant model runner
     volumes:
-      # Source code
-      - ./governance_kernel:/app/governance_kernel:ro
-      - ./edge_node:/app/edge_node:ro
-      - ./cloud_oracle:/app/cloud_oracle:ro
-      - ./hardware:/app/hardware:ro
-      
-      # Persistent data volumes
-      - iluminara-hot-storage:/data/hot       # Recent records (HOT)
-      - iluminara-cold-storage:/data/cold     # Archived records (COLD)
-      - iluminara-vector-db:/data/vectors     # Vector database
-      - iluminara-audit-logs:/data/audit      # Compliance audit trail
-      
-      # Configuration
-      - ./config:/app/config:ro
-      
-    # Resource constraints for Jetson Orin
-    # NOTE: The `deploy` section is honored by Docker Swarm / Compose v2 in swarm mode.
-    # On a single-node docker-compose (non-swarm), these limits are NOT enforced.
-    # If you want to enforce limits on standalone compose, consider using the 'mem_limit' and 'cpus'
-    # service options or run under swarm/kubernetes for production.
+      - ./ml_models:/root/.ollama
     deploy:
       resources:
-        limits:
-          cpus: '1.5'        # Up to 1.5 CPU cores (adjusted for 2-CPU hosts)
-          memory: 8G         # Up to 8GB RAM
         reservations:
-          cpus: '1'          # Reserve 1 CPU core
-          memory: 4G         # Reserve 4GB RAM
-    
-    # Network configuration
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     networks:
-      - iluminara-network
-    
-    # Health check
-    healthcheck:
-      # Use CMD-SHELL so minimal container images can execute shell commands (curl fallback)
-      test: ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    
-    # Restart policy
-    restart: unless-stopped
-    
-    # Device access (for TPM if available) - removed for local hosts without TPM
-    
-    # Logging configuration
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100m"
-        max-file: "10"
-    labels:
-      - "service=iluminara-core"
+      - sovereign-net
 
-  # Optional: Prometheus for metrics collection
-  prometheus:
-    platform: linux/arm64
-    image: prom/prometheus:latest
-    container_name: iluminara-prometheus
-    ports:
-      - "9091:9090"
-    volumes:
-      - prometheus-data:/prometheus
-    # Using default command; custom config mount removed for local demo
-    networks:
-      - iluminara-network
-    restart: unless-stopped
-    depends_on:
-      - iluminara-core
-
-  # Optional: Grafana for visualization
-  grafana:
-    platform: linux/arm64
-    image: grafana/grafana:9.5.7
-    container_name: iluminara-grafana
+  # --- WAR ROOM DASHBOARD (UI) ---
+  nexus-dashboard:
+    build: ./frontend
     ports:
       - "3000:3000"
     environment:
-      # IMPORTANT: Change this password in production!
-      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-changeMeNow!}
-      - GF_INSTALL_PLUGINS=
-    volumes:
-      - grafana-storage:/var/lib/grafana
+      - NEXT_PUBLIC_API_URL=http://nexus-api:8000
+    depends_on:
+      - nexus-api
     networks:
-      - iluminara-network
-    restart: unless-stopped
+      - sovereign-net
+
+  # --- IOT INGESTION GATEWAY ---
+  iot-gateway:
+    image: eclipse-mosquitto:latest
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./infrastructure/iot_layer/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    networks:
+      - sovereign-net
+
+  # --- OBSERVABILITY (NIST MEASURE) ---
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./infrastructure/observability/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - sovereign-net
+
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=iluminara_secure
+    ports:
+      - "3001:3000"
     depends_on:
       - prometheus
-
-  # Optional: Nginx reverse proxy
-  nginx:
-    platform: linux/arm64
-    image: nginx:1.26.2
-    container_name: iluminara-nginx
-    ports:
-      - "80:80"
-      - "443:443"
-    # No host nginx.conf/ssl bind mounts for local demo (use container defaults)
     networks:
-      - iluminara-network
-    restart: unless-stopped
-    depends_on:
-      - iluminara-core
+      - sovereign-net
 
-volumes:
-  # Data volumes for persistence
-  iluminara-hot-storage:
-    driver: local
-    driver_opts:
-      type: tmpfs
-      device: tmpfs
-      o: size=2g  # 2GB tmpfs for hot data (fast access)
-  
-  iluminara-cold-storage:
-    driver: local
-  
-  iluminara-vector-db:
-    driver: local
-  
-  iluminara-audit-logs:
-    driver: local
-  
-  # Monitoring volumes
-  prometheus-data:
-    driver: local
-  
-  grafana-storage:
-    driver: local
+  # --- AUTONOMOUS COMPLIANCE ORACLE ---
+  compliance-oracle:
+    build: ./governance
+    command: python -m compliance_oracle
+    depends_on:
+      - nexus-api
+      - prometheus
+    networks:
+      - sovereign-net
 
 networks:
-  iluminara-network:
+  sovereign-net:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 172.20.0.0/16
 
-# Deployment instructions:
-# 
-# 1. On NVIDIA Jetson Orin, ensure Docker and Docker Compose are installed:
-#    curl -fsSL https://get.docker.com -o get-docker.sh
-#    sudo sh get-docker.sh
-#    sudo apt-get install -y docker-compose-plugin
-#
-# 2. Build and deploy:
-#    docker-compose up -d
-#
-# 3. Verify deployment:
-#    docker-compose logs -f iluminara-core
-#    curl http://localhost:8080/health
-#
-# 4. Access services:
-#    - Main API: http://localhost:8080
-#    - Grafana: http://localhost:3000
-#    - Prometheus: http://localhost:9091
-#    - Nginx: http://localhost:80
-#
-# 5. For production TLS:
-#    - Place certificate in ./ssl/server.crt
-#    - Place key in ./ssl/server.key
-#    - Update nginx.conf with certificate paths
-#
-# 6. Stop deployment:
-#    docker-compose down -v
-#
-# Architecture Notes:
-# - All images use arm64v8 base images for ARM64 compatibility
-# - Hot storage uses tmpfs for <18ms latency on fresh records
-# - Cold storage persists to disk for compliance (GDPR Art. 17)
-# - Volume size can be adjusted based on available storage
-# - Network isolation ensures compliance audit trail integrity
-# - Health checks enable automatic recovery on failure
+volumes:
+  sovereign-ledger:
+  ml_models:
 
