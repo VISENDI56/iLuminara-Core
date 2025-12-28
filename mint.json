@@ -56,6 +56,15 @@
         "infrastructure/nvidia-nim",
         "infrastructure/holoscan-realtime"
       ]
+    },
+    {
+      "group": "NVIDIA IGX & BioNeMo Ascension",
+      "pages": [
+        "infrastructure/igx-safety",
+        "ml-health/bionemo-genomics",
+        "ml-health/riva-clinical",
+        "ml-health/tao-adaptation"
+      ]
     }
   ],
   "analytics": {
