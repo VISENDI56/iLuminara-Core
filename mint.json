@@ -15,89 +15,51 @@
   },
   "navigation": [
     {
-      "group": "Live Nexus",
+      "group": "Nexus Core",
       "pages": [
-        "getting-started/live-apps",
-        "getting-started/war-room"
+        "intro",
+        "quickstart",
+        "architecture/overview"
       ]
     },
     {
-      "group": "Planetary Architecture",
+      "group": "20-Module Singularity",
       "pages": [
-        "architecture/overview",
-        "architecture/golden-thread"
+        "modules/module-1",
+        "modules/module-2",
+        "modules/module-3",
+        "modules/module-4",
+        "modules/module-5",
+        "modules/module-6",
+        "modules/module-7",
+        "modules/module-8",
+        "modules/module-9",
+        "modules/module-10",
+        "modules/module-11",
+        "modules/module-12",
+        "modules/module-13",
+        "modules/module-14",
+        "modules/module-15",
+        "modules/module-16",
+        "modules/module-17",
+        "modules/module-18",
+        "modules/module-19",
+        "modules/module-20"
       ]
     },
     {
-      "group": "47-Framework Sovereignty",
+      "group": "Sovereign Infrastructure",
+      "pages": [
+        "infrastructure/igx-safety-island",
+        "infrastructure/nvidia-nim",
+        "geospatial/geoghost"
+      ]
+    },
+    {
+      "group": "Compliance & Omni-Law",
       "pages": [
         "governance/compliance-matrix",
-        "governance/regenerative-oracle"
-      ]
-    },
-    {
-      "group": "Nuclear IP Fortress",
-      "pages": [
-        "security/nuclear-stack",
-        "security/acorn-protocol"
-      ]
-    },
-    {
-      "group": "Geo-Infrastructure",
-      "pages": [
-        "geospatial/stac-ingestion",
-        "geospatial/hydro-trace",
-        "geospatial/spatial-privacy"
-      ]
-    },
-    {
-      "group": "NVIDIA AI Enterprise",
-      "pages": [
-        "infrastructure/nvidia-nim",
-        "infrastructure/holoscan-realtime"
-      ]
-    },
-    {
-      "group": "NVIDIA IGX & BioNeMo Ascension",
-      "pages": [
-        "infrastructure/igx-safety",
-        "ml-health/bionemo-genomics",
-        "ml-health/riva-clinical",
-        "ml-health/tao-adaptation"
-      ]
-    },
-    {
-      "group": "Kinetic Logistics & Mfg",
-      "pages": [
-        "infrastructure/cuopt-routing",
-        "infrastructure/physics-predict",
-        "infrastructure/vision-agent"
-      ]
-    },
-    {
-      "group": "Apex NVIDIA Sovereignty",
-      "pages": [
-        "ml/monai-imaging",
-        "ml/bionemo-generative",
-        "ml/riva-speech",
-        "ml/parabricks-genomics",
-        "infrastructure/aerial-5g"
-      ]
-    },
-    {
-      "group": "Planetary Nexus (2026)",
-      "pages": [
-        "governance/planetary-boundaries",
-        "governance/pabs-sovereignty",
-        "infrastructure/igx-safety-island"
-      ]
-    },
-    {
-      "group": "The 2026 Singularity",
-      "pages": [
-        "infrastructure/aerial-6g",
-        "ml/tipping-point-forecasting",
-        "ml/traditional-knowledge-tcim"
+        "governance/planetary-boundaries"
       ]
     }
   ],
@@ -107,4 +69,4 @@
   "feedback": {
     "enabled": true
   }
-}# Mintlify sync trigger
+}
