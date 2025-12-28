@@ -65,6 +65,14 @@
         "ml-health/riva-clinical",
         "ml-health/tao-adaptation"
       ]
+    },
+    {
+      "group": "Kinetic Logistics & Mfg",
+      "pages": [
+        "infrastructure/cuopt-routing",
+        "infrastructure/physics-predict",
+        "infrastructure/vision-agent"
+      ]
     }
   ],
   "analytics": {
