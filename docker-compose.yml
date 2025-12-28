@@ -1,11 +1,11 @@
 version: "3.9"
 
 services:
-  vista3d-nim:
-    image: nvcr.io/nvidia/clara/vista3d-nim:latest
-    runtime: nvidia
-    ports:
-      - "8008:8000"
+  # vista3d-nim:
+  #   image: nvcr.io/nvidia/clara/vista3d-nim:latest
+  #   runtime: nvidia
+  #   ports:
+  #     - "8008:8000"
   # --- CORE INTELLIGENCE & API ---
   nexus-api:
     build:
@@ -19,7 +19,6 @@ services:
       - NIST_SCORE_TARGET=0.9
     depends_on:
       - ai-runner
-      - sovereign-ledger
     networks:
       - sovereign-net
 
