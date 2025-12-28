@@ -1,22 +1,33 @@
 {
-      "name": "iLuminara-Core",
-        "navigation": [
-                {
-                          "group": "Introduction",
-                                "pages": ["intro"]
-                },
-                    {
-                              "group": "Sovereign War Rooms",
-                                    "pages": [
-                                                {
-                                                              "name": "Live Nexus Dashboard",
-                                                                        "url": "https://iluminara-war-room.streamlit.app"
-                                                },
-                                                        {
-                                                                      "name": "FRENASA Diagnostic Engine",
-                                                                                "url": "https://iluminara-frenasa.streamlit.app"
-                                                        }
-                                    ]
-                    }
-        ]
+  "name": "iLuminara-Core",
+  "navigation": [
+    {
+      "group": "Introduction",
+      "pages": [
+        "intro"
+      ]
+    },
+    {
+      "group": "Sovereign War Rooms",
+      "pages": [
+        {
+          "name": "Live Nexus Dashboard",
+          "url": "https://iluminara-war-room.streamlit.app"
+        },
+        {
+          "name": "FRENASA Diagnostic Engine",
+          "url": "https://iluminara-frenasa.streamlit.app"
+        }
+      ]
+    },
+    {
+      "group": "2026 Hyper-Sovereignty",
+      "pages": [
+        "infrastructure/ghost-mode",
+        "agents/population-twins",
+        "infrastructure/tee-security",
+        "ml/semantic-sovereignty"
+      ]
+    }
+  ]
 }
