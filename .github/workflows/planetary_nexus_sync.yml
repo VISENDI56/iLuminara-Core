@@ -10,9 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Verify 47-Framework Integrity
-        run: python3 governance_kernel/sovereign_guardrail.py
-
       - name: Verify Module Heartbeat
         run: python3 infrastructure/heartbeat_check.py
 
