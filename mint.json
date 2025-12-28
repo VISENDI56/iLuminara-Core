@@ -1,60 +1,22 @@
 {
       "name": "iLuminara-Core",
-        "logo": {
-                "dark": "/logo/dark.svg",
-                    "light": "/logo/light.svg"
-        },
-          "favicon": "/favicon.svg",
-            "colors": {
-                    "primary": "#00AEA4",
-                        "light": "#00C2B8",
-                            "dark": "#008F87"
-            },
-              "topbarLinks": [
+        "navigation": [
+                {
+                          "group": "Introduction",
+                                "pages": ["intro"]
+                },
                     {
-                              "name": "Live War Room",
-                                    "url": "https://iluminara-war-room.streamlit.app"
-                    }
-              ],
-                "navigation": [
-                        {
-                                  "group": "Introduction",
-                                        "pages": ["intro", "quickstart"]
-                        },
-                            {
-                                      "group": "Sovereign War Rooms (Live Apps)",
-                                            "pages": [
+                              "group": "Sovereign War Rooms",
+                                    "pages": [
+                                                {
+                                                              "name": "Live Nexus Dashboard",
+                                                                        "url": "https://iluminara-war-room.streamlit.app"
+                                                },
                                                         {
-                                                                      "name": "Main Nexus Dashboard",
-                                                                                "url": "https://iluminara-war-room.streamlit.app"
-                                                        },
-                                                                {
-                                                                              "name": "FRENASA Diagnostic Engine",
-                                                                                        "url": "https://iluminara-frenasa.streamlit.app"
-                                                                },
-                                                                        {
-                                                                                      "name": "Network Propagation Map",
-                                                                                                "url": "https://iluminara-network.streamlit.app"
-                                                                        }
-                                            ]
-                            },
-                                {
-                                          "group": "Infrastructure & 47-Frameworks",
-                                                "pages": [
-                                                            "architecture/overview",
-                                                                    "governance/compliance-matrix",
-                                                                            "governance/nist-rmf"
-                                                ]
-                                }
-                ],
-                  "redirects": [
-                        {
-                                  "source": "/app",
-                                        "destination": "https://iluminara-war-room.streamlit.app"
-                        },
-                            {
-                                      "source": "/frenasa",
-                                            "destination": "https://iluminara-frenasa.streamlit.app"
-                            }
-                  ]
+                                                                      "name": "FRENASA Diagnostic Engine",
+                                                                                "url": "https://iluminara-frenasa.streamlit.app"
+                                                        }
+                                    ]
+                    }
+        ]
 }
