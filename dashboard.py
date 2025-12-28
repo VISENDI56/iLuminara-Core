@@ -6,7 +6,17 @@ import json
 import os
 from infrastructure.ui_engine.theme_manager import apply_circadian_theme
 from state.shared_memory import load_state
-from edge_node.data_ingestion_layer import IngestionEngine
+# Mock ingestion engine for dashboard
+class IngestionEngine:
+    def fuse_data_streams(self):
+        return {
+            "fusion_score": 0.95,
+            "physics": {"dist_km": 45.2},
+            "live_feeds": [
+                {"coords": [36.8, -1.3], "type": "EMR"},
+                {"coords": [36.8, -1.3], "type": "CBS"}
+            ]
+        }
 
 # Import governance modules
 from governance.living_certification import LivingCertificationDashboard
