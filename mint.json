@@ -1,87 +1,36 @@
 {
-  "$schema": "https://mintlify.com/schema.json",
-  "name": "iLuminara Sovereign",
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "favicon": "/favicon.png",
-  "colors": {
-    "primary": "#0D9488",
-    "light": "#14B8A6",
-    "dark": "#0F766E",
-    "anchors": "#0D9488"
-  },
-  "topbarLinks": [
-    {
-      "name": "Contact",
-      "url": "mailto:sovereign@iluminara.com"
-    }
-  ],
-  "topbarCtaButton": {
-    "name": "Launch Fortress",
-    "url": "https://github.com/VISENDI56/iLuminara-Core"
-  },
-  "navigation": [
-    {
-      "group": "Genesis",
-      "pages": ["docs/introduction", "docs/architecture", "docs/quickstart"]
-    },
-    {
-      "group": "Nuclear IP Stack",
-      "pages": [
-        "docs/nuclear-ip/crypto-shredder",
-        "docs/nuclear-ip/somatic-auth",
-        "docs/nuclear-ip/serenity-flow",
-        "docs/nuclear-ip/golden-thread",
-        "docs/nuclear-ip/viral-bridge"
-      ]
-    },
-    {
-      "group": "Governance Kernel",
-      "pages": [
-        "docs/governance/rco-engine",
-        "docs/governance/45-laws",
-        "docs/governance/nist-rmf"
-      ]
-    },
-    {
-      "group": "Integrated Management System",
-      "pages": [
-        "docs/governance/ims-kernel",
-        "docs/governance/aims-ethical-drift",
-        "docs/governance/isms-quantum-evidence",
-        "docs/governance/pims-differential-privacy",
-        "docs/governance/compliance-oracle",
-        "docs/governance/living-certification"
-      ]
-    },
-    {
-      "group": "ML Health & Epidemiology",
-      "pages": [
-        "docs/ml-health/seir-model",
-        "docs/ml-health/health-llm-adapter",
-        "docs/ml-health/drift-monitoring"
-      ]
-    },
-    {
-      "group": "Infrastructure & Observability",
-      "pages": [
-        "docs/infrastructure/iot-ingestion",
-        "docs/infrastructure/system2-reasoning",
-        "docs/infrastructure/context-engineering"
-      ]
-    },
-    {
-      "group": "Production Deployment",
-      "pages": [
-        "docs/production/docker-compose",
-        "docs/production/api-dockerfile"
-      ]
-    },
-    {
-      "group": "API Reference",
-      "pages": ["api-reference/introduction", "api-reference/endpoints"]
-    }
-  ]
+      "name": "iLuminara-Core",
+        "logo": {
+                "dark": "/logo/dark.svg",
+                    "light": "/logo/light.svg"
+        },
+          "favicon": "/favicon.svg",
+            "colors": {
+                    "primary": "#00AEA4",
+                        "light": "#00C2B8",
+                            "dark": "#008F87"
+            },
+              "topbarLinks": [
+                    {
+                              "name": "War Room",
+                                    "url": "https://iluminara-war-room.streamlit.app"
+                    }
+              ],
+                "navigation": [
+                        {
+                                  "group": "Core Ascension",
+                                        "pages": ["intro", "architecture/overview", "governance/compliance"]
+                        },
+                            {
+                                      "group": "47-Framework Matrix",
+                                            "pages": ["governance/omni-law", "governance/hyper-law-singularity"]
+                            },
+                                {
+                                          "group": "Clinical Nexus",
+                                                "pages": ["modules/1-20-nexus", "integrations/medgemma-fhir"]
+                                }
+                ],
+                  "footerSocials": {
+                        "github": "https://github.com/VISENDI56/iLuminara-Core"
+                  }
 }
