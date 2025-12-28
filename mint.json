@@ -91,6 +91,14 @@
         "governance/pabs-sovereignty",
         "infrastructure/igx-safety-island"
       ]
+    },
+    {
+      "group": "The 2026 Singularity",
+      "pages": [
+        "infrastructure/aerial-6g",
+        "ml/tipping-point-forecasting",
+        "ml/traditional-knowledge-tcim"
+      ]
     }
   ],
   "analytics": {
