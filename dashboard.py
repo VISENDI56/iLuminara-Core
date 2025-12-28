@@ -220,7 +220,7 @@ with tab2:
         st.info("No milestones recorded yet")
 
 # System 2 Transparency Integration
-from streamlit.about_system2 import render_system2_vision
+from about_system2 import render_system2_vision
 from streamlit.agent_logs import render_agent_logs
 
 st.sidebar.title("Navigation")
