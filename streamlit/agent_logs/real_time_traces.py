@@ -1,5 +1,5 @@
 import streamlit as st
-from audit_trail import TamperProofAuditTrail  # Extend existing
+from governance_kernel.audit_trail import TamperProofAuditTrail  # Extend existing
 
 def render_agent_logs():
     st.title("Agent Logs: Pass@1 Audit Trail")

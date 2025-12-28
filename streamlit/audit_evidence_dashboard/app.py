@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from audit_trail import TamperProofAuditTrail
+from governance_kernel.audit_trail import TamperProofAuditTrail
 from agents.digital_twin_biometry.synthetic_trial import PopulationTwin
 from infrastructure.tee_enclave.secure_signer import EnclaveSigner
 
