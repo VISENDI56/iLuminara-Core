@@ -1,0 +1,29 @@
+---
+title: 'Health LLM Adapter'
+description: 'Localized Medical AI Reasoning and Triage'
+---
+
+## Health Copilot LLM Adapter
+
+Fine-tuned medical LLMs for sovereign, explainable AI triage and diagnosis.
+
+### Components
+
+- **HealthCopilot**: Medical reasoning adapter
+- Explainable AI with Chain-of-Thought logs
+- Region-specific medical knowledge
+
+### Features
+
+- Localized health reasoning (East Africa focus)
+- WHO-AFRO guideline integration
+- Sovereign AI without external dependencies
+
+### Implementation
+
+```python
+from ml_health.llm_adapters.health_copilot import HealthCopilot
+
+copilot = HealthCopilot()
+guidance = copilot.generate_triage_guidance("High fever, chills", region="East_Africa")
+```

@@ -1,0 +1,29 @@
+{
+    "name": "iLuminara-Core",
+    "logo": { "dark": "/logo/dark.svg", "light": "/logo/light.svg" },
+    "navigation": [
+        {
+            "group": "The Sovereign Nexus",
+            "pages": ["introduction", "architecture"]
+        },
+        {
+            "group": "47-Framework Governance",
+            "pages": ["governance/omni-law-matrix", "governance/living-certification", "governance/compliance-oracle"]
+        },
+        {
+            "group": "NVIDIA AI Enterprise (Apex)",
+            "pages": ["ml-health/health-llm-adapter", "ml-health/drift-monitoring", "ml-health/seir-model"]
+        },
+        {
+            "group": "Kinetic & Spatial Intelligence",
+            "pages": ["infrastructure/iot-ingestion", "infrastructure/context-engineering"]
+        },
+        {
+            "group": "Physical Sovereignty",
+            "pages": ["nuclear-ip/crypto-shredder", "nuclear-ip/serenity-flow"]
+        }
+    ],
+    "redirects": [
+        { "source": "/war-room", "destination": "https://iluminara-war-room.streamlit.app" }
+    ]
+}

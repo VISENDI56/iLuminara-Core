@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iluminara-core
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: iluminara-core
+  template:
+    metadata:
+      labels:
+        app: iluminara-core
+    spec:
+      containers:
+      - name: frenasa-engine
+        image: {{ .Values.image.frenasa }}
+        resources:
+          limits:
+            cpu: {{ .Values.resources.frenasa.limits.cpu }}
+            memory: {{ .Values.resources.frenasa.limits.memory }}
+        ports:
+        - containerPort: 8080
+      - name: api-server
+        image: {{ .Values.image.api }}
+        resources:
+          limits:
+            cpu: {{ .Values.resources.api.limits.cpu }}
+            memory: {{ .Values.resources.api.limits.memory }}
+        ports:
+        - containerPort: 8000

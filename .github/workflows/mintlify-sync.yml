@@ -1,0 +1,25 @@
+name: Mintlify Documentation Sync
+
+on:
+  push:
+      branches: [ main ] # Triggers on push to the main branch
+        pull_request:
+            types: [ closed ]
+                branches: [ main ]
+
+                jobs:
+                  sync-docs:
+                      if: github.event.pull_request.merged == true || github.event_name == 'push'
+                          runs-on: ubuntu-latest
+                              steps:
+                                    - name: Checkout Code
+                                            uses: actions/checkout@v4
+
+                                                  - name: Trigger Mintlify Update
+                                                          env:
+                                                                    MINTLIFY_API_KEY: ${{ secrets.MINTLIFY_API_KEY }}
+                                                                            run: |
+                                                                                      # Use Mintlify's Trigger Update endpoint to refresh the docs site
+                                                                                                curl -X POST "https://api.mintlify.com/api/v1/update" \
+                                                                                                          -H "Authorization: Bearer $MINTLIFY_API_KEY" \
+                                                                                                                    -d "{\"repository\": \"${{ github.repository }}\"}"

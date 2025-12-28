@@ -1,0 +1,231 @@
+{
+  "45_law_quantum_nexus": {
+    "version": "3.0",
+    "description": "Sectoral Law Registry for Regulatory Singularity",
+    "laws": {
+      "EU_AI_ACT": {
+        "id": "LAW-001",
+        "name": "EU AI Act (Risk Pyramid)",
+        "jurisdiction": "European Union",
+        "effective_date": "2024-08-01",
+        "risk_levels": {
+          "unacceptable": {
+            "description": "Prohibited AI systems",
+            "examples": ["social_scoring", "real_time_biometric_identification", "manipulative_ai"]
+          },
+          "high": {
+            "description": "High-risk AI systems requiring conformity assessment",
+            "examples": ["healthcare_diagnosis", "critical_infrastructure", "law_enforcement"]
+          },
+          "limited": {
+            "description": "AI with transparency obligations",
+            "examples": ["chatbots", "emotion_recognition", "deepfakes"]
+          },
+          "minimal": {
+            "description": "AI with minimal or no regulatory requirements",
+            "examples": ["spam_filters", "video_games"]
+          }
+        },
+        "trigger_condition": {
+          "type": "ai_deployment",
+          "parameters": {
+            "sector": ["healthcare", "critical_infrastructure", "law_enforcement"],
+            "risk_score_threshold": 0.7
+          }
+        },
+        "enforcement_action": {
+          "validation": "check_ai_conformity",
+          "requirements": [
+            "risk_assessment",
+            "data_governance",
+            "technical_documentation",
+            "human_oversight",
+            "accuracy_metrics",
+            "cybersecurity_measures"
+          ]
+        }
+      },
+      "IHR_2005": {
+        "id": "LAW-002",
+        "name": "International Health Regulations 2005 (Pandemic Triggers)",
+        "jurisdiction": "Global (WHO)",
+        "effective_date": "2007-06-15",
+        "description": "Framework for detecting and responding to public health emergencies of international concern",
+        "trigger_condition": {
+          "type": "pandemic_detection",
+          "parameters": {
+            "outbreak_criteria": [
+              "unusual_disease_pattern",
+              "high_mortality_rate",
+              "rapid_spread",
+              "international_spread_potential"
+            ],
+            "notification_threshold": {
+              "cases": 10,
+              "timeframe_hours": 24,
+              "geographic_spread": "multi_region"
+            }
+          }
+        },
+        "enforcement_action": {
+          "validation": "trigger_pandemic_emergency",
+          "requirements": [
+            "immediate_notification_to_who",
+            "contact_tracing_activation",
+            "quarantine_protocols",
+            "data_sharing_consent_override",
+            "emergency_resource_allocation",
+            "cross_border_coordination"
+          ]
+        }
+      },
+      "MALABO_CONVENTION": {
+        "id": "LAW-003",
+        "name": "Malabo Convention (Data Sovereignty)",
+        "jurisdiction": "African Union",
+        "effective_date": "2014-06-27",
+        "description": "Protection of personal data and privacy in African countries",
+        "trigger_condition": {
+          "type": "data_processing",
+          "parameters": {
+            "data_subject_location": "african_union_member_states",
+            "data_categories": ["personal_data", "sensitive_data", "health_data"]
+          }
+        },
+        "enforcement_action": {
+          "validation": "check_data_sovereignty",
+          "requirements": [
+            "local_data_storage",
+            "data_controller_registration",
+            "explicit_consent",
+            "cross_border_transfer_safeguards",
+            "data_protection_officer",
+            "breach_notification_72h"
+          ]
+        }
+      },
+      "CSDDD": {
+        "id": "LAW-004",
+        "name": "Corporate Sustainability Due Diligence Directive (Supply Chain)",
+        "jurisdiction": "European Union",
+        "effective_date": "2024-07-05",
+        "description": "Mandatory human rights and environmental due diligence for supply chains",
+        "trigger_condition": {
+          "type": "supply_chain_operation",
+          "parameters": {
+            "company_size": "large_or_medium",
+            "high_risk_sectors": ["textiles", "agriculture", "minerals", "pharmaceuticals"],
+            "geographic_regions": ["conflict_zones", "high_risk_countries"]
+          }
+        },
+        "enforcement_action": {
+          "validation": "check_supply_chain_compliance",
+          "requirements": [
+            "due_diligence_policy",
+            "risk_identification",
+            "prevention_measures",
+            "remediation_mechanisms",
+            "monitoring_and_reporting",
+            "stakeholder_engagement",
+            "grievance_mechanisms"
+          ]
+        }
+      },
+      "IFRS_S2": {
+        "id": "LAW-005",
+        "name": "IFRS S2 (Climate-Related Disclosures)",
+        "jurisdiction": "Global (IFRS Foundation)",
+        "effective_date": "2024-01-01",
+        "description": "Climate-related financial disclosures standard",
+        "trigger_condition": {
+          "type": "climate_impact_assessment",
+          "parameters": {
+            "entity_type": ["public_company", "financial_institution"],
+            "carbon_threshold_tons": 500,
+            "climate_risk_exposure": "material"
+          }
+        },
+        "enforcement_action": {
+          "validation": "check_climate_disclosure",
+          "requirements": [
+            "governance_disclosure",
+            "strategy_disclosure",
+            "risk_management_disclosure",
+            "metrics_and_targets",
+            "scope_1_2_3_emissions",
+            "climate_scenario_analysis",
+            "transition_plan"
+          ]
+        }
+      },
+      "GDPR": {
+        "id": "LAW-006",
+        "name": "General Data Protection Regulation",
+        "jurisdiction": "European Union",
+        "effective_date": "2018-05-25",
+        "description": "Comprehensive data protection and privacy regulation",
+        "trigger_condition": {
+          "type": "personal_data_processing",
+          "parameters": {
+            "data_subject_location": "eu_member_states",
+            "data_categories": ["personal_data", "sensitive_data"]
+          }
+        },
+        "enforcement_action": {
+          "validation": "check_gdpr_compliance",
+          "requirements": [
+            "lawful_basis",
+            "data_minimization",
+            "purpose_limitation",
+            "storage_limitation",
+            "accuracy",
+            "integrity_confidentiality",
+            "accountability"
+          ]
+        }
+      },
+      "HIPAA": {
+        "id": "LAW-007",
+        "name": "Health Insurance Portability and Accountability Act",
+        "jurisdiction": "United States",
+        "effective_date": "1996-08-21",
+        "description": "Protection of health information in the United States",
+        "trigger_condition": {
+          "type": "health_data_processing",
+          "parameters": {
+            "data_subject_location": "united_states",
+            "entity_type": ["covered_entity", "business_associate"]
+          }
+        },
+        "enforcement_action": {
+          "validation": "check_hipaa_compliance",
+          "requirements": [
+            "privacy_rule_compliance",
+            "security_rule_compliance",
+            "breach_notification_rule",
+            "minimum_necessary_standard",
+            "business_associate_agreements",
+            "patient_rights_protection"
+          ]
+        }
+      }
+    },
+    "conflict_resolution_matrix": {
+      "GDPR_vs_HIPAA": {
+        "harmonization_strategy": "apply_strictest_requirements",
+        "priority_order": ["GDPR", "HIPAA"],
+        "resolution": "Data processing must satisfy both GDPR lawful basis AND HIPAA minimum necessary standard"
+      },
+      "MALABO_vs_GDPR": {
+        "harmonization_strategy": "territorial_priority",
+        "priority_order": ["MALABO", "GDPR"],
+        "resolution": "For African Union subjects, Malabo data sovereignty takes precedence with GDPR as baseline"
+      },
+      "IHR_vs_GDPR": {
+        "harmonization_strategy": "public_health_emergency_override",
+        "priority_order": ["IHR_2005", "GDPR"],
+        "resolution": "In declared PHEIC, IHR data sharing requirements override GDPR consent requirements under public interest exemption"
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+---
+title: 'Precision Public Health'
+description: 'Superseding Generic Aid with Targeted Logic.'
+---
+
+Based on Research File A ("Targeted Sanitation"), iLuminara implements Hyper-Local Resource Allocation.
+
+### The Risk Heatmap
+Instead of distributing aid randomly, the TargetedSanitationAgent fuses data streams:
+* Water Sensors: Real-time coliform counts.
+* Clinical Data: Live hospital admission rates for dysentery.
+
+#### Logic Gate
+The system contains a hardcoded financial trigger:
+
+```python
+if composite_risk > 0.85:
+    return "DISPATCH_SANITATION_KITS_IMMEDIATELY"
+```
+
+This ensures resources only go where the data proves they are needed, maximizing the impact of every dollar.

@@ -1,4 +1,15 @@
-import streamlit as st
+try:
+    from utils.theme_manager import apply_circadian_theme
+    apply_circadian_theme()
+except Exception:
+    import streamlit as st
+    st.set_page_config(page_title="Field Validation", page_icon="📱", layout="centered")
+    st.markdown("""
+        <style>
+            .stApp { background-color: #0D9488; color: #1e2430; }
+            .stButton>button { background-color: #0D9488; color: white; font-weight: bold; padding: 10px; border-radius: 8px; width: 100%; margin-top: 20px; }
+        </style>
+    """, unsafe_allow_html=True)
 
 # --- CONFIGURATION: MOBILE AESTHETIC ---
 st.set_page_config(
@@ -7,33 +18,33 @@ st.set_page_config(
     layout="centered",  # Optimized for mobile/smaller screens
 )
 
-# Custom CSS for high-contrast mobile look
-st.markdown("""
-    <style>
-        .stApp {
-            background-color: #f0f2f6; /* Light background for field use */
-            color: #1e2430;
-        }
-        .stButton>button {
-            background-color: #008000; /* Green for GO */
-            color: white;
-            font-weight: bold;
-            padding: 10px;
-            border-radius: 8px;
-            width: 100%;
-            margin-top: 20px;
-        }
-        .alert-box {
-            border: 2px solid #FF0000;
-            background-color: #ffe0e0;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            color: #FF0000;
-        }
-    </style>
-    """, unsafe_allow_html=True)
+# --- MINTLIFY GUIDANCE SIDEBAR ---
+st.sidebar.header("📚 Mintlify Guidance")
+with st.sidebar.expander("🤖 AI Agents / Validation", expanded=False):
+    st.markdown("""
+    **Field Validation Overview:**
+    AI agents enable human-in-the-loop validation for clinical accuracy. Core capabilities:
+    - Swahili language processing for East African CHWs
+    - Behavioral biometrics for field authentication
+    - Real-time clinical decision support with uncertainty quantification
+    - Cascade AI propagation for network effects
+    
+    *This form demonstrates iLuminara's AI agent ecosystem in field conditions.*
+    """)
+    if st.button("📖 Open Full AI Agents Docs", key="ai_docs"):
+        st.markdown("[https://visendi56.mintlify.app/ai-agents](https://visendi56.mintlify.app/ai-agents)")
+
+st.sidebar.markdown("### Sovereign Documentation")
+with st.sidebar.expander("Field Validation Excerpt", expanded=False):
+    st.markdown("""
+    **Field Validation:**
+    - Human-in-the-loop validation for clinical accuracy
+    - Swahili language processing for CHWs
+    - Real-time clinical decision support
+    - See [Mintlify Field Validation](https://visendi56.mintlify.app/field-validation)
+    """)
+if st.sidebar.button("Open Full Docs", key="mintlify_docs_field"):
+    st.markdown("[Mintlify Portal](https://visendi56.mintlify.app/)")
 
 st.title("Field Validation Check")
 st.header("CHW Amina Hassan (Zone 4)")
@@ -89,3 +100,11 @@ if st.button('Submit Validation & Sync to Edge Node'):
     st.markdown("---")
     # --- 5. SOVEREIGN INTEGRITY NOTE ---
     st.caption('Note: Data transmission is secured by LoRaWAN mesh and governed by KDPA protocol. All submissions are encrypted at source.')
+
+from state.shared_memory import load_state, get_shared, set_shared
+
+# --- SOVEREIGN SHARED MEMORY SIDEBAR ---
+state = load_state()
+st.sidebar.markdown("---")
+st.sidebar.subheader("🧠 Sovereign Shared Memory")
+st.sidebar.json(state, expanded=False)

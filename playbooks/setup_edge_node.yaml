@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+    - name: Pull iLuminara containers
+      community.docker.docker_image:
+        name: "{{ item }}"
+        source: pull
+      loop:
+        - iluminara/frenasa-engine:latest
+        - iluminara/api-server:latest
+    - name: Configure firewall
+      ufw:
+        rule: allow
+        port: [8080, 8000]
+        proto: tcp

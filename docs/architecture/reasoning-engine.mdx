@@ -1,0 +1,32 @@
+---
+title: 'System 2 Reasoning'
+description: 'The Plan-Simulate-Validate Loop.'
+---
+
+iLuminara moves beyond "System 1" (Reflexive AI) to "System 2" (Deliberate AI).
+
+## The Reasoning Loop
+Every Security and Health Agent follows this strict protocol:
+
+<Steps>
+  <Step title="Planning (CoT)">
+      The agent analyzes the threat and drafts a remediation specification.
+  </Step>
+  <Step title="Simulation (Causal Twin)">
+      The agent spins up a sandbox to test the fix. **Crucial:** It checks for downstream breakages (e.g., "Does blocking this IP kill the Payroll Server?").
+  </Step>
+  <Step title="Validation">
+      If the simulation passes with >99% confidence, the action is approved.
+  </Step>
+  <Step title="Execution">
+      The `SovereignGuardrail` allows the write-action to the live database.
+  </Step>
+</Steps>
+
+```python
+# The Core Loop (agents/security_operations/system2_soc.py)
+plan = self._reason_through_strategy(incident_context)
+sim_result = self._simulate_remediation(plan)
+if sim_result["outcome"] == "SUCCESS":
+    self._execute_fix(plan)
+```

@@ -1,0 +1,13 @@
+replicaCount: 2
+image:
+  frenasa: iluminara/frenasa-engine:latest
+  api: iluminara/api-server:latest
+resources:
+  frenasa:
+    limits:
+      cpu: 1
+      memory: 2Gi
+  api:
+    limits:
+      cpu: 0.5
+      memory: 1Gi

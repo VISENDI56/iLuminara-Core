@@ -1,0 +1,4 @@
+apiVersion: v2
+name: iluminara-core
+version: 0.1.0
+description: Helm chart for iLuminara-Core multi-cloud deployment

@@ -1,0 +1,1 @@
+from .technical_manifesto import render_system2_vision

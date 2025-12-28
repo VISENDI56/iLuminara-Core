@@ -1,0 +1,11 @@
+name: GitHub Pages
+on:
+  push:
+    branches: [ main ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy to GitHub Pages
+        run: echo "Manual step: Enable GitHub Pages from /docs folder in repository settings."

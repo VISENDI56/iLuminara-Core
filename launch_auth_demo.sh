@@ -1,0 +1,1 @@
+streamlit run streamlit/auth_demo/app.py --server.port 8504 --server.address 0.0.0.0

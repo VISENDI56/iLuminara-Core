@@ -40,7 +40,7 @@ RUN flutter build web --release --web-renderer canvaskit \
     --dart-define=FIREBASE_APP_ID=$FIREBASE_APP_ID
 
 # Stage 2: Serve with Nginx
-FROM nginx:1.25-alpine
+FROM nginx:1.29.3-alpine3.22-slim
 
 # Copy nginx configuration
 COPY frontend_web/nginx.conf /etc/nginx/nginx.conf

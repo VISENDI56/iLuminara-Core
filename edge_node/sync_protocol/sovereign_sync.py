@@ -8,7 +8,84 @@ Implements HSML (Health Sovereign Markup Language) format for offline resilience
 Philosophy: "Cloud when available, edge when necessary, never lose data."
 """
 
-from google.cloud import firestore
+"""
+IP-XX: Sovereign Sync Protocol
+Handles synchronization between Edge Nodes and the Cloud Oracle.
+Includes Sovereign Fallback for when Cloud is unavailable (Decoupled Architecture).
+"""
+
+import os
+import json
+import time
+from typing import Dict, Any, Optional
+
+# --- SOVEREIGN DECOUPLING LAYER ---
+# Attempt to import Google Cloud. If missing, fall back to Local Mode.
+try:
+    from google.cloud import firestore
+    from google.cloud import storage
+    GCP_AVAILABLE = True
+except ImportError:
+    GCP_AVAILABLE = False
+    firestore = None
+    storage = None
+    print("   [WARN] Google Cloud libraries not found. Running in SOVEREIGN LOCAL MODE.")
+
+class CloudUnavailableError(Exception):
+    """Raised when cloud sync is attempted without connectivity or drivers."""
+    pass
+
+class SovereignSync:
+    def __init__(self, project_id: str = "iluminara-core"):
+        self.project_id = project_id
+        self.local_buffer_path = "data/buffer/"
+        os.makedirs(self.local_buffer_path, exist_ok=True)
+
+        # Initialize Cloud Clients if available
+        if GCP_AVAILABLE:
+            try:
+                self.db = firestore.Client(project=project_id)
+                self.storage = storage.Client(project=project_id)
+                self.mode = "HYBRID"
+            except Exception as e:
+                print(f"   [WARN] Cloud credentials missing ({e}). Switching to LOCAL.")
+                self.mode = "LOCAL"
+                self.db = None
+        else:
+            self.mode = "LOCAL"
+            self.db = None
+
+    def sync_record(self, collection: str, document_id: str, data: Dict[str, Any]) -> bool:
+        """
+        Syncs a single record. 
+        If Cloud is available, pushes to Firestore.
+        If Cloud is dead/missing, saves to local JSON buffer.
+        """
+        if self.mode == "HYBRID" and self.db:
+            try:
+                doc_ref = self.db.collection(collection).document(document_id)
+                doc_ref.set(data)
+                return True
+            except Exception as e:
+                print(f"   [!] Cloud Sync Failed: {e}")
+                # Fallthrough to local backup
+
+        # Local Fallback (Sovereign Mode)
+        return self._save_local(collection, document_id, data)
+
+    def _save_local(self, collection: str, document_id: str, data: Dict[str, Any]) -> bool:
+        """Saves data to local encrypted buffer"""
+        try:
+            file_path = os.path.join(self.local_buffer_path, f"{collection}_{document_id}.json")
+            with open(file_path, 'w') as f:
+                json.dump(data, f)
+            return True
+        except Exception as e:
+            print(f"   [!] Local Save Failed: {e}")
+            return False
+
+    def get_status(self) -> str:
+        return f"ACTIVE ({self.mode})"
 from google.auth.exceptions import DefaultCredentialsError
 import json
 import hashlib

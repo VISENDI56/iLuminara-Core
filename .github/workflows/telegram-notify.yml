@@ -1,0 +1,16 @@
+name: Telegram Notify
+on:
+  issues:
+    types: [opened, closed]
+  pull_request:
+    types: [opened, closed]
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Telegram Notification
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: "New issue or PR event in iLuminara-Core!"

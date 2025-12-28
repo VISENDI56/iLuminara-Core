@@ -47,6 +47,7 @@ def test_endpoint(name, method, endpoint, data=None):
 
 def main():
     print(f"{YELLOW}═══════════════════════════════════════════════════════════════{NC}")
+        print(f"{YELLOW}# --- Integration Test Start ---{NC}")
     print(f"{YELLOW}   iLuminara GCP Prototype - Integration Tests{NC}")
     print(f"{YELLOW}═══════════════════════════════════════════════════════════════{NC}\n")
     
@@ -119,6 +120,7 @@ def main():
     
     # Summary
     print(f"{YELLOW}═══════════════════════════════════════════════════════════════{NC}")
+        print(f"{YELLOW}# --- Test Summary ---{NC}")
     print(f"{YELLOW}   Test Summary{NC}")
     print(f"{YELLOW}═══════════════════════════════════════════════════════════════{NC}")
     

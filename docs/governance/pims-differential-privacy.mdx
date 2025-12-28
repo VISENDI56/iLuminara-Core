@@ -1,0 +1,28 @@
+---
+title: 'PIMS Differential Privacy'
+description: 'Privacy Information Management System - Differential Privacy Orchestrator'
+---
+
+## Differential Privacy Orchestrator
+
+Implements privacy-preserving data processing with mathematical guarantees.
+
+### Components
+
+- **DifferentialPrivacyOrchestrator**: Privacy budget management
+- **ContextAwareMinimizer**: Adaptive privacy minimization
+
+### Privacy Techniques
+
+- Epsilon-delta privacy
+- Context-aware data minimization
+- Automated privacy controls
+
+### Usage
+
+```python
+from governance.pims.differential_privacy_orchestrator import DifferentialPrivacyOrchestrator
+
+orchestrator = DifferentialPrivacyOrchestrator(epsilon=0.1)
+private_data = orchestrator.process_dataset(dataset)
+```

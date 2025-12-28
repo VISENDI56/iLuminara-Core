@@ -1,0 +1,11 @@
+name: Vercel Deploy
+on:
+  push:
+    branches: [ main ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy to Vercel
+        run: echo "Manual step: Connect repo to Vercel at https://vercel.com/new and import /docs as static site."

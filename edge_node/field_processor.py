@@ -1,0 +1,1 @@
+from geospatial_esri.living_atlas_geoai import run_local_geoai_inference

@@ -106,6 +106,13 @@ if ! pgrep -f "streamlit run field_validation_form.py" > /dev/null; then
 else
     echo -e "${GREEN}✅ Field Validation already running on port 8503${NC}"
 fi
+
+# Sovereign Modules: Phase 25 Ultimate Singularity
+echo "Launching Sovereign Modules..."
+./launch_auth_demo.sh &
+./launch_clinical_voice.sh &
+./launch_compliance_sim.sh &
+echo -e "${GREEN}✅ Sovereign Modules launched${NC}"
 echo ""
 
 # ═══════════════════════════════════════════════════════════════════
@@ -166,6 +173,9 @@ echo "Checking active services:"
 check_port 8501 "Command Console"
 check_port 8502 "Transparency Audit"
 check_port 8503 "Field Validation"
+check_port 8504 "Auth Demo"
+check_port 8513 "Clinical Voice"
+check_port 8519 "Compliance Simulator"
 
 # Check Docker services (optional)
 if command -v docker &> /dev/null; then
@@ -188,6 +198,9 @@ echo -e "${BLUE}📊 STREAMLIT DASHBOARDS:${NC}"
 echo "   1. Command Console:      http://0.0.0.0:8501"
 echo "   2. Transparency Audit:   http://0.0.0.0:8502"
 echo "   3. Field Validation:     http://0.0.0.0:8503"
+echo "   4. Auth Demo:            http://0.0.0.0:8504"
+echo "   5. Clinical Voice:       http://0.0.0.0:8513"
+echo "   6. Compliance Simulator: http://0.0.0.0:8519"
 echo ""
 
 if command -v docker &> /dev/null && docker-compose ps 2>/dev/null | grep -q "Up"; then

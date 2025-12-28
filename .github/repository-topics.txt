@@ -1,0 +1,9 @@
+healthtech
+aI-sovereignty
+offline-ai
+humanitarian-ai
+compliance
+streamlit
+gcp
+sovereign-data
+bio-interface

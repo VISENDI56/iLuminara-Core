@@ -7,6 +7,34 @@
 # - Command Console (Leadership Dashboard)
 # ═════════════════════════════════════════════════════════════════════════════
 
+# Help flag
+if [ "$1" == "--help" ]; then
+    echo "================================================"
+    echo "🛡️  iLUMINARA SOVEREIGN COMMAND SUITE LAUNCHER"
+    echo "================================================"
+    echo ""
+    echo "OVERVIEW (Mintlify-Aligned):"
+    echo "  Quickstart: Launch War Room for immediate sovereignty demonstration"
+    echo "  Architecture: Command Console - Real-time decision orchestration"
+    echo "  Governance Kernel: Transparency Audit - Regulatory compliance monitoring"
+    echo "  AI Agents: Field Validation - Human-in-the-loop clinical verification"
+    echo "  Security: All apps enforce Class-5 defensive protocols"
+    echo "  Deployment: Streamlit Cloud hosted for global access"
+    echo "  API: RESTful endpoints for external integrations"
+    echo ""
+    echo "USAGE:"
+    echo "  ./launch_war_room.sh          # Launch all apps"
+    echo "  ./launch_war_room.sh --help   # Show this help"
+    echo ""
+    echo "APPS LAUNCHED:"
+    echo "  - Command Console:    http://localhost:8501"
+    echo "  - Transparency Audit: http://localhost:8502"
+    echo "  - Field Validation:   http://localhost:8503"
+    echo ""
+    echo "For full documentation: https://visendi56.mintlify.app/"
+    exit 0
+fi
+
 echo "================================================"
 echo "🛡️  LAUNCHING iLUMINARA SOVEREIGN COMMAND SUITE"
 echo "================================================"

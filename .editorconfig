@@ -1,0 +1,17 @@
+# EditorConfig helps maintain consistent coding styles
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.py]
+# Ban non-ASCII except in comments/strings
+detect_encoding = true
+# Use only ASCII for code, allow Unicode in comments/strings only
+# (Enforced by pre-commit or manual review)
+
+# Section divider rule
+# Use: # --- Section ---
