@@ -37,6 +37,31 @@
         "sovereignty/tee-security",
         "sovereignty/semantic-adapters"
       ]
+    },
+    {
+      "group": "20-Module Nexus",
+      "pages": [
+        "modules/module-1",
+        "modules/module-2",
+        "modules/module-3",
+        "modules/module-4",
+        "modules/module-5",
+        "modules/module-6",
+        "modules/module-7",
+        "modules/module-8",
+        "modules/module-9",
+        "modules/module-10",
+        "modules/module-11",
+        "modules/module-12",
+        "modules/module-13",
+        "modules/module-14",
+        "modules/module-15",
+        "modules/module-16",
+        "modules/module-17",
+        "modules/module-18",
+        "modules/module-19",
+        "modules/module-20"
+      ]
     }
   ]
 }
