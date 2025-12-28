@@ -83,6 +83,14 @@
         "ml/parabricks-genomics",
         "infrastructure/aerial-5g"
       ]
+    },
+    {
+      "group": "Planetary Nexus (2026)",
+      "pages": [
+        "governance/planetary-boundaries",
+        "governance/pabs-sovereignty",
+        "infrastructure/igx-safety-island"
+      ]
     }
   ],
   "analytics": {
