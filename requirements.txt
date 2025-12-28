@@ -27,7 +27,7 @@ scikit-learn>=1.3.0,<2.0.0
 networkx>=3.0.0,<4.0.0
 pgmpy>=0.1.20,<0.2.0
 torch>=2.0.0
-transformers>=4.30.0
+transformers>=5.0.0rc1
 
 # Security & Cryptography
 cryptography>=40.0.0,<50.0.0
@@ -42,7 +42,7 @@ google-cloud-speech>=2.21.0
 google-cloud-secret-manager>=2.16.0
 
 # HTTP Requests
-requests>=2.31.0,<3.0.0
+requests>=2.32.4
 httpx>=0.25.0,<1.0.0
 
 # Audio Processing
@@ -83,3 +83,4 @@ pyserial>=3.5
 protobuf>=4.25.8
 arcgis>=2.4.0
 arcgis-runtime
+filelock>=3.20.1 # not directly required, pinned by Snyk to avoid a vulnerability
