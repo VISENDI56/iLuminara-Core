@@ -1,0 +1,2 @@
+time="2025-12-28T16:16:35Z" level=warning msg="/workspaces/iLuminara-Core/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+service "nexus-api" depends on undefined service "sovereign-ledger": invalid compose project

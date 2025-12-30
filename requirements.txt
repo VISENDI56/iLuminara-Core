@@ -1,124 +1,27 @@
-# iLuminara-Core Python Dependencies
-# ═════════════════════════════════════════════════════════════════════════════
-# Python 3.10+
-# Consolidated and deduplicated requirements
+# Core Frameworks
+numpy>=1.24.0
+pandas>=2.0.0
+torch>=2.0.0 --index-url https://download.pytorch.org/whl/cu118
+streamlit>=1.32.0
 
-# Core Web Framework
-fastapi>=0.100.0,<1.0.0
-uvicorn[standard]>=0.30.0,<1.0.0
-pydantic>=2.0.0,<3.0.0
-Flask>=3.0.0,<4.0.0
-flask-cors>=4.0.0,<7.0.0
-Werkzeug>=3.0.0,<4.0.0
-gunicorn>=21.2.0,<23.0.0
+# AI & Inference
+nvidia-pyindex
+nvidia-tensorrt
+tritonclient[all]
 
-# Frontend Dashboard
-streamlit>=1.30.0,<2.0.0
-pydeck>=0.8.0,<1.0.0
-plotly>=5.0.0,<7.0.0
+# Geospatial
+arcgis>=2.2.0
+geopandas>=0.14.0
 
-# Data Processing & Scientific Computing
-pandas>=2.0.0,<3.0.0
-numpy>=1.24.0,<2.0.0
-scipy>=1.10.0,<2.0.0
+# API & Backend
+fastapi>=0.100.0
+uvicorn>=0.22.0
+pydantic>=2.0.0
 
-# Machine Learning & AI
-scikit-learn>=1.5.0
-networkx>=3.0.0,<4.0.0
-pgmpy>=0.1.20,<0.2.0
-torch>=2.0.0
-transformers>=5.0.0rc1
+# Web3 & Cryptography
+web3>=6.0.0
+pycryptodome>=3.18.0
 
-# Security & Cryptography
-cryptography>=40.0.0,<50.0.0
-
-# Google Cloud Services
-google-cloud-bigquery==3.39.0
-google-cloud-storage==2.34.0
-google-cloud-aiplatform==1.132.0
-google-cloud-pubsub==2.34.0
-google-cloud-firestore==2.22.0
-google-cloud-speech>=2.21.0
-google-cloud-secret-manager>=2.16.0
-
-# HTTP Requests
-requests>=2.32.4
-httpx>=0.25.0,<1.0.0
-
-# Audio Processing
-librosa>=0.10.0
-soundfile>=0.12.0
-# Core Engine
-streamlit>=1.30.0
-fastapi>=0.109.1
-uvicorn>=0.23.0
-networkx>=3.0
-# NVIDIA Apex
-arcgis>=2.4.0
-pystac-client>=0.7.0
-# Machine Learning & Health
-monai>=1.3.0
-# Persistence & Governance
-python-dotenv>=1.0.0
-
-# Configuration
-python-dotenv>=1.0.0,<2.0.0
-
-# Utilities
-structlog==25.5.0
-python-dateutil==2.9.0.post0
-structlog>=23.0.0,<25.0.0
-python-dateutil>=2.8.0,<3.0.0
-python-multipart>=0.0.18
-aiofiles>=23.0.0
-
-# Cloud Functions
-functions-framework>=3.4.0
-
-# External APIs
-openai>=1.0.0,<2.0.0
-azure-identity>=1.15.0,<2.0.0
-
-# Testing
-pytest==9.0.2
-pytest-asyncio==1.3.0
-pytest-cov>=4.1.0
-pytest-flask==1.3.0
-# Logging and Monitoring
-structlog==25.5.0
-
-# Testing
-pytest==9.0.2
-pytest-asyncio==1.3.0
-pytest-cov>=4.1.0
-pytest-flask==1.3.0
-
-# Utilities
-python-dateutil==2.9.0.post0
-python-multipart>=0.0.18
-aiofiles>=23.2.0
-functions-framework>=3.4.0
-
-# AI/ML Services
-openai==2.14.0
-azure-identity==1.25.1
-pytest>=8.0.0,<10.0.0
-pytest-asyncio>=0.23.0,<2.0.0
-pytest-cov>=4.1.0,<6.0.0
-pytest-flask>=1.3.0,<2.0.0
-
-# Additional dependencies from remote
-zipp>=3.19.1
-setuptools>=78.1.1
-urllib3>=2.6.0
-jsonschema>=4.25.1
-GitPython>=3.1.45
-fhir.resources>=8.0.0
-psycopg2-binary>=2.9.10
-pyserial>=3.5
-protobuf>=4.25.8
-arcgis>=2.4.0
-arcgis-runtime
-filelock>=3.20.1 # not directly required, pinned by Snyk to avoid a vulnerability
-anyio>=4.4.0 # not directly required, pinned by Snyk to avoid a vulnerability
-starlette>=0.49.1 # not directly required, pinned by Snyk to avoid a vulnerability
+# Testing & Ops
+pytest>=7.4.0
+prometheus_client>=0.17.0
