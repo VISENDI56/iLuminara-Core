@@ -16,6 +16,26 @@ c4.metric("Nebius Bridge", "STANDBY", delta="Hybrid-Cloud")
 
 st.divider()
 
+# --- DATA FLYWHEEL MONITOR ---
+st.divider()
+st.subheader("Data Flywheel: Continuous Learning")
+col_f1, col_f2 = st.columns(2)
+
+# Simulated Flywheel Metrics
+with col_f1:
+    st.metric("Global Brain Version", "v2.1.0-Alpha")
+    st.metric("Participating Nodes", "12")
+
+with col_f2:
+    prediction_error = random.uniform(0.02, 0.18)
+    st.metric("World Model Error (Energy Gap)", f"{prediction_error:.4f}", 
+              delta="-0.002", delta_color="inverse")
+
+    if prediction_error > 0.15:
+        st.warning("⚠️ High Prediction Error: Triggering ZK-Federated Learning Update.")
+
+st.divider()
+
 # Live Event Stream
 st.subheader("Live System Events")
 events = st.empty()
