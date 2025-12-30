@@ -4,6 +4,7 @@ import asyncio
 from core.jepa_architecture.mpc_controller import EnergyBasedMPC
 from infrastructure.logistics.cuopt_agent import AgenticDispatcher
 from governance_kernel.omni_law_interceptor import OmniLawMatrix
+from governance_kernel.verification.formal_gate import FormalLawVerifier
 
 class GhostNexusSimulator:
     """
@@ -54,6 +55,25 @@ class GhostNexusSimulator:
             return plan
         return "BLOCKED"
 
+async def deep_chaos_test():
+    """
+    Simulates a 'Logic Attack' where an agent tries to bypass the law.
+    """
+    verifier = FormalLawVerifier()
+    
+    # Proposed illegal action: Force in a protected zone
+    proposed_force = 100 
+    constraints = {'max_kinetic_force': 10, 'is_protected_zone': True}
+    
+    is_safe = verifier.verify_action(proposed_force, constraints)
+    
+    if not is_safe:
+        print("✅ SUCCESS: Formal Verifier arrested the illegal action at the math level.")
+    else:
+        print("❌ FAILURE: Safety breach.")
+
 if __name__ == "__main__":
     sim = GhostNexusSimulator()
     asyncio.run(sim.generate_chaos())
+    # Also run the deep chaos test
+    asyncio.run(deep_chaos_test())
