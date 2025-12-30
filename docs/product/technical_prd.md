@@ -103,3 +103,7 @@ iLuminara is a localized Health Intelligence Operating System designed for resou
 ## 15. Maintenance
 * Prometheus/Grafana Observability.
 * Data Flywheel Retraining.
+
+### Domain: Cloud Hybridization (Nebius)
+21. **Given** the local IGX Orin is overheating (>90% load), **When** a non-sensitive student query arrives, **Then** the system offloads inference to Nebius Token Factory with <200ms latency.
+22. **Given** a new Swahili medical dataset is available, **When** uploaded, **Then** Nebius automatically fine-tunes a new model version and pushes the quantised weights to the edge node.

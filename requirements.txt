@@ -25,3 +25,11 @@ pycryptodome>=3.18.0
 # Testing & Ops
 pytest>=7.4.0
 prometheus_client>=0.17.0
+
+# Additional Dependencies (Phase 58 Fix)
+flask-cors>=4.0.0
+google-cloud-bigquery>=3.10.0
+google-cloud-pubsub>=2.18.0
+google-cloud-aiplatform>=1.36.0
+pytest-cov>=4.1.0
+openai>=1.0.0  # Nebius uses OpenAI-compatible API
