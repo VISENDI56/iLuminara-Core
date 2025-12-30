@@ -94,3 +94,12 @@ class SovereignPricingModel:
             "quote_generated": datetime.datetime.utcnow().isoformat() + "Z",
             "sovereign_note": "Data Never Leaves Jurisdiction – Only Gradients Flow"
         }
+
+    def calculate_outcome_subsidy(self, prediction_error):
+        """
+        Calculates a 'Precision Subsidy' for the customer.
+        The better the JEPA World Model performs, the more the customer saves.
+        """
+        # Lower error = Higher subsidy for the host government
+        subsidy_rate = max(0, 0.20 - (prediction_error * 0.5))
+        return subsidy_rate
