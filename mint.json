@@ -153,6 +153,12 @@
       "pages": [
         "core/circular_economy/reverse_logistics"
       ]
+    },
+    {
+      "group": "Investor Relations",
+      "pages": [
+        "business/valuation_economics"
+      ]
     }
   ],
   "redirects": [
