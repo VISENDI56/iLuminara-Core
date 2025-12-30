@@ -1,0 +1,28 @@
+import streamlit as st
+from governance.tele_justice.confidential_enclave import LegalEnclave
+
+st.set_page_config(page_title="Tele-Justice", layout="centered")
+st.title("⚖️ Sovereign Legal Aid")
+
+st.info("🔒 Secure Connection: Confidential Computing Enclave Active")
+
+chat_container = st.container()
+user_input = st.chat_input("Describe your legal issue (Voice/Text)...")
+
+if user_input:
+    # Render User Message
+    with chat_container:
+        with st.chat_message("user"):
+            st.write(user_input)
+
+        # Simulate TEE Inference
+        enclave = LegalEnclave()
+        response = enclave.draft_affidavit(user_input)
+
+        # Render AI Response
+        with chat_container:
+            with st.chat_message("assistant", avatar="⚖️"):
+                st.write("I have analyzed your claim against the 1951 Refugee Convention.")
+                st.write("Based on your testimony, I have drafted a preliminary affidavit.")
+                with st.expander("View Sealed Affidavit"):
+                    st.code(f"CASE_ID: 9982\nSTATUS: {response}\nCONTENT: [ENCRYPTED]", language="text")

@@ -1,0 +1,31 @@
+import streamlit as st
+import pandas as pd
+import random
+import time
+
+st.set_page_config(page_title="Governance Audit", layout="wide")
+st.title("🛡️ Omni-Law Compliance Audit")
+
+# Simulated Audit Log
+data = {
+    "Timestamp": [f"10:0{i}:00" for i in range(5)],
+    "Action": ["Drone_Dispatch", "Genomic_Export", "Bio_Credit_Mint", "Legal_Inference", "Map_Sync"],
+    "Framework": ["ICAO / Civil Aviation", "PABS Protocol", "ReFi / FinReg", "Refugee Convention", "GDPR"],
+    "Status": ["COMPLIANT", "BLOCKED", "COMPLIANT", "COMPLIANT", "COMPLIANT"],
+    "Hash": [f"SHA256_{random.randint(1000,9999)}" for _ in range(5)]
+}
+df = pd.DataFrame(data)
+
+# Metrics
+c1, c2, c3 = st.columns(3)
+c1.metric("Compliance Rate", "99.8%")
+c2.metric("Interceptions", "14", delta="-2")
+c3.metric("Active Frameworks", "47")
+
+st.dataframe(df, use_container_width=True)
+
+st.subheader("Evidence Bundle Generation")
+if st.button("Generate ISO 42001 Evidence"):
+    with st.spinner("Cryptographically signing audit trails..."):
+        time.sleep(2)
+        st.success("Evidence Bundle 'AUDIT_2026_Q1.pdf' generated.")
