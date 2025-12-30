@@ -1,0 +1,27 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: iluminara-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: iluminara-core
+  minReplicas: 3
+  maxReplicas: 100
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 75
+---
+# Database Scaling (StatefulSet Stub)
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: iluminara-db
+spec:
+  replicas: 5 # Read Replicas
+  serviceName: "db"

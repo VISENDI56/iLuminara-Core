@@ -2,7 +2,7 @@
 Living Certification Engine - Self-Validating Compliance
 iLuminara Sovereign Health Interface - Eternal Compliance Architecture
 
-This module implements the Living Certification Singularity where standards
+This module implements the Living Certification Converged Architecture where standards
 no longer require external audits but become self-validating, retro-causal code
 that breathes compliance eternally.
 
@@ -98,7 +98,7 @@ class RetroCausalLoop:
     outcome: str = "pending"
 
 class LivingCertificationEngine:
-    """Living Certification Singularity - Self-Validating Compliance"""
+    """Living Certification Converged Architecture - Self-Validating Compliance"""
 
     def __init__(self):
         self.certification_bundles: Dict[str, CertificationBundle] = {}

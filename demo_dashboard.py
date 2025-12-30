@@ -119,7 +119,7 @@ elif page == "ℹ️ About This Demo":
 st.markdown("---")
 st.markdown("""
 <div style="text-align: center; color: #6b7280; padding: 2rem 0;">
-    <p><strong>iLuminara-Core v3.0</strong> | The Fortress is Sealed | The Singularity is Complete</p>
+    <p><strong>iLuminara-Core v3.0</strong> | The Fortress is Sealed | The Converged Architecture is Complete</p>
     <p>🛡️ 7 Legal Frameworks Active | ✅ 100% Compliance Health | 🔒 Zero Security Alerts</p>
 </div>
 """, unsafe_allow_html=True)

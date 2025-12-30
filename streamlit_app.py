@@ -135,7 +135,7 @@ pages = {
     "🏛️ Command Console": "command_console",
     "🔍 Transparency Audit": "transparency_audit",
     "📱 Field Validation": "field_validation",
-    "🧬 Nuclear IP Stack": "nuclear_ip_stack",
+    "🧬 Core IP Stack": "Core_ip_stack",
     "🧠 Bio-Interface API": "bio_interface",
     "🔮 Vertex AI Explainability": "vertex_explainability",
     "📜 Living Certifications": "living_certifications"
@@ -162,9 +162,9 @@ elif selected_page == "📱 Field Validation":
     # Import and run field_validation_form logic
     st.info("Full Field Validation functionality available at individual app deployment.")
 
-elif selected_page == "🧬 Nuclear IP Stack":
-    st.title("🧬 Nuclear IP Stack Demonstrations")
-    st.markdown("**Complete IP Portfolio:** Live demonstrations of all 5 nuclear inventions.")
+elif selected_page == "🧬 Core IP Stack":
+    st.title("🧬 Core IP Stack Demonstrations")
+    st.markdown("**Complete IP Portfolio:** Live demonstrations of all 5 Core inventions.")
 
     ip_selection = st.selectbox("Select IP to Demonstrate:",
                                ["IP-02: Crypto Shredder", "IP-03: Acorn Protocol",
@@ -294,7 +294,7 @@ elif selected_page == "📜 Living Certifications":
     st.markdown("""
     ## Eternal Compliance Architecture
 
-    iLuminara pioneers the **Living Certification Singularity**—where standards transcend external audits and become self-validating, retro-causal code that breathes compliance eternally.
+    iLuminara pioneers the **Living Certification Converged Architecture**—where standards transcend external audits and become self-validating, retro-causal code that breathes compliance eternally.
     """)
 
     # Certification status overview

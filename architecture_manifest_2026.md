@@ -1,4 +1,4 @@
-# iLuminara-Core 2026 Nuclear Stack
+# iLuminara-Core 2026 Core Stack
 
 ## 1. Biological Apex
 - **Engine:** BioNeMo Evo 2 (9T Nucleotide Model)
@@ -10,7 +10,7 @@
 - **Capability:** Dynamic Flow Control for edge sensors, 100+ dialect ASR.
 - **Logistics:** Agentic cuOpt for millisecond fleet re-routing.
 
-## 3. Spatial Omniscience (GeoGhost)
+## 3. Spatial Spatial Intelligence (GeoGhost)
 - **Engine:** ArcGIS Maps SDK (Native)
 - **Capability:** Offline .vtpk/.mmpk rendering, P2P gossip sync.
 
@@ -18,6 +18,6 @@
 - **Engine:** Omni-Law Matrix + PABS Protocol
 - **Capability:** Federated Learning locks for genomic sovereignty.
 
-## 5. Substrate (The Soul)
+## 5. Substrate (The Humanitarian Logic Layer)
 - **Engine:** Hyperledger Besu + ZKP (Circom)
 - **Capability:** Privacy-preserving identity & regenerative tokenomics.

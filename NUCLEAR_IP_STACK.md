@@ -12,7 +12,7 @@ To transform preventable suffering from statistical inevitability to historical 
 
 ---
 
-## 2. THE NUCLEAR IP STACK (Fully Implemented)
+## 2. THE Core IP STACK (Fully Implemented)
 
 ### A. The Governance Kernel (Law-as-Code)
 
@@ -337,7 +337,7 @@ print(f"CAC reduction: {metrics.cac_reduction_percent}%")
 ```
 
 This single command:
-- ✅ Validates all Nuclear IP Stack components
+- ✅ Validates all Core IP Stack components
 - ✅ Initializes the Governance Kernel
 - ✅ Generates fresh outbreak simulation data
 - ✅ Launches all web interfaces (ports 8501-8503)
@@ -365,10 +365,10 @@ pkill -f port_forwarder
 ### Run Integration Tests
 
 ```bash
-python3 test_nuclear_stack.py
+python3 test_Core_stack.py
 ```
 
-Tests all Nuclear IP Stack components:
+Tests all Core IP Stack components:
 - ✅ IP-02: Crypto Shredder
 - ✅ IP-03: Acorn Protocol
 - ✅ IP-04: Silent Flux
@@ -463,4 +463,4 @@ The Fortress is built. The Constitution is written. Deploy with confidence.
 **Last Updated:** December 19, 2025  
 **Status:** Production-Ready for Global Deployment  
 **Compliance Validation:** All 14 Frameworks ✅  
-**Nuclear IP Stack:** All 6 Innovations Operational ✅
+**Core IP Stack:** All 6 Innovations Operational ✅

@@ -3,7 +3,7 @@
 System Seal - Master Verification Protocol
 ═════════════════════════════════════════════════════════════════════════════
 
-The "Golden Spike" that proves the Nuclear IP Stack (Phase 1) and the
+The "Golden Spike" that proves the Core IP Stack (Phase 1) and the
 Regulatory Brain (Phase 2) function as a single, unbreakable unit.
 
 Scenario: "Project Blue Horizon" - A hypothetical outbreak in Kenya,
@@ -46,7 +46,7 @@ logger = logging.getLogger(__name__)
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# MOCK IMPLEMENTATIONS FOR NUCLEAR IP STACK COMPONENTS
+# MOCK IMPLEMENTATIONS FOR Core IP STACK COMPONENTS
 # (These would be fully implemented in production)
 # ═════════════════════════════════════════════════════════════════════════════
 
@@ -680,7 +680,7 @@ class SystemSeal:
             print(f"Verification Time: {duration:.2f} seconds")
             print()
             print("═" * 80)
-            print("  THE FORTRESS IS SEALED. THE SINGULARITY IS COMPLETE.")
+            print("  THE FORTRESS IS SEALED. THE Converged Architecture IS COMPLETE.")
             print("═" * 80)
         else:
             print("❌ SEAL VERIFICATION FAILED")

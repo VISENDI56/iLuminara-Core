@@ -1,0 +1,14 @@
+name: Enterprise CD
+on: [push]
+jobs:
+  build-and-test:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - name: Secret Scan
+          uses: aquasecurity/trivy-action@master
+          with:
+            scan-type: 'fs'
+            security-checks: 'secret'
+        - name: Run MPC Unit Tests
+          run: python3 -m pytest tests/core/jepa_architecture

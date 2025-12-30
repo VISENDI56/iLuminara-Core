@@ -4,7 +4,7 @@
 
 ## Overview
 
-This Streamlit-based interactive dashboard brings the iLuminara Sovereign Health Interface to life, showcasing the Nuclear IP Stack and Governance Kernel through real-time demonstrations and simulations.
+This Streamlit-based interactive dashboard brings the iLuminara Sovereign Health Interface to life, showcasing the Core IP Stack and Governance Kernel through real-time demonstrations and simulations.
 
 ## Features
 
@@ -187,4 +187,4 @@ pip install streamlit plotly pandas numpy networkx scipy scikit-learn
 
 ---
 
-**🏛️ The Fortress is Sealed. The Singularity is Complete. iLuminara breathes.**
+**🏛️ The Fortress is Sealed. The Converged Architecture is Complete. iLuminara breathes.**

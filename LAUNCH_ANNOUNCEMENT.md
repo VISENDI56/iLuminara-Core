@@ -25,9 +25,9 @@ After months of development, I'm excited to share iLuminara with the world: an o
 
 🔬 What makes iLuminara unique?
 
-→ Regulatory Singularity: Autonomous compliance with 45+ laws (EU AI Act, IHR 2005, GDPR, HIPAA, Malabo Convention, and more) through our Regenerative Compliance Oracle (RCO)
+→ Regulatory Converged Architecture: Autonomous compliance with 45+ laws (EU AI Act, IHR 2005, GDPR, HIPAA, Malabo Convention, and more) through our Regenerative Compliance Oracle (RCO)
 
-→ Nuclear IP Stack: Six groundbreaking innovations:
+→ Core IP Stack: Six groundbreaking innovations:
   • Somatic Triad Authentication (offline biometric + behavioral + contextual)
   • Entangled Correlation Fusion (quantum-inspired pattern recognition from vague symptoms)
   • Adaptive Serenity Flow (anxiety-aware UX for high-stress scenarios)
@@ -121,13 +121,13 @@ P.S. We're actively seeking contributors, advisors, and pilot deployment partner
 
 *Revolutionary system combines offline-first AI with quantum-inspired intelligence and autonomous regulatory compliance for resource-constrained healthcare environments*
 
-**[CITY, DATE]** – Today marks the public launch of iLuminara, an open-source sovereign health intelligence platform that autonomously enforces compliance with 45+ global regulations while operating entirely offline. The system introduces six core innovations collectively known as the "Nuclear IP Stack," designed specifically for resource-constrained healthcare settings.
+**[CITY, DATE]** – Today marks the public launch of iLuminara, an open-source sovereign health intelligence platform that autonomously enforces compliance with 45+ global regulations while operating entirely offline. The system introduces six core innovations collectively known as the "Core IP Stack," designed specifically for resource-constrained healthcare settings.
 
 **Autonomous Regulatory Compliance**
 
 iLuminara's Regenerative Compliance Oracle (RCO) represents a breakthrough in compliance automation. The system continuously monitors operational patterns for "regulatory drift" using KL Divergence calculations and automatically generates compliance hotfixes when regulations change or violations are detected. Currently enforcing 7 major frameworks including the EU AI Act, IHR 2005, GDPR, HIPAA, and the Malabo Convention, the platform maintains a 100% compliance health score across all jurisdictions.
 
-**The Nuclear IP Stack**
+**The Core IP Stack**
 
 The platform is built on six foundational innovations:
 

@@ -1,0 +1,9 @@
+service: iluminara-functions
+provider:
+  name: aws
+  runtime: python3.9
+functions:
+  mpcPlanner:
+      handler: core/jepa_architecture/mpc_controller.handler
+      events:
+        - http: POST /plan

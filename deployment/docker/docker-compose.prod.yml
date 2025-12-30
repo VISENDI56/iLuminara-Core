@@ -1,0 +1,7 @@
+services:
+  core-engine:
+      image: iluminara/core:latest
+      runtime: nvidia
+      environment:
+        - DEPLOYMENT_MODE=DOCKER
+      restart: always

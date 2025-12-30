@@ -77,7 +77,7 @@ def render():
     
     with col1:
         st.markdown("""
-        **Nuclear IP Stack:**
+        **Core IP Stack:**
         - 🔐 STA: Somatic Triad Authentication  
         - 🔮 ECF: Entangled Correlation Fusion
         - 🎨 ASF: Adaptive Serenity Flow

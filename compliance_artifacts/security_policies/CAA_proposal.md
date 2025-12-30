@@ -2,7 +2,7 @@
 **Status:** ACTIVE | **Enforcement:** Crypto-Shredder
 
 ## 1. Policy Statement
-iLuminara strictly prohibits the transfer of "Nuclear IP" (Source Code, Weights) to external partners. Instead, we offer a **Controlled Access Area (CAA)**.
+iLuminara strictly prohibits the transfer of "Core IP" (Source Code, Weights) to external partners. Instead, we offer a **Controlled Access Area (CAA)**.
 
 ## 2. The CAA Mechanism
 - **No Transfer:** Partners never receive the code.

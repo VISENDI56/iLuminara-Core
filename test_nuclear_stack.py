@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Integration test for the Nuclear IP Stack components.
+Integration test for the Core IP Stack components.
 Tests all proprietary innovations (IP-02 through IP-06).
 """
 
@@ -264,7 +264,7 @@ def test_golden_thread():
 def main():
     """Run all integration tests."""
     print("═══════════════════════════════════════════════════════════════")
-    print("🧪 NUCLEAR IP STACK INTEGRATION TESTS")
+    print("🧪 Core IP STACK INTEGRATION TESTS")
     print("═══════════════════════════════════════════════════════════════")
     print()
     
@@ -299,7 +299,7 @@ def main():
     print()
     
     if failed == 0:
-        print("🎉 ALL TESTS PASSED - NUCLEAR IP STACK OPERATIONAL")
+        print("🎉 ALL TESTS PASSED - Core IP STACK OPERATIONAL")
         return 0
     else:
         print("⚠️  SOME TESTS FAILED - REVIEW REQUIRED")

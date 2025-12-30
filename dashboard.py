@@ -58,8 +58,8 @@ fusion = ingestor.fuse_data_streams()
 tab1, tab2 = st.tabs(["🏛️ Command Center", "🏛️ Living IMS Dashboard"])
 
 with tab1:
-    # --- 1. THE NUCLEAR IP STACK STATUS ---
-    st.subheader("📡 NUCLEAR IP STACK STATUS")
+    # --- 1. THE Core IP STACK STATUS ---
+    st.subheader("📡 Core IP STACK STATUS")
     c1, c2, c3, c4 = st.columns(4)
 
     with c1:
@@ -118,7 +118,7 @@ Time Lag: {fusion.get('physics', {}).get('time_lag_h', 0.0)} hours
         
         if fusion.get('fusion_score', 0) > 0.8:
             st.error(f"🚨 **CRITICAL CONVERGENCE**\n{fusion.get('fusion_note', 'No fusion note available')}")
-            if st.button("🔴 AUTHORIZE NUCLEAR RESPONSE", type="primary"):
+            if st.button("🔴 AUTHORIZE Core RESPONSE", type="primary"):
                 state['protocol_status'] = "AUTHORIZED"
                 st.toast("Response Authorized. Logistics Dispatched.")
                 time.sleep(1)

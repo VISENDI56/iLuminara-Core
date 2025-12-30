@@ -16,7 +16,7 @@ Thank you for your interest in contributing to iLuminara Sovereign Health Interf
 1. **Read the Code of Conduct**: Please review our [Code of Conduct](./CODE_OF_CONDUCT.md)
 2. **Check Existing Issues**: Search for existing issues before creating new ones
 3. **Review Documentation**: Familiarize yourself with the [project documentation](https://visendi56.mintlify.app/)
-4. **Understand the Architecture**: Read the [Nuclear IP Stack documentation](./NUCLEAR_IP_STACK.md)
+4. **Understand the Architecture**: Read the [Core IP Stack documentation](./Core_IP_STACK.md)
 
 ## 🚀 Getting Started
 
@@ -43,7 +43,7 @@ pip install -r requirements.txt
 pip install -r requirements-test.txt
 
 # Run verification tests
-python scripts/verify_singularity.py
+python scripts/verify_Converged Architecture.py
 python scripts/verify_49_laws.py
 python scripts/system_seal.py
 ```
@@ -189,7 +189,7 @@ pytest tests/ -v
 
 # Run security checks
 python scripts/verify_49_laws.py
-python scripts/verify_singularity.py
+python scripts/verify_Converged Architecture.py
 ```
 
 ### 3. Submit Pull Request

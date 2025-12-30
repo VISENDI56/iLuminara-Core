@@ -32,7 +32,7 @@ iLuminara is a **sovereign health intelligence platform** that transforms vague 
 
 ---
 
-## 🎯 Key Innovations (Nuclear IP Stack)
+## 🎯 Key Innovations (Core IP Stack)
 
 | Innovation | Description | Status |
 |------------|-------------|--------|
@@ -171,7 +171,7 @@ pip install -r requirements.txt
 
 # 4. Run verification tests
 python scripts/verify_49_laws.py
-python scripts/verify_singularity.py
+python scripts/verify_Converged Architecture.py
 python scripts/system_seal.py
 
 # 5. Launch demo dashboard
@@ -213,8 +213,8 @@ docker-compose up -d
 ### Run Verification Suite
 
 ```bash
-# 1. Regulatory Singularity Verification
-python scripts/verify_singularity.py
+# 1. Regulatory Converged Architecture Verification
+python scripts/verify_Converged Architecture.py
 # ✅ 10/10 tests passed (Drift detection, auto-patch, multi-law harmonization)
 
 # 2. 49-Law Quantum Nexus Audit
@@ -242,7 +242,7 @@ pytest tests/ -v
 
 # Run specific test modules
 pytest tests/test_integration.py
-pytest tests/test_nuclear_stack.py
+pytest tests/test_Core_stack.py
 ```
 
 ---
@@ -254,7 +254,7 @@ pytest tests/test_nuclear_stack.py
 | **Mintlify Docs** | Complete technical documentation | [visendi56.mintlify.app](https://visendi56.mintlify.app/) |
 | **Demo Guide** | Interactive dashboard walkthrough | [`DEMO_README.md`](./DEMO_README.md) |
 | **Deployment Summary** | Production deployment guide | [`DEMO_DEPLOYMENT_SUMMARY.md`](./DEMO_DEPLOYMENT_SUMMARY.md) |
-| **Nuclear IP Stack** | Innovation specifications | [`NUCLEAR_IP_STACK.md`](./NUCLEAR_IP_STACK.md) |
+| **Core IP Stack** | Innovation specifications | [`Core_IP_STACK.md`](./Core_IP_STACK.md) |
 | **API Documentation** | API reference & endpoints | [`API_DOCUMENTATION.md`](./API_DOCUMENTATION.md) |
 | **Security Policy** | Vulnerability reporting | [`SECURITY.md`](./SECURITY.md) |
 | **Contributing Guide** | How to contribute | [`CONTRIBUTING.md`](./CONTRIBUTING.md) |
@@ -310,7 +310,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 ### Current Status: **Phase 3 Complete** ✅
 
 - [x] Phase 1: Mintlify documentation structure
-- [x] Phase 2: Regulatory Singularity (RCO + 45-Law Nexus)
+- [x] Phase 2: Regulatory Converged Architecture (RCO + 45-Law Nexus)
 - [x] Phase 3: System Seal (end-to-end integration verification)
 - [x] Interactive Streamlit demo dashboard
 
@@ -364,7 +364,7 @@ Built with:
 
 <div align="center">
 
-**🏛️ THE FORTRESS IS SEALED. THE SINGULARITY IS COMPLETE. ALL LAWS VERIFIED. THE DEMO BREATHES.**
+**🏛️ THE FORTRESS IS SEALED. THE Converged Architecture IS COMPLETE. ALL LAWS VERIFIED. THE DEMO BREATHES.**
 
 Made with ❤️ by [VISENDI56](https://github.com/VISENDI56)
 

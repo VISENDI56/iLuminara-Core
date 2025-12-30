@@ -3,7 +3,7 @@ Streamlit Hyper-Law Oracle: Live RCO Simulation & Clause-Level Law Evolution
 
 - Visualizes clause-level compliance, amplification, and proposals
 - Demonstrates Law-as-Living-Code, SAE, RCCP, SLEP
-- History-rewriting interface for 2026 regulatory singularity
+- History-rewriting interface for 2026 regulatory Converged Architecture
 """
 import streamlit as st
 import json
@@ -26,7 +26,7 @@ from governance_kernel.rco_engine import RegenerativeComplianceOracle
 from state.shared_memory import load_state, get_shared, set_shared
 
 st.set_page_config(page_title="Hyper-Law Oracle", page_icon="⚖️", layout="wide")
-st.title("⚖️ Hyper-Law Oracle — Regenerative Compliance Singularity")
+st.title("⚖️ Hyper-Law Oracle — Regenerative Compliance Converged Architecture")
 
 st.markdown("""
 **Welcome to the world's first living law engine.**

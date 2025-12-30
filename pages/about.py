@@ -11,7 +11,7 @@ def render():
     
     st.markdown("""
     This Streamlit dashboard provides an **interactive demonstration** of the iLuminara 
-    Sovereign Health Interface's core capabilities. It showcases the Nuclear IP Stack 
+    Sovereign Health Interface's core capabilities. It showcases the Core IP Stack 
     and Governance Kernel in action through simulated scenarios.
     """)
     
@@ -24,7 +24,7 @@ def render():
     
     ✅ **Concept Validation**: Proves the technical feasibility of self-governing compliance
     
-    ✅ **Educational Tool**: Helps stakeholders understand the Nuclear IP Stack architecture
+    ✅ **Educational Tool**: Helps stakeholders understand the Core IP Stack architecture
     
     ✅ **Sandbox Environment**: Safe environment to experiment with system parameters
     """)
@@ -84,13 +84,13 @@ iLuminara-Core/
 │
 ├── scripts/                    # Verification & testing
 │   ├── system_seal.py         # End-to-end integration test
-│   ├── verify_singularity.py  # RCO verification
+│   ├── verify_Converged Architecture.py  # RCO verification
 │   └── verify_49_laws.py      # Law registry audit
 │
 ├── docs/                       # Mintlify documentation
 │   ├── introduction.mdx
 │   ├── architecture.mdx
-│   └── nuclear-ip/            # IP Stack docs
+│   └── Core-ip/            # IP Stack docs
 │
 ├── pages/                      # Streamlit demo pages
 │   ├── overview.py
@@ -141,7 +141,7 @@ iLuminara-Core/
     st.markdown("""
     - **Documentation**: [https://visendi56.mintlify.app/](https://visendi56.mintlify.app/)
     - **Repository**: [github.com/VISENDI56/iLuminara-Core](https://github.com/VISENDI56/iLuminara-Core)
-    - **Nuclear IP Stack**: See docs/NUCLEAR_IP_STACK.md
+    - **Core IP Stack**: See docs/Core_IP_STACK.md
     - **Security**: See SECURITY.md and SECURITY_SUMMARY.md
     """)
     
@@ -152,7 +152,7 @@ iLuminara-Core/
     st.info("""
     **To explore further:**
     
-    1. **Run Verification Scripts**: Execute system_seal.py, verify_singularity.py, verify_49_laws.py
+    1. **Run Verification Scripts**: Execute system_seal.py, verify_Converged Architecture.py, verify_49_laws.py
     2. **Review Documentation**: Read the Mintlify docs for architectural details
     3. **Experiment with Demo**: Adjust parameters in each module to see system behavior
     4. **Contact for Production**: Reach out to discuss full deployment architecture
@@ -161,7 +161,7 @@ iLuminara-Core/
     st.markdown("---")
     
     st.success("""
-    **🏛️ The Fortress is Sealed. The Singularity is Complete.**
+    **🏛️ The Fortress is Sealed. The Converged Architecture is Complete.**
     
     This demo represents the technical foundation for a $85M valuation thesis: 
     a self-governing compliance system capable of autonomous regulatory management.
