@@ -1,54 +1,21 @@
 # Contributing to iLuminara
 
-Thank you for your interest in contributing to iLuminara Sovereign Health Interface! This document provides guidelines and best practices for contributing to the project.
+## The Sovereign Standard
+iLuminara is not just software; it is critical infrastructure for life. Code must meet **ISO 42001** and **IEC 62304** (Medical Software) standards.
 
-## 🌟 Ways to Contribute
+## 1. Architectural Principles
+* **JEPA over RL:** Always prefer Model-Predictive Control. Minimizing energy (risk) is more important than maximizing reward.
+* **Offline-First:** Every feature must function without an internet connection (`Ghost-Mode`).
+* **Constitutional:** All actions must pass the `OmniLawMatrix`.
 
-- **Report Bugs**: Submit detailed bug reports via GitHub Issues
-- **Suggest Features**: Propose new features or enhancements
-- **Improve Documentation**: Fix typos, clarify instructions, add examples
-- **Submit Code**: Fix bugs, implement features, improve performance
-- **Write Tests**: Add test coverage for existing functionality
-- **Review Pull Requests**: Help review and test community contributions
+## 2. Development Workflow
+1. **Fork & Branch:** Use `feature/your-feature-name`.
+2. **Stress Test:** Run `make stress-test` (Ghost-Nexus) to ensure your changes don't destabilize the MPC.
+3. **Audit:** Ensure no secrets are committed. Run `make audit`.
 
-## 📋 Before You Start
-
-1. **Read the Code of Conduct**: Please review our [Code of Conduct](./CODE_OF_CONDUCT.md)
-2. **Check Existing Issues**: Search for existing issues before creating new ones
-3. **Review Documentation**: Familiarize yourself with the [project documentation](https://visendi56.mintlify.app/)
-4. **Understand the Architecture**: Read the [Core IP Stack documentation](./Core_IP_STACK.md)
-
-## 🚀 Getting Started
-
-### 1. Fork and Clone
-
-```bash
-# Fork the repository on GitHub, then clone your fork
-git clone https://github.com/YOUR_USERNAME/iLuminara-Core.git
-cd iLuminara-Core
-
-# Add upstream remote
-git remote add upstream https://github.com/VISENDI56/iLuminara-Core.git
-```
-
-### 2. Set Up Development Environment
-
-```bash
-# Create virtual environment
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-pip install -r requirements-test.txt
-
-# Run verification tests
-python scripts/verify_Converged Architecture.py
-python scripts/verify_49_laws.py
-python scripts/system_seal.py
-```
-
-### 3. Create a Branch
+## 3. Pull Request Process
+* PRs must include a "Sovereignty Impact Assessment."
+* Code must include Pydantic models for all data exchange.
 
 ```bash
 # Create a descriptive branch name

@@ -159,6 +159,12 @@
       "pages": [
         "business/valuation_economics"
       ]
+    },
+    {
+      "group": "Operations & Simulation",
+      "pages": [
+        "simulation/ghost_nexus"
+      ]
     }
   ],
   "redirects": [
