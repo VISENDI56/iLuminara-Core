@@ -1,17 +1,18 @@
 class AgentToolRegistry:
     """
-    Ensures agents have direct access to business-value tools.
+    Grants Agents access to Real Business Value tools.
     """
     def __init__(self):
         self.tools = {
             "bionemo_design": "ml_health.bionemo_genomics.evo2_engine",
             "logistics_route": "infrastructure.logistics.cuopt_agent",
             "legal_compliance": "governance_kernel.omni_law_interceptor",
-            "spatial_query": "geospatial_esri.native_geoghost"
+            "spatial_query": "geospatial_esri.native_geoghost",
+            "cloud_distill": "ml_ops.model_foundry.nebius_distiller",  # Added Phase 60
+            "inference_router": "infrastructure.inference_router.hybrid_controller"  # Added Phase 60
         }
 
-    def get_tool(self, tool_name, agent_clearance_level):
+    def access_tool(self, tool_name):
         if tool_name in self.tools:
-            print(f"   [Registry] Granting {tool_name} access to Agent (Level {agent_clearance_level})")
-            return self.tools[tool_name]
-        raise PermissionError("Tool not found or unauthorized.")
+            return f"ACCESS_GRANTED: {self.tools[tool_name]}"
+        return "ACCESS_DENIED"
