@@ -1,0 +1,8 @@
+{
+  "timestamp": "2025-12-30 20:43:10.497075",
+  "assets": {
+    "core/jepa_architecture/mpc_controller.py": "4f4af30f14dee1c0b09d1baf4c8618eb0ec9936d0877d37affb305e8f89addfa",
+    "governance_kernel/omni_law_interceptor.py": "7a696759a9b24d604bfb654c1d75785da0d9c8c4d3667905a077e23b70c62d4d",
+    "docs/product/technical_prd.md": "da7cdb7fcb8135bd9d0a217868db8e10a0a85022c5d096fd6468be36f900511c"
+  }
+}
