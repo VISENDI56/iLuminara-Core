@@ -84,6 +84,69 @@
         "governance/pabs-federated",
         "core/zkp-circom"
       ]
+    },
+    {
+      "group": "1. Biological Apex",
+      "pages": [
+        "ml_health/bionemo_genomics/evo2_engine"
+      ]
+    },
+    {
+      "group": "2. Kinetic & Sensory",
+      "pages": [
+        "infrastructure/holoscan_edge/pipeline_25h1",
+        "infrastructure/logistics/cuopt_agent"
+      ]
+    },
+    {
+      "group": "3. Spatial Omniscience",
+      "pages": [
+        "geospatial_esri/native_geoghost"
+      ]
+    },
+    {
+      "group": "4. Sovereign Governance",
+      "pages": [
+        "governance_kernel/omni_law_interceptor",
+        "governance/pabs_protocol/validator"
+      ]
+    },
+    {
+      "group": "5. Humanitarian Substrate",
+      "pages": [
+        "core/refi_substrate/besu_client",
+        "core/privacy_zkp/eligibility_circuit"
+      ]
+    },
+    {
+      "group": "6. Connectivity & Ghost-Mesh",
+      "pages": [
+        "infrastructure/aerial_6g/polymorphic_mesh"
+      ]
+    },
+    {
+      "group": "7. Educational Sovereignty",
+      "pages": [
+        "education/knowledge_mesh/tutor_agent"
+      ]
+    },
+    {
+      "group": "8. Agricultural & Climate",
+      "pages": [
+        "infrastructure/agro_voltaics/modulus_controller"
+      ]
+    },
+    {
+      "group": "9. Tele-Justice",
+      "pages": [
+        "governance/tele_justice/confidential_enclave"
+      ]
+    },
+    {
+      "group": "10. Circularity & Autarky",
+      "pages": [
+        "core/circular_economy/reverse_logistics"
+      ]
     }
   ],
   "redirects": [
