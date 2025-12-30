@@ -33,3 +33,4 @@ google-cloud-pubsub>=2.18.0
 google-cloud-aiplatform>=1.36.0
 pytest-cov>=4.1.0
 openai>=1.0.0  # Nebius uses OpenAI-compatible API
+cyclonedx-bom>=3.11.0

@@ -167,6 +167,12 @@
       "pages": [
         "simulation/ghost_nexus"
       ]
+    },
+    {
+      "group": "Governance & Compliance",
+      "pages": [
+        "SECURITY"
+      ]
     }
   ],
   "redirects": [

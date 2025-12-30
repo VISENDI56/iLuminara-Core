@@ -1,32 +1,18 @@
 # Security Policy
 
 ## Supported Versions
-We actively support the following versions with security updates:
-- Latest release
-- Previous major version
+| Version | Supported |
+| :--- | :--- |
+| 1.0.x | :white_check_mark: |
+| < 1.0 | :x: |
 
 ## Reporting a Vulnerability
-If you discover a security vulnerability in iLuminara, please report it responsibly:
+Do **NOT** open a public issue.
+1. Encrypt your report using our PGP Key (ID: 0xILUM_SEC).
+2. Email: security@visendi56.io
+3. We acknowledge receipt within 24 hours (ISO 29147 SLA).
 
-### Contact
-- **Email:** security@iluminara.health (PGP key available)
-- **Response Time:** Within 48 hours
-- **Disclosure:** We follow responsible disclosure practices
-
-### Process
-1. Report the vulnerability privately via email
-2. We acknowledge receipt within 48 hours
-3. We investigate and provide updates within 7 days
-4. We release fixes as soon as possible
-5. We credit you (if desired) after public disclosure
-
-### Scope
-- iLuminara Core Application
-- API endpoints
-- Data processing pipelines
-- Humanitarian surveillance algorithms
-
-### Safe Harbor
-We consider security research conducted under this policy authorized. We will not pursue legal action against you if you act in good faith.
-
-Thank you for helping keep iLuminara secure!
+## Supply Chain Integrity
+* All releases are signed with GPG.
+* We publish a CycloneDX SBOM for every build.
+* We enforce "Two-Person Rule" on PRs merging to `main`.
