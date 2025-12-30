@@ -13,6 +13,12 @@
       ]
     },
     {
+      "group": "Product Specifications",
+      "pages": [
+        "product/technical_prd"
+      ]
+    },
+    {
       "group": "47-Framework Governance",
       "pages": [
         "governance/omni-law-matrix",
