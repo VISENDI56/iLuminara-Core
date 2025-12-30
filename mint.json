@@ -21,6 +21,7 @@
     {
       "group": "47-Framework Governance",
       "pages": [
+        "governance/omni_law_constitution",
         "governance/omni-law-matrix",
         "governance/living-certification",
         "governance/compliance-oracle"
