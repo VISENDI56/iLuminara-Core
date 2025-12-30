@@ -107,3 +107,7 @@ iLuminara is a localized Health Intelligence Operating System designed for resou
 ### Domain: Cloud Hybridization (Nebius)
 21. **Given** the local IGX Orin is overheating (>90% load), **When** a non-sensitive student query arrives, **Then** the system offloads inference to Nebius Token Factory with <200ms latency.
 22. **Given** a new Swahili medical dataset is available, **When** uploaded, **Then** Nebius automatically fine-tunes a new model version and pushes the quantised weights to the edge node.
+
+### Domain: Cognitive Architecture (Pixel & Recursive)
+23. **Given** a handwritten prescription in a rare dialect, **When** ingested, **Then** the `RetinaInputLayer` processes it as raw pixels (bypassing text tokenizers) to extract semantic meaning.
+24. **Given** a complex resource allocation puzzle, **When** planning, **Then** the `TinyRecursiveModel` (7M params) iterates 16 times on the latent state to find the solution, replacing heavy LLM reasoning.
