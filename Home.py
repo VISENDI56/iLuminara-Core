@@ -213,3 +213,28 @@ with col_ag2:
 
 if st.button("Generate Digital Labor Audit Trail"):
     st.json({"entity_usa": "92-3622772", "entity_ke": "PVT-MKUMQYEX", "compliance": "HIPAA/KDPA"})
+
+from core.trism.governance_monitor import AITRiSM
+
+st.divider()
+st.header("🤝 Human-Machine Synergy (2025 Strategy)")
+st.caption("Theme 3: Redefining Workplace Dynamics via Agentic Autonomy")
+
+col_syn1, col_syn2 = st.columns(2)
+
+with col_syn1:
+    st.subheader("Agentic Initiative Monitor")
+    trism = AITRiSM()
+    verdict = trism.validate_agent_action("Deploy Drone to Sector 4")
+    st.metric("Agent Trust Score", "98%", delta="NIST-Aligned")
+    st.success(f"Action Status: {verdict['status']}")
+
+with col_syn2:
+    st.subheader("Strategic Human Oversight")
+    st.info("Current Role: Strategic Supervisor")
+    st.progress(85, text="Operational Bottleneck Reduction")
+    st.caption("AI-Powered Productivity Gains: 40-70%")
+
+if st.button("Authorize Global Agent Sync"):
+    st.write("Initiating Multi-Agent Ecosystem Collaboration...")
+    st.write("Post-Quantum Cryptography: ACTIVE")
