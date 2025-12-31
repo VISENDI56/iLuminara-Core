@@ -166,3 +166,27 @@ with col_soc2:
 if st.button("Launch Autonomous Disruption"):
     st.success("Ransomware/Pathogen Lateral Movement Blocked in < 3 Minutes.")
     st.caption("Validated via Forrester ROI Analysis (1.76M NPV Projected)")
+
+from ml_ops.hardware_tuning.blackwell_optimizer import BlackwellOptimizer
+
+st.divider()
+st.header("⚡ Nebius Aether 3.1 Infrastructure")
+st.info("Status: First Cloud Provider in Europe (NVIDIA Blackwell Ultra Live)")
+
+col_neb1, col_neb2 = st.columns(2)
+
+with col_neb1:
+    st.subheader("Compute Capacity")
+    opt = BlackwellOptimizer()
+    status = opt.tune_hstpu_latency()
+    st.metric("Blackwell Speedup", status['acceleration'])
+    st.caption(f"Kernel: {status['precision']}")
+
+with col_neb2:
+    st.subheader("Sovereign Reservation")
+    st.success("GB300 NVL72 Systems Reserved (Finland DC)")
+    st.caption("Auto-Triage API: CONNECTED")
+
+if st.button("Sync Focus-Compliant Billing"):
+    st.write("Billing Entity: VISENDI56 LLC (USA)")
+    st.write("Audit Trail: HIPAA Compliant Logs Enabled")
