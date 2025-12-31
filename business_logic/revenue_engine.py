@@ -11,6 +11,7 @@
 
 import datetime
 from typing import Dict, List, Optional
+from core.config.corporate_identity import visendi_identity, get_legal_footer
 
 class SovereignPricingModel:
     """
@@ -103,7 +104,8 @@ class SovereignPricingModel:
             "bio_credit_subsidy_applied": f"{discount_percent * 100:.1f}%",
             "final_total_usd": f"${final_total:,.2f} {'/ year' if annual else '/ month'}",
             "quote_generated": datetime.datetime.utcnow().isoformat() + "Z",
-            "sovereign_note": "Data Never Leaves Jurisdiction – Only Gradients Flow"
+            "sovereign_note": "Data Never Leaves Jurisdiction – Only Gradients Flow",
+            "legal_footer": get_legal_footer("KENYA")  # Default to Kenya entity
         }
 
     def calculate_outcome_subsidy(self, prediction_error):
