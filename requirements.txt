@@ -8,5 +8,6 @@ streamlit==1.31.0
 python-jose[cryptography]==3.3.0  # For JWT
 cyclonedx-bom==3.11.0
 z3-solver==4.12.2
+protobuf==4.25.8  # Security patch for CVE-2025-4565
 # NVIDIA Libraries (Conditional Install in Makefile)
 # holoscan-sdk==0.6.0
