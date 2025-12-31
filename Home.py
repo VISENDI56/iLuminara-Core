@@ -190,3 +190,26 @@ with col_neb2:
 if st.button("Sync Focus-Compliant Billing"):
     st.write("Billing Entity: VISENDI56 LLC (USA)")
     st.write("Audit Trail: HIPAA Compliant Logs Enabled")
+
+from core.agentic_ops.agent_governance import registry
+
+st.divider()
+st.header("🤖 Agentic Operations & Digital Labor")
+st.caption("Strategic Imperative: Automating Global Business Services (IBM Architecture)")
+
+col_ag1, col_ag2 = st.columns(2)
+
+with col_ag1:
+    st.subheader("Active Digital Labor")
+    for agent in registry.agents:
+        st.write(f"• **{agent.role}** ({agent.jurisdiction})")
+    st.caption("IAM: Microsoft Entra ID Integrated")
+
+with col_ag2:
+    st.subheader("Business Impact (2027 Projections)")
+    st.metric("Finance: Forecast Accuracy", "+24%", delta="Target")
+    st.metric("HR: Training Effectiveness", "+30%", delta="Impact")
+    st.metric("O2C: Cycle Time Reduction", "-51%", delta="Active")
+
+if st.button("Generate Digital Labor Audit Trail"):
+    st.json({"entity_usa": "92-3622772", "entity_ke": "PVT-MKUMQYEX", "compliance": "HIPAA/KDPA"})
