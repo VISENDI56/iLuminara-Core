@@ -17,6 +17,7 @@ st.set_page_config(layout="wide", page_title="iLuminara Home")
 
 st.title("iLuminara Enterprise OS")
 st.markdown("### Status: **Nuclear IP Stack Active**")
+st.info("Status: ORACLE-STABLE | Hardware: Blackwell B300 | Security: IRON DOME ACTIVE")
 
 # Architecture Indicators
 c1, c2, c3, c4 = st.columns(4)
