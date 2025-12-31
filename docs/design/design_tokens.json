@@ -1,0 +1,24 @@
+{
+    "identity": {
+        "name": "iLuminara Sovereign",
+        "tone": "Compassionate, Authoritative, Calm"
+    },
+    "palette": {
+        "primary_purple": "#6A1B9A", // Dignity & Wisdom
+        "accent_gold": "#FFD700",    // Sovereignty & Value
+        "calm_teal": "#009688",      // Healing & Anxiety Reduction
+        "alert_red": "#D32F2F",      // Only for Critical Life Threats
+        "neutral_bg": "#FAFAFA"      // Reduced Glare
+    },
+    "typography": {
+        "header": "Merriweather (Humanist Serif)",
+        "body": "Inter (Clean Sans-serif)"
+    },
+    "components": {
+        "decision_card": {
+            "max_options": 3,
+            "shadow": "soft",
+            "animation": "slow_fade_in"
+        }
+    }
+}
