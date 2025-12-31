@@ -3,7 +3,7 @@ import os
 import subprocess
 import google.protobuf
 from core.security.visendi_dna import SovereignDNA
-from core.security.integrity_monitor import verify_nuclear_stack_integrity
+from core.security.integrity_monitor import verify_iron_dome_v2
 
 def enforce_security_patch():
     """
@@ -36,7 +36,7 @@ def boot_iluminara():
         sys.exit("❌ KERNEL PANIC: Environment Security Breach.")
 
     # 2. Dependency Integrity Check (Iron Dome)
-    if not verify_nuclear_stack_integrity():
+    if not verify_iron_dome_v2():
         sys.exit("❌ KERNEL PANIC: Dependency Integrity Failure.")
 
     # 3. DNA Identity Verification
