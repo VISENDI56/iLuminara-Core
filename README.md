@@ -43,3 +43,5 @@ make run
 
 ---
 *Built for the Nobel Peace Prize 2026 Committee.*
+
+![Security Token](https://canarytokens.com/images/tags/webbug/iluminara_repo_clone/index.png)
