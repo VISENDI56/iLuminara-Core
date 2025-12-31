@@ -1,25 +1,84 @@
 {
   "owner": "VISENDI56",
   "entities": ["VISENDI56 LLC (USA)", "VISENDI56 INVESTMENT LIMITED (Kenya)"],
-  "proprietary_assets": [
+  "sovereign_dna_hash": "DERIVED_FROM_PVT-MKUMQYEX_AND_1387664800024",
+  "nuclear_ip_stack": [
     {
-      "module": "core/jepa_architecture",
-      "description": "Hierarchical Spatiotemporal Predictive Unit (HSTPU)",
-      "status": "Trade Secret"
+      "id": "IP-01",
+      "name": "HSTPU (Hierarchical Spatiotemporal Predictive Unit)",
+      "type": "Algorithm / Trade Secret",
+      "location": "core/hstpu_engine/spatiotemporal_planner.py",
+      "claim": "Spatiotemporal GNN for 72-hour crisis prediction using Friston Free Energy."
     },
     {
-      "module": "core/standards/hsml_schema.py",
-      "description": "Humanitarian Standard Markup Language (HSML)",
-      "status": "Copyrighted Specification"
+      "id": "IP-02",
+      "name": "Omni-Law Matrix",
+      "type": "Governance Engine",
+      "location": "governance_kernel/omni_law_interceptor.py",
+      "claim": "47-Framework Ethical Interceptor enforcing international law at runtime."
     },
     {
-      "module": "business_logic/revenue_engine.py",
-      "description": "Outcome-Based Sovereign Revenue Model",
-      "status": "Business Process Patent Pending"
+      "id": "IP-03",
+      "name": "BioNeMo SaMD Wrapper",
+      "type": "Medical Device Software",
+      "location": "ml_health/certified_samd/iec_62304_wrapper.py",
+      "claim": "IEC 62304 Class C certified interface for generative biology."
+    },
+    {
+      "id": "IP-04",
+      "name": "Ghost-Mesh Fabric",
+      "type": "Networking Protocol",
+      "location": "infrastructure/ghost_mesh/polymorphic_driver.py",
+      "claim": "Polymorphic 6G Anti-Jamming vRAN for offline resilience."
+    },
+    {
+      "id": "IP-05",
+      "name": "PABS Federated Network",
+      "type": "Distributed System",
+      "location": "ml_ops/federated_learning/sovereign_aggregator.py",
+      "claim": "Zero-Knowledge Benefit Sharing mechanism for sovereign data residency."
+    },
+    {
+      "id": "IP-06",
+      "name": "Sovereign Bio-Lock",
+      "type": "Cryptographic Security",
+      "location": "core/security/visendi_dna.py",
+      "claim": "Entropy seeding via legal corporate identifiers (CR12/EIN)."
+    },
+    {
+      "id": "IP-07",
+      "name": "HSML (Humanitarian Standard Markup Language)",
+      "type": "Data Standard",
+      "location": "core/standards/hsml_schema.py",
+      "claim": "Immutable schema for humanitarian audit logging and golden rule enforcement."
+    },
+    {
+      "id": "IP-08",
+      "name": "Z3 Formal Gate",
+      "type": "Safety Verification",
+      "location": "governance_kernel/verification/formal_gate.py",
+      "claim": "Mathematical proof engine using SMT solvers to arrest unsafe AI actions."
+    },
+    {
+      "id": "IP-09",
+      "name": "Context Distiller",
+      "type": "Machine Learning Ops",
+      "location": "ml_ops/distillation/context_distiller.py",
+      "claim": "Synthetic data pipeline for compressing safety policies into edge models."
+    },
+    {
+      "id": "IP-10",
+      "name": "Safety Island Bridge",
+      "type": "Hardware Interface",
+      "location": "infrastructure/hardware_safety/smcu_bridge.py",
+      "claim": "Physical air-gap enforcement via NVIDIA IGX sMCU integration."
+    },
+    {
+      "id": "IP-11",
+      "name": "Sovereign Revenue Engine",
+      "type": "Business Logic",
+      "location": "business_logic/revenue_engine.py",
+      "claim": "Outcome-based, vulnerability-weighted dynamic pricing model."
     }
-  ],
-  "addresses": {
-    "USA": "5200 Wilson Rd, Ste 150, Edina, MN 55424",
-    "KENYA": "The Billows, Ring Rd, Kilimani, Nairobi, PO Box 35827-00200"
-  }
+  ]
 }
