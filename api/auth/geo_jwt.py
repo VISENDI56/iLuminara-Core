@@ -1,7 +1,8 @@
 import jwt
 from datetime import datetime, timedelta
+from core.config.settings import settings
 
-SECRET_KEY = "SOVEREIGN_KEY_2026"
+SECRET_KEY = settings.JWT_SECRET_KEY
 
 class GeoJWT:
     """
