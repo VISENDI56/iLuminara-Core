@@ -1,8 +1,4 @@
-
-Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.
-
-
-  You can now view your Streamlit app in your browser.
-
-  URL: http://0.0.0.0:8501
-
+Traceback (most recent call last):
+  File "/home/codespace/.python/current/bin/streamlit", line 3, in <module>
+    from streamlit.web.cli import main
+ModuleNotFoundError: No module named 'streamlit.web'

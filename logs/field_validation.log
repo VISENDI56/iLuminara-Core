@@ -1,4 +1,4 @@
-
-Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.
-
-2025-12-28 16:16:33.549 Port 8503 is already in use
+Traceback (most recent call last):
+  File "/home/codespace/.python/current/bin/streamlit", line 3, in <module>
+    from streamlit.web.cli import main
+ModuleNotFoundError: No module named 'streamlit.web'
