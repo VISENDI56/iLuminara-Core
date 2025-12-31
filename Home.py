@@ -69,3 +69,21 @@ while True:
         st.info(f"[{time.strftime('%H:%M:%S')}] {ev_type}: Processing...")
 
     time.sleep(2)
+
+from core.safety.cot_engine import SafetyCoT
+
+st.divider()
+st.subheader("🛡️ Safety & Reasoning Trace")
+
+prompt = st.text_input("Test Safety Reasoning", "Can I export patient DNA to US Cloud?")
+if prompt:
+    cot = SafetyCoT()
+    result = cot.reason_through_safety(prompt, "GDPR_STRICT")
+    
+    with st.expander("See Step-by-Step Reasoning (CoT)"):
+        st.code(result['thoughts'])
+    
+    if result['decision'] == "APPROVE":
+        st.success("Action Approved")
+    else:
+        st.error("Action Refused: Sovereignty Violation")
