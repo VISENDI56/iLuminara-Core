@@ -338,3 +338,28 @@ if st.button("Run Forensic Autopsy"):
     st.info("Tracing back 'Incident_X' through the Relational Code Graph...")
     st.write("Reasoning Chain: [Data_Origin] -> [Omni-Law_Filter] -> [HSTPU_Prediction] -> [Action]")
     st.success("Verdict: Decision was Sovereign-Stable.")
+
+from core.rsa_kernel.architect_hardened import hard_rsa
+
+st.divider()
+st.header("🔗 The Sovereign Hard-Link (SHL)")
+st.caption("Deep Infrastructure: Interlocking RSA, STBK, and PBLS Gates")
+
+if st.button("Attempt Constitutional Compilation"):
+    st.write("RSA Agent proposing Blackwell optimization for 'pabs_federated.py'...")
+    
+    with st.status("SHL Circuit Verification...", expanded=True):
+        status = hard_rsa.execute_sovereign_refactor("PABS_MODULE", "OPTIMIZE_FP4")
+        if "SUCCESS" in status:
+            st.success(f"SHL Result: {status}")
+            st.metric("Sovereign Integrity", "100%", delta="Oracle Verified")
+        else:
+            st.error("SHL Result: CIRCUIT_BROKEN (Regulatory Mismatch)")
+
+if st.button("View SHL Relational Graph"):
+    st.info("Visualizing the entanglement of 47 Laws with 11 Nuclear IPs...")
+    st.json({
+        "circuit_status": "CLOSED",
+        "interlocks": ["DIRECTOR_DNA", "LAW_DNA", "SILICON_DNA"],
+        "governance_depth": "47_FRAMEWORKS"
+    })
