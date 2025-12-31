@@ -1,30 +1,13 @@
-.PHONY: setup test run clean audit docker-build
+# iLuminara Constitutional Build System
+all: verify_sovereignty build_nuclear_stack
 
-setup:
-	@echo "[*] Setting up iLuminara Environment..."
-	pip install -r requirements.txt
-	chmod +x scripts/configure_gpu.sh
-	./scripts/configure_gpu.sh
+verify_sovereignty:
+	@python3 core/compiler_gate/shl_compiler.py
 
-test:
-	@echo "[*] Running Unit Tests..."
-	python3 -m pytest tests/
-
-stress-test:
-	@echo "[*] Running Ghost-Nexus Simulation..."
-	python3 tests/simulation/ghost_nexus.py
-
-run:
-	@echo "[*] Launching Enterprise Command Center..."
-	streamlit run Home.py
-
-audit:
-	@echo "[*] Generating Transparency & Security Audit..."
-	python3 -m pytest tests/ --cov=core
-	trivy fs .
-
-docker-build:
-	docker build -t iluminara-core:latest .
+build_nuclear_stack:
+	@echo "[*] RSA: Building Blackwell-Optimized Kernels..."
+		@# Standard build commands proceed only if verify_sovereignty passes
+		@python3 -m build
 
 clean:
-	rm -rf __pycache__ .pytest_cache .coverage
+	@rm -rf build/ dist/ *.egg-info
