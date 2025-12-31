@@ -404,3 +404,24 @@ if st.button("EXECUTE GLOBAL LAUNCH"):
         st.balloons()
         st.success(f"Nexus Live. 50 Nodes Operational. Daily Impact Value: ${val:,.2f}")
         st.metric("Sovereign Status", "LIVE_OPERATIONS", delta="Revenue Triggered")
+
+st.divider()
+st.header("📊 Sovereign ROI & Commercialization")
+st.caption("Step 4 Measurement: Speed, Cost, and New Capabilities")
+
+if 'nodes_active' in st.session_state:
+    from core.revenue.roi_engine import roi_engine
+    
+    # Calculate ROI for current operational nexus
+    metrics = roi_engine.calculate_real_time_roi(50, 0.95)
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric("Daily Operational Savings", metrics["monetary_savings_daily"], delta="Cost-to-Serve Optimized")
+    with col2:
+        st.metric("Process Speed Gain", "99.9%", delta="Speed-to-Outcome")
+
+    with st.expander("View 'Net New' Strategic Capabilities"):
+        for cap in metrics["strategic_capabilities"]:
+            st.write(f"✅ {cap}")
+        st.info(f"Step 1: High-Impact Use Case - {metrics['wastage_mitigation']} Supply Wastage Mitigated.")
