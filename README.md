@@ -1,3 +1,12 @@
+# 🛡️ iLuminara-Core: The Sovereign Health OS
+
+[![License: Polyform Shield](https://img.shields.io/badge/License-Polyform_Shield-red.svg)](LICENSE)
+[![Security: Hardened](https://img.shields.io/badge/Security-ISO_42001_Hardened-blue.svg)](SECURITY.md)
+[![Status: Proprietary](https://img.shields.io/badge/IP_Status-Patent_Pending-orange.svg)](LEGAL_NOTICE.md)
+
+> **⚠️ RESTRICTED ACCESS:** This codebase is protected by the **Polyform Shield License**. Commercial use by competitors is strictly prohibited. All IP is anchored to the blockchain via \`GENESIS_BLOCK.log\`.
+
+---
 # iLuminara-Core: The Sovereign Health OS
 
 **Status:** Enterprise / Nuclear IP Stack (Live)
