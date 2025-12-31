@@ -111,3 +111,19 @@ with col_R:
         st.caption("Compliance: NIST AI RMF")
     else:
         st.caption("Compliance: KDPA / AU")
+
+from core.security.visendi_dna import SovereignDNA
+
+# --- DIRECTOR AUTH CHECK (Simulated) ---
+current_user = "ANTHONY WAGANDA"
+current_email = "waganda@visendi56.onmicrosoft.com"
+
+dna_engine = SovereignDNA()
+is_god_mode, auth_msg = dna_engine.verify_director_authority(current_email, current_user)
+
+if is_god_mode:
+    st.sidebar.success(f"👑 {current_user}")
+    st.sidebar.caption(f"Tenant: visendi56.onmicrosoft.com")
+    st.sidebar.caption("Sovereign Access: GRANTED")
+else:
+    st.sidebar.info("User Mode: Standard")
