@@ -3,7 +3,7 @@ import os
 import subprocess
 import google.protobuf
 from core.security.visendi_dna import SovereignDNA
-from core.security.integrity_monitor import verify_iron_dome_v2
+from core.security.integrity_monitor import verify_iron_dome_v2, verify_license_compliance
 
 def enforce_security_patch():
     """
@@ -39,7 +39,11 @@ def boot_iluminara():
     if not verify_iron_dome_v2():
         sys.exit("❌ KERNEL PANIC: Dependency Integrity Failure.")
 
-    # 3. DNA Identity Verification
+    # 3. License Compliance Check
+    if not verify_license_compliance():
+        sys.exit("❌ KERNEL PANIC: License Compliance Failure.")
+
+    # 4. DNA Identity Verification
     dna = SovereignDNA()
     current_hash = dna.generate_genesis_seed()
     print(f"[BOOT] DNA Hash Verified: {current_hash[:16]}...")

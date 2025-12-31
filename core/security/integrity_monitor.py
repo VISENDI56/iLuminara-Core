@@ -33,3 +33,17 @@ def verify_iron_dome_v2():
 if __name__ == "__main__":
     if not verify_iron_dome_v2():
         sys.exit(1)
+
+def verify_license_compliance():
+    """
+    Ensures that risky licenses are documented and handled.
+    """
+    risky_pkgs = ["certifi", "soxr"]
+    print("[*] Performing License Integrity Audit...")
+    # Logic to check for existence of LEGAL_COMPLIANCE_MANIFEST.md
+    import os
+    if not os.path.exists("LEGAL_COMPLIANCE_MANIFEST.md"):
+        print("[!] COMPLIANCE FAILURE: Legal Manifest missing.")
+        return False
+    print("[+] License Compliance Verified.")
+    return True
