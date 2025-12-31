@@ -1,63 +1,48 @@
 {
-  "$schema": "https://mintlify.com/schema.json",
-  "name": "iLuminara Sovereign",
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "favicon": "/favicon.png",
-  "colors": {
-    "primary": "#0D9488",
-    "light": "#14B8A6",
-    "dark": "#0F766E",
-    "anchors": "#0D9488"
-  },
-  "topbarLinks": [
-    {
-      "name": "Contact",
-      "url": "mailto:sovereign@iluminara.com"
-    }
-  ],
-  "topbarCtaButton": {
-    "name": "Launch Fortress",
-    "url": "https://github.com/VISENDI56/iLuminara-Core"
-  },
-  "navigation": [
-    {
-      "group": "Genesis",
-      "pages": ["docs/introduction", "docs/architecture", "docs/quickstart"]
-    },
-    {
-      "group": "Nuclear IP Stack",
-      "pages": [
-        "docs/nuclear-ip/crypto-shredder",
-        "docs/nuclear-ip/somatic-auth",
-        "docs/nuclear-ip/serenity-flow",
-        "docs/nuclear-ip/golden-thread",
-        "docs/nuclear-ip/viral-bridge"
-      ]
-    },
-    {
-      "group": "Governance Kernel",
-      "pages": ["docs/governance/rco-engine", "docs/governance/45-laws"]
-    },
-    {
-      "group": "Sovereign Roadmap",
-      "pages": [
-        "docs/roadmap/phase-1-infrastructure",
-        "docs/roadmap/phase-2-resilience",
-        "docs/roadmap/phase-3-security",
-        "docs/roadmap/phase-4-compliance",
-        "docs/roadmap/phase-5-deployment"
-      ]
-    },
-    {
-      "group": "API Reference",
-      "pages": ["api-reference/introduction", "api-reference/endpoints"]
-    }
-  ],
-  "footerSocials": {
-    "github": "https://github.com/VISENDI56",
-    "twitter": "https://twitter.com/iluminara"
-  }
+      "$schema": "https://mintlify.com/docs.json",
+        "name": "iLuminara-Core",
+          "theme": "almond",
+            "colors": {
+                    "primary": "#16A34A",
+                        "light": "#07C983",
+                            "dark": "#15803D"
+            },
+              "navigation": {
+                    "tabs": [
+                              {
+                                        "name": "Documentation",
+                                                "url": "docs",
+                                                        "groups": [
+                                                                      {
+                                                                                    "group": "Genesis",
+                                                                                                "pages": [
+                                                                                                                  "index",
+                                                                                                                                "quickstart"
+                                                                                                ]
+                                                                      },
+                                                                                {
+                                                                                                "group": "Nuclear IP Stack",
+                                                                                                            "pages": [
+                                                                                                                              "nuclear-ip/compendium"
+                                                                                                            ]
+                                                                                },
+                                                                                          {
+                                                                                                        "group": "Governance",
+                                                                                                                    "pages": [
+                                                                                                                                      "governance/omni-law"
+                                                                                                                    ]
+                                                                                          },
+                                                                                                    {
+                                                                                                                    "group": "Technical Specs",
+                                                                                                                                "pages": [
+                                                                                                                                                  "technical/system-2-refactor"
+                                                                                                                                ]
+                                                                                                    }
+                                                        ]
+                              }
+                    ]
+              },
+                "footerSocials": {
+                        "github": "https://github.com/VISENDI56/iLuminara-Core"
+                }
 }

@@ -1,184 +1,48 @@
 {
-  "name": "iLuminara-Core",
-  "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
-  },
-  "navigation": [
-    {
-      "group": "The Sovereign Nexus",
-      "pages": [
-        "introduction",
-        "architecture"
-      ]
-    },
-    {
-      "group": "Product Specifications",
-      "pages": [
-        "product/technical_prd"
-      ]
-    },
-    {
-      "group": "47-Framework Governance",
-      "pages": [
-        "governance/omni_law_constitution",
-        "governance/omni-law-matrix",
-        "governance/living-certification",
-        "governance/compliance-oracle"
-      ]
-    },
-    {
-      "group": "NVIDIA AI Enterprise (Apex)",
-      "pages": [
-        "ml-health/health-llm-adapter",
-        "ml-health/drift-monitoring",
-        "ml-health/seir-model"
-      ]
-    },
-    {
-      "group": "Kinetic & Spatial Intelligence",
-      "pages": [
-        "infrastructure/iot-ingestion",
-        "infrastructure/context-engineering"
-      ]
-    },
-    {
-      "group": "Physical Sovereignty",
-      "pages": [
-        "nuclear-ip/crypto-shredder",
-        "nuclear-ip/serenity-flow"
-      ]
-    },
-    {
-      "group": "Sovereign Substrates",
-      "pages": [
-        "governance/moral-governor",
-        "core/refi-substrate",
-        "core/zkp-privacy"
-      ]
-    },
-    {
-      "group": "Humanitarian Nexus (2026)",
-      "pages": [
-        "humanitarian/shirika-equity",
-        "humanitarian/circular-sovereignty",
-        "humanitarian/migration-forecast"
-      ]
-    },
-    {
-      "group": "Civilization OS (2026)",
-      "pages": [
-        "infrastructure/omniverse-twin",
-        "education/knowledge-mesh",
-        "infrastructure/agro-voltaics",
-        "core/water-sovereignty",
-        "governance/tele-justice"
-      ]
-    },
-    {
-      "group": "The Nobel Singularities",
-      "pages": [
-        "nobel_dossier/biological",
-        "nobel_dossier/peace",
-        "nobel_dossier/economics"
-      ]
-    },
-    {
-      "group": "Nuclear IP Stack (2026)",
-      "pages": [
-        "ml/bionemo-evo2",
-        "infrastructure/holoscan-25h1",
-        "governance/pabs-federated",
-        "core/zkp-circom"
-      ]
-    },
-    {
-      "group": "1. Biological Apex",
-      "pages": [
-        "ml_health/bionemo_genomics/evo2_engine"
-      ]
-    },
-    {
-      "group": "2. Kinetic & Sensory",
-      "pages": [
-        "infrastructure/holoscan_edge/pipeline_25h1",
-        "infrastructure/logistics/cuopt_agent"
-      ]
-    },
-    {
-      "group": "3. Spatial Omniscience",
-      "pages": [
-        "geospatial_esri/native_geoghost"
-      ]
-    },
-    {
-      "group": "4. Sovereign Governance",
-      "pages": [
-        "governance_kernel/omni_law_interceptor",
-        "governance/pabs_protocol/validator"
-      ]
-    },
-    {
-      "group": "5. Humanitarian Substrate",
-      "pages": [
-        "core/refi_substrate/besu_client",
-        "core/privacy_zkp/eligibility_circuit"
-      ]
-    },
-    {
-      "group": "6. Connectivity & Ghost-Mesh",
-      "pages": [
-        "infrastructure/aerial_6g/polymorphic_mesh"
-      ]
-    },
-    {
-      "group": "7. Educational Sovereignty",
-      "pages": [
-        "education/knowledge_mesh/tutor_agent"
-      ]
-    },
-    {
-      "group": "8. Agricultural & Climate",
-      "pages": [
-        "infrastructure/agro_voltaics/modulus_controller"
-      ]
-    },
-    {
-      "group": "9. Tele-Justice",
-      "pages": [
-        "governance/tele_justice/confidential_enclave"
-      ]
-    },
-    {
-      "group": "10. Circularity & Autarky",
-      "pages": [
-        "core/circular_economy/reverse_logistics"
-      ]
-    },
-    {
-      "group": "Investor Relations",
-      "pages": [
-        "business/valuation_economics",
-        "business/financial_dossier"
-      ]
-    },
-    {
-      "group": "Operations & Simulation",
-      "pages": [
-        "simulation/ghost_nexus"
-      ]
-    },
-    {
-      "group": "Governance & Compliance",
-      "pages": [
-        "SECURITY"
-      ]
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/war-room",
-      "destination": "https://iluminara-war-room.streamlit.app"
-    }
-  ]
+      "$schema": "https://mintlify.com/docs.json",
+        "name": "iLuminara-Core",
+          "theme": "almond",
+            "colors": {
+                    "primary": "#16A34A",
+                        "light": "#07C983",
+                            "dark": "#15803D"
+            },
+              "navigation": {
+                    "tabs": [
+                              {
+                                        "name": "Documentation",
+                                                "url": "docs",
+                                                        "groups": [
+                                                                      {
+                                                                                    "group": "Genesis",
+                                                                                                "pages": [
+                                                                                                                  "index",
+                                                                                                                                "quickstart"
+                                                                                                ]
+                                                                      },
+                                                                                {
+                                                                                                "group": "Nuclear IP Stack",
+                                                                                                            "pages": [
+                                                                                                                              "nuclear-ip/compendium"
+                                                                                                            ]
+                                                                                },
+                                                                                          {
+                                                                                                        "group": "Governance",
+                                                                                                                    "pages": [
+                                                                                                                                      "governance/omni-law"
+                                                                                                                    ]
+                                                                                          },
+                                                                                                    {
+                                                                                                                    "group": "Technical Specs",
+                                                                                                                                "pages": [
+                                                                                                                                                  "technical/system-2-refactor"
+                                                                                                                                ]
+                                                                                                    }
+                                                        ]
+                              }
+                    ]
+              },
+                "footerSocials": {
+                        "github": "https://github.com/VISENDI56/iLuminara-Core"
+                }
 }
