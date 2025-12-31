@@ -1,0 +1,25 @@
+{
+  "owner": "VISENDI56",
+  "entities": ["VISENDI56 LLC (USA)", "VISENDI56 INVESTMENT LIMITED (Kenya)"],
+  "proprietary_assets": [
+    {
+      "module": "core/jepa_architecture",
+      "description": "Hierarchical Spatiotemporal Predictive Unit (HSTPU)",
+      "status": "Trade Secret"
+    },
+    {
+      "module": "core/standards/hsml_schema.py",
+      "description": "Humanitarian Standard Markup Language (HSML)",
+      "status": "Copyrighted Specification"
+    },
+    {
+      "module": "business_logic/revenue_engine.py",
+      "description": "Outcome-Based Sovereign Revenue Model",
+      "status": "Business Process Patent Pending"
+    }
+  ],
+  "addresses": {
+    "USA": "5200 Wilson Rd, Ste 150, Edina, MN 55424",
+    "KENYA": "The Billows, Ring Rd, Kilimani, Nairobi, PO Box 35827-00200"
+  }
+}

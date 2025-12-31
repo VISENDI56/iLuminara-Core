@@ -87,3 +87,27 @@ if prompt:
         st.success("Action Approved")
     else:
         st.error("Action Refused: Sovereignty Violation")
+
+from core.legal.jurisdiction_resolver import JurisdictionEngine
+
+# --- CORPORATE VEIL FOOTER ---
+st.divider()
+col_L, col_R = st.columns([3, 1])
+
+# Detect Region (Simulated)
+active_region = "KENYA" # This would be dynamic in prod
+engine = JurisdictionEngine(active_region)
+controller = engine.get_controller()
+ent = controller['entity']
+
+with col_L:
+    st.caption(f"© 2025 **{ent.legal_name}** | {ent.address.city}, {ent.address.country}")
+    st.caption(f"Reg: {ent.registration_number} | Tax ID: {ent.tax_id}")
+    st.caption(f"📍 {ent.address.street}, {ent.address.postal_code}")
+
+with col_R:
+    st.caption(f"⚖️ Jurisdiction: {controller['governing_law']}")
+    if active_region == "USA":
+        st.caption("Compliance: NIST AI RMF")
+    else:
+        st.caption("Compliance: KDPA / AU")

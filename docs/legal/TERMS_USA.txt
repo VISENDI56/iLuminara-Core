@@ -1,0 +1,21 @@
+
+Terms of Service (Sovereign License)
+====================================
+Last Updated: 2025-12-31
+
+1. PARTIES
+This agreement is between You ("Licensee") and VISENDI56 LLC ("Licensor"), 
+a company registered in USA under number 1387664800024.
+
+2. ADDRESS FOR SERVICE
+USA: 5200 Wilson Rd, Ste 150, Edina, MN 55424
+KENYA: The Billows, Ring Rd, Kilimani, PO Box 35827-00200, Nairobi
+
+3. GOVERNING LAW
+This agreement shall be governed by the laws of State of Minnesota, USA. 
+Disputes shall be settled in Hennepin County, MN.
+
+4. IP OWNERSHIP
+The "Nuclear IP Stack" (BioNeMo, JEPA, Omni-Law) remains the sole property 
+of VISENDI56. Use is strictly limited to Humanitarian/Sovereign purposes 
+unless a Commercial License is granted.
