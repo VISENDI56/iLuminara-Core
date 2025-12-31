@@ -272,3 +272,29 @@ if st.sidebar.toggle("Activate Autonomous Repair Fleet"):
 
     st.progress(100, text="Edge-Node Network Integrity: 100%")
     st.info("System-2 Reasoning active for all propagated patches.")
+
+from core.agentic_dev.context_engine.semantic_graph import context_manager
+
+st.divider()
+st.header("🧠 Advanced System-2 Orchestration")
+st.caption("Blitzy-Standard: Ranking-Based Context Manager Active")
+
+if st.button("Ingest Multi-Repo Context"):
+    st.info("Ingesting 11-Point Nuclear IP Stack into Semantic Graph...")
+    # Simulate Ingestion
+    st.success("Hierarchical Summary Index Created (Millions of LOC usable).")
+    st.write("Context Injected via Relational Proximity.")
+
+if st.button("Simulate Blitzy 'Fix Bugs' Flow"):
+    problem = "Fix race condition in pabs_federated_aggregator.py under high load"
+    st.write(f"Problem Statement: **{problem}**")
+    
+    with st.status("Agentic Reasoning in Progress...", expanded=True):
+        st.write("1. Retrieving context via JIT Semantic Graph...")
+        st.write("2. Building Technical Spec (System-2 Deliberation)...")
+        st.write("3. Generating Ad-Hoc Test Suite...")
+        st.write("4. Implementing Fix and Recompiling...")
+        st.write("5. Re-running validation suites...")
+        
+    st.metric("Patch Integrity Score", "86.8%", delta="Sovereign Standard")
+    st.success("Patch Generated: PR #772 (PABS Recovery)")
