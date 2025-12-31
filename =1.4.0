@@ -1,0 +1,8 @@
+Requirement already satisfied: werkzeug in /usr/local/python/3.12.1/lib/python3.12/site-packages (3.1.4)
+Requirement already satisfied: protobuf in /usr/local/python/3.12.1/lib/python3.12/site-packages (4.25.8)
+Requirement already satisfied: scikit-learn in /usr/local/python/3.12.1/lib/python3.12/site-packages (1.8.0)
+Requirement already satisfied: markupsafe>=2.1.1 in /home/codespace/.local/lib/python3.12/site-packages (from werkzeug) (3.0.3)
+Requirement already satisfied: numpy>=1.24.1 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from scikit-learn) (1.26.3)
+Requirement already satisfied: scipy>=1.10.0 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from scikit-learn) (1.16.3)
+Requirement already satisfied: joblib>=1.3.0 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from scikit-learn) (1.5.3)
+Requirement already satisfied: threadpoolctl>=3.2.0 in /usr/local/python/3.12.1/lib/python3.12/site-packages (from scikit-learn) (3.6.0)
