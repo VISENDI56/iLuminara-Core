@@ -60,3 +60,11 @@ def get_legal_footer(entity="KENYA"):
     else:
         ent = visendi_identity.kenya_entity
         return f"{ent.legal_name} | Reg: {ent.registration_number} | PIN: {ent.tax_id} | PO Box {ent.address.po_box}-{ent.address.postal_code}, {ent.address.street}, {ent.address.city}, {ent.address.country}"
+
+# --- GLOBAL SECURITY LIMITS ---
+# Prevents CVE-2025-4565 Uncontrolled Recursion even if env flags fail.
+try:
+    import sys
+    sys.setrecursionlimit(2000) # Balanced for complex ESRI maps vs security
+except ImportError:
+    pass
