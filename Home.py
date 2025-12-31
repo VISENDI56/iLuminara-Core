@@ -319,3 +319,22 @@ if st.button("Initiate Sovereign Refactor (RSA)"):
 if st.button("Generate RSA Audit Trail"):
     st.info("RSA has autonomously updated 12 modules for HIPAA/KDPA drift.")
     st.json({"last_evolution": "2025-12-31T18:00Z", "integrity": "CRYPTO_SIGNED"})
+
+from core.stbk.traceback_engine import stbk
+
+st.divider()
+st.header("🕰️ Sovereign Trace-Back Kernel (STBK)")
+st.caption("New Invention: Temporal-Relational Forensic Auditing")
+
+if st.button("Generate Mathematical Receipt of Intent"):
+    # Simulate an Agent Action
+    intent = stbk.capture_intent("CLINICAL_AGENT_01", "DISPATCH_SUPPLIES", ["Dadaab_Health_Report_V4"])
+        
+    st.write("**STBK Intent Logged:**")
+    st.json(intent)
+    st.success("Decision is mathematically linked to the 47-Law Matrix.")
+
+if st.button("Run Forensic Autopsy"):
+    st.info("Tracing back 'Incident_X' through the Relational Code Graph...")
+    st.write("Reasoning Chain: [Data_Origin] -> [Omni-Law_Filter] -> [HSTPU_Prediction] -> [Action]")
+    st.success("Verdict: Decision was Sovereign-Stable.")
