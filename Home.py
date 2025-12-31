@@ -381,3 +381,26 @@ if st.button("Force Global System-2 Refactor"):
         
         st.success("Refactor Complete: iLuminara is now Blitzy-Standard.")
         st.metric("System-2 Accuracy", "86.8%", delta="+15.8% vs System-1")
+
+st.divider()
+st.header("🚀 Operational Nexus: Nairobi-Dadaab")
+st.caption("Director's Launch Protocol: Phase 1 Operational")
+
+if st.button("EXECUTE GLOBAL LAUNCH"):
+    from core.nexus_ops.pabs_pinning import pinner
+    from core.nexus_ops.ghost_mesh_launch import fabric
+    from core.nexus_ops.revenue_engine import revenue
+    
+    with st.status("Initializing Nairobi-Dadaab Nexus...", expanded=True):
+        st.write("1. Pinning PABS Data to Kenyan Territory (DPA 2019)...")
+        pinner.pin_to_territory()
+        
+        st.write("2. Activating Ghost-Mesh Anti-Jamming Fabric...")
+        f_status = fabric.activate_fabric(50)
+        
+        st.write("3. Triggering Sovereign Revenue Engine (IP #11)...")
+        val = revenue.trigger_billing(50)
+        
+        st.balloons()
+        st.success(f"Nexus Live. 50 Nodes Operational. Daily Impact Value: ${val:,.2f}")
+        st.metric("Sovereign Status", "LIVE_OPERATIONS", delta="Revenue Triggered")
