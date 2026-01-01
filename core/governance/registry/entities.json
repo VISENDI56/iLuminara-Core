@@ -1,0 +1,45 @@
+{
+      "sovereign_entities": [
+            {
+                      "entity_id": "KENYA_PVT",
+                            "legal_name": "VISENDI56",
+                                  "jurisdiction": "Republic of Kenya",
+                                        "registration_number": "PVT-MKUMQYEX",
+                                              "incorporation_date": "2023-05-03T19:50:00Z",
+                                                    "governing_law": "Companies Act, 2015",
+                                                          "capital_structure": {
+                                                                    "nominal_capital": 100000.00,
+                                                                            "currency": "KES",
+                                                                                    "shares": {
+                                                                                                  "count": 100,
+                                                                                                            "class": "Ordinary",
+                                                                                                                      "value_per_share": 1000.00
+                                                                                    }
+                                                          },
+                                                                "registered_address": {
+                                                                            "box": "35827-00200",
+                                                                                    "city": "Nairobi",
+                                                                                            "physical": "Stedmark Building, 3rd Floor, Room 7, Ongata Rongai, Kajiado North"
+                                                                },
+                                                                      "tax_status": "Stamp Duty Exempt (Section 106 SDA 60)"
+            },
+                {
+                          "entity_id": "US_LLC",
+                                "legal_name": "VISENDI56 LLC",
+                                      "jurisdiction": "State of Minnesota, USA",
+                                            "file_number": "1387664800024",
+                                                  "incorporation_date": "2023-04-19T23:59:00Z",
+                                                        "governing_law": "Minnesota Statutes, Chapter 322C",
+                                                              "structure": "Member-Managed Limited Liability Company",
+                                                                    "registered_agent": {
+                                                                                "name": "LEGALINC CORPORATE SERVICES INC",
+                                                                                        "address": "3800 American Blvd West, Suite 1500 300-030, Bloomington, MN 55431"
+                                                                    },
+                                                                          "organizer": {
+                                                                                    "name": "John Moseley",
+                                                                                            "status": "RESIGNED",
+                                                                                                    "resignation_date": "2023-04-20"
+                                                                          }
+                }
+      ]
+}

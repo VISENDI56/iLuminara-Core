@@ -1,0 +1,29 @@
+officers:
+  - id: "UBO-001"
+      name: "Anthony Waganda"
+          alias: ["Anthony Oduor"]
+              roles:
+                    - entity: "KENYA_PVT"
+                            title: "Director Shareholder"
+                                    shares_held: 100
+                                            id_number: "31813996"
+                                                    nationality: "Kenyan"
+                                                          - entity: "US_LLC"
+                                                                  title: "Member"
+                                                                          ownership: "100%"
+                                                                                  address: "3359 Coachman Rd, Apt 215, Eagan, MN 55121"
+                                                                                      permissions: ["ROOT_ACCESS", "SIGNATORY", "DISSOLUTION_VETO"]
+
+                                                                                        - id: "CLO-001"
+                                                                                            name: "Sheila Jelimo"
+                                                                                                title: "Chief Legal Officer (CLO)"
+                                                                                                    nationality: "Kenyan"
+                                                                                                        credentials:
+                                                                                                              id_number: "27978044"
+                                                                                                                    cle_reg: "CLE20180291"
+                                                                                                                          practice_no: "LSK/2021/03144"
+                                                                                                                                qualification: "Advocate of the High Court of Kenya"
+                                                                                                                                    statutory_compliance:
+                                                                                                                                          advocates_act_cap_16: "SECTION_13_COMPLIANT"
+                                                                                                                                                legal_education_act_no_27: "SECTION_8_1_F_SATISFIED"
+                                                                                                                                                    permissions: ["OMNI_LAW_AUDIT", "CONTRACT_VERIFICATION", "LEGAL_HOLD"]
