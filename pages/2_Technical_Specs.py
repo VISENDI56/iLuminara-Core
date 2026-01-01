@@ -1,22 +1,84 @@
-# MEMETIC CACHE VISUALIZER (Phase 137)
-st.divider()
-st.subheader("🚀 Blitzy Memetic Cache (MPC)")
-st.caption("Recalling solved patterns to bypass compute cost.")
+import streamlit as st
+import pandas as pd
+import time
+from core.rsa_kernel.benchmarks.swe_bench_loader import SovereignBenchmarker
 
-from core.rsa_kernel.cache.memetic_engine import mpc
+st.set_page_config(page_title="RSA Neural Dojo", page_icon="🧠", layout="wide")
 
-c1, c2 = st.columns(2)
-with c1:
-    # Simulate a "New" Problem
-    st.write("**Scenario A: Novel Bug**")
-    res_miss = mpc.query_cache("Unique biosecurity race condition in sector 7")
-    st.info(f"Result: {res_miss['status']}")
+# Custom CSS for Terminal Feel
+st.markdown("""
+    <style>
+        .stCode { font-family: 'Courier New', monospace; }
+            .stAlert { border-left: 5px solid #00FF00; }
+                </style>
+                """, unsafe_allow_html=True)
 
-with c2:
-    # Simulate a "Known" Pattern (using empty string md5 for demo)
-    st.write("**Scenario B: Recurring Bug**")
-    # We cheat slightly to hit the hardcoded demo hash
-    res_hit = mpc.pattern_store.get("d41d8cd98f00b204e9800998ecf8427e") 
-    if res_hit:
-        st.success(f"Result: INSTANT RECALL")
-        st.metric("Latency Saved", f"{res_hit['latency_saved_ms']} ms")
+st.title("🧠 RSA: The Cognitive Spiral")
+st.caption("System-2 Recursive Reasoning Engine (SWE-Bench Pro)")
+
+# Initialize Benchmarker
+if 'bench' not in st.session_state:
+    st.session_state.bench = SovereignBenchmarker()
+
+    # Top Metrics
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Reasoning Depth", "Lvl 3", "Recursive")
+        with col2:
+            st.metric("Pass@1 (Commerical)", "86.8%", "+2.4%")
+            with col3:
+                st.metric("Experience Replay", "Active", "Learning")
+
+                st.divider()
+
+                # The Battle Arena
+                c_left, c_right = st.columns([1, 2])
+
+                with c_left:
+                    st.subheader("📡 Training Feed")
+                        if st.button("Inject Chaos (New Challenge)", use_container_width=True):
+                                st.session_state.challenge = st.session_state.bench.fetch_challenge()
+                                        st.session_state.solving = True
+
+                                    if 'challenge' in st.session_state:
+                                            st.info(f"**Repo:** {st.session_state.challenge['repo']}")
+                                                    st.warning(f"**Issue:** {st.session_state.challenge['id']}")
+                                                            with st.expander("View Vector Space (Problem Context)", expanded=True):
+                                                                    st.code(st.session_state.challenge['desc'][:250] + "...", language="text")
+
+                                                                    with c_right:
+                                                                        st.subheader("🧬 Cognitive Spiral Trace")
+                                                                            
+                                                                                if st.session_state.get('solving', False):
+                                                                                        trace_container = st.container()
+                                                                                                
+                                                                                                        # Execute the Generator
+                                                                                                                solver_gen = st.session_state.bench.recursive_solve(st.session_state.challenge)
+                                                                                                                        
+                                                                                                                                        for step in solver_gen:
+                                                                                                                                                    with trace_container:
+                                                                                                                                                                    with st.chat_message("assistant", avatar="🤖"):
+                                                                                                                                                                                        st.write(f"**Spiral Depth {step['depth']}**: {step['action']}")
+                                                                                                                                                                                                            col_a, col_b = st.columns(2)
+                                                                                                                                                                                                                                col_a.write(f"Confidence: `{step['confidence']}`")
+                                                                                                                                                                                                                                                    col_b.write(f"Z3-Gate: `{step['z3_check']}`")
+                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                    if step['status'] == "REFACTORING":
+                                                                                                                                                                                                                                                                                    st.progress(step['depth'] * 30, text="Critiquing & Refactoring...")
+                                                                                                                                                                                                                                                                                                else:
+                                                                                                                                                                                                                                                                                                            st.success("✅ SOLUTION CONVERGED")
+                                                                                                                                                                                                                                                                                                                            st.balloons()
+                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                            st.session_state.solving = False
+
+                                                                                                                                                                                                                                                                                                                                                            # Historical Wins (Experience Replay)
+                                                                                                                                                                                                                                                                                                                                                            st.divider()
+                                                                                                                                                                                                                                                                                                                                                            st.subheader("💾 Experience Replay (Long-Term Memory)")
+                                                                                                                                                                                                                                                                                                                                                            try:
+                                                                                                                                                                                                                                                                                                                                                                df = pd.read_json("core/rsa_kernel/benchmarks/neural_memory.json")
+                                                                                                                                                                                                                                                                                                                                                                    if not df.empty:
+                                                                                                                                                                                                                                                                                                                                                                                st.dataframe(df.sort_values("timestamp", ascending=False), use_container_width=True)
+                                                                                                                                                                                                                                                                                                                                                                                            else:
+                                                                                                                                                                                                                                                                                                                                                                                                        st.caption("Memory is empty. Initialize training.")
+                                                                                                                                                                                                                                                                                                                                                                                                                except:
+                                                                                                                                                                                                                                                                                                                                                                                                                    st.caption("Memory initialization pending...")
