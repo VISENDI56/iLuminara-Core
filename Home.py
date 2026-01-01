@@ -69,3 +69,24 @@ with tab3:
 
 st.sidebar.success("Sovereign OS Active")
 st.sidebar.info(f"Identity: {os.getenv('CLO_IDENTITY', 'GUEST_USER')}")
+
+# SWARM COMMAND (Phase 160)
+st.divider()
+st.header("🐝 Agentic Swarm: Black Swan Mode")
+if st.button("Trigger 'Black Swan' Oracle Failure"):
+    from core.swarm.agentic_node import swarm_engine
+    
+    with st.status("ORACLE DISCONNECTED. Securing Local Nexus...", expanded=True) as status:
+        st.error("🚨 ALERT: Nebius/Snowflake/Esri Connection Terminated.")
+        st.warning("🔄 Transitioning to Peer-to-Peer Agentic Reasoning...")
+        
+        simulation_data = swarm_engine.run_crisis_simulation()
+        
+        # Display the Swarm's "Hive Mind" activity
+        st.write("### Swarm Consensus Trace")
+        for res in simulation_data:
+            st.code(f"Node {res['node']}: {res['action']} | Conf: {res['confidence']}", language="text")
+        
+        status.update(label="✅ Swarm Stabilized: Autonomous Bio-Foundry Active", state="complete")
+        st.success("Sovereignty Maintained: The Nexus is self-governing.")
+
