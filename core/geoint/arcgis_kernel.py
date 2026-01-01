@@ -40,17 +40,17 @@ class SovereignGEOINT:
     def trigger_vaccine_logistics(self, hotspot_coords):
         """
         AUTOMATED RESPONSE:
-            When the Sentinel Grid detects an anomaly, ArcGIS Routing 
-                finds the safest path through the Nexus.
-                    """
-                        print(f"⚠️ [ALERT] Sentinel Grid detected anomaly at {hotspot_coords}")
-                            # Call to ArcGIS Routing Service
-                                route = self.get_logistics_route("Nairobi_Nexus", hotspot_coords)
-                                    return {
-                                                "action": "DEPLOY_BINDERS",
-                                                        "route_plan": route,
-                                                                "eta_minutes": 120,
-                                                                        "auth": "CLO_VERIFIED"
-                                            }
+        When the Sentinel Grid detects an anomaly, ArcGIS Routing 
+        finds the safest path through the Nexus.
+        """
+        print(f"⚠️ [ALERT] Sentinel Grid detected anomaly at {hotspot_coords}")
+        # Call to ArcGIS Routing Service
+        route = self.get_logistics_route("Nairobi_Nexus", hotspot_coords)
+        return {
+            "action": "DEPLOY_BINDERS",
+            "route_plan": route,
+            "eta_minutes": 120,
+            "auth": "CLO_VERIFIED"
+        }
 
 geoint_engine = SovereignGEOINT()
