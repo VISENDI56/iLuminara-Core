@@ -26,6 +26,12 @@ frontend_web/lib/firebase_options.dart
 .env.local
 .env.production
 
+# Snowflake RSA Keys (DO NOT COMMIT)
+snowflake_rsa_key.*
+*.p8
+*.pem
+*.key
+
 # IDE
 .vscode/
 .idea/
