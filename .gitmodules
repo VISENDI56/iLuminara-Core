@@ -1,0 +1,6 @@
+[submodule "core/research/nvidia_bionemo"]
+	path = core/research/nvidia_bionemo
+	url = https://github.com/NVIDIA/BioNeMo.git
+[submodule "core/research/z3_logic"]
+	path = core/research/z3_logic
+	url = https://github.com/Z3Prover/z3.git
