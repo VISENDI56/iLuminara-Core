@@ -4,6 +4,7 @@ import json
 import pandas as pd
 from dotenv import load_dotenv
 from datetime import datetime
+from cryptography.hazmat.primitives import serialization
 
 load_dotenv()
 
@@ -22,10 +23,23 @@ class SnowflakeSovereignFortress:
         self.enabled = all([self.account, self.user, self.password])
 
     def get_connection(self):
+        # Load the Private Key from the Vault
+        with open(os.getenv("SNOWFLAKE_PRIVATE_KEY_PATH"), "rb") as key_file:
+            p_key = serialization.load_pem_private_key(
+                key_file.read(),
+                password=os.getenv("SNOWFLAKE_PRIVATE_KEY_PASSPHRASE").encode(),
+            )
+
+        pkb = p_key.private_bytes(
+            encoding=serialization.Encoding.DER,
+            format=serialization.PrivateFormat.PKCS8,
+            encryption_algorithm=serialization.NoEncryption(),
+        )
+
         return snowflake.connector.connect(
             account=self.account,
             user=self.user,
-            password=self.password,
+            private_key=pkb,  # PASSING THE CRYPTOGRAPHIC BYTES
             warehouse="COMPLIANCE_WH",
             database=self.database,
             schema=self.schema
