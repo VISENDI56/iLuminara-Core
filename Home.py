@@ -549,3 +549,11 @@ with c_inv3:
     # Simulation
     st.metric("Dynamic Share Price", "KES 4,500", delta="+350%")
     st.caption("Based on 100 Ordinary Shares")
+
+st.divider()
+st.subheader("🌑 Dark-Mesh & Foundry Status")
+col_a, col_b = st.columns(2)
+with col_a:
+    st.metric("Comms Mode", "DARK_MESH (RF-Only)", delta="No Satellite Detected")
+with col_b:
+    st.metric("Edge Foundry", "READY", delta="3 Binders Queued")
