@@ -19,7 +19,7 @@ import sys
 import time
 
 def run_command(cmd, description):
-    """Run a command and print status."""
+    """Run a command and print(status.""")
     print(f"\n{'='*60}")
     print(f"  {description}")
     print('='*60)

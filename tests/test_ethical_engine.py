@@ -67,7 +67,7 @@ class TestEthicalEngine:
         action = {
             'type': 'isolation_facility',
             'scope': 'community',
-            'attack_rate': 0.02,  # 2% attack rate
+            'attack_rate': 0.2,  # 2% attack rate
             'r_effective': 2.5,
             'severity_score': 0.7
         }
@@ -91,7 +91,7 @@ class TestEthicalEngine:
             'scope': 'regional',
             'estimated_civilian_impact': 0.15,
             'medical_benefit': 0.85,
-            'attack_rate': 0.03,
+            'attack_rate': 0.3,
             'r_effective': 1.8,
             'severity_score': 0.8
         }
@@ -228,7 +228,7 @@ class TestEthicalEngine:
         action = {
             'type': 'vaccination_campaign',
             'scope': 'national',
-            'estimated_civilian_impact': 0.05,
+            'estimated_civilian_impact': 0.5,
             'medical_benefit': 0.9
         }
         context = {
@@ -246,7 +246,7 @@ class TestEthicalEngine:
         """Test that necessity constraints add time limits."""
         action = {
             'type': 'contact_tracing',
-            'attack_rate': 0.05,
+            'attack_rate': 0.5,
             'r_effective': 2.0,
             'severity_score': 0.6
         }
@@ -309,7 +309,7 @@ class TestIntegrationScenarios:
             'scope': 'refugee_camp',
             'estimated_civilian_impact': 0.3,
             'medical_benefit': 0.85,
-            'attack_rate': 0.04,  # 4% attack rate
+            'attack_rate': 0.4,  # 4% attack rate
             'r_effective': 2.8,
             'severity_score': 0.75
         }
@@ -332,7 +332,7 @@ class TestIntegrationScenarios:
         action = {
             'type': 'field_hospital',
             'scope': 'conflict_zone',
-            'estimated_civilian_impact': 0.05,
+            'estimated_civilian_impact': 0.5,
             'medical_benefit': 0.95
         }
         context = {

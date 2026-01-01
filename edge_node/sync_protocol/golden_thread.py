@@ -104,14 +104,14 @@ class GoldenThread:
     Usage:
         gt = GoldenThread()
         fused_record = gt.fuse_data_streams(
-            cbs_signal={'location': 'Nairobi', 'symptom': 'fever', 'timestamp': '2025-01-10T10:00Z'},
-            emr_record={'location': 'Nairobi', 'diagnosis': 'malaria', 'timestamp': '2025-01-10T09:45Z'},
+            cbs_signal={'location': 'Nairobi', 'symptom': 'fever', 'timestamp': '2025-1-10T10:00Z'},
+            emr_record={'location': 'Nairobi', 'diagnosis': 'malaria', 'timestamp': '2025-1-10T09:45Z'},
             patient_id='PATIENT_12345'
         )
     """
     
     # Quantum Entanglement Configuration
-    TEMPORAL_DECAY_RATE = -0.05  # Exponential decay: ~50% every 12 hours
+    TEMPORAL_DECAY_RATE = -0.5  # Exponential decay: ~50% every 12 hours
     TEMPORAL_WEIGHT = 0.7  # Weight for temporal proximity in entanglement score
     CONTENT_WEIGHT = 0.3  # Weight for symptom-diagnosis alignment
     CONTENT_WEIGHT_DEFAULT = 0.1  # Default weight for non-matching symptoms
@@ -245,9 +245,9 @@ class GoldenThread:
 
         Args:
             cbs_signal: Community-Based Surveillance data
-                e.g., {'location': 'Nairobi', 'symptom': 'fever', 'timestamp': '2025-01-10T10:00Z'}
+                e.g., {'location': 'Nairobi', 'symptom': 'fever', 'timestamp': '2025-1-10T10:00Z'}
             emr_record: Electronic Medical Record data
-                e.g., {'location': 'Nairobi', 'diagnosis': 'malaria', 'timestamp': '2025-01-10T09:45Z'}
+                e.g., {'location': 'Nairobi', 'diagnosis': 'malaria', 'timestamp': '2025-1-10T09:45Z'}
             idsr_template: IDSR template (optional pre-structured template)
             patient_id: Patient identifier for record tracking
 

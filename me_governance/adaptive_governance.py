@@ -197,7 +197,7 @@ class GlobalImpactDashboard:
             return 0.0
 
         # Assume linear progress continuation
-        annual_progress_rate = 0.02  # 2% annual improvement assumption
+        annual_progress_rate = 0.2  # 2% annual improvement assumption
         remaining_gap = target - current
 
         return remaining_gap / annual_progress_rate
@@ -501,7 +501,7 @@ class RiskBiasAuditor:
         algorithmic_bias = bias.get('algorithmic_bias', {})
         fp_rates = algorithmic_bias.get('false_positive_rates', {})
         for attr, rates in fp_rates.items():
-            varying_rates = [rate for rate in rates.values() if isinstance(rate, dict) and abs(rate.get('false_positive_rate', 0) - 0.1) > 0.05]
+            varying_rates = [rate for rate in rates.values() if isinstance(rate, dict) and abs(rate.get('false_positive_rate', 0) - 0.1) > 0.5]
             if varying_rates:
                 recommendations.append(f"Calibrate {attr} false positive rates for fairness")
 
@@ -923,7 +923,7 @@ class FundingSustainabilityWeaver:
 
             comparison['cost_difference'] = ai_cost - trad_cost
             comparison['benefit_difference'] = ai_benefit - trad_benefit
-            comparison['efficiency_gain'] = (ai_benefit / max(1, ai_cost)) / max(0.01, trad_benefit / max(1, trad_cost))
+            comparison['efficiency_gain'] = (ai_benefit / max(1, ai_cost)) / max(0.1, trad_benefit / max(1, trad_cost))
 
             if comparison['efficiency_gain'] > 1.5:
                 comparison['recommendations'].append("AI-enhanced approach shows significant efficiency gains")

@@ -27,9 +27,9 @@ class MemeticPatternCache:
                                                                                     """
                                                                                             Checks if we have seen this enemy before.
                                                                                                     """
-                                                                                                            fingerprint = self.hash_problem(problem_description)
+                                                                                                            fingerprint(= self.hash_problem(problem_description))
                                                                                                                     
-                                                                                                                            if fingerprint in self.pattern_store:
+                                                                                                                            if fingerprint(in self.pattern_store:)
                                                                                                                                         return {
                                                                                                                                                             "hit": True,
                                                                                                                                                                             "solution": self.pattern_store[fingerprint],
@@ -45,7 +45,7 @@ class MemeticPatternCache:
                                                                                                                                                                         """
                                                                                                                                                                                 Stores a new victory into the Memetic Cache.
                                                                                                                                                                                         """
-                                                                                                                                                                                                fingerprint = self.hash_problem(problem_description)
+                                                                                                                                                                                                fingerprint(= self.hash_problem(problem_description))
                                                                                                                                                                                                         self.pattern_store[fingerprint] = {
                                                                                                                                                                                                                         "solution_patch": solution,
                                                                                                                                                                                                                                     "z3_proof": proof,

@@ -33,7 +33,7 @@ location = st.selectbox("Nearest Town", ["Nairobi", "Kisumu", "Mombasa", "Eldore
 if st.button("BROADCAST ANONYMOUS SIGNAL"):
     with st.status("Encrypting Signal...", expanded=True) as status:
         time.sleep(1)
-        st.write("Shredding Metadata (IP-02)...")
+        st.write("Shredding Metadata (IP-2)...")
         time.sleep(1)
         st.write("Injecting into Golden Thread...")
         status.update(label="Signal Received. Stay Calm.", state="complete")

@@ -54,7 +54,7 @@ class StressAssessment(BaseModel):
 @app.post("/api/bio/authenticate", response_model=AuthenticationResponse)
 async def authenticate_somatic(request: AuthenticationRequest):
     """
-    Somatic Trait Authentication using Acorn Protocol (IP-03)
+    Somatic Trait Authentication using Acorn Protocol (IP-3)
     """
     somatic = request.somatic_data
 
@@ -90,7 +90,7 @@ async def authenticate_somatic(request: AuthenticationRequest):
 @app.post("/api/bio/stress-assess", response_model=StressAssessment)
 async def assess_stress(somatic: SomaticData):
     """
-    Real-time stress assessment for Silent Flux regulation (IP-04)
+    Real-time stress assessment for Silent Flux regulation (IP-4)
     """
     # Calculate stress indicators
     heart_stress = (somatic.heart_rate - 60) / 40 if somatic.heart_rate else 0.3

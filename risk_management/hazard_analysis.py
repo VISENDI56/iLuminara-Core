@@ -62,8 +62,8 @@ class HarmSeverity(Enum):
 
 class OccurrenceProbability(Enum):
     """ISO 14971 Occurrence Probability Levels"""
-    REMOTE = 1      # < 0.01% probability
-    LOW = 2         # 0.01% - 0.1% probability
+    REMOTE = 1      # < 0.1% probability
+    LOW = 2         # 0.1% - 0.1% probability
     MEDIUM = 3      # 0.1% - 1% probability
     HIGH = 4        # 1% - 10% probability
     FREQUENT = 5    # > 10% probability

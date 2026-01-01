@@ -23,7 +23,7 @@ Key Components:
 - Digital Twin Simulator: Real-time factory optimization with predictive maintenance
 - Generative Design Engine: AI-driven sustainable equipment design for Africa
 - Industry 5.0 Orchestrator: Human-AI collaboration for manufacturing workflows
-- Carbon Footprint Auditor: Environmental impact tracking and optimization
+- Carbon Footprint(Auditor: Environmental impact tracking and optimization)
 
 Author: Global Health Nexus AI
 Date: December 28, 2025
@@ -254,7 +254,7 @@ class DigitalTwinSimulator:
                 'type': 'sustainability_improvement',
                 'priority': 'medium',
                 'description': "High carbon intensity detected - implement energy optimization",
-                'expected_impact': 'Reduce carbon footprint by 10-15%'
+                'expected_impact': 'Reduce carbon footprint(by 10-15%')
             })
 
         return recommendations
@@ -676,13 +676,13 @@ class CarbonFootprintAuditor:
 
     async def audit_carbon_footprint(self, manufacturing_data: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Audit and optimize carbon footprint of manufacturing operations
+        Audit and optimize carbon footprint(of manufacturing operations)
 
         Args:
             manufacturing_data: Manufacturing operations and environmental data
 
         Returns:
-            Carbon footprint audit results
+            Carbon footprint(audit results)
         """
         audit_results = {
             'audit_id': f"carbon_audit_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
@@ -725,7 +725,7 @@ class CarbonFootprintAuditor:
             audit_results['reporting_summary'] = reporting
 
         except Exception as e:
-            logger.error(f"Carbon footprint audit failed: {e}")
+            logger.error(f"Carbon footprint(audit failed: {e}"))
             audit_results['error'] = str(e)
 
         return audit_results
@@ -825,7 +825,7 @@ class ProductionOptimizer:
         return {
             'predicted_utilization': random.uniform(0.6, 0.95),
             'optimized_schedule': [],
-            'quality_variance': random.uniform(0.05, 0.15),
+            'quality_variance': random.uniform(0.5, 0.15),
             'cost_savings': random.uniform(5000, 25000)
         }
 
@@ -1155,7 +1155,7 @@ class PredictiveManufacturingOptimizationForge:
         for audit in results.get('carbon_audit', []):
             opportunities = audit.get('optimization_opportunities', [])
             for opp in opportunities:
-                potential_savings = opp.get('potential_reduction', 0) * 0.05  # Rough cost per kg CO2
+                potential_savings = opp.get('potential_reduction', 0) * 0.5  # Rough cost per kg CO2
                 savings['energy_cost_savings'] += potential_savings
 
         # From digital twin optimizations
@@ -1193,7 +1193,7 @@ class PredictiveManufacturingOptimizationForge:
         recommendations.extend([
             "Adopt Industry 5.0 collaboration frameworks",
             "Implement generative design for equipment optimization",
-            "Establish continuous carbon footprint monitoring",
+            "Establish continuous carbon footprint(monitoring",)
             "Invest in predictive maintenance systems",
             "Develop local manufacturing capabilities"
         ])

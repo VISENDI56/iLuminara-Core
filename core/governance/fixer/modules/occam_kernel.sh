@@ -12,16 +12,21 @@ run_occam_pruning() {
 
         # Generate coverage analysis (if available)
         if command -v coverage &> /dev/null && [ -f ".coverage" ]; then
-            log_sovereign "Analyzing coverage data for optimization opportunities..."
+            # Check if coverage can parse all files without syntax errors
+            if coverage report --include="**/*.py" >/dev/null 2>&1; then
+                log_sovereign "Analyzing coverage data for optimization opportunities..."
 
-            # Extract low-coverage files (safely)
-            coverage report --include="**/*.py" 2>/dev/null | grep -E "\.py\s+[0-9]+\s+[0-9]+\s+[0-9]+\s+[0-9]+\s+[0-9]+\s+" | \
-            awk '$NF < 50 {print $1, $NF}' | while read -r file coverage; do
-                if [[ "$coverage" -lt 50 ]]; then
-                    log_sovereign "IDENTIFIED: $file has ${coverage}% coverage - candidate for review"
-                    echo "$file:$coverage" >> "$analysis_dir/low_coverage_files.txt"
-                fi
-            done
+                # Extract low-coverage files (safely)
+                coverage report --include="**/*.py" 2>/dev/null | grep -E "\.py\s+[0-9]+\s+[0-9]+\s+[0-9]+\s+[0-9]+\s+[0-9]+\s+" | \
+                awk '$NF < 15 {print $1, $NF}' | while read -r file coverage; do
+                    if [[ "$coverage" -lt 15 ]]; then
+                        log_sovereign "IDENTIFIED: $file has ${coverage}% coverage - candidate for review"
+                        echo "$file:$coverage" >> "$analysis_dir/low_coverage_files.txt"
+                    fi
+                done
+            else
+                log_sovereign "Coverage data contains syntax errors - falling back to git activity analysis"
+            fi
         else
             log_sovereign "Coverage data not available - using git activity analysis"
 

@@ -28,5 +28,5 @@ class DigitalLaborRegistry:
         return new_agent
 
 registry = DigitalLaborRegistry()
-registry.register_agent("AG-FIN-01", "Fraud_Detector", "USA")
-registry.register_agent("AG-PROC-01", "Supplier_Investigator", "KENYA")
+registry.register_agent("AG-FIN-1", "Fraud_Detector", "USA")
+registry.register_agent("AG-PROC-1", "Supplier_Investigator", "KENYA")

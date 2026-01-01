@@ -1,0 +1,78 @@
+Sorry: IndentationError: unexpected indent (dialect_adapter.py, line 18)Sorry: IndentationError: unexpected indent (geo_jwt.py, line 11)  File "./edge_node/frenasa_engine/silent_flux.py", line 12
+    IP-4 Silent Flux code
+         ^^^^^^
+SyntaxError: invalid syntax
+Sorry: IndentationError: unexpected indent (gossip_engine.py, line 18)Sorry: IndentationError: unexpected indent (latency_engine.py, line 8)Sorry: IndentationError: unexpected indent (sovereign_aggregator.py, line 20)  File "./governance_kernel/crypto_shredder.py", line 12
+    IP-2 Crypto Shredder code
+         ^^^^^^
+SyntaxError: invalid syntax
+Sorry: IndentationError: unexpected indent (compliance_matrix.py, line 35)Sorry: IndentationError: unexpected indent (smart_contracts.py, line 6)Sorry: IndentationError: unexpected indent (valuation_simulator.py, line 19)Sorry: IndentationError: unexpected indent (equity_engine.py, line 6)Sorry: IndentationError: unexpected indent (dialect_adapter.py, line 17)Sorry: IndentationError: unexpected indent (watermark_distro.py, line 11)Sorry: IndentationError: unexpected indent (dead_man_switch.py, line 10)Sorry: IndentationError: unexpected indent (clo_protocol.py, line 6)Sorry: IndentationError: unexpected indent (multi_scale_adapter.py, line 5)  File "./core/research/z3_logic/examples/python/mini_quip.py", line 457
+    print self.reachable.state2cube(state)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?
+./core/research/z3_logic/scripts/mk_win_dist.py:261: SyntaxWarning: invalid escape sequence '\.'
+  VS_RUNTIME_PATS = [re.compile('vcomp.*\.dll'),
+./core/research/z3_logic/scripts/mk_win_dist.py:262: SyntaxWarning: invalid escape sequence '\.'
+  re.compile('msvcp.*\.dll'),
+./core/research/z3_logic/scripts/mk_win_dist.py:263: SyntaxWarning: invalid escape sequence '\.'
+  re.compile('msvcr.*\.dll'),
+./core/research/z3_logic/scripts/mk_win_dist.py:264: SyntaxWarning: invalid escape sequence '\.'
+  re.compile('vcrun.*\.dll')]
+./core/research/z3_logic/scripts/update_header_guards.py:6: SyntaxWarning: invalid escape sequence '\_'
+  ifndef  = re.compile("#ifndef \_(.*)\_H\_")
+./core/research/z3_logic/scripts/update_header_guards.py:7: SyntaxWarning: invalid escape sequence '\_'
+  doubleu = re.compile("#(.*) (.*)\_\_H\_")
+./core/research/z3_logic/scripts/update_header_guards.py:8: SyntaxWarning: invalid escape sequence '\_'
+  defn    = re.compile("#define \_(.*)\_H\_")
+./core/research/z3_logic/scripts/update_header_guards.py:9: SyntaxWarning: invalid escape sequence '\*'
+  endif   = re.compile("#endif /\* \_(.*)\_H\_")
+./core/research/z3_logic/doc/mk_tactic_doc.py:19: SyntaxWarning: invalid escape sequence '\-'
+  is_doc_end = re.compile("\-\-\*\/")
+./core/research/z3_logic/doc/mk_tactic_doc.py:21: SyntaxWarning: invalid escape sequence '\('
+  is_simplifier = re.compile("ADD_SIMPLIFIER\(.*\"([^\"]*)\".*,.*\"([^\"]*)\".*,.*\"([^\"]*)\"\.*\)")
+Sorry: IndentationError: unexpected indent (memetic_engine.py, line 9)Sorry: IndentationError: unexpected indent (swe_bench_loader.py, line 13)Sorry: IndentationError: expected an indented block after 'if' statement on line 21 (sovereign_bus.py, line 22)Sorry: IndentationError: unexpected indent (phoenix_snapshot.py, line 22)Sorry: IndentationError: unexpected indent (hsml_schema.py, line 16)Sorry: IndentationError: unexpected indent (spatiotemporal_planner.py, line 11)Sorry: IndentationError: unexpected indent (hstpu_service.py, line 9)Sorry: IndentationError: unexpected indent (hsml_logger.py, line 9)Sorry: IndentationError: unexpected indent (reconciler.py, line 22)  File "./transparency_view.py", line 229
+    Unlike traditional response protocols (avg 78h latency), the **Golden Thread** fused this CBS signal with clinical EMR data within **{duration} seconds**.
+                                                ^
+SyntaxError: invalid decimal literal
+Sorry: IndentationError: unexpected indent (synthetic_trial.py, line 17)Sorry: IndentationError: unexpected indent (synthetic_trial.py, line 19)Sorry: IndentationError: unexpected indent (2_Technical_Specs.py, line 40)Sorry: IndentationError: unexpected indent (health_geoai.py, line 21)  File "./certification/standard_extensions.py", line 24
+    **Document ID:** QMS-MED-001
+                             ^^
+SyntaxError: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers
+Sorry: IndentationError: unexpected indent (gossip_engine.py, line 17)Sorry: IndentationError: unexpected indent (secure_signer.py, line 19)./.venv/lib/python3.12/site-packages/passlib/tests/test_context_deprecated.py:554: SyntaxWarning: invalid escape sequence '\.'
+  warnings.filterwarnings("ignore", ".*(CryptPolicy|context\.policy).*(has|have) been deprecated.*")
+./.venv/lib/python3.12/site-packages/passlib/tests/test_context_deprecated.py:707: SyntaxWarning: invalid escape sequence '\.'
+  warnings.filterwarnings("ignore", ".*(CryptPolicy|context\.policy).*(has|have) been deprecated.*")
+./.venv/lib/python3.12/site-packages/passlib/tests/test_utils.py:144: SyntaxWarning: invalid escape sequence '\('
+  warnings.filterwarnings("ignore", "The function.*generate_password\(\) is deprecated")
+./.venv/lib/python3.12/site-packages/passlib/tests/test_handlers.py:1523: SyntaxWarning: invalid escape sequence '\d'
+  ("freebsd(9|1\d)|linux", True),
+./.venv/lib/python3.12/site-packages/passlib/tests/test_handlers.py:1761: SyntaxWarning: invalid escape sequence '\('
+  warnings.filterwarnings("ignore", "passing settings to .*.hash\(\) is deprecated")
+./.venv/lib/python3.12/site-packages/passlib/tests/test_apache.py:210: SyntaxWarning: invalid escape sequence '\('
+  with self.assertWarningList("update\(\) is deprecated"):
+./.venv/lib/python3.12/site-packages/passlib/tests/test_apache.py:280: SyntaxWarning: invalid escape sequence '\('
+  with self.assertWarningList(["verify\(\) is deprecated"]*2):
+./.venv/lib/python3.12/site-packages/passlib/tests/test_apache.py:370: SyntaxWarning: invalid escape sequence '\('
+  with self.assertWarningList("find\(\) is deprecated"):
+./.venv/lib/python3.12/site-packages/passlib/tests/test_apache.py:606: SyntaxWarning: invalid escape sequence '\('
+  with self.assertWarningList("update\(\) is deprecated"):
+./.venv/lib/python3.12/site-packages/passlib/tests/test_apache.py:640: SyntaxWarning: invalid escape sequence '\('
+  with self.assertWarningList(["verify\(\) is deprecated"]*2):
+./.venv/lib/python3.12/site-packages/passlib/tests/test_apache.py:728: SyntaxWarning: invalid escape sequence '\('
+  with self.assertWarningList("find\(\) is deprecated"):
+./.venv/lib/python3.12/site-packages/passlib/tests/test_ext_django.py:916: SyntaxWarning: invalid escape sequence '\.'
+  with self.assertWarningList("another library has patched.*User\.set_password"):
+Fatal Python error: init_import_site: Failed to import the site module
+Python runtime state: initialized
+Traceback (most recent call last):
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1176, in exec_module
+  File "<frozen site>", line 73, in <module>
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1176, in exec_module
+  File "<frozen os>", line 58, in <module>
+KeyboardInterrupt

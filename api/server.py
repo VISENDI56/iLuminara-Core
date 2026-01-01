@@ -39,7 +39,7 @@ soc_agent = System2SecurityAgent()
 
 @app.get("/")
 def health_check():
-    return {"status": "ONLINE", "node": "TensorSwitch-Edge-01", "sovereignty": "ACTIVE"}
+    return {"status": "ONLINE", "node": "TensorSwitch-Edge-1", "sovereignty": "ACTIVE"}
 
 @app.websocket("/ws/live-feed")
 async def websocket_endpoint(websocket: WebSocket):

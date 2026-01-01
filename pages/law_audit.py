@@ -61,13 +61,13 @@ def render():
     st.subheader("📋 Framework Roll Call")
     
     frameworks = [
-        {"id": "LAW-001", "name": "EU AI Act (Risk Pyramid)", "jurisdiction": "EU", "status": "✅ LIVE", "effective": "2024-08-01"},
-        {"id": "LAW-002", "name": "IHR 2005 (Pandemic Triggers)", "jurisdiction": "Global", "status": "✅ LIVE", "effective": "2007-06-15"},
-        {"id": "LAW-003", "name": "Malabo Convention (Data Sovereignty)", "jurisdiction": "African Union", "status": "✅ LIVE", "effective": "2023-05-08"},
-        {"id": "LAW-004", "name": "CSDDD (Supply Chain)", "jurisdiction": "EU", "status": "✅ LIVE", "effective": "2024-07-01"},
-        {"id": "LAW-005", "name": "IFRS S2 (Climate)", "jurisdiction": "Global", "status": "✅ LIVE", "effective": "2024-01-01"},
-        {"id": "LAW-006", "name": "GDPR", "jurisdiction": "EU", "status": "✅ LIVE", "effective": "2018-05-25"},
-        {"id": "LAW-007", "name": "HIPAA", "jurisdiction": "US", "status": "✅ LIVE", "effective": "1996-08-21"},
+        {"id": "LAW-001", "name": "EU AI Act (Risk Pyramid)", "jurisdiction": "EU", "status": "✅ LIVE", "effective": "2024-8-1"},
+        {"id": "LAW-002", "name": "IHR 2005 (Pandemic Triggers)", "jurisdiction": "Global", "status": "✅ LIVE", "effective": "2007-6-15"},
+        {"id": "LAW-003", "name": "Malabo Convention (Data Sovereignty)", "jurisdiction": "African Union", "status": "✅ LIVE", "effective": "2023-5-8"},
+        {"id": "LAW-004", "name": "CSDDD (Supply Chain)", "jurisdiction": "EU", "status": "✅ LIVE", "effective": "2024-7-1"},
+        {"id": "LAW-005", "name": "IFRS S2 (Climate)", "jurisdiction": "Global", "status": "✅ LIVE", "effective": "2024-1-1"},
+        {"id": "LAW-006", "name": "GDPR", "jurisdiction": "EU", "status": "✅ LIVE", "effective": "2018-5-25"},
+        {"id": "LAW-007", "name": "HIPAA", "jurisdiction": "US", "status": "✅ LIVE", "effective": "1996-8-21"},
     ]
     
     df = pd.DataFrame(frameworks)

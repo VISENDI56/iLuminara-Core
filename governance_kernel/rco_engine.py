@@ -167,9 +167,9 @@ class RegulatoryEntropySensor:
         # Simple linear trend
         trend_slope = np.polyfit(range(len(recent_scores)), recent_scores, 1)[0]
         
-        if trend_slope > 0.05:
+        if trend_slope > 0.5:
             return "increasing"
-        elif trend_slope < -0.05:
+        elif trend_slope < -0.5:
             return "decreasing"
         else:
             return "stable"

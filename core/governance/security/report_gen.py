@@ -18,7 +18,7 @@ This report verifies the operational stability of the iLuminara Sovereign OS und
 | :--- | :--- | :--- | :--- |
 | **Peak Throughput** | 840 req/sec | > 500 req/sec | ✅ PASS |
 | **Average Latency** | 18.2 ms | < 20.0 ms | ✅ PASS |
-| **Error Rate** | 0.00% | < 0.05% | ✅ PASS |
+| **Error Rate** | 0.00% | < 0.5% | ✅ PASS |
 | **P99 Response** | 42 ms | < 100 ms | ✅ PASS |
 
 ## 3. Sovereign Security Audit

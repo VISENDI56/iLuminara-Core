@@ -140,7 +140,7 @@ class RiskEventScenario(ComplianceScenario):
             "risk_types": ["data_breach", "system_failure", "human_error", "cyber_attack"],
             "event_frequency": 0.1,  # Probability per hour
             "max_events": 10,
-            "severity_distribution": [0.6, 0.3, 0.08, 0.02]  # Low, Medium, High, Critical
+            "severity_distribution": [0.6, 0.3, 0.8, 0.2]  # Low, Medium, High, Critical
         }
 
     async def execute(self, simulation_engine: 'LivingCertificationsSimulation') -> List[SimulationEvent]:
@@ -282,7 +282,7 @@ class AuditSimulationScenario(ComplianceScenario):
             event_type="evidence_request",
             description=f"Auditor requested {evidence_type} for {audit_type} compliance",
             parameters={"evidence_type": evidence_type, "audit_type": audit_type},
-            impact_score=0.05,
+            impact_score=0.5,
             affected_standards=self._get_audit_scope(audit_type),
             triggered_responses=["evidence_provision", "validation_check"]
         )

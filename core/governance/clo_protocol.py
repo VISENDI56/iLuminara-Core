@@ -4,7 +4,7 @@ class AdvocateVerifier:
             Requires LSK-Verified Signature for Governance Changes.
                 """
                     def __init__(self):
-                            self.clo_id = "LSK/2021/03144" # Sheila Jelimo
+                            self.clo_id = "LSK/2021/3144" # Sheila Jelimo
                                     self.clo_status = "ACTIVE_ADVOCATE"
 
                                         def verify_governance_change(self, code_diff, signature):

@@ -54,7 +54,7 @@ class OutbreakPredictor:
             'malaria': {
                 'symptoms': ['fever', 'headache', 'body_ache'],
                 'weight': 0.7,
-                'baseline_rate': 0.05  # 5% baseline in endemic areas
+                'baseline_rate': 0.5  # 5% baseline in endemic areas
             },
             'measles': {
                 'symptoms': ['fever', 'cough', 'rash'],
@@ -291,8 +291,8 @@ class OutbreakPredictor:
         )
         
         # Check proximity to high-risk areas (refugee camps, urban centers)
-        # Dadaab coordinates: approximately (0.05, 40.31)
-        dadaab_center = {'lat': 0.0512, 'lng': 40.3129}
+        # Dadaab coordinates: approximately (0.5, 40.31)
+        dadaab_center = {'lat': 0.512, 'lng': 40.3129}
         distance_to_dadaab = self._calculate_distance(location, dadaab_center)
         
         return {
@@ -338,7 +338,7 @@ class OutbreakPredictor:
         """Get human-readable location name from coordinates."""
         # In production, use reverse geocoding API
         # For demo, check if near Dadaab
-        dadaab_center = {'lat': 0.0512, 'lng': 40.3129}
+        dadaab_center = {'lat': 0.512, 'lng': 40.3129}
         distance = self._calculate_distance(location, dadaab_center)
         
         if distance < 10:
@@ -352,7 +352,7 @@ class OutbreakPredictor:
         """Estimate population at risk based on location."""
         # In production, query from population database
         # For demo, estimate based on proximity to Dadaab
-        dadaab_center = {'lat': 0.0512, 'lng': 40.3129}
+        dadaab_center = {'lat': 0.512, 'lng': 40.3129}
         distance = self._calculate_distance(location, dadaab_center)
         
         if distance < 5:

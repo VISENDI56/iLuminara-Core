@@ -22,7 +22,7 @@ st.markdown("### Decentralized Health Finance (DeHi)")
 c1, c2, c3 = st.columns(3)
 c1.metric("Global Liquidity", "$45,200,000", "+12%")
 c2.metric("Emergency Reserve", "2,000 BTC", "Immutable")
-c3.metric("Deployment Cost", "$0.04 / node", "Optimized")
+c3.metric("Deployment Cost", "$0.4 / node", "Optimized")
 
 st.markdown("---")
 st.subheader("💸 Smart Contract Streams")

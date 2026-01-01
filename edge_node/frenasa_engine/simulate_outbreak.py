@@ -39,7 +39,7 @@ def generate_stream(duration_hours=72):
             "cbs_signals": cbs,
             "emr_confirmations": emr,
             "payout_status": payout,
-            "lat": 0.0512,
+            "lat": 0.512,
             "lon": 40.3129,
             "timestamp": (datetime.utcnow() + timedelta(hours=h)).isoformat() + "Z",
         })
@@ -493,7 +493,7 @@ class OutbreakSimulator:
 
             # Spike Z-score during critical phase for dramatic effect
             if hour >= 30:
-                z_score *= 1.3 + (hour - 30) * 0.05
+                z_score *= 1.3 + (hour - 30) * 0.5
 
             self.z_score_timeline.append(
                 {

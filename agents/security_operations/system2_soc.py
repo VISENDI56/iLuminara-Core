@@ -67,5 +67,5 @@ class System2SecurityAgent:
 
 if __name__ == "__main__":
     agent = System2SecurityAgent()
-    result = agent.handle_critical_incident({"alert": "Ransomware Behavior", "host": "Finance-Server-01"})
+    result = agent.handle_critical_incident({"alert": "Ransomware Behavior", "host": "Finance-Server-1"})
     print(json.dumps(result, indent=2))

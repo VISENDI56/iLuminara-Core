@@ -19,7 +19,7 @@ class LiveDataHarness:
     """
     def generate_financial_event(self):
         # 5% chance of Sanctioned Entity
-        payee = "Global-Supplies-Ltd" if random.random() > 0.05 else "SC-9982"
+        payee = "Global-Supplies-Ltd" if random.random() > 0.5 else "SC-9982"
         amount = random.randint(5000, 50000)
         return {"context": "FINANCE", "payload": {"payee_id": payee, "amount": amount}}
 

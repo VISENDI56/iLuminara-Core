@@ -154,9 +154,9 @@ class HstpuForecaster:
         
         # Generate random coordinates for Kenya regions (demo data)
         locations = [
-            {"region": "Dadaab", "lat": 0.0512, "lon": 40.3129},
+            {"region": "Dadaab", "lat": 0.512, "lon": 40.3129},
             {"region": "Nairobi", "lat": -1.2921, "lon": 36.8219},
-            {"region": "Mombasa", "lat": -4.0435, "lon": 39.6682}
+            {"region": "Mombasa", "lat": -4.435, "lon": 39.6682}
         ]
         
         map_points = []
@@ -175,7 +175,7 @@ class HstpuForecaster:
         
         return {
             "points": map_points,
-            "center": {"lat": -0.0236, "lon": 37.9062},  # Kenya center
+            "center": {"lat": -0.236, "lon": 37.9062},  # Kenya center
             "zoom": 6,
             "timestamp": datetime.now().isoformat()
         }
@@ -204,7 +204,7 @@ class HstpuForecaster:
             "hierarchical_context": {
                 "district_risk": round(random.uniform(0.2, 0.8), 2),
                 "region_risk": round(random.uniform(0.1, 0.6), 2),
-                "country_risk": round(random.uniform(0.05, 0.3), 2)
+                "country_risk": round(random.uniform(0.5, 0.3), 2)
             },
             "temporal_projection": [
                 {

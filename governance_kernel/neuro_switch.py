@@ -28,11 +28,11 @@ class NeuroSwitch:
         # 1. Regex Redaction (Determinism)
         text = re.sub(r'\b(ID|P)-?\d+\b', '[REDACTED_ID]', text)
         text = re.sub(r'\b(Amina|Omar|Fatuma)\b', '[REDACTED_NAME]', text)
-        text = re.sub(r'\b(07\d{8})\b', '[REDACTED_PHONE]', text)
+        text = re.sub(r'\b(7\d{8})\b', '[REDACTED_PHONE]', text)
         
         # 2. Gemma 2 Confirmation (Simulation of Edge Inference)
         # "Gemma, verify sanitization complete." -> "YES"
-        edge_latency = 0.045 # 45ms on Jetson Orin
+        edge_latency = 0.45 # 45ms on Jetson Orin
         
         return text, edge_latency
 

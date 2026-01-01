@@ -275,7 +275,7 @@ class AzureOracle:
         
         # Estimate doubling time
         if avg_growth_rate > 0:
-            doubling_time = 1.0 / avg_growth_rate if avg_growth_rate > 0.01 else None
+            doubling_time = 1.0 / avg_growth_rate if avg_growth_rate > 0.1 else None
         else:
             doubling_time = None
         

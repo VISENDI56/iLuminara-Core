@@ -19,7 +19,7 @@ def connect_living_atlas(username=None, password=None):
 
 def download_pretrained_dlpk(item_id, save_path="models/esri_pretrained"):
     gis = connect_living_atlas()  # Upgrade to auth for private/pro
-    item = gis.content.get(item_id)  # e.g., Building Footprint Extraction USA: search Living Atlas
+    item = gis.content.get(item_id)  # e.g., Building Footprint(Extraction USA: search Living Atlas)
     item.download(save_path=save_path)
     st.success(f"Pretrained DLPK Downloaded: {item.title}")
 

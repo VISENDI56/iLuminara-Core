@@ -769,7 +769,7 @@ class EarlyWarningSystemAgent:
             len(signal.cbs_reports) +
             len(signal.emr_records)
         )
-        data_bonus = min(0.2, data_point_count * 0.05)
+        data_bonus = min(0.2, data_point_count * 0.5)
         
         return min(1.0, base_confidence + data_bonus)
     

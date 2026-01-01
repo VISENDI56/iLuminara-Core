@@ -318,7 +318,7 @@ class ActiveInferenceEngine:
             # Generate surveillance intensity candidates
             candidates.append({
                 'intensity': 'low',
-                'sampling_rate': 0.01,
+                'sampling_rate': 0.1,
                 'sentinel_sites': 5,
                 'reporting_frequency': 'weekly'
             })
@@ -459,7 +459,7 @@ class ActiveInferenceEngine:
         if len(self.observation_log) > 10:
             base_confidence += 0.1
         elif len(self.observation_log) > 5:
-            base_confidence += 0.05
+            base_confidence += 0.5
         
         # Increase confidence with consistent beliefs
         if len(self.beliefs) > 0:

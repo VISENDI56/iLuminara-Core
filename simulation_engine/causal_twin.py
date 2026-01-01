@@ -36,7 +36,7 @@ if st.button("RUN 10,000 PARALLEL UNIVERSES"):
         r0 = 2.5 * (1 - lockdown_strength)
         new_infections = np.random.poisson(r0 * (i+1))
         infected_curve.append(new_infections)
-        time.sleep(0.02)
+        time.sleep(0.2)
         progress_bar.progress(i + 1)
     # VISUALIZE THE FUTURE
     chart_data = pd.DataFrame(infected_curve, columns=["Predicted Infections"])

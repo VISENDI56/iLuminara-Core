@@ -57,7 +57,7 @@ st.markdown("""
         margin: 1rem 0;
     }
     .status-operational {
-        color: #059669;
+        color: #59669;
         font-weight: bold;
     }
     .status-warning {

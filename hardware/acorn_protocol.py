@@ -10,7 +10,7 @@
 # ------------------------------------------------------------------------------
 
 """
-Acorn Protocol (IP-03): Somatic Security
+Acorn Protocol (IP-3): Somatic Security
 ═════════════════════════════════════════════════════════════════════════════
 
 Philosophy: "Your body is the key."
@@ -371,7 +371,7 @@ class AcornProtocol:
     
     def _classify_stillness(self, movement_magnitude: float) -> StillnessLevel:
         """Classify movement from accelerometer."""
-        if movement_magnitude < 0.05:
+        if movement_magnitude < 0.5:
             return StillnessLevel.STILL
         elif movement_magnitude < 0.2:
             return StillnessLevel.NORMAL
@@ -495,7 +495,7 @@ class AcornProtocol:
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# IP-03: Acorn Protocol
+# IP-3: Acorn Protocol
 # 
 # "Your body is the key."
 # 

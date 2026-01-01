@@ -9,7 +9,7 @@
 # proprietary inventions of iLuminara.
 # ------------------------------------------------------------------------------
 
-# IP-02: Crypto Shredder — Post-Quantum Edition
+# IP-2: Crypto Shredder — Post-Quantum Edition
 
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 try:

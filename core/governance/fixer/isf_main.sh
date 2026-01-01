@@ -8,7 +8,9 @@ run_valley_standards_sync
 if [ "${1:-}" != "--dry-run" ]; then
     source "${SCRIPT_DIR}/modules/occam_kernel.sh"
     run_occam_pruning
+    source "${SCRIPT_DIR}/modules/e2i_056_enforcer.sh"
+    run_e2i_prune_target
 else
     log_sovereign "OCCAM KERNEL: Dry-run mode - analysis only"
 fi
-log_sovereign "Sovereign OS Rev 171: System Nominal."
+log_sovereign "Sovereign OS $(python3 version.py | tail -1): System Nominal."

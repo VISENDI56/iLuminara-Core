@@ -822,7 +822,7 @@ class BiasMitigator:
             'bias_reduction_score': random.uniform(0.75, 0.95),
             'bias_types_addressed': ['cultural_bias', 'representation_bias', 'algorithmic_bias'],
             'mitigation_techniques': ['Data_augmentation', 'Fairness_constraints', 'Bias_detection'],
-            'residual_bias_level': random.uniform(0.05, 0.2)
+            'residual_bias_level': random.uniform(0.5, 0.2)
         }
 
 class LocalDataCurator:

@@ -63,7 +63,7 @@ logger = logging.getLogger(__name__)
 
 class SomaticTriadAuthentication:
     """
-    IP-03: Somatic Triad Auth - Biometric + Behavioral + Contextual Identity
+    IP-3: Somatic Triad Auth - Biometric + Behavioral + Contextual Identity
     
     Simulates multi-factor authentication using:
     - Biometric (fingerprint, face, voice)
@@ -128,7 +128,7 @@ class SomaticTriadAuthentication:
 
 class EntangledCorrelationFusion:
     """
-    IP-05: Entangled Correlation Fusion (ECF) - Quantum-Inspired Intelligence
+    IP-5: Entangled Correlation Fusion (ECF) - Quantum-Inspired Intelligence
     
     Fuses vague, incomplete signals from multiple sources (EMR, CBS, IDSR)
     into verified, actionable intelligence using Bayesian networks.
@@ -203,7 +203,7 @@ class EntangledCorrelationFusion:
 
 class AdaptiveSerenityFlow:
     """
-    IP-04: Adaptive Serenity Flow (ASF) - Anxiety-Aware UX
+    IP-4: Adaptive Serenity Flow (ASF) - Anxiety-Aware UX
     
     Adapts interface complexity based on user's cognitive load and stress level.
     Creates "Zen Mode" summaries for anxious users.
@@ -285,7 +285,7 @@ class AdaptiveSerenityFlow:
 
 class ViralSymbioticAPIInfusion:
     """
-    IP-06: Viral Symbiotic API Infusion (VSAI) - Network Effect Engine
+    IP-6: Viral Symbiotic API Infusion (VSAI) - Network Effect Engine
     
     Calculates viral spread coefficient and propagates alerts through
     peer networks using graph theory and epidemiological models.
@@ -489,7 +489,7 @@ class SystemSeal:
             location={
                 "region": "Garissa County",
                 "facility": "Dadaab Refugee Camp",
-                "coordinates": {"lat": 0.0528, "lon": 40.3123},
+                "coordinates": {"lat": 0.528, "lon": 40.3123},
                 "population": 215000
             },
             confidence=0.72

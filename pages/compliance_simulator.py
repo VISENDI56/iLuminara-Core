@@ -47,8 +47,8 @@ def render():
             # Generate synthetic drift data
             days = 30
             dates = [datetime.now() - timedelta(days=days-i) for i in range(days)]
-            baseline_kl = 0.05
-            drift = np.random.normal(baseline_kl, 0.02, days)
+            baseline_kl = 0.5
+            drift = np.random.normal(baseline_kl, 0.2, days)
             
             # Add drift event
             drift[20:25] += 0.15

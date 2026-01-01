@@ -95,7 +95,7 @@ def test_alert_publishing():
     outbreak_result = {
         "z_score": 3.2,
         "risk_level": "HIGH",
-        "location": {"lat": 0.0512, "lng": 40.3129},
+        "location": {"lat": 0.512, "lng": 40.3129},
         "disease_likelihood": [
             {"disease": "cholera", "confidence": 0.85}
         ],
@@ -119,7 +119,7 @@ def test_alert_publishing():
     
     voice_result = {
         "alert_level": "CRITICAL",
-        "location": {"lat": 0.0512, "lng": 40.3129},
+        "location": {"lat": 0.512, "lng": 40.3129},
         "symptoms": ["diarrhea", "vomiting", "dehydration"],
         "severity": 9,
         "transcription": "Patient reporting severe watery diarrhea and vomiting",
@@ -142,7 +142,7 @@ def test_alert_publishing():
     message_id = publisher.publish_alert(
         alert_type="bond_trigger",
         severity="CRITICAL",
-        location={"lat": 0.0512, "lng": 40.3129},
+        location={"lat": 0.512, "lng": 40.3129},
         data={
             "z_score": 4.5,
             "threshold": 2.576,

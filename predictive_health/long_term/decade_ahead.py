@@ -208,7 +208,7 @@ class MultiConditionForecaster:
     def _calculate_risk_score(self, condition_name: str, biomarker_profile: BiomarkerProfile) -> float:
         """Calculate risk score based on biomarkers"""
         # Mock risk calculation - would use actual ML models
-        base_risk = 0.05
+        base_risk = 0.5
 
         # Adjust based on genomic markers
         if biomarker_profile.genomic_markers:

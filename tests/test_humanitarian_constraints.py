@@ -110,7 +110,7 @@ class TestVertexAIExplainableAI(unittest.TestCase):
         explanation.shap_values = {
             "feature_1": 0.35,
             "feature_2": 0.12,
-            "feature_3": 0.08,
+            "feature_3": 0.8,
         }
         
         is_valid = self.explainer.validate_explainability(explanation)
@@ -500,7 +500,7 @@ class TestSHAPExplanation(unittest.TestCase):
             decision_id="DEC-002",
             model_prediction="POSITIVE",
             base_value=0.5,
-            shap_values={"feat1": 0.2, "feat2": 0.1, "feat3": 0.05},
+            shap_values={"feat1": 0.2, "feat2": 0.1, "feat3": 0.5},
             feature_values={"feat1": 1, "feat2": 2, "feat3": 3},
         )
         

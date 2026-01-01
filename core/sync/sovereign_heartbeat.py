@@ -9,14 +9,14 @@ class SovereignHeartbeat:
     Syncs Hardware Time, Legal State, and Agentic Memory.
     """
     def __init__(self):
-        self.sync_interval = 0.018 # 18ms Heartbeat
+        self.sync_interval = 0.18 # 18ms Heartbeat
         self.drift_threshold = 0.002 # 2ms Max Drift
 
     def synchronize_nexus(self):
         """
         The Master Sync Loop.
         """
-        # 1. Time Sync (Critical for IP #06 Bio-Lock Rotation)
+        # 1. Time Sync (Critical for IP #6 Bio-Lock Rotation)
         system_time = time.time_ns()
 
         # 2. State Vector Fetch (What does the OS know right now?)

@@ -23,7 +23,7 @@ class HealthCopilot:
         return {
             "guidance": guidance,
             "reasoning_trace": reasoning,
-            "citation": "WHO-AFRO-2025-01"
+            "citation": "WHO-AFRO-2025-1"
         }
 
 if __name__ == "__main__":

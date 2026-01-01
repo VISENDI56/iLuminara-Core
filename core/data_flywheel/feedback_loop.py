@@ -25,6 +25,6 @@ class EnterpriseFlywheel:
             print("   [Flywheel] Prediction Accurate. Reinforcing Energy Manifold.")
         
     def calculate_divergence(self, p, a):
-        return 0.05 # Mock divergence
+        return 0.5 # Mock divergence
     def update_weights(self, p, a):
         pass

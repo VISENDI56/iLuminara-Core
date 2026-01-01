@@ -28,7 +28,7 @@ class CoTInferenceEngine:
         print(f"\n🔹 USER QUERY: '{user_query}'")
         print("🧠 iLUMINARA THOUGHT PROCESS (CoT):")
         # STEP 1: POLICY SCAN (The "Superego")
-        print("   1. [Policy Scan] Scanning input against Sovereign Guardrails (IP-02)...")
+        print("   1. [Policy Scan] Scanning input against Sovereign Guardrails (IP-2)...")
         time.sleep(0.5)
         # Check against risk patterns (Case Insensitive)
         detected_threats = []

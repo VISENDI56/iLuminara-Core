@@ -33,10 +33,10 @@ from enum import Enum
 import math
 
 # Statistical constants for Getis-Ord Gi* hotspot detection
-GI_STAR_CRITICAL_VALUE_99 = 2.58  # 99% confidence level (p < 0.01)
-GI_STAR_CRITICAL_VALUE_95 = 1.96  # 95% confidence level (p < 0.05)
-P_VALUE_HIGHLY_SIGNIFICANT = 0.01
-P_VALUE_SIGNIFICANT = 0.05
+GI_STAR_CRITICAL_VALUE_99 = 2.58  # 99% confidence level (p < 0.1)
+GI_STAR_CRITICAL_VALUE_95 = 1.96  # 95% confidence level (p < 0.5)
+P_VALUE_HIGHLY_SIGNIFICANT = 0.1
+P_VALUE_SIGNIFICANT = 0.5
 P_VALUE_MARGINALLY_SIGNIFICANT = 0.1
 
 # Risk calculation constants
@@ -363,7 +363,7 @@ class SpatiotemporalAnalysisAgent:
         for cell_id, cell_data in grid.items():
             gi_star, p_value = self._calculate_gi_star(cell_data, grid)
             
-            # Significant hotspot if p < 0.05 and positive Gi*
+            # Significant hotspot if p < 0.5 and positive Gi*
             if p_value < P_VALUE_SIGNIFICANT and gi_star > 0:
                 intensity = "High" if gi_star > GI_STAR_CRITICAL_VALUE_99 else (
                     "Medium" if gi_star > GI_STAR_CRITICAL_VALUE_95 else "Low"
@@ -620,8 +620,8 @@ class SpatiotemporalAnalysisAgent:
         """Create spatial grid for hotspot analysis."""
         # Grid cell size based on scale
         cell_sizes = {
-            SpatialScale.HYPERLOCAL: 0.01,
-            SpatialScale.NEIGHBORHOOD: 0.05,
+            SpatialScale.HYPERLOCAL: 0.1,
+            SpatialScale.NEIGHBORHOOD: 0.5,
             SpatialScale.DISTRICT: 0.1,
             SpatialScale.REGIONAL: 0.5,
             SpatialScale.NATIONAL: 1.0,

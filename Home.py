@@ -40,7 +40,7 @@ with tab1:
     # Placeholder for Rev 155 manufacturing data
     df = pd.DataFrame({
         "Binder ID": ["BIN-44", "BIN-92", "BIN-101"],
-        "Target Pathogen": ["Respiratory-X", "S. Aureus-D", "Unknown-Viral-01"],
+        "Target Pathogen": ["Respiratory-X", "S. Aureus-D", "Unknown-Viral-1"],
         "Purity": [0.99, 0.98, 0.85],
         "Status": ["Printing", "Queued", "Verifying"]
     })

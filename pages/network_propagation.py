@@ -34,11 +34,11 @@ def render():
     
     with col1:
         network_size = st.slider("Network Size (peers):", 10, 200, 100, 10)
-        transmission_prob = st.slider("Transmission Probability:", 0.0, 1.0, 0.70, 0.01)
+        transmission_prob = st.slider("Transmission Probability:", 0.0, 1.0, 0.70, 0.1)
     
     with col2:
         initial_infected = st.slider("Initial Alert Sources:", 1, 10, 1)
-        recovery_rate = st.slider("Information Decay Rate:", 0.0, 1.0, 0.10, 0.01)
+        recovery_rate = st.slider("Information Decay Rate:", 0.0, 1.0, 0.10, 0.1)
     
     if st.button("🚀 Simulate Propagation", key="sim_btn"):
         with st.spinner("Simulating viral network propagation..."):

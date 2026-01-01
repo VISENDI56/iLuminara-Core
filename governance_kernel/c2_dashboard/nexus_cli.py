@@ -36,15 +36,15 @@ class C2NexusV3:
         
         print("\n[LIVE COMPLIANCE ORACLE]")
         print(f"   ◈ Unified Controls Validated: 147/147")
-        print(f"   ◈ Ethical Drift: 0.02 (Within Bounds)")
+        print(f"   ◈ Ethical Drift: 0.2 (Within Bounds)")
         print(f"   ◈ Evidence Locker: QUANTUM_SECURE_LOCKED")
         
         print("\n[SECTOR 1: PUBLIC HEALTH]")
         print("   District-B Risk: 0.95 (Intervention Dispatched)")
         
         print("\n[SECTOR 2: OMNI-LAW INTERCEPTS]")
-        print("   14:02 | 🔴 FINANCE | BLOCKED | OFAC Sanction SC-9982")
-        print("   14:05 | 🟢 ESG     | REPORT  | CBAM Carbon Tax Logged")
+        print("   14:2 | 🔴 FINANCE | BLOCKED | OFAC Sanction SC-9982")
+        print("   14:5 | 🟢 ESG     | REPORT  | CBAM Carbon Tax Logged")
 
 if __name__ == "__main__":
     nexus = C2NexusV3()

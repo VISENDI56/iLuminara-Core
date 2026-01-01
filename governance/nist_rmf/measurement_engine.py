@@ -52,4 +52,4 @@ class NISTMeasureEngine:
 if __name__ == "__main__":
     engine = NISTMeasureEngine()
     # Mock data from System 2 logs
-    print(json.dumps(engine.calculate_trust_score(0.05, 1, 0.25), indent=2))
+    print(json.dumps(engine.calculate_trust_score(0.5, 1, 0.25), indent=2))

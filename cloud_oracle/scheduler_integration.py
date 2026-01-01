@@ -302,7 +302,7 @@ class CloudSchedulerIntegration:
             else:
                 # Default optimization logic
                 cycle.policies_generated = 1
-                cycle.improvements_detected = 0.05  # Mock improvement
+                cycle.improvements_detected = 0.5  # Mock improvement
             
             # Complete cycle
             cycle.completion_time = datetime.utcnow()

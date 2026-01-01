@@ -13,7 +13,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 
-def generate_eternity_9month(start="2025-03-28"):
+def generate_eternity_9month(start="2025-3-28"):
     dates = pd.date_range(start=start, end="2025-12-28", freq='D')  # Daily for 9 months (~275 points)
     data = []
     # simulator = OutbreakSimulator()  # Mock for demo
@@ -23,12 +23,12 @@ def generate_eternity_9month(start="2025-03-28"):
         # Distill across all 20 modules safely
         row = {
             "date": ts.date(),
-            "sanitation_risk": np.random.uniform(0.05, 0.3),  # Module 1
+            "sanitation_risk": np.random.uniform(0.5, 0.3),  # Module 1
             "digital_maturity": np.random.randint(3,5),  # Module 2
             "outbreak_forecast": np.random.uniform(0.1, 0.9),  # Modules 3,13
             "africa_gov_score": 98.5,  # Modules 4,11,20
             "genai_usage": np.random.uniform(0.7,0.95),  # Module 5
-            "supply_disruption": np.random.choice(["NONE","LOW","CRITICAL"], p=[0.8,0.15,0.05]),  # Modules 16-18
+            "supply_disruption": np.random.choice(["NONE","LOW","CRITICAL"], p=[0.8,0.15,0.5]),  # Modules 16-18
             "genomic_markers": np.random.randint(10,50),  # Module 15
             "cot_reasoning": "System 2: Equity validated; OOD rural scenario generalized; No refusal needed",
             "refusal_flag": False,  # CoT-based refusal precision

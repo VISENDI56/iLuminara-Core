@@ -115,8 +115,8 @@ def demo_spatiotemporal_agent():
     # Cluster 1: Dadaab (0.05N, 40.31E)
     for i in range(25):
         case_data.append({
-            "lat": 0.05 + (i % 5) * 0.01,
-            "lon": 40.31 + (i % 5) * 0.01,
+            "lat": 0.5 + (i % 5) * 0.1,
+            "lon": 40.31 + (i % 5) * 0.1,
             "timestamp": (datetime.utcnow() - timedelta(days=14-i)).isoformat(),
             "disease": "cholera",
             "cases": 1,
@@ -125,8 +125,8 @@ def demo_spatiotemporal_agent():
     # Cluster 2: Garissa Town (0.46S, 39.64E) - later outbreak
     for i in range(15):
         case_data.append({
-            "lat": -0.46 + (i % 3) * 0.01,
-            "lon": 39.64 + (i % 3) * 0.01,
+            "lat": -0.46 + (i % 3) * 0.1,
+            "lon": 39.64 + (i % 3) * 0.1,
             "timestamp": (datetime.utcnow() - timedelta(days=7-i)).isoformat(),
             "disease": "cholera",
             "cases": 1,
@@ -184,7 +184,7 @@ def demo_early_warning_agent():
         SensorReading(
             sensor_id="ENV_001",
             sensor_type="Environmental",
-            location=(0.05, 40.31),
+            location=(0.5, 40.31),
             timestamp=datetime.utcnow() - timedelta(hours=2),
             readings={
                 "temperature_c": 28.5,
@@ -195,7 +195,7 @@ def demo_early_warning_agent():
         SensorReading(
             sensor_id="ENV_002",
             sensor_type="Environmental",
-            location=(0.06, 40.32),
+            location=(0.6, 40.32),
             timestamp=datetime.utcnow() - timedelta(hours=1),
             readings={
                 "temperature_c": 29.0,
@@ -211,7 +211,7 @@ def demo_early_warning_agent():
     cbs_reports = [
         {
             "timestamp": (datetime.utcnow() - timedelta(hours=6)).isoformat(),
-            "lat": 0.05,
+            "lat": 0.5,
             "lon": 40.31,
             "symptom": "acute diarrhea",
             "reporter": "CHV_Amina_Hassan",
@@ -219,7 +219,7 @@ def demo_early_warning_agent():
         },
         {
             "timestamp": (datetime.utcnow() - timedelta(hours=4)).isoformat(),
-            "lat": 0.055,
+            "lat": 0.55,
             "lon": 40.315,
             "symptom": "watery diarrhea and vomiting",
             "reporter": "CHV_Mohamed_Ali",
@@ -227,7 +227,7 @@ def demo_early_warning_agent():
         },
         {
             "timestamp": (datetime.utcnow() - timedelta(hours=2)).isoformat(),
-            "lat": 0.06,
+            "lat": 0.6,
             "lon": 40.32,
             "symptom": "severe dehydration",
             "reporter": "CHV_Fatima_Omar",
@@ -242,7 +242,7 @@ def demo_early_warning_agent():
     emr_records = [
         {
             "timestamp": (datetime.utcnow() - timedelta(hours=1)).isoformat(),
-            "lat": 0.052,
+            "lat": 0.52,
             "lon": 40.312,
             "diagnosis": "Cholera",
             "confirmed": True,
@@ -250,7 +250,7 @@ def demo_early_warning_agent():
         },
         {
             "timestamp": (datetime.utcnow() - timedelta(minutes=30)).isoformat(),
-            "lat": 0.057,
+            "lat": 0.57,
             "lon": 40.318,
             "diagnosis": "Cholera",
             "confirmed": True,
@@ -309,7 +309,7 @@ def demo_orchestrator():
         SensorReading(
             sensor_id=f"ENV_{i:03d}",
             sensor_type="Environmental",
-            location=(0.05 + i*0.01, 40.31 + i*0.01),
+            location=(0.5 + i*0.1, 40.31 + i*0.1),
             timestamp=datetime.utcnow() - timedelta(hours=24-i),
             readings={
                 "temperature_c": 27 + i*0.2,
@@ -326,8 +326,8 @@ def demo_orchestrator():
     cbs_data = [
         {
             "timestamp": (datetime.utcnow() - timedelta(days=14-i)).isoformat(),
-            "lat": 0.05 + (i % 5) * 0.01,
-            "lon": 40.31 + (i % 5) * 0.01,
+            "lat": 0.5 + (i % 5) * 0.1,
+            "lon": 40.31 + (i % 5) * 0.1,
             "symptom": "acute diarrhea",
             "disease": "cholera",
             "cases": 1 + (i % 3),
@@ -341,8 +341,8 @@ def demo_orchestrator():
     emr_data = [
         {
             "timestamp": (datetime.utcnow() - timedelta(days=10-i)).isoformat(),
-            "lat": 0.05 + (i % 3) * 0.01,
-            "lon": 40.31 + (i % 3) * 0.01,
+            "lat": 0.5 + (i % 3) * 0.1,
+            "lon": 40.31 + (i % 3) * 0.1,
             "diagnosis": "Cholera",
             "confirmed": True,
             "cases": 1,

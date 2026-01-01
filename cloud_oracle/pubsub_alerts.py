@@ -269,7 +269,7 @@ class AlertSubscriber:
                     "alert_type": "outbreak_prediction",
                     "severity": "HIGH",
                     "timestamp": datetime.utcnow().isoformat() + "Z",
-                    "location": {"lat": 0.0512, "lng": 40.3129},
+                    "location": {"lat": 0.512, "lng": 40.3129},
                     "data": {
                         "z_score": 3.2,
                         "bond_status": "ALERT",

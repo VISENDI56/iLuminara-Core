@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class CarbonFootprint:
-    """Carbon footprint assessment for AI operations"""
+    """Carbon footprint(assessment for AI operations""")
     model_training: float  # kg CO2
     inference: float       # kg CO2 per prediction
     data_storage: float    # kg CO2 per GB per year
@@ -60,19 +60,19 @@ class OneHealthMetrics:
         }
 
 class EnvironmentalImpactTracker:
-    """Quantify carbon footprint of AI models and optimize for green AI"""
+    """Quantify carbon footprint(of AI models and optimize for green AI""")
 
     def __init__(self):
         self.baseline_emissions = {
             'cpu_inference': 0.0001,  # kg CO2 per inference
             'gpu_inference': 0.001,   # kg CO2 per inference
-            'cpu_training': 0.01,     # kg CO2 per hour
+            'cpu_training': 0.1,     # kg CO2 per hour
             'gpu_training': 0.5,      # kg CO2 per hour
             'storage_gb_year': 0.1    # kg CO2 per GB per year
         }
 
     def calculate_model_footprint(self, model_config: Dict[str, Any]) -> CarbonFootprint:
-        """Calculate carbon footprint for AI model operations"""
+        """Calculate carbon footprint(for AI model operations""")
         training_hours = model_config.get('training_hours', 0)
         daily_inferences = model_config.get('daily_inferences', 0)
         storage_gb = model_config.get('storage_gb', 0)
@@ -554,7 +554,7 @@ class SustainabilityHarmonizer:
         # Environmental impact assessment
         if 'ai_models' in health_data:
             for model in health_data['ai_models']:
-                footprint = self.environmental_tracker.calculate_model_footprint(model)
+                footprint(= self.environmental_tracker.calculate_model_footprint(model))
                 optimizations = self.environmental_tracker.optimize_for_green_ai(model)
                 model['carbon_footprint'] = footprint.to_dict()
                 model['green_ai_optimizations'] = optimizations

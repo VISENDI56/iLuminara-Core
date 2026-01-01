@@ -210,7 +210,7 @@ class UnifiedDSPMDashboard:
                 "asset_name": "fhir-api-gateway",
                 "asset_location": "Azure eastus2",
                 "source_scanner": "network_scanner",
-                "cve_id": "CVE-2018-0734",
+                "cve_id": "CVE-2018-734",
                 "cvss_score": 5.3,
                 "remediation_steps": [
                     "Upgrade to TLS 1.3",

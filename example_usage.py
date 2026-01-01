@@ -31,7 +31,7 @@ def example_conflict_zone_response():
     action = {
         'type': 'field_hospital',
         'scope': 'conflict_zone',
-        'estimated_civilian_impact': 0.05,
+        'estimated_civilian_impact': 0.5,
         'medical_benefit': 0.95
     }
     
@@ -70,7 +70,7 @@ def example_outbreak_response():
         'scope': 'refugee_camp',
         'estimated_civilian_impact': 0.3,
         'medical_benefit': 0.85,
-        'attack_rate': 0.04,  # 4% attack rate
+        'attack_rate': 0.4,  # 4% attack rate
         'r_effective': 2.8,   # Rapid spread
         'severity_score': 0.75
     }
@@ -144,7 +144,7 @@ def example_combined_crisis():
         'scope': 'regional',
         'estimated_civilian_impact': 0.15,
         'medical_benefit': 0.85,
-        'attack_rate': 0.03,
+        'attack_rate': 0.3,
         'r_effective': 1.8,
         'severity_score': 0.8
     }

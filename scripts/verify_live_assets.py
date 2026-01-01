@@ -59,31 +59,31 @@ ASSETS = [
     },
     {
         "url": "https://visendi56.mintlify.app/docs/Core-ip/crypto-shredder",
-        "name": "Crypto Shredder (IP-02)",
+        "name": "Crypto Shredder (IP-2)",
         "type": "documentation",
         "required": True
     },
     {
         "url": "https://visendi56.mintlify.app/docs/Core-ip/somatic-auth",
-        "name": "Somatic Auth (IP-03)",
+        "name": "Somatic Auth (IP-3)",
         "type": "documentation",
         "required": True
     },
     {
         "url": "https://visendi56.mintlify.app/docs/Core-ip/serenity-flow",
-        "name": "Serenity Flow (IP-04)",
+        "name": "Serenity Flow (IP-4)",
         "type": "documentation",
         "required": True
     },
     {
         "url": "https://visendi56.mintlify.app/docs/Core-ip/golden-thread",
-        "name": "Golden Thread (IP-05)",
+        "name": "Golden Thread (IP-5)",
         "type": "documentation",
         "required": True
     },
     {
         "url": "https://visendi56.mintlify.app/docs/Core-ip/viral-bridge",
-        "name": "Viral Bridge (IP-06)",
+        "name": "Viral Bridge (IP-6)",
         "type": "documentation",
         "required": True
     },

@@ -85,7 +85,7 @@ class IMSOrchestrator:
         """Monitor certification readiness continuously."""
         # Placeholder implementation
         for iso in self.certification_status:
-            self.certification_status[iso]['score'] = min(1.0, self.certification_status[iso]['score'] + 0.01)
+            self.certification_status[iso]['score'] = min(1.0, self.certification_status[iso]['score'] + 0.1)
 
         return {
             'timestamp': datetime.now().isoformat(),

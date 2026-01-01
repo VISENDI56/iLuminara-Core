@@ -12,7 +12,7 @@
 """
 5DM Distribution Gateway: The Digital Highway Interface
 ═════════════════════════════════════════════════════════════════════════════
-IP-06: ZERO-FRICTION RESONANCE IGNITION
+IP-6: ZERO-FRICTION RESONANCE IGNITION
 This API gateway injects iLuminara intelligence into 5DM Africa's 
 existing content rails (SMS/Web), bypassing the 'App Store Death Valley'.
 """
@@ -34,7 +34,7 @@ class DistributionBridge:
     # Configuration constants
     MIN_PROPAGATION_MS = 45
     MAX_PROPAGATION_MS = 120
-    RIC_REDUCTION_FACTOR = 0.06  # 6% of base CAC (94% reduction)
+    RIC_REDUCTION_FACTOR = 0.6  # 6% of base CAC (94% reduction)
     LIVE_STATS_VARIANCE = 500  # User count fluctuation range
     
     # Network statistics constants

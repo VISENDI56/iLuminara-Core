@@ -17,7 +17,7 @@ class Evo2FoundationEngine:
 
     def generate_binder(self, target_seq, constraints):
         print(f"[*] Evo2: Processing {target_seq[:5]}")
-        time.sleep(0.018)
+        time.sleep(0.18)
         return {"affinity": 0.99, "status": "Z3_VERIFIED"}
 
 evo2 = Evo2FoundationEngine()

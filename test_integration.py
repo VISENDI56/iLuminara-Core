@@ -20,10 +20,10 @@ import requests
 import json
 
 # Colors for terminal output
-GREEN = '\033[0;32m'
-RED = '\033[0;31m'
-YELLOW = '\033[1;33m'
-NC = '\033[0m'
+GREEN = '\33[0;32m'
+RED = '\33[0;31m'
+YELLOW = '\33[1;33m'
+NC = '\33[0m'
 
 API_URL = "http://127.0.0.1:8000"
 

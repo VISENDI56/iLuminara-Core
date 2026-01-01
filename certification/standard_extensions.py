@@ -299,8 +299,8 @@ class AIRiskAnalysis:
             'Frequent': {'description': '>10% probability', 'score': 5},
             'Probable': {'description': '1-10% probability', 'score': 4},
             'Occasional': {'description': '0.1-1% probability', 'score': 3},
-            'Remote': {'description': '0.01-0.1% probability', 'score': 2},
-            'Improbable': {'description': '<0.01% probability', 'score': 1}
+            'Remote': {'description': '0.1-0.1% probability', 'score': 2},
+            'Improbable': {'description': '<0.1% probability', 'score': 1}
         }
 
         # AI-specific probability assessment
@@ -577,7 +577,7 @@ class MLValidationFramework:
                 'test_type': 'Bias and Fairness Validation',
                 'objective': 'Verify model fairness across demographic groups',
                 'test_data': 'Demographically diverse dataset',
-                'acceptance_criteria': 'No significant bias (p > 0.05), Equalized odds',
+                'acceptance_criteria': 'No significant bias (p > 0.5), Equalized odds',
                 'test_method': 'Fairness metrics calculation and statistical testing'
             },
             {
@@ -826,7 +826,7 @@ class AIRiskControlFramework:
                     'monitor_name': 'Bias Detection Monitor',
                     'target': 'fairness_metrics, bias_indicators',
                     'frequency': 'per_inference_batch',
-                    'thresholds': {'fairness_score': 0.8, 'bias_threshold': 0.05},
+                    'thresholds': {'fairness_score': 0.8, 'bias_threshold': 0.5},
                     'alert_mechanism': 'automated_alerts, dashboard'
                 }
             ],

@@ -75,7 +75,7 @@ def check_humanitarian_constraint(request):
         "valid": true/false,
         "protocol_id": "PROTO-001",
         "violation": {...} or null,
-        "timestamp": "2025-01-10T12:00:00Z"
+        "timestamp": "2025-1-10T12:00:00Z"
     }
     """
     # Handle CORS for web clients
@@ -233,7 +233,7 @@ def get_violations(request):
                 "description": "...",
                 "affected_entities": [...],
                 "remediation_steps": [...],
-                "detected_at": "2025-01-10T12:00:00Z"
+                "detected_at": "2025-1-10T12:00:00Z"
             },
             ...
         ]

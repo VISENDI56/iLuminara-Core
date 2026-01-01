@@ -38,7 +38,7 @@ class TestAuditEntry:
     def test_audit_entry_creation(self):
         """Test basic audit entry creation."""
         entry = AuditEntry(
-            timestamp="2025-01-15T10:00:00Z",
+            timestamp="2025-1-15T10:00:00Z",
             event_type=AuditEventType.SOVEREIGNTY_CHECK.value,
             actor="user@example.com",
             resource="patient_record_12345",
@@ -49,7 +49,7 @@ class TestAuditEntry:
             previous_hash="0" * 64
         )
         
-        assert entry.timestamp == "2025-01-15T10:00:00Z"
+        assert entry.timestamp == "2025-1-15T10:00:00Z"
         assert entry.event_type == "sovereignty_check"
         assert entry.actor == "user@example.com"
         assert len(entry.entry_hash) == 64  # SHA-256 produces 64 hex chars
@@ -58,7 +58,7 @@ class TestAuditEntry:
     def test_audit_entry_hash_computation(self):
         """Test that hash is computed correctly."""
         entry = AuditEntry(
-            timestamp="2025-01-15T10:00:00Z",
+            timestamp="2025-1-15T10:00:00Z",
             event_type="test_event",
             actor="test_actor",
             resource="test_resource",
@@ -78,7 +78,7 @@ class TestAuditEntry:
     def test_audit_entry_integrity_verification(self):
         """Test integrity verification."""
         entry = AuditEntry(
-            timestamp="2025-01-15T10:00:00Z",
+            timestamp="2025-1-15T10:00:00Z",
             event_type="test_event",
             actor="test_actor",
             resource="test_resource",
@@ -107,7 +107,7 @@ class TestAuditEntry:
     def test_audit_entry_chain_linkage(self):
         """Test that entries link to previous entries."""
         entry1 = AuditEntry(
-            timestamp="2025-01-15T10:00:00Z",
+            timestamp="2025-1-15T10:00:00Z",
             event_type="event1",
             actor="actor1",
             resource="resource1",
@@ -120,7 +120,7 @@ class TestAuditEntry:
         
         # Second entry links to first
         entry2 = AuditEntry(
-            timestamp="2025-01-15T10:01:00Z",
+            timestamp="2025-1-15T10:1:00Z",
             event_type="event2",
             actor="actor2",
             resource="resource2",
@@ -149,7 +149,7 @@ class TestBigtableLedger:
         ledger = BigtableLedger(simulate=True)
         
         entry = AuditEntry(
-            timestamp="2025-01-15T10:00:00Z",
+            timestamp="2025-1-15T10:00:00Z",
             event_type="test_event",
             actor="test_actor",
             resource="test_resource",
@@ -171,7 +171,7 @@ class TestBigtableLedger:
         # Write multiple entries
         for i in range(5):
             entry = AuditEntry(
-                timestamp=f"2025-01-15T10:0{i}:00Z",
+                timestamp=f"2025-1-15T10:0{i}:00Z",
                 event_type=f"event_{i}",
                 actor="test_actor",
                 resource=f"resource_{i}",
@@ -196,7 +196,7 @@ class TestBigtableLedger:
         ledger = BigtableLedger(simulate=True)
         
         entry = AuditEntry(
-            timestamp="2025-01-15T10:00:00Z",
+            timestamp="2025-1-15T10:00:00Z",
             event_type="test_event",
             actor="test_actor",
             resource="test_resource",
@@ -231,7 +231,7 @@ class TestSpannerSyncEngine:
         sync_engine = SpannerSyncEngine(simulate=True)
         
         entry = AuditEntry(
-            timestamp="2025-01-15T10:00:00Z",
+            timestamp="2025-1-15T10:00:00Z",
             event_type="test_event",
             actor="test_actor",
             resource="test_resource",
@@ -254,7 +254,7 @@ class TestSpannerSyncEngine:
         sync_engine = SpannerSyncEngine(simulate=True)
         
         entry = AuditEntry(
-            timestamp="2025-01-15T10:00:00Z",
+            timestamp="2025-1-15T10:00:00Z",
             event_type="test_event",
             actor="test_actor",
             resource="test_resource",
@@ -297,7 +297,7 @@ class TestCloudKMSManager:
         kms = CloudKMSManager(simulate=True)
         
         entry = AuditEntry(
-            timestamp="2025-01-15T10:00:00Z",
+            timestamp="2025-1-15T10:00:00Z",
             event_type="test_event",
             actor="test_actor",
             resource="test_resource",
@@ -325,7 +325,7 @@ class TestCloudKMSManager:
         kms = CloudKMSManager(simulate=True)
         
         entry = AuditEntry(
-            timestamp="2025-01-15T10:00:00Z",
+            timestamp="2025-1-15T10:00:00Z",
             event_type="test_event",
             actor="test_actor",
             resource="test_resource",
@@ -349,7 +349,7 @@ class TestCloudKMSManager:
         kms = CloudKMSManager(simulate=True)
         
         entry = AuditEntry(
-            timestamp="2025-01-15T10:00:00Z",
+            timestamp="2025-1-15T10:00:00Z",
             event_type="test_event",
             actor="test_actor",
             resource="test_resource",

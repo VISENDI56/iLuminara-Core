@@ -34,7 +34,7 @@ class EdgeOptimizer:
             r=16,
             lora_alpha=32,
             target_modules=["q_proj", "v_proj"],
-            lora_dropout=0.05,
+            lora_dropout=0.5,
             bias="none"
         )
         return get_peft_model(model, config)
@@ -44,7 +44,7 @@ class EdgeOptimizer:
         Creates the 'HSML Sync Agent' package for offline reconciliation.
         """
         return {
-            "sync_protocol": "IP-09",
+            "sync_protocol": "IP-9",
             "offline_mode": True,
             "reconciliation_strategy": "Merkle-Tree-Diff"
         }

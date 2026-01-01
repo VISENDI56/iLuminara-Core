@@ -85,9 +85,9 @@ def test_regulatory_drift_detection(rco: RegenerativeComplianceOracle):
     try:
         # Create baseline distributions for laws
         baseline = {
-            "LAW-001": np.array([0.5, 0.3, 0.15, 0.05]),  # EU AI Act
-            "LAW-002": np.array([0.6, 0.25, 0.1, 0.05]),  # IHR 2005
-            "LAW-006": np.array([0.4, 0.35, 0.2, 0.05])   # GDPR
+            "LAW-001": np.array([0.5, 0.3, 0.15, 0.5]),  # EU AI Act
+            "LAW-002": np.array([0.6, 0.25, 0.1, 0.5]),  # IHR 2005
+            "LAW-006": np.array([0.4, 0.35, 0.2, 0.5])   # GDPR
         }
         
         rco.entropy_sensor.baseline_distributions = baseline
@@ -95,7 +95,7 @@ def test_regulatory_drift_detection(rco: RegenerativeComplianceOracle):
         # Simulate drift: observed distribution differs from baseline
         observed = {
             "LAW-001": np.array([0.3, 0.4, 0.2, 0.1]),  # Significant drift
-            "LAW-002": np.array([0.58, 0.27, 0.1, 0.05]),  # Minimal drift
+            "LAW-002": np.array([0.58, 0.27, 0.1, 0.5]),  # Minimal drift
             "LAW-006": np.array([0.1, 0.5, 0.3, 0.1])   # High drift
         }
         
@@ -343,7 +343,7 @@ def test_quantum_nexus_harmonization():
 
 def test_retroactive_alignment(nexus: QuantumNexus):
     """Test 9: Retroactive Alignment Engine"""
-    print_section("TEST 9: Retroactive Alignment Engine (IP-09 Integration)")
+    print_section("TEST 9: Retroactive Alignment Engine (IP-9 Integration)")
     
     try:
         # Create simulated historical data

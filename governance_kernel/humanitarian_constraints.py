@@ -227,9 +227,9 @@ class VertexAIExplainableAI:
                 # Default attribution
                 else:
                     if isinstance(value, (int, float)):
-                        shap_values[feature] = float(value) * 0.05
+                        shap_values[feature] = float(value) * 0.5
                     else:
-                        shap_values[feature] = 0.05
+                        shap_values[feature] = 0.5
         
         return shap_values
     

@@ -134,7 +134,7 @@ st.markdown("""
         
         @keyframes pulse-banner {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+            50% { transform: scale(1.2); }
         }
         
         /* Buttons */

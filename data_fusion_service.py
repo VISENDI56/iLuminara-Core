@@ -62,12 +62,12 @@ def fuse_data():
         "cbs_signal": {
             "location": "Nairobi",
             "symptom": "fever",
-            "timestamp": "2025-01-10T10:00Z"
+            "timestamp": "2025-1-10T10:00Z"
         },
         "emr_record": {
             "location": "Nairobi",
             "diagnosis": "malaria",
-            "timestamp": "2025-01-10T09:45Z"
+            "timestamp": "2025-1-10T09:45Z"
         },
         "patient_id": "PATIENT_12345"
     }

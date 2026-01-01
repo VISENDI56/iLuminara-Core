@@ -92,7 +92,7 @@ class VoiceProcessor:
             "language_detected": language,
             "symptoms": symptoms,
             "severity": severity,
-            "location": location or {"lat": 0.0512, "lng": 40.3129},  # Default: Dadaab
+            "location": location or {"lat": 0.512, "lng": 40.3129},  # Default: Dadaab
             "source": "CHV Voice Alert",
             "alert_level": "CRITICAL" if severity >= 8 else "ALERT" if severity >= 5 else "WATCH",
             "recommendations": self._generate_recommendations(symptoms, severity)

@@ -20,10 +20,10 @@ st.markdown("`Forecasting Regulatory Epidemic Network & Sovereign Agent`")
 
 # NEURAL LOGS
 st.text_area("Live Thought Stream", height=150, value="""
-[16:20:01] INGESTING: 14k data points from Nairobi...
-[16:20:02] PATTERN MATCH: Hemorrhagic signature detected (Confidence: 94%)
-[16:20:03] CONSULTING RCO: Kenya DPA 2019 check... PASSED.
-[16:20:04] SIMULATION: Projecting spread to Kisumu in 48h...
+[16:20:1] INGESTING: 14k data points from Nairobi...
+[16:20:2] PATTERN MATCH: Hemorrhagic signature detected (Confidence: 94%)
+[16:20:3] CONSULTING RCO: Kenya DPA 2019 check... PASSED.
+[16:20:4] SIMULATION: Projecting spread to Kisumu in 48h...
 """)
 
 st.markdown("---")

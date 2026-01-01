@@ -18,7 +18,7 @@ conflict resolution and retroactive alignment capabilities.
 
 This module implements:
 - harmonize_risk_vectors: Resolves conflicts between laws (e.g., GDPR vs. HIPAA)
-- retroactive_alignment_engine: Scans historical data for compliance gaps via IP-09
+- retroactive_alignment_engine: Scans historical data for compliance gaps via IP-9
 
 Philosophy: "When laws collide, harmony emerges from the highest standard."
 """
@@ -451,7 +451,7 @@ class QuantumNexus:
         """
         Scan historical data for compliance gaps and generate remediation plan.
         
-        This is the IP-09 integration that analyzes past operations for regulatory violations.
+        This is the IP-9 integration that analyzes past operations for regulatory violations.
         
         Args:
             historical_data: List of historical operations to audit

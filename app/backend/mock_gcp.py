@@ -54,7 +54,7 @@ class MockBigQuery:
                 },
                 {
                     "region": "Mombasa",
-                    "outbreak_probability": round(random.uniform(0.05, 0.4), 3),
+                    "outbreak_probability": round(random.uniform(0.5, 0.4), 3),
                     "population_at_risk": random.randint(8000, 80000),
                     "cases_confirmed": random.randint(2, 100),
                     "cases_suspected": random.randint(10, 300),

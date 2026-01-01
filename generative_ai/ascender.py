@@ -1267,8 +1267,8 @@ class PredictiveScenarioBuilder:
     def _initialize_model_parameters(self) -> Dict[str, Dict[str, Any]]:
         """Initialize modeling parameters"""
         return {
-            "conservative": {"growth_rate": 0.02, "uncertainty_multiplier": 0.8},
-            "moderate": {"growth_rate": 0.05, "uncertainty_multiplier": 1.0},
+            "conservative": {"growth_rate": 0.2, "uncertainty_multiplier": 0.8},
+            "moderate": {"growth_rate": 0.5, "uncertainty_multiplier": 1.0},
             "aggressive": {"growth_rate": 0.10, "uncertainty_multiplier": 1.3}
         }
 
@@ -1405,7 +1405,7 @@ class PredictiveScenarioBuilder:
                 ])
             elif variant_type == "most_likely":
                 # Moderate adjustments
-                adjustment = 0.05  # Slight change
+                adjustment = 0.5  # Slight change
                 variant["key_assumptions"].extend([
                     "Partial intervention success",
                     "Mixed community response",
@@ -1421,7 +1421,7 @@ class PredictiveScenarioBuilder:
                 ])
 
             # Apply adjustment with some randomness
-            final_value = max(0, min(1, initial_value + adjustment + np.random.normal(0, 0.05)))
+            final_value = max(0, min(1, initial_value + adjustment + np.random.normal(0, 0.5)))
             variant["variables"][var_name] = {
                 "initial_value": initial_value,
                 "projected_value": final_value,

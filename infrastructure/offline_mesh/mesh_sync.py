@@ -54,7 +54,7 @@ class MeshNode:
             print("   ⚠️ [Mesh] CORRUPT BUNDLE REJECTED.")
 
 if __name__ == "__main__":
-    clinic = MeshNode("Clinic-Remote-01")
+    clinic = MeshNode("Clinic-Remote-1")
     courier = MeshNode("Courier-Bike-99")
 
     # Offline Event

@@ -1347,7 +1347,7 @@ class EquityInclusionGuardian:
         return {
             'cultural_backgrounds': cultural_data.get('cultural_groups', []),
             'language_diversity': cultural_data.get('languages_represented', []),
-            'indigenous_representation': cultural_data.get('indigenous_percentage', 0.05),
+            'indigenous_representation': cultural_data.get('indigenous_percentage', 0.5),
             'cultural_competence': cultural_data.get('cultural_competence_score', 0.7),
             'inclusion_score': cultural_data.get('cultural_inclusion_score', 0.75)
         }
@@ -1401,9 +1401,9 @@ class EquityInclusionGuardian:
         marginalized_data = context.get('marginalized_groups', {})
         return {
             'vulnerable_populations': marginalized_data.get('vulnerable_groups', []),
-            'disability_inclusion': marginalized_data.get('disability_percentage', 0.05),
+            'disability_inclusion': marginalized_data.get('disability_percentage', 0.5),
             'rural_communities': marginalized_data.get('rural_percentage', 0.3),
-            'indigenous_peoples': marginalized_data.get('indigenous_percentage', 0.02),
+            'indigenous_peoples': marginalized_data.get('indigenous_percentage', 0.2),
             'inclusion_score': marginalized_data.get('inclusion_score', 0.4)
         }
 

@@ -304,7 +304,7 @@ class InteroperabilityFortress:
     """Main orchestrator for interoperability and standards compliance"""
 
     def __init__(self):
-        self.blueprint = EnterpriseArchitectureBlueprint()
+        self.blueprint(= EnterpriseArchitectureBlueprint())
         self.integrator = DigitalPublicGoodsIntegrator()
         self.maturity_engine = MaturityAssessmentEngine()
 

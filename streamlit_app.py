@@ -45,7 +45,7 @@ st.markdown("""
         padding: 1rem;
         margin: 0.5rem 0;
     }
-    .compliance-high { color: #059669; }
+    .compliance-high { color: #59669; }
     .compliance-medium { color: #d97706; }
     .compliance-low { color: #dc2626; }
     .sidebar-certifications {
@@ -178,12 +178,12 @@ elif selected_page == "🧬 Core IP Stack":
     st.markdown("**Complete IP Portfolio:** Live demonstrations of all 5 Core inventions.")
 
     ip_selection = st.selectbox("Select IP to Demonstrate:",
-                               ["IP-02: Crypto Shredder", "IP-03: Acorn Protocol",
-                                "IP-04: Silent Flux", "IP-05: Golden Thread ECF",
-                                "IP-06: 5DM Bridge VSAI"])
+                               ["IP-2: Crypto Shredder", "IP-3: Acorn Protocol",
+                                "IP-4: Silent Flux", "IP-5: Golden Thread ECF",
+                                "IP-6: 5DM Bridge VSAI"])
 
-    if ip_selection == "IP-02: Crypto Shredder":
-        st.subheader("🔐 IP-02: Crypto Shredder")
+    if ip_selection == "IP-2: Crypto Shredder":
+        st.subheader("🔐 IP-2: Crypto Shredder")
         st.markdown("**Data is not deleted; it is cryptographically dissolved.**")
         demo_text = st.text_area("Enter sensitive data to shred:", "Patient PHI data...")
         if st.button("🗑️ Shred Data"):
@@ -192,8 +192,8 @@ elif selected_page == "🧬 Core IP Stack":
             st.success(f"Data cryptographically shredded: {shredded}")
             st.info("Data is now mathematically irrecoverable.")
 
-    elif ip_selection == "IP-03: Acorn Protocol":
-        st.subheader("🌰 IP-03: Acorn Protocol (STA Engine)")
+    elif ip_selection == "IP-3: Acorn Protocol":
+        st.subheader("🌰 IP-3: Acorn Protocol (STA Engine)")
         st.markdown("**Somatic Trait Authentication using Posture + Location + Stillness.**")
         posture = st.slider("Body Posture Angle", 0, 180, 90)
         location_accuracy = st.slider("GPS Accuracy (meters)", 0, 50, 5)
@@ -205,8 +205,8 @@ elif selected_page == "🧬 Core IP Stack":
             else:
                 st.error("❌ Authentication Failed - Insufficient somatic confidence")
 
-    elif ip_selection == "IP-04: Silent Flux":
-        st.subheader("🌊 IP-04: Silent Flux (ASF Regulation)")
+    elif ip_selection == "IP-4: Silent Flux":
+        st.subheader("🌊 IP-4: Silent Flux (ASF Regulation)")
         st.markdown("**AI output regulation based on user cognitive load.**")
         user_stress = st.slider("Detected User Stress Level", 0, 100, 30)
         info_complexity = st.selectbox("Information Complexity:",
@@ -219,8 +219,8 @@ elif selected_page == "🧬 Core IP Stack":
         else:
             st.success("💬 Normal Mode - Full information flow available")
 
-    elif ip_selection == "IP-05: Golden Thread ECF":
-        st.subheader("🧬 IP-05: Golden Thread (Entangled Clinical Fusion)")
+    elif ip_selection == "IP-5: Golden Thread ECF":
+        st.subheader("🧬 IP-5: Golden Thread (Entangled Clinical Fusion)")
         st.markdown("**Quantum-entangled data fusion across spatiotemporal vectors.**")
         col1, col2 = st.columns(2)
         with col1:
@@ -236,8 +236,8 @@ elif selected_page == "🧬 Core IP Stack":
         fig.update_layout(title="Clinical Signal Entanglement")
         st.plotly_chart(fig)
 
-    elif ip_selection == "IP-06: 5DM Bridge VSAI":
-        st.subheader("🌐 IP-06: 5DM Bridge (Viral Swarm AI)")
+    elif ip_selection == "IP-6: 5DM Bridge VSAI":
+        st.subheader("🌐 IP-6: 5DM Bridge (Viral Swarm AI)")
         st.markdown("**AI agent spread across mobile networks for adoption optimization.**")
         network_size = st.slider("Mobile Network Size", 1000, 14000000, 1000000)
         viral_coefficient = st.slider("Viral Coefficient", 1.0, 5.0, 2.5)
@@ -343,9 +343,9 @@ elif selected_page == "📜 Living Certifications":
         artifacts = living_cert.get_recent_artifacts()
     else:
         artifacts = [
-            {"id": "EVD-2025-0127-001", "type": "Design Control", "standard": "ISO 13485", "status": "✅ Validated"},
-            {"id": "EVD-2025-0127-002", "type": "Risk Assessment", "standard": "ISO 14971", "status": "✅ Validated"},
-            {"id": "EVD-2025-0127-003", "type": "Privacy Audit", "standard": "ISO 27701", "status": "✅ Validated"}
+            {"id": "EVD-2025-127-001", "type": "Design Control", "standard": "ISO 13485", "status": "✅ Validated"},
+            {"id": "EVD-2025-127-002", "type": "Risk Assessment", "standard": "ISO 14971", "status": "✅ Validated"},
+            {"id": "EVD-2025-127-003", "type": "Privacy Audit", "standard": "ISO 27701", "status": "✅ Validated"}
         ]
 
     for artifact in artifacts:

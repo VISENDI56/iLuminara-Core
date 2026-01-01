@@ -183,17 +183,17 @@ class DataQualityReport:
                 mitigation_technique="Stratified Sampling with Weights",
                 target_bias_type="Demographic Representation Bias",
                 before_metrics={
-                    "gender_imbalance_score": 0.087,
+                    "gender_imbalance_score": 0.87,
                     "age_imbalance_score": 0.134,
-                    "geographic_imbalance_score": 0.092
+                    "geographic_imbalance_score": 0.92
                 },
                 after_metrics={
-                    "gender_imbalance_score": 0.023,
-                    "age_imbalance_score": 0.045,
-                    "geographic_imbalance_score": 0.031
+                    "gender_imbalance_score": 0.23,
+                    "age_imbalance_score": 0.45,
+                    "geographic_imbalance_score": 0.31
                 },
                 effectiveness_score=0.72,
-                validation_method="Statistical significance testing (p < 0.05)"
+                validation_method="Statistical significance testing (p < 0.5)"
             ),
             BiasMitigationStep(
                 step_id="BM-002",
@@ -203,11 +203,11 @@ class DataQualityReport:
                 target_bias_type="Algorithmic Discrimination",
                 before_metrics={
                     "disparate_impact_ratio": 1.23,
-                    "equal_opportunity_difference": 0.089
+                    "equal_opportunity_difference": 0.89
                 },
                 after_metrics={
-                    "disparate_impact_ratio": 1.05,
-                    "equal_opportunity_difference": 0.023
+                    "disparate_impact_ratio": 1.5,
+                    "equal_opportunity_difference": 0.23
                 },
                 effectiveness_score=0.85,
                 validation_method="Fairlearn fairness metrics validation"
@@ -246,7 +246,7 @@ class DataQualityReport:
             missing_data_percentage=6.2,
             imputation_methods=["Multiple imputation", "Domain expert consultation", "Statistical modeling"],
             accuracy_score=0.91,
-            error_rate=0.09,
+            error_rate=0.9,
             validation_methods=["Cross-validation", "Expert review", "Statistical outlier detection"],
             demographic_representations=demographic_representations,
             bias_mitigation_steps=bias_mitigation_steps,

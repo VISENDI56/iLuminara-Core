@@ -12,7 +12,7 @@
 #!/usr/bin/env python3
 """
 Integration test for the Core IP Stack components.
-Tests all proprietary innovations (IP-02 through IP-06).
+Tests all proprietary innovations (IP-2 through IP-6).
 """
 
 import sys
@@ -20,8 +20,8 @@ from datetime import datetime, timedelta
 
 
 def test_crypto_shredder():
-    """Test IP-02: Crypto Shredder"""
-    print("🔐 Testing IP-02: Crypto Shredder...")
+    """Test IP-2: Crypto Shredder"""
+    print("🔐 Testing IP-2: Crypto Shredder...")
     
     from governance_kernel.crypto_shredder import CryptoShredder
     
@@ -55,12 +55,12 @@ def test_crypto_shredder():
     assert decrypted_after is None, "Data should be unrecoverable after dissolution"
     print(f"   ✅ Data confirmed unrecoverable after dissolution")
     
-    print("   ✅ Crypto Shredder (IP-02) - PASSED\n")
+    print("   ✅ Crypto Shredder (IP-2) - PASSED\n")
 
 
 def test_silent_flux():
-    """Test IP-04: Silent Flux"""
-    print("🌊 Testing IP-04: Silent Flux...")
+    """Test IP-4: Silent Flux"""
+    print("🌊 Testing IP-4: Silent Flux...")
     
     from edge_node.frenasa_engine.silent_flux import SilentFlux, OutputMode
     
@@ -71,7 +71,7 @@ def test_silent_flux():
         typing_speed_wpm=60.0,
         click_frequency_per_min=15.0,
         avg_response_time_sec=2.0,
-        alert_dismissal_rate=0.05
+        alert_dismissal_rate=0.5
     )
     
     anxiety = flux.calculate_anxiety()
@@ -103,12 +103,12 @@ def test_silent_flux():
     print(f"   ✅ Filtered {len(test_inferences) - len(filtered)} low-priority alerts")
     assert len(filtered) < len(test_inferences), "Should filter some alerts under stress"
     
-    print("   ✅ Silent Flux (IP-04) - PASSED\n")
+    print("   ✅ Silent Flux (IP-4) - PASSED\n")
 
 
 def test_acorn_protocol():
-    """Test IP-03: Acorn Protocol"""
-    print("🌰 Testing IP-03: Acorn Protocol...")
+    """Test IP-3: Acorn Protocol"""
+    print("🌰 Testing IP-3: Acorn Protocol...")
     
     from hardware.acorn_protocol import AcornProtocol, DuressLevel
     
@@ -155,7 +155,7 @@ def test_acorn_protocol():
     print(f"   ✅ Anomalous authentication: duress={decision.duress_level.value}")
     assert decision.duress_level != DuressLevel.NORMAL, "Anomalous metrics should flag"
     
-    print("   ✅ Acorn Protocol (IP-03) - PASSED\n")
+    print("   ✅ Acorn Protocol (IP-3) - PASSED\n")
 
 
 def test_azure_oracle():
@@ -196,8 +196,8 @@ def test_azure_oracle():
 
 
 def test_5dm_bridge():
-    """Test IP-06: 5DM Bridge"""
-    print("📡 Testing IP-06: 5DM Bridge...")
+    """Test IP-6: 5DM Bridge"""
+    print("📡 Testing IP-6: 5DM Bridge...")
     
     from edge_node.frenasa_engine.five_dm_bridge import FiveDMBridge, DeliveryChannel, MessagePriority
     
@@ -232,12 +232,12 @@ def test_5dm_bridge():
     print(f"   ✅ Total nodes reached: {metrics.total_nodes_reached:,}")
     print(f"   ✅ CAC reduction: {metrics.cac_reduction_percent}%")
     
-    print("   ✅ 5DM Bridge (IP-06) - PASSED\n")
+    print("   ✅ 5DM Bridge (IP-6) - PASSED\n")
 
 
 def test_golden_thread():
-    """Test IP-05: Golden Thread"""
-    print("🧵 Testing IP-05: Golden Thread...")
+    """Test IP-5: Golden Thread"""
+    print("🧵 Testing IP-5: Golden Thread...")
     
     from edge_node.sync_protocol.golden_thread import GoldenThread
     
@@ -248,12 +248,12 @@ def test_golden_thread():
         cbs_signal={
             'location': 'Nairobi',
             'symptom': 'fever',
-            'timestamp': '2025-01-10T10:00:00Z'
+            'timestamp': '2025-1-10T10:00:00Z'
         },
         emr_record={
             'location': 'Nairobi',
             'diagnosis': 'malaria',
-            'timestamp': '2025-01-10T09:45:00Z'
+            'timestamp': '2025-1-10T09:45:00Z'
         },
         patient_id='PATIENT_TEST_001'
     )
@@ -269,7 +269,7 @@ def test_golden_thread():
     print(f"   ✅ Retention policy enforced (>180 days should archive)")
     assert should_archive, "Records > 180 days should be archived"
     
-    print("   ✅ Golden Thread (IP-05) - PASSED\n")
+    print("   ✅ Golden Thread (IP-5) - PASSED\n")
 
 
 def main():
@@ -280,12 +280,12 @@ def main():
     print()
     
     tests = [
-        ("IP-02: Crypto Shredder", test_crypto_shredder),
-        ("IP-04: Silent Flux", test_silent_flux),
-        ("IP-03: Acorn Protocol", test_acorn_protocol),
+        ("IP-2: Crypto Shredder", test_crypto_shredder),
+        ("IP-4: Silent Flux", test_silent_flux),
+        ("IP-3: Acorn Protocol", test_acorn_protocol),
         ("Azure Oracle", test_azure_oracle),
-        ("IP-06: 5DM Bridge", test_5dm_bridge),
-        ("IP-05: Golden Thread", test_golden_thread),
+        ("IP-6: 5DM Bridge", test_5dm_bridge),
+        ("IP-5: Golden Thread", test_golden_thread),
     ]
     
     passed = 0

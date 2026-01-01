@@ -66,7 +66,7 @@ class ComplianceCompiler:
 
 ## 3. Sovereign Certification
 This system maintains a 'Human-in-the-Loop' for all high-risk decisions.
-The 'Crypto-Shredder' (IP-02) is active and functional.
+The 'Crypto-Shredder' (IP-2) is active and functional.
 
 **Signed:** iLuminara Governance Kernel (Automated)
 """

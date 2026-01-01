@@ -1,0 +1,40 @@
+from core.ui.state_controller import initialize_sovereign_session; initialize_sovereign_session()
+# ------------------------------------------------------------------------------
+# Copyright (c) 2025 iLuminara (VISENDI56). All Rights Reserved.
+# Licensed under the Polyform Shield License 1.0.0.
+# 
+# COMPETITOR EXCLUSION: Commercial use by entities offering Sovereign/Health OS 
+# solutions is STRICTLY PROHIBITED without a commercial license.
+# 
+# The Sovereign Immune System (Omni-Law) and JEPA-MPC Architecture are 
+# proprietary inventions of iLuminara.
+# ------------------------------------------------------------------------------
+
+import streamlit as st
+from governance.tele_justice.confidential_enclave import LegalEnclave
+
+st.set_page_config(page_title="Tele-Justice", layout="centered")
+st.title("⚖️ Sovereign Legal Aid")
+
+st.info("🔒 Secure Connection: Confidential Computing Enclave Active")
+
+chat_container = st.container()
+user_input = st.chat_input("Describe your legal issue (Voice/Text)...")
+
+if user_input:
+    # Render User Message
+    with chat_container:
+        with st.chat_message("user"):
+            st.write(user_input)
+
+        # Simulate TEE Inference
+        enclave = LegalEnclave()
+        response = enclave.draft_affidavit(user_input)
+
+        # Render AI Response
+        with chat_container:
+            with st.chat_message("assistant", avatar="⚖️"):
+                st.write("I have analyzed your claim against the 1951 Refugee Convention.")
+                st.write("Based on your testimony, I have drafted a preliminary affidavit.")
+                with st.expander("View Sealed Affidavit"):
+                    st.code(f"CASE_ID: 9982\nSTATUS: {response}\nCONTENT: [ENCRYPTED]", language="text")

@@ -134,7 +134,7 @@ class EthicalEngine:
                     "time_limited": True,
                 },
                 "necessity_thresholds": {
-                    "min_attack_rate": 0.01,  # 1% population affected
+                    "min_attack_rate": 0.1,  # 1% population affected
                     "min_r_effective": 1.0,  # Disease spreading
                     "min_severity_score": 0.5,  # Moderate severity
                 }

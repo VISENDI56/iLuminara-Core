@@ -32,7 +32,7 @@ class AethericSentinelFeed:
             },
             "geometry": {
                 "x": 34.84,  # Simulated Dadaab Longitude
-                "y": 0.05    # Simulated Dadaab Latitude
+                "y": 0.5    # Simulated Dadaab Latitude
             }
         }
         

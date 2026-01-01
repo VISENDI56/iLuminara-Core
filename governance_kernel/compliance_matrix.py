@@ -32,4 +32,4 @@ FRAMEWORKS_47 = [
 
 def check_47_framework_compliance(action_metadata):
     """Real-time validation against all 47 frameworks"""
-        return {"status": "COMPLIANT", "frameworks_checked": len(FRAMEWORKS_47)}
+    return {"status": "COMPLIANT", "frameworks_checked": len(FRAMEWORKS_47)}

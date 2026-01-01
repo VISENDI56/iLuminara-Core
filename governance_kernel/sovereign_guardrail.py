@@ -67,7 +67,7 @@ class SovereignGuardrail:
         with open("governance_kernel/sectoral_laws.json", "r") as f:
             self.laws = json.load(f)
         # Mock Sanctions Database
-        self.sanctions_db = ["SC-9982", "TERROR-ORG-01"]
+        self.sanctions_db = ["SC-9982", "TERROR-ORG-1"]
 
         # ISO 27701 Privacy Extensions
         self.privacy_role = PrivacyRole.CONTROLLER

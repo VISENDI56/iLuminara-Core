@@ -10,7 +10,7 @@
 # ------------------------------------------------------------------------------
 
 """
-5DM Bridge (IP-06): API-Level Injection into African Mobile Networks
+5DM Bridge (IP-6): API-Level Injection into African Mobile Networks
 ═════════════════════════════════════════════════════════════════════════════
 
 Philosophy: "Zero-friction ignition. Infinite scale."
@@ -425,7 +425,7 @@ class FiveDMBridge:
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# IP-06: 5DM Bridge
+# IP-6: 5DM Bridge
 # 
 # "Zero-friction ignition. Infinite scale."
 # 

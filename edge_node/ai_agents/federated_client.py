@@ -299,7 +299,7 @@ class FederatedLearningClient(OfflineAgent):
         
         # Simulate gradient computation
         # In production: Compute actual gradients
-        gradients = [0.1, -0.05, 0.3, -0.15, 0.2]  # Simulated
+        gradients = [0.1, -0.5, 0.3, -0.15, 0.2]  # Simulated
         
         # Apply privacy mechanisms
         if apply_privacy:

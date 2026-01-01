@@ -19,7 +19,7 @@ st.title("🧬 Bio-Foundry: Clinical Intelligence")
 st.caption("Active Inference: Genomic Drift Analysis (18ms)")
 st.sidebar.success(f"Global Status: {state['status']}")
 
-# IP #03 Logic with error handling for the 18ms threshold
+# IP #3 Logic with error handling for the 18ms threshold
 try:
     target = st.text_input("Pathogen Sequence", "ATGC_SOVEREIGN_V1")
     if st.button("Synthesize"):
@@ -34,7 +34,7 @@ if st.button("Analyze Genomic Stability"):
         # Generate 100 variations of the sequence drift
         drift_data = pd.DataFrame({
             'Generation': np.arange(100),
-            'Stability': np.random.normal(0.98, 0.01, 100).cumprod(),
+            'Stability': np.random.normal(0.98, 0.1, 100).cumprod(),
             'Mutational_Load': np.random.exponential(1, 100)
         })
 

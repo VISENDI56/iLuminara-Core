@@ -23,7 +23,7 @@ class ModelDriftMonitor:
         """
         Calculates MSE drift. If > 0.15, triggers retraining.
         """
-        self.drift_score = random.uniform(0.01, 0.2) # Mock
+        self.drift_score = random.uniform(0.1, 0.2) # Mock
         if self.drift_score > 0.15:
             print(f"   🛑 [Drift] CRITICAL: Drift detected ({self.drift_score:.2f}). Retraining suggested.")
             return "RETRAIN_TRIGGERED"

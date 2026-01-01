@@ -51,7 +51,7 @@ def validate_action(request: Request):
             "scope": "district",
             "estimated_civilian_impact": 0.2,
             "medical_benefit": 0.8,
-            "attack_rate": 0.02,
+            "attack_rate": 0.2,
             "r_effective": 1.5,
             "severity_score": 0.6
         },

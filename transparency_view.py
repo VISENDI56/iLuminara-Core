@@ -80,7 +80,7 @@ def generate_narrative(seq_data):
     AZURE_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT") 
     AZURE_KEY = os.getenv("AZURE_OPENAI_API_KEY")
     AZURE_MODEL = os.getenv("AZURE_OPENAI_MODEL", "gpt-4o")
-    AZURE_API_VERSION = os.getenv("AZURE_OPENAI_API_VERSION", "2024-02-15-preview")
+    AZURE_API_VERSION = os.getenv("AZURE_OPENAI_API_VERSION", "2024-2-15-preview")
     
     if AZURE_ENDPOINT and AZURE_KEY:
         try:
@@ -124,7 +124,7 @@ def generate_narrative(seq_data):
 
 def _local_fallback(start_time, duration):
     return f"""
-    **INCIDENT REPORT: DADAAB-ZONE-04**
+    **INCIDENT REPORT: DADAAB-ZONE-4**
     
     At **{start_time}**, the Sovereign Intelligence Network detected a weak signal. 
     The **Golden Thread** fused this signal within **{duration} seconds**.
@@ -223,7 +223,7 @@ def generate_narrative(seq_data):
     duration = seq_data[-1]['offset_seconds']
     
     narrative = f"""
-    **INCIDENT REPORT: DADAAB-ZONE-04**
+    **INCIDENT REPORT: DADAAB-ZONE-4**
     
     At **{start_time}**, the Sovereign Intelligence Network detected a weak signal anomaly consistent with early-stage cholera vectors. 
     Unlike traditional response protocols (avg 78h latency), the **Golden Thread** fused this CBS signal with clinical EMR data within **{duration} seconds**.
@@ -247,7 +247,7 @@ try:
         st.markdown(f"<div style='background-color: #111; padding: 20px; border-left: 5px solid #00ff88; font-family: monospace;'>{narrative_text}</div>", unsafe_allow_html=True)
         
         if st.button("🖨️ PRINT OFFICIAL REPORT (PDF)"):
-            st.toast("Document signed and sent to secure print queue.")
+            st.toast("Document signed and sent to secure print(queue."))
 
 except Exception as e:
     st.warning("Awaiting Precision Sequence Data for Narrative Generation...")

@@ -40,7 +40,7 @@ class HSMLSyncAgent:
         if local_root == nexus_root_hash:
             return "SYNC_STATUS: ALIGNED (No Data Transfer Needed)"
         else:
-            return f"SYNC_STATUS: DRIFT DETECTED. Initiating IP-09 Protocol to push {len(local_data)} records."
+            return f"SYNC_STATUS: DRIFT DETECTED. Initiating IP-9 Protocol to push {len(local_data)} records."
 
 if __name__ == "__main__":
     agent = HSMLSyncAgent()

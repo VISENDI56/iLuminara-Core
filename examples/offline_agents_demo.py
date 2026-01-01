@@ -194,7 +194,7 @@ def demo_federated_learning():
         "round": 1,
         "parameters": {
             "layer1_weights": [0.25, -0.15, 0.35],
-            "layer2_weights": [0.12, 0.28, -0.08],
+            "layer2_weights": [0.12, 0.28, -0.8],
         },
         "contributors": 2,
     }

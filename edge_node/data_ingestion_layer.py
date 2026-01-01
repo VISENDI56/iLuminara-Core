@@ -9,9 +9,9 @@
 # proprietary inventions of iLuminara.
 # ------------------------------------------------------------------------------
 
-iLuminara Data Ingestion Layer v2.0 (FINAL)
-Scientific Kernel: Spatio-Temporal Decay & Source Weighting
-Reference: Rift Valley Fever Vector Models (Linthicum et al.)
+# iLuminara Data Ingestion Layer v2.0 (FINAL)
+# Scientific Kernel: Spatio-Temporal Decay & Source Weighting
+# Reference: Rift Valley Fever Vector Models (Linthicum et al.)
 
 
 import random
@@ -23,9 +23,9 @@ class IngestionEngine:
         self.data_lake = {"EMR": [], "CBS": [], "IDSR": []}
 
     def _generate_coords(self):
-        """Generates random coords near Dadaab (0.0512, 40.3129)"""
-        lat = 0.0512 + random.uniform(-0.01, 0.01)
-        lon = 40.3129 + random.uniform(-0.01, 0.01)
+        """Generates random coords near Dadaab (0.512, 40.3129)"""
+        lat = 0.512 + random.uniform(-0.1, 0.1)
+        lon = 40.3129 + random.uniform(-0.1, 0.1)
         return (lat, lon)
 
     def fetch_emr_data(self):
@@ -34,7 +34,7 @@ class IngestionEngine:
             "source": "CLINIC_BLOCK_B4",
             "type": "LAB_RESULT",
             "patient_id": f"P-{random.randint(1000,9999)}",
-            "diagnosis": "Vibrio cholerae 01",
+            "diagnosis": "Vibrio cholerae 1",
             "confirmed": True,
             "timestamp": datetime.now(),
             "coords": self._generate_coords()
@@ -116,6 +116,3 @@ class IngestionEngine:
             "live_feeds": [emr, cbs, idsr],
             "physics": {"dist_km": round(dist_km, 2), "time_lag_h": round(delta_t_days*24, 1)}
         }
-
-Current Date and Time (UTC - YYYY-MM-DD HH:MM:SS formatted): 2025-12-21 19:06:03
-Current User's Login: VISENDI56

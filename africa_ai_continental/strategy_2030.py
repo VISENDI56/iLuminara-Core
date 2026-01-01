@@ -52,7 +52,7 @@ class NationalAIStrategy:
             'monitoring_indicators': self.monitoring_indicators
         }
 
-class Rev 1Executor:
+class Rev1Executor:
     """Governance builder: national AI strategy templates; resource mobilization simulator; advisory board spawner"""
 
     def __init__(self):
@@ -1507,14 +1507,14 @@ class IntraAfricanPartnershipOracle:
                 'regional_distribution': {
                     'urban_centers': startup_context.get('urban_funding_percentage', 0.75),
                     'secondary_cities': startup_context.get('secondary_cities_percentage', 0.15),
-                    'rural_areas': startup_context.get('rural_funding_percentage', 0.05),
-                    'border_regions': startup_context.get('border_regions_percentage', 0.05)
+                    'rural_areas': startup_context.get('rural_funding_percentage', 0.5),
+                    'border_regions': startup_context.get('border_regions_percentage', 0.5)
                 }
             },
             'sectoral_concentration': {
                 'fintech_dominance': startup_context.get('fintech_percentage', 0.35),
                 'other_sectors': {
-                    'health_tech': startup_context.get('health_tech_percentage', 0.08),
+                    'health_tech': startup_context.get('health_tech_percentage', 0.8),
                     'edtech': startup_context.get('edtech_percentage', 0.10),
                     'agritech': startup_context.get('agritech_percentage', 0.12),
                     'other': startup_context.get('other_sectors_percentage', 0.35)
@@ -1649,7 +1649,7 @@ class ContinentalAIStrategyHarmonizer:
     """Main orchestrator for AU Continental AI Strategy harmonization"""
 
     def __init__(self):
-        self.phase_1_executor = Rev 1Executor()
+        self.phase_1_executor = Rev1Executor()
         self.innovation_engine = PeopleCentredInnovationEngine()
         self.regional_weaver = RegionalAlignmentWeaver()
         self.partnership_oracle = IntraAfricanPartnershipOracle()
