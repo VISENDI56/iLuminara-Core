@@ -4,8 +4,8 @@ Standard: Semantic Versioning (SemVer) 2.0.0
 """
 MAJOR = 2
 MINOR = 0
-PATCH = 168
-BUILD_METADATA = "Sovereign-Nairobi"
+PATCH = 171
+BUILD_METADATA = "Apex-Sovereign-Nexus-IT"
 
 def get_version_tuple():
     return (MAJOR, MINOR, PATCH)
