@@ -55,7 +55,7 @@
 
 ## 🎬 The 15-Minute Demo Script
 
-### Phase 1: "The System Thinking" (Minutes 0-3)
+### Rev 1: "The System Thinking" (Minutes 0-3)
 
 **Setup: Dashboard Running, WiFi Still ON**
 
@@ -84,7 +84,7 @@
 
 ---
 
-### Phase 2: "The Cut" (Minute 3-4)
+### Rev 2: "The Cut" (Minute 3-4)
 
 **NOW: Disconnect from WiFi**
 
@@ -109,7 +109,7 @@
 
 ---
 
-### Phase 3: "The Event" (Minutes 4-10)
+### Rev 3: "The Event" (Minutes 4-10)
 
 **Run the Outbreak Simulation**
 
@@ -120,16 +120,16 @@
 
 2. **Watch the simulation print output**
    ```
-   Phase 1: Background Noise (Hours 0-12)
+   Rev 1: Background Noise (Hours 0-12)
    Generated 23 background cases
    
-   Phase 2: Weak Signal Injection (Hours 12-24)
+   Rev 2: Weak Signal Injection (Hours 12-24)
    Injected 4 CBS weak signal events
    
-   Phase 3: EMR Confirmation (Hours 24-30)
+   Rev 3: EMR Confirmation (Hours 24-30)
    Injected 5 EMR confirmation events
    
-   Phase 4: Critical Phase (Hours 30-72)
+   Rev 4: Critical Phase (Hours 30-72)
    Generated 847 critical phase events
    ```
 
@@ -156,7 +156,7 @@
 
 ---
 
-### Phase 4: "The Reveal" (Minutes 10-13)
+### Rev 4: "The Reveal" (Minutes 10-13)
 
 **Refresh the Dashboard**
 
@@ -189,7 +189,7 @@
 
 ---
 
-### Phase 5: "The Legal Ledger" (Minute 13-15)
+### Rev 5: "The Legal Ledger" (Minute 13-15)
 
 **Demonstrate Compliance Enforcement**
 
@@ -252,7 +252,7 @@
 
 ## 🎯 The Closing Statement
 
-**After Phase 5, with WiFi still off, say:**
+**After Rev 5, with WiFi still off, say:**
 
 > *"Everything you just watched happened offline. No cloud. No internet. No surveillance from San Francisco. This is sovereignty. This is dignity. This is a health system that protects both the data and the people.*
 > 

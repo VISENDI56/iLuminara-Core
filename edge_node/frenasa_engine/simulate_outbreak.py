@@ -230,16 +230,16 @@ class OutbreakSimulator:
         print(f"   Location: Dadaab Refugee Complex")
         print(f"   Pathogen: Cholera (V. cholerae)")
 
-        # Phase 1: Background Noise (Hours 0-12)
+        # Rev 1: Background Noise (Hours 0-12)
         self._generate_background_noise()
 
-        # Phase 2: Weak Signal (Hours 12-24)
+        # Rev 2: Weak Signal (Hours 12-24)
         self._inject_weak_signal()
 
-        # Phase 3: EMR Confirmation (Hours 24-30)
+        # Rev 3: EMR Confirmation (Hours 24-30)
         self._inject_emr_confirmation()
 
-        # Phase 4: Critical Spike (Hours 30-72)
+        # Rev 4: Critical Spike (Hours 30-72)
         self._generate_critical_phase()
 
         # Calculate Z-scores for each time point
@@ -282,7 +282,7 @@ class OutbreakSimulator:
 
     def _generate_background_noise(self):
         """Generate random background noise (Hours 0-12): Normal illness patterns."""
-        print("\n📊 Phase 1: Background Noise (Hours 0-12)")
+        print("\n📊 Rev 1: Background Noise (Hours 0-12)")
 
         for zone, zone_data in DADAAB_ZONES.items():
             # Random number of routine cases per zone
@@ -314,7 +314,7 @@ class OutbreakSimulator:
 
     def _inject_weak_signal(self):
         """Inject early outbreak signal (Hours 12-24): First CBS reports of watery stool."""
-        print("📊 Phase 2: Weak Signal Injection (Hours 12-24)")
+        print("📊 Rev 2: Weak Signal Injection (Hours 12-24)")
 
         # Hour 12: First CBS report from Ifo Camp
         weak_signal_events = [
@@ -366,7 +366,7 @@ class OutbreakSimulator:
 
     def _inject_emr_confirmation(self):
         """Inject EMR confirmation (Hours 24-30): Clinical diagnoses emerge."""
-        print("📊 Phase 3: EMR Confirmation (Hours 24-30)")
+        print("📊 Rev 3: EMR Confirmation (Hours 24-30)")
 
         emr_confirmations = [
             {
@@ -418,7 +418,7 @@ class OutbreakSimulator:
 
     def _generate_critical_phase(self):
         """Generate critical phase (Hours 30-72): Exponential case growth, Z-Score spike."""
-        print("📊 Phase 4: Critical Phase (Hours 30-72)")
+        print("📊 Rev 4: Critical Phase (Hours 30-72)")
 
         # Exponential growth phase
         hour = 30

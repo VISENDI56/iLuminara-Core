@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Phase 147: Automated Key Rotation Script
+Rev 147: Automated Key Rotation Script
 Rotates Snowflake RSA keys monthly to maintain Moving Target Defense.
 """
 
@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def rotate_snowflake_keys():
-    print("[*] Initiating Key Rotation (Phase 147)...")
+    print("[*] Initiating Key Rotation (Rev 147)...")
 
     # Backup old keys
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

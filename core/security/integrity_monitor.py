@@ -16,7 +16,7 @@ def verify_iron_dome_v2():
         "numpy": "1.22.2"
     }
 
-    print("[*] Performing Sovereign Integrity Check (Phase 97)...")
+    print("[*] Performing Sovereign Integrity Check (Rev 97)...")
     for pkg, min_ver in hardened_baseline.items():
         try:
             installed = pkg_resources.get_distribution(pkg).version

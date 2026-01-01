@@ -439,7 +439,7 @@ def main():
     print("╔" + "═" * 78 + "╗")
     print("║" + " " * 20 + "REGULATORY Converged Architecture VERIFICATION" + " " * 23 + "║")
     print("║" + " " * 78 + "║")
-    print("║" + "  Phase 2: The Regenerative Compliance Oracle (RCO) v3.0" + " " * 21 + "║")
+    print("║" + "  Rev 2: The Regenerative Compliance Oracle (RCO) v3.0" + " " * 21 + "║")
     print("║" + "  45-Law Quantum Nexus Integration Test" + " " * 39 + "║")
     print("╚" + "═" * 78 + "╝")
     

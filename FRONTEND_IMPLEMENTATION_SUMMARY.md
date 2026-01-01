@@ -218,7 +218,7 @@ gcloud run services describe iluminara-web --format='value(status.url)'
 6. [ ] Configure .env file
 7. [ ] Deploy to Cloud Run
 
-### Phase 2 Enhancements (Future)
+### Rev 2 Enhancements (Future)
 - [ ] Real voice recording with `record` package
 - [ ] Real GPS with `geolocator` package
 - [ ] Audio playback functionality

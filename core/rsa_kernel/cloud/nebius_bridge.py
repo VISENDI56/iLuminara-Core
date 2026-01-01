@@ -7,7 +7,7 @@ load_dotenv()
 
 class NebiusOracle:
     """
-    Phase 138: The Nebius Oracle Bridge.
+    Rev 138: The Nebius Oracle Bridge.
     Powers the RSA with Qwen-2.5-Coder via High-Velocity Inference.
     """
     def __init__(self):

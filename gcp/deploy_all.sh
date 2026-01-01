@@ -66,20 +66,20 @@ fi
 
 echo ""
 echo "=========================================================="
-echo "Phase 1: Speech-to-Text API Setup"
+echo "Rev 1: Speech-to-Text API Setup"
 echo "=========================================================="
 ./gcp/setup_speech_api.sh
 echo ""
 
 echo "=========================================================="
-echo "Phase 2: FRENASA Symptom Extractor Deployment"
+echo "Rev 2: FRENASA Symptom Extractor Deployment"
 echo "=========================================================="
 # Note: This may fail if Docker image needs to be built manually
 ./gcp/deploy_symptom_model.sh || echo "⚠️  Model deployment requires manual Docker build"
 echo ""
 
 echo "=========================================================="
-echo "Phase 3: Alert Distribution System Setup"
+echo "Rev 3: Alert Distribution System Setup"
 echo "=========================================================="
 ./gcp/setup_alert_distribution.sh
 echo ""

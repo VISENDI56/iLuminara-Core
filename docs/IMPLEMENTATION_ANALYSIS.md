@@ -295,7 +295,7 @@ Successfully implemented a complete Flutter Web frontend for iLuminara-Core with
 
 ## Future Enhancements
 
-### Phase 2 Features
+### Rev 2 Features
 
 1. **Real Voice Recording:**
    - Integrate `record` package

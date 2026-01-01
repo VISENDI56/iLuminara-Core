@@ -19,8 +19,8 @@ class AgentToolRegistry:
             "logistics_route": "infrastructure.logistics.cuopt_agent",
             "legal_compliance": "governance_kernel.omni_law_interceptor",
             "spatial_query": "geospatial_esri.native_geoghost",
-            "cloud_distill": "ml_ops.model_foundry.nebius_distiller",  # Added Phase 60
-            "inference_router": "infrastructure.inference_router.hybrid_controller"  # Added Phase 60
+            "cloud_distill": "ml_ops.model_foundry.nebius_distiller",  # Added Rev 60
+            "inference_router": "infrastructure.inference_router.hybrid_controller"  # Added Rev 60
         }
 
     def access_tool(self, tool_name):

@@ -143,10 +143,10 @@
   - Status: **PAYOUT_RELEASED**
 
 - [x] **4-Phase Outbreak Progression**
-  - Phase 1 (0-12h): Background Noise [Z=0.34] 🟢
-  - Phase 2 (12-24h): Weak Signal CBS [Z=0.89] 🟡
-  - Phase 3 (24-30h): EMR Confirmation [Z=1.45] 🟠
-  - Phase 4 (30-72h): Critical Spike [Z=4.2+] 🔴
+  - Rev 1 (0-12h): Background Noise [Z=0.34] 🟢
+  - Rev 2 (12-24h): Weak Signal CBS [Z=0.89] 🟡
+  - Rev 3 (24-30h): EMR Confirmation [Z=1.45] 🟠
+  - Rev 4 (30-72h): Critical Spike [Z=4.2+] 🔴
   - Status: **4-PHASE PROGRESSION VERIFIED**
 
 - [x] **Synthetic Data Generation and Output**

@@ -162,19 +162,19 @@ python -m streamlit run demo_dashboard.py
 
 ## 📈 Next Steps (Production Path)
 
-### Phase 4: Edge Deployment
+### Rev 4: Edge Deployment
 - NVIDIA Jetson optimization
 - Offline-first data persistence
 - Device-local model inference
 - Field tablet distribution
 
-### Phase 5: Cloud Integration
+### Rev 5: Cloud Integration
 - GCP Vertex AI deployment
 - BigQuery data warehouse
 - Cloud Functions for sync
 - Pub/Sub event streaming
 
-### Phase 6: Real Compliance
+### Rev 6: Real Compliance
 - Actual 45-Law implementation
 - Live RCO monitoring
 - Regulatory API integrations

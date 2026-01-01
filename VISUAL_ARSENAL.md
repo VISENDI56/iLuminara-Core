@@ -229,10 +229,10 @@ streamlit run dashboard.py
 - Run outbreak simulator in terminal
 - Watch 4 phases unfold:
   ```
-  ✓ Phase 1: 13 background cases
-  ✓ Phase 2: 4 CBS weak signals
-  ✓ Phase 3: 5 EMR confirmations
-  ✓ Phase 4: 11,754 critical cases
+  ✓ Rev 1: 13 background cases
+  ✓ Rev 2: 4 CBS weak signals
+  ✓ Rev 3: 5 EMR confirmations
+  ✓ Rev 4: 11,754 critical cases
   ```
 - **Narration:** "Hour 12: First reports. Hour 24: Confirmation. Hour 30: Spike."
 
@@ -305,7 +305,7 @@ streamlit run dashboard.py
 | 1:00 | WiFi off | "Watch. The internet is going away." |
 | 1:30 | Still online | "System still running. No cloud. No internet." |
 | 2:00 | Run simulator | "Cholera outbreak. Starting now." |
-| 3:00 | Phase 4 | "Cases doubling. Z-score rising. Insurance trigger." |
+| 3:00 | Rev 4 | "Cases doubling. Z-score rising. Insurance trigger." |
 | 4:00 | Refresh | "Z-score 10.3. Bond released. Lives saved." |
 | 4:30 | Map red | "Every camp has cases. Automatic response." |
 | 5:00 | Governance | "Try to export data to foreign cloud..." |

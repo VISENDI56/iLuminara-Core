@@ -14,8 +14,8 @@
 System Seal - Master Verification Protocol
 ═════════════════════════════════════════════════════════════════════════════
 
-The "Golden Spike" that proves the Core IP Stack (Phase 1) and the
-Regulatory Brain (Phase 2) function as a single, unbreakable unit.
+The "Golden Spike" that proves the Core IP Stack (Rev 1) and the
+Regulatory Brain (Rev 2) function as a single, unbreakable unit.
 
 Scenario: "Project Blue Horizon" - A hypothetical outbreak in Kenya,
 a high-risk regulatory zone requiring multi-law compliance.

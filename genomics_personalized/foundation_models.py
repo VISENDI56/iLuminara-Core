@@ -725,7 +725,7 @@ class PipelineAccelerator:
             'accelerated_timeline_months': 60,
             'success_probability': 0.6,
             'resource_requirements': {'funding_required': 50000000},
-            'critical_path': ['Preclinical', 'Phase 1', 'Phase 2', 'Phase 3']
+            'critical_path': ['Preclinical', 'Rev 1', 'Rev 2', 'Rev 3']
         }
 
 class TrialSimulator:
@@ -887,7 +887,7 @@ class AdvancedGenomicsPersonalizedTherapeuticsAccelerator:
 
         age = patient_profile.get('age', 50)
         if 18 <= age <= 75:
-            eligibility.append("Age-eligible for most Phase 2/3 trials")
+            eligibility.append("Age-eligible for most Rev 2/3 trials")
 
         performance_status = patient_profile.get('performance_status', 'good')
         if performance_status in ['good', 'excellent']:

@@ -13,7 +13,7 @@
 Vertex AI Explainability Integration
 SHAP-based explainable AI for clinical decision support
 
-SSACS Self-Architected Module - Phase 3 Implementation
+SSACS Self-Architected Module - Rev 3 Implementation
 """
 
 import os

@@ -45,10 +45,10 @@
 - [ ] Run: `python edge_node/frenasa_engine/simulate_outbreak.py`
 - [ ] Watch output unfold:
   ```
-  Phase 1: Background Noise (13 cases)
-  Phase 2: Weak Signal (4 CBS reports)
-  Phase 3: EMR Confirmation (5 diagnoses)
-  Phase 4: Critical (11,754 cases) ← PAYOUT TRIGGERED
+  Rev 1: Background Noise (13 cases)
+  Rev 2: Weak Signal (4 CBS reports)
+  Rev 3: EMR Confirmation (5 diagnoses)
+  Rev 4: Critical (11,754 cases) ← PAYOUT TRIGGERED
   ```
 - [ ] Narrate: "Hour 12: First signals. Hour 24: Clinical confirmation. Hour 30: Exponential spike."
 - [ ] Wait for "✅ Simulation Complete" message
@@ -198,7 +198,7 @@
 | 1:00 | WiFi off | "Internet goes away. Watch." |
 | 1:30 | Still online | "System doesn't need WiFi." |
 | 2:00 | Simulator running | "Cholera signal emerges." |
-| 3:00 | Phase 4 output | "Cases doubling. Trigger threshold approaching." |
+| 3:00 | Rev 4 output | "Cases doubling. Trigger threshold approaching." |
 | 4:00 | Refresh begins | "Dashboard updating with 11,776 new events..." |
 | 4:15 | Metrics update | "Z-score: 0.34 → 10.3. RED ALERT." |
 | 4:30 | Bond changes | "PAYOUT_RELEASED. Insurance flows automatically." |

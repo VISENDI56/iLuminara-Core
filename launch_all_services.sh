@@ -107,7 +107,7 @@ else
     echo -e "${GREEN}✅ Field Validation already running on port 8503${NC}"
 fi
 
-# Sovereign Modules: Phase 25 Ultimate Singularity
+# Sovereign Modules: Rev 25 Ultimate Singularity
 echo "Launching Sovereign Modules..."
 ./launch_auth_demo.sh &
 ./launch_clinical_voice.sh &

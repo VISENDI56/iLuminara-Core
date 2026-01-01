@@ -39,7 +39,7 @@ class DependabotRemediator:
     def _create_sovereign_patch(self, package, version):
         """Simulates the creation of a verified security patch."""
         print(f"🛡️ [STBK] Verifying Patch for {package}...")
-        # Integration with Phase 134: Verification of the fix
+        # Integration with Rev 134: Verification of the fix
         print(f"✅ Patch for {package} verified against Sovereign Logic.")
 
 fixer = DependabotRemediator()

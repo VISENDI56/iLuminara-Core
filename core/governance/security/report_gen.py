@@ -28,7 +28,7 @@ This report verifies the operational stability of the iLuminara Sovereign OS und
 - **Encryption:** Kyber-1024 (Post-Quantum) Active
 
 ## 4. Hardware Integrity (NVIDIA Blackwell)
-During Phase 158, the B300 clusters maintained thermal stability at 68°C under 90% load. The BlueField-3 DPU successfully offloaded 100% of the STBK logging, preserving 0% impact on biosecurity inference cycles.
+During Rev 158, the B300 clusters maintained thermal stability at 68°C under 90% load. The BlueField-3 DPU successfully offloaded 100% of the STBK logging, preserving 0% impact on biosecurity inference cycles.
 
 ## 5. Conclusion
 iLuminara-Core is cleared for **National Health Sandbox** deployment in the Nairobi-Dadaab Nexus.

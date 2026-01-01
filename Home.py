@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from core.ui.state_controller import initialize_sovereign_session, check_system_integrity
+from version import get_full_version
 
 st.set_page_config(page_title="iLuminara OS | Sovereign Control", layout="wide", page_icon="🛡️")
 
@@ -9,7 +10,7 @@ st.set_page_config(page_title="iLuminara OS | Sovereign Control", layout="wide",
 initialize_sovereign_session()
 st.markdown("<style>.stMetric { background-color: #0e1117; border: 1px solid #31333F; padding: 10px; border-radius: 10px; }</style>", unsafe_allow_html=True)
 
-st.title("🛡️ iLuminara Sovereign OS")
+st.title(f'🛡️ iLuminara Sovereign OS {get_full_version()}')
 st.caption("Central Command: Nairobi-Dadaab Nexus | v1.57-Blackwell")
 
 # 1. SYSTEM INTEGRITY BAR
@@ -20,7 +21,7 @@ for i, (svc, status) in enumerate(integrity.items()):
 
 st.divider()
 
-# 2. THE NUCLEAR STEERING METRICS (Phase 136 + 152)
+# 2. THE NUCLEAR STEERING METRICS (Rev 136 + 152)
 c1, c2, c3, c4 = st.columns(4)
 with c1:
     st.metric("Aetheric Precision", f"{st.session_state.precision_score:.1%}", delta="Tesla-BRE Active")
@@ -36,7 +37,7 @@ tab1, tab2, tab3 = st.tabs(["🧬 Bio-Foundry", "📡 Ghost-Mesh", "⚖️ Legal
 
 with tab1:
     st.subheader("Micro-Fluidic Synthesis Queue")
-    # Placeholder for Phase 155 manufacturing data
+    # Placeholder for Rev 155 manufacturing data
     df = pd.DataFrame({
         "Binder ID": ["BIN-44", "BIN-92", "BIN-101"],
         "Target Pathogen": ["Respiratory-X", "S. Aureus-D", "Unknown-Viral-01"],
@@ -52,7 +53,7 @@ with tab2:
     st.line_chart(chart_data)
     st.caption("Real-time RF Harmonics from Dadaab Sector 4")
 
-    # STRESS MONITOR (Phase 158)
+    # STRESS MONITOR (Rev 158)
     st.subheader("🌋 Sovereign Stress-Test Monitor")
     if st.button("Simulate 10k Concurrent Queries"):
         with st.status("Swarming System with 10k Virtual Users...", expanded=True):
@@ -70,7 +71,7 @@ with tab3:
 st.sidebar.success("Sovereign OS Active")
 st.sidebar.info(f"Identity: {os.getenv('CLO_IDENTITY', 'GUEST_USER')}")
 
-# SWARM COMMAND (Phase 160)
+# SWARM COMMAND (Rev 160)
 st.divider()
 st.header("🐝 Agentic Swarm: Black Swan Mode")
 if st.button("Trigger 'Black Swan' Oracle Failure"):

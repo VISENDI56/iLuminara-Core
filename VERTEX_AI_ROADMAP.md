@@ -44,9 +44,9 @@ class VertexAIVoiceProcessor:
 - **Cost:** ~$0.006 per 15 seconds
 
 ### Timeline
-- **Phase 1 (Week 1-2):** Replace simulated transcription
-- **Phase 2 (Week 3-4):** Add conversation context understanding
-- **Phase 3 (Week 5-6):** Fine-tune with Dadaab medical terminology
+- **Rev 1 (Week 1-2):** Replace simulated transcription
+- **Rev 2 (Week 3-4):** Add conversation context understanding
+- **Rev 3 (Week 5-6):** Fine-tune with Dadaab medical terminology
 
 ---
 
@@ -90,9 +90,9 @@ class VertexAIForecaster:
 - **Cost:** ~$0.10 per prediction
 
 ### Timeline
-- **Phase 1 (Week 1-3):** Train model on historical Dadaab cholera data
-- **Phase 2 (Week 4-6):** Integrate with existing Z-score system
-- **Phase 3 (Week 7-8):** Validate with real outbreak data
+- **Rev 1 (Week 1-3):** Train model on historical Dadaab cholera data
+- **Rev 2 (Week 4-6):** Integrate with existing Z-score system
+- **Rev 3 (Week 7-8):** Validate with real outbreak data
 
 ---
 
@@ -145,9 +145,9 @@ class VertexAIDocumentProcessor:
 - **Cost:** ~$1.50 per 1000 pages
 
 ### Timeline
-- **Phase 1 (Week 1-4):** Train processor on Kenya health forms
-- **Phase 2 (Week 5-6):** Integrate with Golden Thread
-- **Phase 3 (Week 7-8):** Deploy to pilot sites
+- **Rev 1 (Week 1-4):** Train processor on Kenya health forms
+- **Rev 2 (Week 5-6):** Integrate with Golden Thread
+- **Rev 3 (Week 7-8):** Deploy to pilot sites
 
 ---
 
@@ -194,9 +194,9 @@ class VertexAIHealthcareAPI:
 - **Cost:** ~$0.01 per 1000 API calls
 
 ### Timeline
-- **Phase 1 (Week 1-3):** Set up FHIR store
-- **Phase 2 (Week 4-6):** Map existing data to FHIR
-- **Phase 3 (Week 7-9):** Deploy to production
+- **Rev 1 (Week 1-3):** Set up FHIR store
+- **Rev 2 (Week 4-6):** Map existing data to FHIR
+- **Rev 3 (Week 7-9):** Deploy to production
 
 ---
 
@@ -242,9 +242,9 @@ class VertexAIIoTIntegration:
 - **Cost:** ~$0.01 per device per day
 
 ### Timeline
-- **Phase 1 (Week 1-4):** Deploy pilot sensors at 5 water points
-- **Phase 2 (Week 5-8):** Integrate with outbreak predictor
-- **Phase 3 (Week 9-12):** Scale to all Dadaab water points
+- **Rev 1 (Week 1-4):** Deploy pilot sensors at 5 water points
+- **Rev 2 (Week 5-8):** Integrate with outbreak predictor
+- **Rev 3 (Week 9-12):** Scale to all Dadaab water points
 
 ---
 
@@ -301,9 +301,9 @@ class ConfidentialComputeDeployment:
 - **Cost:** +30% over standard VMs
 
 ### Timeline
-- **Phase 1 (Week 1-2):** Deploy confidential test environment
-- **Phase 2 (Week 3-4):** Migrate sensitive workloads
-- **Phase 3 (Week 5-6):** Validate compliance audit trail
+- **Rev 1 (Week 1-2):** Deploy confidential test environment
+- **Rev 2 (Week 3-4):** Migrate sensitive workloads
+- **Rev 3 (Week 5-6):** Validate compliance audit trail
 
 ---
 

@@ -15,7 +15,7 @@ class SovereignAgent:
         """
         Collaborates with neighboring agents to synthesize a response.
         """
-        # Distilling knowledge from the 'Neural Air-Lock' (Phase 150)
+        # Distilling knowledge from the 'Neural Air-Lock' (Rev 150)
         confidence = random.uniform(0.7, 0.95)
         
         # Collaborative Logic: "I see X, what do you see?"

@@ -430,25 +430,25 @@ To train effective Swahili medical AI agents, the following datasets are critica
 
 ## 6. Recommended Implementation Roadmap
 
-### Phase 1: Proof of Concept (Month 1-2)
+### Rev 1: Proof of Concept (Month 1-2)
 - [ ] Deploy Dialogflow CX Swahili symptom triage agent (europe-west4 region)
 - [ ] Integrate Cloud Translation API with edge node (offline caching)
 - [ ] Test Gemini Pro for Swahili medical Q&A (non-PHI test data)
 - [ ] Establish VPC Service Controls for data boundary enforcement
 
-### Phase 2: Custom Model Training (Month 3-4)
+### Rev 2: Custom Model Training (Month 3-4)
 - [ ] Collect and annotate 10,000 Swahili medical texts (IRB approval required)
 - [ ] Fine-tune mBERT on Swahili medical NER (Vertex AI)
 - [ ] Train custom symptom classifier (Swahili → ICD-10 codes)
 - [ ] Benchmark accuracy against English medical NLP baselines
 
-### Phase 3: Hybrid Deployment (Month 5-6)
+### Rev 3: Hybrid Deployment (Month 5-6)
 - [ ] Deploy lightweight Swahili NLP models on NVIDIA Jetson Orin (edge)
 - [ ] Implement sync protocol: edge ↔ cloud (encrypted, de-identified)
 - [ ] Enable patient consent management for cloud AI features
 - [ ] Conduct user acceptance testing with Swahili-speaking health workers
 
-### Phase 4: Production Rollout (Month 7-12)
+### Rev 4: Production Rollout (Month 7-12)
 - [ ] Scale Dialogflow CX agents to 10,000 patients/month
 - [ ] Monitor compliance (GDPR, KDPA) via automated audits
 - [ ] Publish Swahili medical AI performance metrics (peer-reviewed journal)

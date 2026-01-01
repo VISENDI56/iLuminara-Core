@@ -7,7 +7,7 @@ from core.system_boot import boot_iluminara
 def simulate_recursion_attack():
     """Attack simulation targeting CVE-2025-4565 (Protobuf)"""
     print("[RED-TEAM] Injecting deeply nested recursive payload...")
-    # Because of our Phase 96 fix, this should be caught by the Kernel Gate.
+    # Because of our Rev 96 fix, this should be caught by the Kernel Gate.
     # In a vulnerable system, this would trigger a RecursionError.
     try:
         from google.protobuf.internal import decoder

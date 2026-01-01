@@ -17,7 +17,7 @@ class AethericSentinelFeed:
         """
         Extracts biometrics and pushes to the Esri Spatiotemporal Cloud.
         """
-        # Analyze the frequency via Phase 135
+        # Analyze the frequency via Rev 135
         analysis = bre_sensor.analyze_etheric_field(rf_signal)
         
         # Construct the 'Sentinel Packet'

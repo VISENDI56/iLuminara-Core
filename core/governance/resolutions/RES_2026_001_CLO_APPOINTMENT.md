@@ -56,7 +56,7 @@ The Company agrees to indemnify the CLO to the fullest extent permitted by law (
 
 **CRYPTOGRAPHIC WITNESS:**
 * **Git Commit Hash:** `(Pending Merge)`
-* **Kernel State:** Oracle-Stable (Phase 130)
+* **Kernel State:** Oracle-Stable (Rev 130)
 * **Z3-Verification:** `SAT`
 
 ---

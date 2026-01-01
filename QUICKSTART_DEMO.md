@@ -53,10 +53,10 @@ http://localhost:8501
 - Run: `python edge_node/frenasa_engine/simulate_outbreak.py`
 - Watch output as simulation progresses:
   ```
-  Phase 1: Background Noise (13 cases)
-  Phase 2: Weak Signal (4 CBS reports)
-  Phase 3: EMR Confirmation (5 diagnoses)
-  Phase 4: Critical Spike (11,754 cases) ← PAYOUT TRIGGERED
+  Rev 1: Background Noise (13 cases)
+  Rev 2: Weak Signal (4 CBS reports)
+  Rev 3: EMR Confirmation (5 diagnoses)
+  Rev 4: Critical Spike (11,754 cases) ← PAYOUT TRIGGERED
   ```
 
 ### ✅ Step 4: Refresh Dashboard (1 min)

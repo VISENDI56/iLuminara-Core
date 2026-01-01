@@ -13,7 +13,7 @@
 Bio-Interface API
 Somatic simulation and biometric authentication endpoints
 
-SSACS Self-Architected Module - Phase 3 Implementation
+SSACS Self-Architected Module - Rev 3 Implementation
 """
 
 from fastapi import FastAPI, HTTPException
