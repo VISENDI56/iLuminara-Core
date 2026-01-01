@@ -49,6 +49,7 @@ __pycache__/
 .Python
 
 # Virtual environment
+.venv/
 .Python
 build/
 develop-eggs/
