@@ -1,3 +1,4 @@
+from core.ui.state_controller import initialize_sovereign_session; initialize_sovereign_session()
 # ------------------------------------------------------------------------------
 # Copyright (c) 2025 iLuminara (VISENDI56). All Rights Reserved.
 # Licensed under the Polyform Shield License 1.0.0.

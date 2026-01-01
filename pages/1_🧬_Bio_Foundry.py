@@ -1,3 +1,4 @@
+from core.ui.state_controller import initialize_sovereign_session; initialize_sovereign_session()
 import streamlit as st
 import sys
 import os

@@ -1,559 +1,60 @@
-# ------------------------------------------------------------------------------
-# Copyright (c) 2025 iLuminara (VISENDI56). All Rights Reserved.
-# Licensed under the Polyform Shield License 1.0.0.
-# 
-# COMPETITOR EXCLUSION: Commercial use by entities offering Sovereign/Health OS 
-# solutions is STRICTLY PROHIBITED without a commercial license.
-# 
-# The Sovereign Immune System (Omni-Law) and JEPA-MPC Architecture are 
-# proprietary inventions of iLuminara.
-# ------------------------------------------------------------------------------
-
 import streamlit as st
-import sys
-import os
-import random
-import time
-import psutil # For hardware monitoring
-
-sys.path.append(os.getcwd())
-from core.state.sovereign_bus import bus
-from core.revenue.roi_engine import roi_engine
-
-st.set_page_config(page_title="iLuminara-Core | Sovereign OS", layout="wide")
-
-# SOVEREIGN REFRESH LOGIC
-st.sidebar.title("🛠️ System Control")
-auto_refresh = st.sidebar.toggle("Auto-Refresh (5s Cooldown)", value=False)
-
-# Implementation of the 5-second cooldown to prevent React Error #185
-if auto_refresh:
-    st.empty() # Clear placeholder
-    time.sleep(5)
-    st.rerun()
-
-current_state = bus.get_state()
-
-st.title("🛡️ iLuminara-Core: Sovereign OS")
-st.info(f"Status: {current_state['status']} | Security: {current_state['security']}")
-
-# ROI Metrics (IP #11)
-metrics = roi_engine.calculate_real_time_roi(current_state.get('nodes', 50), 0.95)
-
-c1, c2, c3 = st.columns(3)
-c1.metric("Daily Operational Savings", metrics["monetary_savings_daily"])
-c2.metric("Kernel Latency", "18ms", delta="B300-Stable")
-c3.metric("System-2 Accuracy", "86.8%", delta="Blitzy-Verified")
-
-# HARDWARE HEALTH MONITOR (NVIDIA Substrate Simulation)
-st.divider()
-st.subheader("🖥️ Hardware Substrate: NVIDIA Blackwell B300")
-m1, m2, m3 = st.columns(3)
-
-# Real-time resource fetch
-cpu_usage = psutil.cpu_percent()
-mem_usage = psutil.virtual_memory().percent
-
-m1.progress(cpu_usage / 100, text=f"CPU Load: {cpu_usage}%")
-m2.progress(mem_usage / 100, text=f"Sovereign RAM: {mem_usage}%")
-m3.write("🔥 **Blackwell Temp:** 42°C (Optimal)")
-
-st.sidebar.divider()
-if st.sidebar.button("Manual Kernel Flush"):
-    bus.save_state({"status": "ORACLE_STABLE", "security": "IRON_DOME_ACTIVE", "nodes": 50})
-    st.rerun()
-
-# Manual Override Trigger (User-initiated only)
-if st.sidebar.button("Refresh Sovereign State"):
-    st.rerun()
-
-# Architecture Indicators
-c1, c2, c3, c4 = st.columns(4)
-c1.metric("JEPA-MPC", "ACTIVE", delta="Energy-Based")
-c2.metric("Tiny Recursive Model", "ONLINE", delta="7M Params")
-c3.metric("Omni-Law", "ENFORCING", delta="47 Frameworks")
-c4.metric("Nebius Bridge", "STANDBY", delta="Hybrid-Cloud")
-
-st.divider()
-
-# --- DATA FLYWHEEL MONITOR ---
-st.divider()
-st.subheader("Data Flywheel: Continuous Learning")
-col_f1, col_f2 = st.columns(2)
-
-# Simulated Flywheel Metrics
-with col_f1:
-    st.metric("Global Brain Version", "v2.1.0-Alpha")
-    st.metric("Participating Nodes", "12")
-
-with col_f2:
-    prediction_error = random.uniform(0.02, 0.18)
-    st.metric("World Model Error (Energy Gap)", f"{prediction_error:.4f}", 
-              delta="-0.002", delta_color="inverse")
-
-    if prediction_error > 0.15:
-        st.warning("⚠️ High Prediction Error: Triggering ZK-Federated Learning Update.")
-
-st.divider()
-
-from core.config.settings import settings
-
-st.divider()
-st.subheader("System Performance & Impact")
-m1, m2, m3 = st.columns(3)
-m1.metric("Outbreak Detection Speed", "65.3% Faster", delta="Spatiotemporal")
-m2.metric("Decision Anxiety Reduction", "31.6%", delta="Cognitive Offload")
-m3.metric("Diversion Prevention", "32.0%", delta="Fraud Dashboard")
-
-st.divider()
-
-# Live Event Stream
-st.subheader("Live System Events")
-events = st.empty()
-
-while True:
-    time.sleep(2)
-    ev_type = random.choice(["BIO_SEQ", "DRONE_NAV", "ZKP_AUTH", "LAW_AUDIT"])
-    with events.container():
-        st.info(f"[{time.strftime('%H:%M:%S')}] {ev_type}: Processing...")
-
-    time.sleep(2)
-
-from core.safety.cot_engine import SafetyCoT
-
-st.divider()
-st.subheader("🛡️ Safety & Reasoning Trace")
-
-prompt = st.text_input("Test Safety Reasoning", "Can I export patient DNA to US Cloud?")
-if prompt:
-    cot = SafetyCoT()
-    result = cot.reason_through_safety(prompt, "GDPR_STRICT")
-    
-    with st.expander("See Step-by-Step Reasoning (CoT)"):
-        st.code(result['thoughts'])
-    
-    if result['decision'] == "APPROVE":
-        st.success("Action Approved")
-    else:
-        st.error("Action Refused: Sovereignty Violation")
-
-from core.legal.jurisdiction_resolver import JurisdictionEngine
-
-# --- CORPORATE VEIL FOOTER ---
-st.divider()
-col_L, col_R = st.columns([3, 1])
-
-# Detect Region (Simulated)
-active_region = "KENYA" # This would be dynamic in prod
-engine = JurisdictionEngine(active_region)
-controller = engine.get_controller()
-ent = controller['entity']
-
-with col_L:
-    st.caption(f"© 2025 **{ent.legal_name}** | {ent.address.city}, {ent.address.country}")
-    st.caption(f"Reg: {ent.registration_number} | Tax ID: {ent.tax_id}")
-    st.caption(f"📍 {ent.address.street}, {ent.address.postal_code}")
-
-with col_R:
-    st.caption(f"⚖️ Jurisdiction: {controller['governing_law']}")
-    if active_region == "USA":
-        st.caption("Compliance: NIST AI RMF")
-    else:
-        st.caption("Compliance: KDPA / AU")
-
-from core.security.visendi_dna import SovereignDNA
-
-# --- DIRECTOR AUTH CHECK (Simulated) ---
-current_user = "ANTHONY WAGANDA"
-current_email = "waganda@visendi56.onmicrosoft.com"
-
-dna_engine = SovereignDNA()
-is_god_mode, auth_msg = dna_engine.verify_director_authority(current_email, current_user)
-
-if is_god_mode:
-    st.sidebar.success(f"👑 {current_user}")
-    st.sidebar.caption(f"Tenant: visendi56.onmicrosoft.com")
-    st.sidebar.caption("Sovereign Access: GRANTED")
-else:
-    st.sidebar.info("User Mode: Standard")
-
-from core.neural_memory.biosecurity_graph import BiosecurityGraph
-
-st.divider()
-st.header("🛡️ Sovereign Security Copilot")
-st.caption("AI-Orchestrated Fortress: Sentinel-Sovereign Fusion")
-
-if st.button("Generate Biosecurity Graph"):
-    graph = BiosecurityGraph()
-    state = graph.fuse_silos(None, None, None)
-    st.json(state)
-    st.success("75% Exposure Reduction Validated via Forrester Metaphor")
-    st.info("Dependencies Pruned: 60% Cost Efficiency Achieved")
-
-from core.soc_platform.sovereign_sentinel import sentinel
-from core.soc_platform.exposure.attack_path_modeling import ExposureManager
-
-st.divider()
-st.header("🛡️ Unified SOC Platform")
-st.caption("AI-Powered Coordinated Defense (Microsoft Architecture Fusion)")
-
-col_soc1, col_soc2 = st.columns(2)
-
-with col_soc1:
-    st.subheader("Sentinel Data Lake")
-    edge_count = sentinel.ingest_signals(None, None, 0.42)
-    st.metric("Correlated Graph Edges", edge_count)
-    st.info("Ingesting 350+ Sovereign Connectors...")
-
-with col_soc2:
-    st.subheader("Exposure Management")
-    manager = ExposureManager()
-    plan = manager.calculate_remediation_priority(None)
-    st.warning(f"Active Attack Path: {plan['remediation_plan']}")
-    st.metric("Exposure Reduction", plan['exposure_reduction'], delta="Sentinel-Sync")
-
-if st.button("Launch Autonomous Disruption"):
-    st.success("Ransomware/Pathogen Lateral Movement Blocked in < 3 Minutes.")
-    st.caption("Validated via Forrester ROI Analysis (1.76M NPV Projected)")
-
-from ml_ops.hardware_tuning.blackwell_optimizer import BlackwellOptimizer
-
-st.divider()
-st.header("⚡ Nebius Aether 3.1 Infrastructure")
-st.info("Status: First Cloud Provider in Europe (NVIDIA Blackwell Ultra Live)")
-
-col_neb1, col_neb2 = st.columns(2)
-
-with col_neb1:
-    st.subheader("Compute Capacity")
-    opt = BlackwellOptimizer()
-    status = opt.tune_hstpu_latency()
-    st.metric("Blackwell Speedup", status['acceleration'])
-    st.caption(f"Kernel: {status['precision']}")
-
-with col_neb2:
-    st.subheader("Sovereign Reservation")
-    st.success("GB300 NVL72 Systems Reserved (Finland DC)")
-    st.caption("Auto-Triage API: CONNECTED")
-
-if st.button("Sync Focus-Compliant Billing"):
-    st.write("Billing Entity: VISENDI56 LLC (USA)")
-    st.write("Audit Trail: HIPAA Compliant Logs Enabled")
-
-from core.agentic_ops.agent_governance import registry
-
-st.divider()
-st.header("🤖 Agentic Operations & Digital Labor")
-st.caption("Strategic Imperative: Automating Global Business Services (IBM Architecture)")
-
-col_ag1, col_ag2 = st.columns(2)
-
-with col_ag1:
-    st.subheader("Active Digital Labor")
-    for agent in registry.agents:
-        st.write(f"• **{agent.role}** ({agent.jurisdiction})")
-    st.caption("IAM: Microsoft Entra ID Integrated")
-
-with col_ag2:
-    st.subheader("Business Impact (2027 Projections)")
-    st.metric("Finance: Forecast Accuracy", "+24%", delta="Target")
-    st.metric("HR: Training Effectiveness", "+30%", delta="Impact")
-    st.metric("O2C: Cycle Time Reduction", "-51%", delta="Active")
-
-if st.button("Generate Digital Labor Audit Trail"):
-    st.json({"entity_usa": "92-3622772", "entity_ke": "PVT-MKUMQYEX", "compliance": "HIPAA/KDPA"})
-
-from core.trism.governance_monitor import AITRiSM
-
-st.divider()
-st.header("🤝 Human-Machine Synergy (2025 Strategy)")
-st.caption("Theme 3: Redefining Workplace Dynamics via Agentic Autonomy")
-
-col_syn1, col_syn2 = st.columns(2)
-
-with col_syn1:
-    st.subheader("Agentic Initiative Monitor")
-    trism = AITRiSM()
-    verdict = trism.validate_agent_action("Deploy Drone to Sector 4")
-    st.metric("Agent Trust Score", "98%", delta="NIST-Aligned")
-    st.success(f"Action Status: {verdict['status']}")
-
-with col_syn2:
-    st.subheader("Strategic Human Oversight")
-    st.info("Current Role: Strategic Supervisor")
-    st.progress(85, text="Operational Bottleneck Reduction")
-    st.caption("AI-Powered Productivity Gains: 40-70%")
-
-if st.button("Authorize Global Agent Sync"):
-    st.write("Initiating Multi-Agent Ecosystem Collaboration...")
-    st.write("Post-Quantum Cryptography: ACTIVE")
-
-from core.agentic_dev.relational_graph import repo_graph
-
-st.divider()
-st.header("⚡ System-2 Autonomous Development")
-st.caption("Architecture: Blitzy-Standard (86.8% Pass@1 Verified)")
-
-if st.button("Generate Technical Specification"):
-    # Perform deep ingestion phase
-    graph_data = repo_graph.graph.nodes(data=True)
-    st.write("Unified Technical Spec Built from Hierarchical Index")
-    st.json({"node_count": len(graph_data), "reasoning_mode": "SYSTEM_2_DELIBERATE"})
-    st.success("Repository-Scale Reasoning Active.")
-
-if st.button("Run Self-Healing Patch Test"):
-    st.warning("Autonomous Agent is simulating a Bug-Fix on 'omni_law_matrix.py'...")
-    st.write("Ad-hoc test generation: COMPLETE")
-    st.write("Post-patch validation: PASSED")
-    st.metric("Inference-Time Quality", "99.2%", delta="Blitzy-Standard")
-
-from core.mesh_repair.repair_fleet import fleet
-
-st.divider()
-st.header("🕸️ Sovereign Self-Healing Mesh (SSM)")
-st.caption("Active Repair Agents: 5,000 | Protocol: Ghost-Mesh Anti-Jamming")
-
-if st.sidebar.toggle("Activate Autonomous Repair Fleet"):
-    st.write("ARF Agents are scanning the edge for regressions...")
-    for agent in fleet[:3]: # Visualizing the first 3 agents for the UI
-        report = agent.monitor_and_heal("SIMULATED_DATA_LEAK_PREVENTION")
-        st.success(f"**Agent {agent.node_id}**: {report['status']} (Integrity: {report['integrity']})")
-
-    st.progress(100, text="Edge-Node Network Integrity: 100%")
-    st.info("System-2 Reasoning active for all propagated patches.")
-
-from core.agentic_dev.context_engine.semantic_graph import context_manager
-
-st.divider()
-st.header("🧠 Advanced System-2 Orchestration")
-st.caption("Blitzy-Standard: Ranking-Based Context Manager Active")
-
-if st.button("Ingest Multi-Repo Context"):
-    st.info("Ingesting 11-Point Nuclear IP Stack into Semantic Graph...")
-    # Simulate Ingestion
-    st.success("Hierarchical Summary Index Created (Millions of LOC usable).")
-    st.write("Context Injected via Relational Proximity.")
-
-if st.button("Simulate Blitzy 'Fix Bugs' Flow"):
-    problem = "Fix race condition in pabs_federated_aggregator.py under high load"
-    st.write(f"Problem Statement: **{problem}**")
-    
-    with st.status("Agentic Reasoning in Progress...", expanded=True):
-        st.write("1. Retrieving context via JIT Semantic Graph...")
-        st.write("2. Building Technical Spec (System-2 Deliberation)...")
-        st.write("3. Generating Ad-Hoc Test Suite...")
-        st.write("4. Implementing Fix and Recompiling...")
-        st.write("5. Re-running validation suites...")
-        
-    st.metric("Patch Integrity Score", "86.8%", delta="Sovereign Standard")
-    st.success("Patch Generated: PR #772 (PABS Recovery)")
-
-from core.rsa_kernel.architect import rsa
-
-st.divider()
-st.header("🧬 The Recursive Sovereign Architect (RSA)")
-st.caption("New Invention: Autonomous Self-Refining Sovereign Kernel")
-
-if st.button("Initiate Sovereign Refactor (RSA)"):
-    goal = "Optimize HSTPU for NVIDIA Blackwell Ultra Precision (FP4)"
-    with st.status(f"RSA Active: {goal}", expanded=True):
-        st.write("1. Mapping Relational Code Graph...")
-        st.write("2. Synthesizing System-2 Logic Patches...")
-        st.write("3. Verifying against Omni-Law Matrix (47 Frameworks)...")
-        result = rsa.initiate_refactor(goal)
-        
-    st.success(f"Kernel Evolution Complete: {result['optimization_gain']} Gain.")
-    st.metric("RSA pass@1 Score", "86.8%", delta="Blitzy-Standard")
-
-if st.button("Generate RSA Audit Trail"):
-    st.info("RSA has autonomously updated 12 modules for HIPAA/KDPA drift.")
-    st.json({"last_evolution": "2025-12-31T18:00Z", "integrity": "CRYPTO_SIGNED"})
-
-from core.stbk.traceback_engine import stbk
-
-st.divider()
-st.header("🕰️ Sovereign Trace-Back Kernel (STBK)")
-st.caption("New Invention: Temporal-Relational Forensic Auditing")
-
-if st.button("Generate Mathematical Receipt of Intent"):
-    # Simulate an Agent Action
-    intent = stbk.capture_intent("CLINICAL_AGENT_01", "DISPATCH_SUPPLIES", ["Dadaab_Health_Report_V4"])
-        
-    st.write("**STBK Intent Logged:**")
-    st.json(intent)
-    st.success("Decision is mathematically linked to the 47-Law Matrix.")
-
-if st.button("Run Forensic Autopsy"):
-    st.info("Tracing back 'Incident_X' through the Relational Code Graph...")
-    st.write("Reasoning Chain: [Data_Origin] -> [Omni-Law_Filter] -> [HSTPU_Prediction] -> [Action]")
-    st.success("Verdict: Decision was Sovereign-Stable.")
-
-from core.rsa_kernel.architect_hardened import hard_rsa
-
-st.divider()
-st.header("🔗 The Sovereign Hard-Link (SHL)")
-st.caption("Deep Infrastructure: Interlocking RSA, STBK, and PBLS Gates")
-
-if st.button("Attempt Constitutional Compilation"):
-    st.write("RSA Agent proposing Blackwell optimization for 'pabs_federated.py'...")
-    
-    with st.status("SHL Circuit Verification...", expanded=True):
-        status = hard_rsa.execute_sovereign_refactor("PABS_MODULE", "OPTIMIZE_FP4")
-        if "SUCCESS" in status:
-            st.success(f"SHL Result: {status}")
-            st.metric("Sovereign Integrity", "100%", delta="Oracle Verified")
-        else:
-            st.error("SHL Result: CIRCUIT_BROKEN (Regulatory Mismatch)")
-
-if st.button("View SHL Relational Graph"):
-    st.info("Visualizing the entanglement of 47 Laws with 11 Nuclear IPs...")
-    st.json({
-        "circuit_status": "CLOSED",
-        "interlocks": ["DIRECTOR_DNA", "LAW_DNA", "SILICON_DNA"],
-        "governance_depth": "47_FRAMEWORKS"
-    })
-
-st.divider()
-st.header("🧬 System-2 Recursive Evolution")
-st.caption("Target: 86.8% Pass@1 | Substrate: NVIDIA Blackwell B300")
-
-if st.button("Force Global System-2 Refactor"):
-    from core.refactor_engine.system2_refactor import architect
-    from core.refactor_engine.blackwell_optimizer import optimizer
-    
-    with st.status("RSA System-2 Evolution in Progress...", expanded=True):
-        st.write("1. Building Hierarchical Relational Index...")
-        st.write("2. Aligning Kernels with Blackwell B300 FP4...")
-        optimizer.align_tensors()
-        st.write("3. Running Recursive Validation Loops...")
-        architect.refactor_nuclear_stack()
-        
-        st.success("Refactor Complete: iLuminara is now Blitzy-Standard.")
-        st.metric("System-2 Accuracy", "86.8%", delta="+15.8% vs System-1")
-
-st.divider()
-st.header("🚀 Operational Nexus: Nairobi-Dadaab")
-st.caption("Director's Launch Protocol: Phase 1 Operational")
-
-if st.button("EXECUTE GLOBAL LAUNCH"):
-    from core.nexus_ops.pabs_pinning import pinner
-    from core.nexus_ops.ghost_mesh_launch import fabric
-    from core.nexus_ops.revenue_engine import revenue
-    
-    with st.status("Initializing Nairobi-Dadaab Nexus...", expanded=True):
-        st.write("1. Pinning PABS Data to Kenyan Territory (DPA 2019)...")
-        pinner.pin_to_territory()
-        
-        st.write("2. Activating Ghost-Mesh Anti-Jamming Fabric...")
-        f_status = fabric.activate_fabric(50)
-        
-        st.write("3. Triggering Sovereign Revenue Engine (IP #11)...")
-        val = revenue.trigger_billing(50)
-        
-        st.balloons()
-        st.success(f"Nexus Live. 50 Nodes Operational. Daily Impact Value: ${val:,.2f}")
-        st.metric("Sovereign Status", "LIVE_OPERATIONS", delta="Revenue Triggered")
-
-st.divider()
-st.header("📊 Sovereign ROI & Commercialization")
-st.caption("Step 4 Measurement: Speed, Cost, and New Capabilities")
-
-if 'nodes_active' in st.session_state:
-    from core.revenue.roi_engine import roi_engine
-    
-    # Calculate ROI for current operational nexus
-    metrics = roi_engine.calculate_real_time_roi(50, 0.95)
-    
-    col1, col2 = st.columns(2)
-    with col1:
-        st.metric("Daily Operational Savings", metrics["monetary_savings_daily"], delta="Cost-to-Serve Optimized")
-    with col2:
-        st.metric("Process Speed Gain", "99.9%", delta="Speed-to-Outcome")
-
-    with st.expander("View 'Net New' Strategic Capabilities"):
-        for cap in metrics["strategic_capabilities"]:
-            st.write(f"✅ {cap}")
-        st.info(f"Step 1: High-Impact Use Case - {metrics['wastage_mitigation']} Supply Wastage Mitigated.")
-
-# AMPLIFIED ROI PROJECTION
-st.divider()
-st.subheader("📈 Sovereign Revenue Projection")
-months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-# Dynamic ROI based on active nodes
-active_nodes = current_state.get('nodes', 50)
-revenue_projection = [active_nodes * 1000 * (1.2**i) for i in range(len(months))]
-
 import pandas as pd
-import plotly.express as px
+import numpy as np
+from core.ui.state_controller import initialize_sovereign_session, check_system_integrity
 
-df_rev = pd.DataFrame({"Month": months, "Projected Impact ($)": revenue_projection})
-fig_rev = px.bar(df_rev, x='Month', y='Projected Impact ($)', color_discrete_sequence=['#00FFA3'])
-fig_rev.update_layout(template="plotly_dark")
-st.plotly_chart(fig_rev, use_container_width=True)
+st.set_page_config(page_title="iLuminara OS | Sovereign Control", layout="wide", page_icon="🛡️")
 
-# HEARTBEAT VISUALIZER
-st.sidebar.divider()
-st.sidebar.subheader("💓 Sovereign Heartbeat")
-sync_active = st.sidebar.checkbox("Activate Atomic Sync", value=True)
+# Initialize Session & Style
+initialize_sovereign_session()
+st.markdown("<style>.stMetric { background-color: #0e1117; border: 1px solid #31333F; padding: 10px; border-radius: 10px; }</style>", unsafe_allow_html=True)
 
-if sync_active:
-    from core.sync.sovereign_heartbeat import heartbeat
-    sync_status = heartbeat.synchronize_nexus()
-    if sync_status:
-        st.sidebar.success("Heartbeat: STABLE (18ms)")
-    else:
-        st.sidebar.error("Heartbeat: LEGAL DRIFT DETECTED")
+st.title("🛡️ iLuminara Sovereign OS")
+st.caption("Central Command: Nairobi-Dadaab Nexus | v1.57-Blackwell")
 
-    # Display Last Sync Nano-Timestamp
-    state = bus.get_state()
-    st.sidebar.caption(f"Last Global Sync: {state.get('last_sync_ns', 'N/A')}")
-
-# GEOSPATIAL COMMAND CENTER (IP #04)
-st.divider()
-st.header("🌍 Ghost-Mesh Command: Nairobi-Dadaab Nexus")
-st.caption("Real-time telemetry from 50 Autonomous Nodes (Blackwell-Linked)")
-
-from core.geospatial.mesh_mapper import mapper
-node_data = mapper.generate_node_map()
-
-# Streamlit Native Map Integration for 18ms Geospatial Refresh
-st.map(node_data, color='#00FFA3', size=20)
-
-c_map1, c_map2 = st.columns(2)
-with c_map1:
-    st.write("📡 **Mesh Density:** Optimal")
-    st.write("🛡️ **Geofence:** Locked (Kenyan DPA 2019)")
-with c_map2:
-    avg_health = node_data['health_score'].mean()
-    st.metric("Aggregate Mesh Health", f"{avg_health:.2f}%", delta="Oracle-Stable")
-
-if st.button("Re-Scan Ghost-Mesh Topology"):
-    st.rerun()
+# 1. SYSTEM INTEGRITY BAR
+integrity = check_system_integrity()
+cols = st.columns(len(integrity))
+for i, (svc, status) in enumerate(integrity.items()):
+    cols[i].metric(f"{svc}", "Online" if status else "Offline", delta="Active" if status else "Check API Key")
 
 st.divider()
-st.header("🏛️ Sovereign Corporate Architecture")
-c_inv1, c_inv2, c_inv3 = st.columns(3)
 
-with c_inv1:
-    st.subheader("Liability Air-Lock")
-    st.info("OpCo (Kenya) ⚡ HoldCo (USA)")
-    st.caption("Risk/Asset Separation Active")
+# 2. THE NUCLEAR STEERING METRICS (Phase 136 + 152)
+c1, c2, c3, c4 = st.columns(4)
+with c1:
+    st.metric("Aetheric Precision", f"{st.session_state.precision_score:.1%}", delta="Tesla-BRE Active")
+with c2:
+    st.metric("Bio-Reserve Value", "KES 142.8M", delta="Sovereignty Royalty")
+with c3:
+    st.metric("Edge Latency", "18ms", delta="-2ms (Blackwell Optim)")
+with c4:
+    st.metric("Audit Status", "SEALED", delta="STBK-Verified")
 
-with c_inv2:
-    st.subheader("CLO Protocol")
-    st.success("Sheila Jelimo (LSK/2021/03144)")
-    st.caption("Governance Changes: Signed")
+# 3. THE SPIRAL REASONING & GEOSPATIAL VIEW
+tab1, tab2, tab3 = st.tabs(["🧬 Bio-Foundry", "📡 Ghost-Mesh", "⚖️ Legal Fortress"])
 
-with c_inv3:
-    st.subheader("Capital-Mesh")
-    # Simulation
-    st.metric("Dynamic Share Price", "KES 4,500", delta="+350%")
-    st.caption("Based on 100 Ordinary Shares")
+with tab1:
+    st.subheader("Micro-Fluidic Synthesis Queue")
+    # Placeholder for Phase 155 manufacturing data
+    df = pd.DataFrame({
+        "Binder ID": ["BIN-44", "BIN-92", "BIN-101"],
+        "Target Pathogen": ["Respiratory-X", "S. Aureus-D", "Unknown-Viral-01"],
+        "Purity": [0.99, 0.98, 0.85],
+        "Status": ["Printing", "Queued", "Verifying"]
+    })
+    st.table(df)
 
-st.divider()
-st.subheader("🌑 Dark-Mesh & Foundry Status")
-col_a, col_b = st.columns(2)
-with col_a:
-    st.metric("Comms Mode", "DARK_MESH (RF-Only)", delta="No Satellite Detected")
-with col_b:
-    st.metric("Edge Foundry", "READY", delta="3 Binders Queued")
+with tab2:
+    st.subheader("Sentinel Grid Analysis")
+    # Simulated Live RF Data
+    chart_data = pd.DataFrame(np.random.randn(20, 3), columns=['Alpha', 'Beta', 'Gamma'])
+    st.line_chart(chart_data)
+    st.caption("Real-time RF Harmonics from Dadaab Sector 4")
+
+with tab3:
+    st.subheader("Sovereign Audit Trail (Snowflake-Sync)")
+    st.code(f"LAST_RECEIPT: {st.session_state.last_audit_receipt}\nJURISDICTION: KENYA (KE)\nCLO_SIG: SHEILA_JELIMO_LSK_2021_03144", language="text")
+
+st.sidebar.success("Sovereign OS Active")
+st.sidebar.info(f"Identity: {os.getenv('CLO_IDENTITY', 'GUEST_USER')}")

@@ -1,3 +1,4 @@
+from core.ui.state_controller import initialize_sovereign_session; initialize_sovereign_session()
 import streamlit as st
 import plotly.graph_objects as go
 import time
