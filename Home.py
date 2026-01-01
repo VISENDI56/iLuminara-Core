@@ -529,3 +529,23 @@ with c_map2:
 
 if st.button("Re-Scan Ghost-Mesh Topology"):
     st.rerun()
+
+st.divider()
+st.header("🏛️ Sovereign Corporate Architecture")
+c_inv1, c_inv2, c_inv3 = st.columns(3)
+
+with c_inv1:
+    st.subheader("Liability Air-Lock")
+    st.info("OpCo (Kenya) ⚡ HoldCo (USA)")
+    st.caption("Risk/Asset Separation Active")
+
+with c_inv2:
+    st.subheader("CLO Protocol")
+    st.success("Sheila Jelimo (LSK/2021/03144)")
+    st.caption("Governance Changes: Signed")
+
+with c_inv3:
+    st.subheader("Capital-Mesh")
+    # Simulation
+    st.metric("Dynamic Share Price", "KES 4,500", delta="+350%")
+    st.caption("Based on 100 Ordinary Shares")
