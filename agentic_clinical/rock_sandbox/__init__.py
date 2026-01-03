@@ -1,0 +1,1 @@
+def spawn_isolated(cmd): return True
