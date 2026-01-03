@@ -1,0 +1,39 @@
+modules = ["bash", "web", "nodejs-20", "python-3.11"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+packages = ["cargo", "glibcLocales", "libiconv", "libxcrypt", "openssl", "pkg-config", "rustc"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Streamlit App"
+
+[[workflows.workflow]]
+name = "Streamlit App"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "streamlit run streamlit_app.py --server.address=0.0.0.0 --server.port=5000 --server.headless=true --server.enableCORS=false --server.enableXsrfProtection=false"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["streamlit", "run", "streamlit_app.py", "--server.address=0.0.0.0", "--server.port=5000", "--server.headless=true", "--server.enableCORS=false", "--server.enableXsrfProtection=false"]
