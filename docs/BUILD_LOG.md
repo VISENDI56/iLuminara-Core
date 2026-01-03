@@ -164,3 +164,7 @@ All revisions from foundational nuclear stack through Apex Integrity Sentinel.
 - Blackwell B300 Substrate Optimization Init
 - Committed: Sat Jan  3 06:06:30 AM UTC 2026
 
+## Build-Rev 184 - 2026-01-03
+- Z3-Gate Hybrid Heuristic Prototype
+- Committed: Sat Jan  3 06:06:31 AM UTC 2026
+
