@@ -11,4 +11,4 @@ enableXsrfProtection = true
 enableStaticServing = false
 
 [browser]
-gatherUsageStats = False
+gatherUsageStats = false

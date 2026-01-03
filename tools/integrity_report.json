@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-01-03T06:07:11.118572",
+  "overall_status": "FAIL",
+  "components": {
+    "1/7: VOX-SCRIBE": {
+      "status": "PASS",
+      "details": "Transcription: Transcribed: febrile patient 41.5C..."
+    },
+    "2/7: Z3-FORMAL-GATE": {
+      "status": "FAIL",
+      "details": "argument of type 'PrecisionVerdict' is not iterable"
+    },
+    "3/7: AGENTIC-TRIAGE": {
+      "status": "PASS",
+      "details": "{'status': 'Bio-Threat'}"
+    },
+    "4/7: BIONEMO-SUBSTRATE": {
+      "status": "FAIL",
+      "details": "HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /v1/health (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8001): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+    },
+    "5/7: ROCK-CONTAINMENT": {
+      "status": "PASS",
+      "details": "Sandbox spawned"
+    },
+    "6/7: IFLOW-ORCHESTRATION": {
+      "status": "PASS",
+      "details": "Memory persisted"
+    },
+    "7/7: BLACKWELL-SUBSTRATE": {
+      "status": "FAIL",
+      "details": "NVML: NVML Shared Library Not Found"
+    }
+  },
+  "summary": []
+}
