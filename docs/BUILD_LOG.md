@@ -172,3 +172,7 @@ All revisions from foundational nuclear stack through Apex Integrity Sentinel.
 - Sovereign Paging KV Extensions
 - Committed: Sat Jan  3 06:06:32 AM UTC 2026
 
+## Build-Rev 186 - 2026-01-03
+- BioNeMo Framework Docker Substrate Integration
+- Committed: Sat Jan  3 06:06:33 AM UTC 2026
+
