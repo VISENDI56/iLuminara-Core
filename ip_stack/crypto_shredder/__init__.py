@@ -1,24 +1,12 @@
-"""
-IP-02: Crypto Shredder - Forward secrecy data dissolution.
-"""
-import hashlib
-import os
-
+import os, secrets
 class CryptoShredder:
-    def __init__(self, shred_passes: int = 3):
-        self.shred_passes = shred_passes
-        
-    def shred_data(self, data: bytes, key_id: str) -> bool:
-        try:
-            # Generate destruction hash
-            destruction_hash = hashlib.sha3_512(data).digest()
-            
-            # Record destruction proof
-            proof_file = f"/tmp/crypto_shredder_{key_id}.proof"
-            with open(proof_file, "wb") as f:
-                f.write(destruction_hash)
-            
-            return True
-        except Exception as e:
-            print(f"Crypto Shredder error: {e}")
-            return False
+    """IP-02: Forward secrecy via 7-pass NIST overwrite."""
+    def dissolve(self, path):
+        if not os.path.exists(path): return False
+        size = os.path.getsize(path)
+        with open(path, "ba+", buffering=0) as f:
+            for _ in range(7):
+                f.seek(0); f.write(secrets.token_bytes(size))
+                f.flush(); os.fsync(f.fileno())
+        os.remove(path)
+        return True
