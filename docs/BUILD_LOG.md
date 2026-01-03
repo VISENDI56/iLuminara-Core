@@ -180,3 +180,7 @@ All revisions from foundational nuclear stack through Apex Integrity Sentinel.
 - Protein Binder Blueprint Pipeline v1
 - Committed: Sat Jan  3 06:06:35 AM UTC 2026
 
+## Build-Rev 188 - 2026-01-03
+- NIM Microservices Local Endpoint Wiring
+- Committed: Sat Jan  3 06:06:36 AM UTC 2026
+
