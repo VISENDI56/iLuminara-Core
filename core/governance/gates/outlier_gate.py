@@ -42,3 +42,4 @@ class PatientZeroGate:
         except Exception as e:
             logging.error(f"[Z3-GATE] Solver Failure: {e}. Defaulting to FP16 Safety.")
             return PrecisionVerdict.RETAIN_FP16
+from core.security.biometrics.acorn_somatic import AcornSomaticEngine
