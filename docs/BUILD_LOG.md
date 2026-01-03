@@ -168,3 +168,7 @@ All revisions from foundational nuclear stack through Apex Integrity Sentinel.
 - Z3-Gate Hybrid Heuristic Prototype
 - Committed: Sat Jan  3 06:06:31 AM UTC 2026
 
+## Build-Rev 185 - 2026-01-03
+- Sovereign Paging KV Extensions
+- Committed: Sat Jan  3 06:06:32 AM UTC 2026
+
