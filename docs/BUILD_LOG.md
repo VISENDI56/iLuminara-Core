@@ -156,3 +156,7 @@ All revisions from foundational nuclear stack through Apex Integrity Sentinel.
 - Foundational Nuclear IP Stack Refactor & JEPA-MPC Baseline
 - Committed: Sat Jan  3 06:06:28 AM UTC 2026
 
+## Build-Rev 182 - 2026-01-03
+- Post-Quantum Hardening Layer Activation
+- Committed: Sat Jan  3 06:06:29 AM UTC 2026
+
