@@ -1,0 +1,5 @@
+sovereign_arsenal:
+  proteins: [AMPLIFY, ESM-2-3B]
+  genomics: [Evo2, DNABERT]
+  imaging: [VISTA-3D]
+  voice: [Parakeet-TDT-1.1B]
