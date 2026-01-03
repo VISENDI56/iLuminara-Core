@@ -16,15 +16,15 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Streamlit App"
+args = "Sentinel Apex C2"
 
 [[workflows.workflow]]
-name = "Streamlit App"
+name = "Sentinel Apex C2"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "streamlit run streamlit_app.py --server.address=0.0.0.0 --server.port=5000 --server.headless=true --server.enableCORS=false --server.enableXsrfProtection=false"
+args = "streamlit run sentinel_ui.py --server.address=0.0.0.0 --server.port=5000 --server.headless=true --server.enableCORS=false --server.enableXsrfProtection=false"
 waitForPort = 5000
 
 [workflows.workflow.metadata]
@@ -36,4 +36,4 @@ externalPort = 80
 
 [deployment]
 deploymentTarget = "autoscale"
-run = ["streamlit", "run", "streamlit_app.py", "--server.address=0.0.0.0", "--server.port=5000", "--server.headless=true", "--server.enableCORS=false", "--server.enableXsrfProtection=false"]
+run = ["streamlit", "run", "sentinel_ui.py", "--server.address=0.0.0.0", "--server.port=5000", "--server.headless=true", "--server.enableCORS=false", "--server.enableXsrfProtection=false"]
