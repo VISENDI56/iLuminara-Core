@@ -88,9 +88,7 @@ if real_power:
 else:
     solar_input = st.sidebar.slider("Simulated Solar Input (W)", 0, 300, 150, step=5)
 
-# Battery calculation based on solar input
-battery_level = min(100, max(0, int((solar_input / 300) * 100)))
-st.sidebar.progress(battery_level, text=f"Battery Reserve: {battery_level}%")
+battery_level = st.sidebar.gauge("Battery Reserve", min_value=0, max_value=100, value=min(100, max(0, int((solar_input / 300) * 100))))
 
 if solar_input < 80:
     st.sidebar.error("⚠️ CRITICAL POWER: Emergency FP8 Mode Forced")
