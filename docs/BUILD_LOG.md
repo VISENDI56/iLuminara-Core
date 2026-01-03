@@ -188,3 +188,7 @@ All revisions from foundational nuclear stack through Apex Integrity Sentinel.
 - Generative Genomics Triage Module
 - Committed: Sat Jan  3 06:06:37 AM UTC 2026
 
+## Build-Rev 190 - 2026-01-03
+- cuEquivariance Geometric Acceleration
+- Committed: Sat Jan  3 06:06:38 AM UTC 2026
+
