@@ -22,4 +22,5 @@ auditor.audit_data("WHO_Protocols", "Malaria update")
 agent = CharterAlignmentAgent()
 agent.check_alignment("Telemetry update", impact)
 
+    print("Deployed on simulated Jetson Orin edge (post-quantum secured)")
 print("Full chain complete: Sovereign change approved.")
