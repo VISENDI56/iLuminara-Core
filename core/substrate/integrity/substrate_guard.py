@@ -21,3 +21,4 @@ class SubstrateGuard:
 if __name__ == "__main__":
     guard = SubstrateGuard()
     print(f"[*] Logic Clock: {guard.tick()} | Integrity: {guard.audit_memory()[1]}")
+from core.security.shredder.nuclear_dissolve import CryptoShredder
