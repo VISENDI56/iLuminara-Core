@@ -1,56 +1,9 @@
-__pycache__/
-*.pyc
-*.pyo
-*.py[cod]
-*$py.class
-*.so
-.Python
-
-# Flutter Web build artifacts
-frontend_web/build/
-frontend_web/.dart_tool/
-frontend_web/.flutter-plugins
-frontend_web/.flutter-plugins-dependencies
-frontend_web/.packages
-frontend_web/pubspec.lock
-
-# Hive databases
-*.hive
-*.lock
-
-# Firebase config (use environment variables instead)
-frontend_web/lib/firebase_options.dart
-
-# Environment variables
+# iLuminara Secret Scrubber
 .env
-.env.local
-.env.production
-
-# Snowflake RSA Keys (DO NOT COMMIT)
-snowflake_rsa_key.*
-*.p8
+*.pyc
+__pycache__/
+.cache/
+SOVEREIGN_CERTIFICATE.txt
 *.pem
 *.key
-
-# IDE
-.vscode/
-.idea/
-*.iml
-*.iws
-*.ipr
-
-# Python cache files
-__pycache__/
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-
-# Virtual environment
-.venv/
-.Python
-build/
-develop-eggs/
-dist/
+docs/_secrets/
