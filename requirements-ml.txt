@@ -2,6 +2,6 @@ numpy==1.26.0
 scipy==1.11.0
 fastapi==0.104.0
 uvicorn==0.23.0
-prometheus-client==0.23.1
-pydantic==2.12.5
+prometheus-client==0.17.1
+pydantic==2.4.2
 networkx>=3.0
