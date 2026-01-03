@@ -1,5 +1,26 @@
-sovereign_arsenal:
-  proteins: [AMPLIFY, ESM-2-3B]
-  genomics: [Evo2, DNABERT]
-  imaging: [VISTA-3D]
-  voice: [Parakeet-TDT-1.1B]
+# Sovereign Arsenal - Build-Rev 191 Compact Manifest
+# Unified registry for air-gapped sovereignty
+proteins:
+  - AMPLIFY
+  - ESM-2-3B
+genomics:
+  - Evo2
+  - DNABERT
+  - Geneformer
+single_cell:
+  - Geneformer
+small_molecules:
+  - MoIMIM
+  - MegaMolBART
+structure:
+  - AlphaFold2
+  - DiffDock
+  - ESMFold
+  - RFdiffusion
+  - ProteinMPNN
+imaging:
+  - VISTA-3D
+voice:
+  - Parakeet-TDT-1.1B
+acceleration:
+  - cuEquivariance
