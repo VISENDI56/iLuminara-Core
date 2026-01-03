@@ -1,0 +1,13 @@
+services:
+  alphafold2:
+    image: nvcr.io/nim/nvidia/alphafold2:latest
+    runtime: nvidia
+    ports: ["8001:8000"]
+  rfdiffusion:
+    image: nvcr.io/nim/nvidia/rfdiffusion:latest
+    runtime: nvidia
+    ports: ["8002:8000"]
+  proteinmpnn:
+    image: nvcr.io/nim/nvidia/proteinmpnn:latest
+    runtime: nvidia
+    ports: ["8003:8000"]
