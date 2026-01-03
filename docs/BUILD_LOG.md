@@ -152,3 +152,7 @@ All revisions from foundational nuclear stack through Apex Integrity Sentinel.
 - Anchored: Sat Jan  3 06:05:55 AM UTC 2026
 - Status: Permanently Reflected on GitHub
 
+## Build-Rev 181 - 2026-01-03
+- Foundational Nuclear IP Stack Refactor & JEPA-MPC Baseline
+- Committed: Sat Jan  3 06:06:28 AM UTC 2026
+
