@@ -1,105 +1,14 @@
-version: "3.9"
+version: '3.8'
 
 services:
-  fleet-command-agent:
-    image: nvcr.io/nvidia/fleet-command-agent:latest
-    runtime: nvidia
-    environment:
-      - CONFIDENTIAL_COMPUTING=TRUE
-  # vista3d-nim:
-  #   image: nvcr.io/nvidia/clara/vista3d-nim:latest
-  #   runtime: nvidia
-  #   ports:
-  #     - "8008:8000"
-  # --- CORE INTELLIGENCE & API ---
-  nexus-api:
-    build:
-      context: .
-      dockerfile: api/Dockerfile
+  iluminara:
+    build: .
     ports:
-      - "8000:8000"
-    environment:
-      - NODE_ENV=production
-      - ISO_STANDARDS=42001,27001,27701
-      - NIST_SCORE_TARGET=0.9
-    depends_on:
-      - ai-runner
-    networks:
-      - sovereign-net
-
-  # --- LOCALIZED AI RUNNER (Sovereign Edge) ---
-  ai-runner:
-    image: ollama/ollama:latest # Or internal OCI-compliant model runner
+      - "8501:8501"
     volumes:
-      - ./ml_models:/root/.ollama
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
-    networks:
-      - sovereign-net
-
-  # --- WAR ROOM DASHBOARD (UI) ---
-  nexus-dashboard:
-    build: ./frontend
-    ports:
-      - "3000:3000"
+      - .:/app
     environment:
-      - NEXT_PUBLIC_API_URL=http://nexus-api:8000
-    depends_on:
-      - nexus-api
-    networks:
-      - sovereign-net
-
-  # --- IOT INGESTION GATEWAY ---
-  iot-gateway:
-    image: eclipse-mosquitto:latest
-    ports:
-      - "1883:1883"
-    volumes:
-      - ./infrastructure/iot_layer/mosquitto.conf:/mosquitto/config/mosquitto.conf
-    networks:
-      - sovereign-net
-
-  # --- OBSERVABILITY (NIST MEASURE) ---
-  prometheus:
-    image: prom/prometheus:latest
-    volumes:
-      - ./infrastructure/observability/prometheus.yml:/etc/prometheus/prometheus.yml
-    ports:
-      - "9090:9090"
-    networks:
-      - sovereign-net
-
-  grafana:
-    image: grafana/grafana:latest
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=iluminara_secure
-    ports:
-      - "3001:3000"
-    depends_on:
-      - prometheus
-    networks:
-      - sovereign-net
-
-  # --- AUTONOMOUS COMPLIANCE ORACLE ---
-  compliance-oracle:
-    build: ./governance
-    command: python -m compliance_oracle
-    depends_on:
-      - nexus-api
-      - prometheus
-    networks:
-      - sovereign-net
-
-networks:
-  sovereign-net:
-    driver: bridge
-
-volumes:
-  sovereign-ledger:
-  ml_models:
-
+      - ILUMINARA_MODE=test
+      - ILUMINARA_CONTEXT=131072
+      - PYTHONPATH=/app
+    command: streamlit run dashboards/sovereign_control.py --server.port=8501 --server.address=0.0.0.0

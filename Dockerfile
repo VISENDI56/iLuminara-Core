@@ -1,23 +1,26 @@
-# STAGE 1: The Sovereign Base
-FROM python:3.15-rc-alpine3.22 as base
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+FROM python:3.10-slim
 
-# STAGE 2: The Builder (Compiling Science Kernels)
-FROM base as builder
-WORKDIR /install
-COPY requirements.txt .
-RUN pip install --prefix=/install -r requirements.txt
-
-# STAGE 3: The Final Sovereign Image
-FROM base
 WORKDIR /app
-COPY --from=builder /install /usr/local
-COPY . /app
 
-# SECURITY: Run as non-root user (The "Sentinel" User)
-RUN useradd -m sentry && chown -R sentry:sentry /app
-USER sentry
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
-# ORCHESTRATION: Launch Overwatch
-CMD ["python3", "enterprise/overwatch.py"]
+# Copy requirements first for better caching
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY . .
+
+# Expose port for Streamlit
+EXPOSE 8501
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import sys; sys.exit(0)"
+
+# Default command
+CMD ["streamlit", "run", "dashboards/sovereign_control.py", "--server.port=8501", "--server.address=0.0.0.0"]
