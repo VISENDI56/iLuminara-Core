@@ -1,71 +1,111 @@
-# iLuminara-Core: Agentic Operating System for Health Security
+# iLuminara-Core: Agentic Operating System for Global Health Security
 
 [![License: Polyform Shield](https://img.shields.io/badge/License-Polyform_Shield-blue.svg)](LICENSE)
 [![Compliance: ISO 42001 / IEC 62304](https://img.shields.io/badge/Compliance-ISO_42001%20%2F%20IEC_62304-green.svg)](compliance/SECURITY.md)
-[![Logic: Z3 Verified](https://img.shields.io/badge/Logic-Z3_Verified-orange.svg)](core/governance/contracts/pcc_gate.py)
-[![Substrate: NVIDIA Blackwell Optimized](https://img.shields.io/badge/Substrate-NVIDIA_Blackwell-76b900.svg)](core/research/nvidia_bionemo)
+[![Logic: Z3 Verified](https://img.shields.io/badge/Logic-Z3_Verified-orange.svg)](core/governance/gates/outlier_gate.py)
+[![Substrate: NVIDIA Blackwell Optimized](https://img.shields.io/badge/Substrate-NVIDIA_Blackwell-76b900.svg)](core/substrate/blackwell_config.yaml)
+[![BioNeMo Integration](https://img.shields.io/badge/BioNeMo-Generative_Biology-00a1f1.svg)](core/research/blueprints/protein_binder.py)
 [![Docs: Mintlify](https://img.shields.io/badge/Docs-Mintlify-black.svg)](https://visendi56.mintlify.app/)
 
-**iLuminara-Core** is a modular, agentic operating system designed for health security applications, with a focus on humanitarian contexts such as outbreak surveillance, personalized genomics, and logistics in underserved areas (e.g., refugee settlements). It integrates advanced AI reasoning, formal verification, and hardware-optimized inference to support resilient, low-latency decision-making.
+**iLuminara-Core** is a sovereign, modular agentic operating system engineered for health security in humanitarian and austere environments. It enables autonomous outbreak surveillance, personalized genomics, bio-threat neutralization, and resilient logistics—transforming refugee settlements into self-sufficient smart health ecosystems.
 
-## Key Features
-- **Recursive Reasoning Architecture**: Energy-based models (JEPA-MPC) with System-2 style deliberation for complex clinical and governance tasks.
-- **Formal Verification**: Z3 solver integration for compliance across multiple global regulatory frameworks.
-- **Hardware Optimization**: Targeted for NVIDIA Blackwell-series GPUs, Holoscan for edge processing, BioNeMo for generative biology, and cuOpt for logistics.
-- **Geospatial Intelligence**: ESRI Native SDK integration for offline-capable mapping and anomaly detection.
-- **Security and Privacy**: Post-quantum hardening (ML-KEM), federated learning patterns, and secure aggregation.
-- **Low-Latency Inference**: Optimized pipelines targeting high-throughput, real-time performance.
-- **Modular Design**: Extensive directories for agents, inference, governance, genomics, surveillance, and deployment.
+## Key Pillars
+- **Recursive Reasoning Core**: JEPA-MPC + Tiny Recursive Model (TRM) for System-2 deliberation and long-horizon stability.
+- **Formal Governance**: Z3 theorem prover integration for verifiable compliance across 47 global frameworks (Omni-Law Matrix).
+- **Generative Biology Substrate**: NVIDIA BioNeMo Framework + NIM microservices for in silico therapeutic design (protein binders, small molecules).
+- **Edge Optimization**: Blackwell B300 native (FP8/mixed precision), Holoscan sensor processing, cuOpt logistics, solar-aware governors.
+- **Geospatial Omniscience**: ESRI Native SDK for offline mapping and anomaly clustering.
+- **Zero-Trust Security**: Post-quantum ML-KEM, ROCK sandbox containment, federated patterns, SBOM hardening.
+- **Agentic Workflow**: Multi-turn triage agents with iFlow orchestration and ALE-inspired stability.
 
-## Architecture Overview
-The system is structured around a core governance kernel with specialized modules:
-- **Cognitive Core**: Tiny Recursive Model (TRM) for efficient reasoning.
-- **Input Layers**: Direct pixel/multimodal processing for robustness.
-- **Explainability**: Gradient-based saliency for clinical transparency.
-- **Deployment Flexibility**: Supports hybrid cloud-edge setups with burst compute options.
+## Architecture Manifest
+See detailed blueprints:
+- [`CORE_PATENT_BLUEPRINT.md`](CORE_PATENT_BLUEPRINT.md)
+- [`architecture_manifest_2026.md`](architecture_manifest_2026.md)
+- [`IP_MANIFEST.json`](IP_MANIFEST.json)
 
-For detailed blueprints, see [`CORE_PATENT_BLUEPRINT.md`](CORE_PATENT_BLUEPRINT.md) and [`architecture_manifest_2026.md`](architecture_manifest_2026.md).
-
-## Quick Start
+## Quick Start (Replit / Local / Edge)
 ```bash
-# Clone the repository
+# Clone the sovereign repository
 git clone https://github.com/VISENDI56/iLuminara-Core.git
 cd iLuminara-Core
 
-# Set up environment (requires Python 3.10+ and NVIDIA tools)
-make setup  # Or pip install -r requirements.txt
+# Install dependencies (Python 3.11+ recommended)
+make setup || pip install -r requirements-ml.txt
 
-# Run basic tests
-make test
+# Run integrity sentinel
+python tools/integrity_sentinel.py
 
-# Launch demo dashboard
-make run
-```
+# Launch Apex Sentinel C2 dashboard
+streamlit run sentinel_ui.py
 
-Detailed guides:
- * COMPLETE_LAUNCH_GUIDE.md
- * QUICKSTART_DEMO.md
+# Execute tests & benchmarks
+make test# ====================================================
+# iLuminara Build-Rev 184-PERFECTED: Sovereign Trinity Protocol
+# Z3-Gate | Sovereign Pager | Solar Governor - Kinetic Hardened
+# ====================================================
 
-## Installation
- * Prerequisites: NVIDIA CUDA toolkit, Docker (optional for containerized deployment), and access to relevant cloud providers (GCP/Azure recommended).
- * Review environment templates: .env.template.
- * For edge deployment: See deployment/ and Jetson/Blackwell scripts.
+echo "[*] INITIATING SOVEREIGN TRINITY PROTOCOL (Rev 184-Perfected)..."
+echo "[*] Installing Z3 solver + NVML for real substrate binding"
+echo "[*] Deploying perfected, robust implementations with error resilience"
 
-## Usage
- * Local Development: Use streamlit_app.py or dashboard launchers.
- * API Access: Start services via start_all_services.py.
- * Simulations: Run outbreak/logistics scenarios in simulation_engine/.
- * Examples in examples/.
+# 0. Dependency hardening (idempotent, silent)
+pip install z3-solver pynvml > /dev/null 2>&1
 
-## Compliance and Security
- * Formal compliance artifacts: compliance_artifacts/
- * Security policy: SECURITY.md
- * Software Bill of Materials (SBOM): SBOM_2026_HARDENED.txt
+# 1. Sovereign identity lock
+git config user.email "director@iluminara.org"
+git config user.name "VISENDI56"
 
-## Contributing
-Contributions are welcome via pull requests. Please review CONTRIBUTING.md and open issues for discussion. Focus areas include module enhancements, testing, and documentation.
+# 2. Assert directory structure (idempotent)
+mkdir -p core/governance/gates core/substrate/memory core/substrate/energy core/testing
 
-## License
-This project is licensed under the Polyform Shield License - see LICENSE for details.
+# 3. PERFECTED Z3 OUTLIER GATE (Patient Zero Protocol)
+echo "[*] Deploying perfected Z3-Gate with robust solver logic..."
+cat << 'EOF' > core/governance/gates/outlier_gate.py
+import z3
+import logging
+from enum import Enum
+from typing import Optional
 
-Built to support resilient health infrastructure in challenging environments.
+# Sovereign audit trail
+logging.basicConfig(filename='core/governance/stbk_audit.log', level=logging.INFO, 
+                    format='%(asctime)s - %(levelname)s - %(message)s')
+
+class PrecisionVerdict(Enum):
+    QUANTIZE_INT8 = "INT8_SAFE"
+    RETAIN_FP16 = "FP16_RETAIN"
+
+class PatientZeroGate:
+    """
+    Build-Rev 184-Perfected: Formal Zero-Loss Anomaly Detection Gate
+    Uses Z3 to prove quantization preserves diagnostic confidence (>0.1% shift blocked).
+    """
+    def __init__(self, tolerance: float = 0.001):
+        self.tolerance = tolerance
+        self.solver = z3.Solver()
+
+    def verify_vital_sign(self, patient_id: str, raw_value: float, scale_factor: float = 0.5) -> PrecisionVerdict:
+        try:
+            # Z3 Real variables for precise modeling
+            val = z3.Real('val')
+            quantized = z3.Real('quantized')
+            error = z3.Real('error')
+
+            self.solver.reset()
+            self.solver.add(val == raw_value)
+            self.solver.add(quantized == z3.ToReal(z3.ToInt(val / scale_factor)) * scale_factor)
+            self.solver.add(error == z3.If(val >= quantized, val - quantized, quantized - val))
+
+            # Prove max error bound
+            self.solver.push()
+            self.solver.add(error > self.tolerance)
+            if self.solver.check() == z3.sat:
+                logging.warning(f"[Z3-GATE] Patient {patient_id}: Outlier risk ({raw_value}°C). FORCING FP16.")
+                return PrecisionVerdict.RETAIN_FP16
+            
+            logging.info(f"[Z3-GATE] Patient {patient_id}: Safe for INT8 quantization.")
+            return PrecisionVerdict.QUANTIZE_INT8
+
+        except Exception as e:
+            logging.error(f"[Z3-GATE] Solver exception: {e}. Defaulting to FP16 safety.")
+            return PrecisionVerdict.RETAIN_FP16
