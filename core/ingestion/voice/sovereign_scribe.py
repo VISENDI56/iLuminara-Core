@@ -43,3 +43,4 @@ if __name__ == "__main__":
     result = scribe.process_transcription(test_input)
     print(f"[*] Input: {test_input}")
     print(f"[*] Result: {result}")
+from core.ingestion.security.logic_scrubber import RecursiveLogicScrubber
