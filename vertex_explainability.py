@@ -158,7 +158,7 @@ class ClinicalDecisionExplainer:
     def _register_clinical_models(self):
         """Register pre-trained clinical models"""
         # Mock model registration - in reality would load trained models
-        from sklearn.ensemble import RandomForestClassifier
+        from #sklearn.ensemble import RandomForestClassifier
 
         # Malaria diagnosis model
         malaria_model = RandomForestClassifier(n_estimators=100, random_state=42)
