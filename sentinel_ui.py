@@ -1,51 +1,44 @@
 import streamlit as st
+import json
+import time
+from datetime import datetime
 import plotly.graph_objects as go
-import random
 
-st.set_page_config(page_title="iLuminara Sovereign Dashboard", layout="wide")
-st.title("🛡️ Nairobi-Nexus Sovereign Control Panel")
-st.markdown("**Rev-217-OMEGA | January 04, 2026**")
-
-# Sidebar
-st.sidebar.header("🧬 Blackwell Substrate Control")
-solar_input = st.sidebar.slider("Simulated Solar Input (W)", 0, 300, 180, 10)
-battery_level = min(100, max(0, int((solar_input / 300) * 100)))
-
-# Plotly Battery Gauge
-fig = go.Figure(go.Indicator(
-    mode="gauge+number+delta",
-    value=battery_level,
-    domain={'x': [0, 1], 'y': [0, 1]},
-    title={'text': "Battery Reserve (%)"},
-    delta={'reference': 80},
-    gauge={
-        'axis': {'range': [None, 100]},
-        'bar': {'color': "cyan"},
-        'steps': [
-            {'range': [0, 30], 'color': 'red'},
-            {'range': [30, 70], 'color': 'yellow'},
-            {'range': [70, 100], 'color': 'green'}
-        ],
-        'threshold': {'line': {'color': "red", 'width': 4}, 'value': 30}
-    }
-))
-fig.update_layout(paper_bgcolor="black", font={'color': "white"})
-st.sidebar.plotly_chart(fig, use_container_width=True)
+st.set_page_config(page_title="Blackwell B300 Live", layout="wide")
+st.title("⚡ Live Blackwell B300 Simulation - Nairobi-Nexus")
+st.markdown("**Real-Time Telemetry | Rev-217-OMEGA | January 05, 2026**")
 
 # Auto-refresh
-refresh_interval = st.sidebar.selectbox("Auto-Refresh (sec)", [0, 10, 30, 60], index=2)
-if refresh_interval > 0:
-    st.sidebar.write(f"Refreshing every {refresh_interval}s")
-    import time
-    time.sleep(refresh_interval)
-    st.rerun()
+placeholder = st.empty()
+refresh = st.sidebar.selectbox("Refresh Rate", [5, 10, 30], index=0)
 
-# Main metrics
-st.header("Sovereign Posture")
-col1, col2, col3, col4 = st.columns(4)
-col1.metric("Trust Index", "97.4%", "↑0.3%")
-col2.metric("Frameworks", "50/50")
-col3.metric("Ethical Drift", "0.02 σ")
-col4.metric("PQC Proofs", "12.4k")
-
-st.success("🟢 Living Law Singularity Operational")
+while True:
+    try:
+        with open("telemetry/latest.json") as f:
+            data = json.load(f)
+    except:
+        data = {"system_status": "INITIALIZING"}
+    
+    with placeholder.container():
+        col1, col2, col3, col4 = st.columns(4)
+        col1.metric("Trust Index", f"{data.get('sovereign_trust_index', 0)}%", "Stable")
+        col2.metric("Battery", f"{data.get('battery_reserve_percent', 0)}%", f"{data.get('solar_input_w', 0)}W solar")
+        col3.metric("GPU Temp", f"{data.get('gpu_temperature_c', 0)}°C")
+        col4.metric("Inference Load", f"{data.get('inference_utilization_percent', 0)}%")
+        
+        # Gauge
+        fig = go.Figure(go.Indicator(
+            mode="gauge+number",
+            value=data.get('battery_reserve_percent', 50),
+            title={'text': "Battery Reserve"},
+            gauge={'axis': {'range': [None, 100]},
+                   'steps': [{'range': [0, 30], 'color': "red"},
+                             {'range': [30, 70], 'color': "yellow"},
+                             {'range': [70, 100], 'color': "green"}]}
+        ))
+        st.plotly_chart(fig, use_container_width=True)
+        
+        st.json(data, expanded=False)
+        st.success(f"🟢 {data.get('system_status', 'NOMINAL')} - Blackwell B300 Operational")
+    
+    time.sleep(refresh)
