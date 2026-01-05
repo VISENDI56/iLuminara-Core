@@ -152,7 +152,7 @@ pandocfilters==1.5.1
 parso==0.8.5
 partd==1.4.2
 pexpect==4.9.0
-pillow==12.0.0
+pillow==12.1.0
 pip-api==0.0.34
 pip-requirements-parser==32.0.1
 pip_audit==2.10.0
