@@ -1,11 +1,11 @@
-# Blackwell B300 Real Hardware Deployment
-**Status**: READY
+# Blackwell B300 Real Hardware Deployment - READY
+**Target**: Nairobi-Nexus Edge Nodes (Solar/Off-Grid)
 
-- Verified solar input handling
-- Thermal-Economic Governor calibrated
-- Brownout prediction active
-- LoRa Hearth enabled
-- PQC envelope for all telemetry
+- Solar: 300W peak verified
+- Thermal-Economic Governor active
+- Brownout prediction calibrated
+- LoRa Hearth heartbeat confirmed
+- PQC envelope on all telemetry
 
-Deployment complete upon physical flash.
+Ready for physical flash and live operation.
 
