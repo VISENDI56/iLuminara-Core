@@ -4,7 +4,7 @@ expertMode = true
 
 [nix]
 channel = "stable-25_05"
-packages = ["cargo", "glibcLocales", "libiconv", "libxcrypt", "openssl", "pkg-config", "rustc", "docker", "fetchutils", "solana-cli", "u-root-cmds"]
+packages = ["cargo", "glibcLocales", "libiconv", "libxcrypt", "openssl", "pkg-config", "rustc", "docker", "fetchutils", "solana-cli", "u-root-cmds", "gh"]
 
 [workflows]
 runButton = "Project"
