@@ -1,3 +1,5 @@
+from core.utils.logging_config import setup_sovereign_logging
+logger = setup_sovereign_logging()
 # ------------------------------------------------------------------------------
 # Copyright (c) 2025 iLuminara (VISENDI56). All Rights Reserved.
 # Licensed under the Polyform Shield License 1.0.0.

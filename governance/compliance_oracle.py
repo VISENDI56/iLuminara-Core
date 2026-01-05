@@ -1,3 +1,5 @@
+from core.utils.logging_config import setup_sovereign_logging
+logger = setup_sovereign_logging()
 """
 governance/compliance_oracle.py
 Autonomous validation of the 50-Framework Sovereign Substrate.

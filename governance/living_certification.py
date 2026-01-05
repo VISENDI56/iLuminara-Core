@@ -1,3 +1,5 @@
+from core.utils.logging_config import setup_sovereign_logging
+logger = setup_sovereign_logging()
 """
 governance/living_certification.py
 Real-time 50-Framework certification status with Predictive Analytics.

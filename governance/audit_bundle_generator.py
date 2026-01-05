@@ -1,3 +1,5 @@
+from core.utils.logging_config import setup_sovereign_logging
+logger = setup_sovereign_logging()
 """
 governance/audit_bundle_generator.py
 Automated generation of audit-ready evidence bundles for the 50-Framework Substrate.
