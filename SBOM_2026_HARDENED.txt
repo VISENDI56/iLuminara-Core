@@ -204,7 +204,7 @@ safetensors==0.7.0
 scikit-learn==1.8.0
 scipy==1.16.3
 SecretStorage==3.5.0
-Send2Trash==1.8.3
+Send2Trash==2.0.0
 setuptools==80.9.0
 shapely==2.1.2
 six==1.17.0
