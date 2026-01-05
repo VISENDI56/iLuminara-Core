@@ -37,7 +37,7 @@ if 'bench' not in st.session_state:
 
                 with c_left:
                     st.subheader("📡 Training Feed")
-                        if st.button("Inject Chaos (New Challenge)", use_container_width=True):
+                    if st.button("Inject Chaos (New Challenge)", use_container_width=True)::
                                 st.session_state.challenge = st.session_state.bench.fetch_challenge()
                                         st.session_state.solving = True
 

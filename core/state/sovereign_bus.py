@@ -1,28 +1,39 @@
 import json
-import os
+from pathlib import Path
+from datetime import datetime
+
+STATE_FILE = Path("core/state/state.json")
+DEFAULT_STATE = {
+    "schema_version": "2026.01",
+    "status": "BOOT",
+    "mode": "INIT",
+    "version": "1.0",
+    "last_updated": None
+}
 
 class SovereignBus:
-    """
-    Ensures state persistence across Ports 8501, 8502, and 8503.
-    """
-    def __init__(self, state_file="core/state/system_state.json"):
-        self.state_file = state_file
-        self.last_hash = None
-        if not os.path.exists(self.state_file):
-            self.save_state({"status": "ORACLE_STABLE", "security": "IRON_DOME_ACTIVE", "nodes": 50})
+    def __init__(self):
+        self.state_file = STATE_FILE
+        self._state = DEFAULT_STATE.copy()
+        self.load()
 
-    def get_state(self):
-        with open(self.state_file, 'r') as f:
-            return json.load(f)
+    def load(self):
+        if self.state_file.exists():
+            try:
+                self._state.update(json.loads(self.state_file.read_text()))
+            except:
+                self._state = DEFAULT_STATE.copy()
+        self._state["last_updated"] = datetime.utcnow().isoformat()
 
-    def save_state(self, data):
-        # Prevent React Error #185 by checking for data identity
-        new_hash = hashlib.md5(json.dumps(data, sort_keys=True).encode()).hexdigest()
-        if new_hash != self.last_hash:
-        with open(self.state_file, 'w') as f:
-                json.dump(data, f)
-            self.last_hash = new_hash
-            return True
-        return False # No change, no write, no re-render trigger
+    def save(self):
+        self.state_file.write_text(json.dumps(self._state, indent=2))
+
+    def get(self, key):
+        return self._state.get(key)
+
+    def set(self, key, value):
+        self._state[key] = value
+        self._state["last_updated"] = datetime.utcnow().isoformat()
+        self.save()
 
 bus = SovereignBus()

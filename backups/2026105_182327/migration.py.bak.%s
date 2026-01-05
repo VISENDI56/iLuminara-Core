@@ -1,0 +1,48 @@
+"""
+State Migration Logic - Auto-upgrade old state files
+Supports graceful evolution across versions
+"""
+
+import json
+import logging
+from datetime import datetime, timezone
+from .schema import DEFAULT_STATE, STATE_SCHEMA_VERSION, validate_state
+
+def load_state(file_path: str = "state.json") -> dict:
+    """Load and migrate state with error handling"""
+    try:
+        with open(file_path, "r") as f:
+            state = json.load(f)
+        logging.info(f"Loaded state from {file_path}")
+    except (FileNotFoundError):
+        logging.warning(f"State file not found - creating new: {file_path}")
+        state = DEFAULT_STATE.copy()
+    except (json.JSONDecodeError) as e:
+        logging.error(f"Corrupt state file {file_path}: {e} - resetting to default")
+        state = DEFAULT_STATE.copy()
+    except Exception as e:
+        logging.error(f"Unexpected error loading state: {e}")
+        state = DEFAULT_STATE.copy()
+    
+    # Migration
+    if "schema_version" not in state or state["schema_version"] != STATE_SCHEMA_VERSION:
+        logging.info(f"Migrating state from {state.get('schema_version', 'legacy')} to {STATE_SCHEMA_VERSION}")
+        state = {**DEFAULT_STATE, **state}  # Preserve existing keys
+        state["schema_version"] = STATE_SCHEMA_VERSION
+    
+    state["last_updated"] = datetime.now(timezone.utc).isoformat()
+    
+    if not validate_state(state):
+        logging.error("State validation failed after migration - using defaults")
+        state = DEFAULT_STATE.copy()
+    
+    save_state(state, file_path)
+    return state
+
+def save_state(state: dict, file_path: str = "state.json"):
+    try:
+        with open(file_path, "w") as f:
+            json.dump(state, f, indent=2)
+        logging.info(f"State saved to {file_path}")
+    except Exception as e:
+        logging.error(f"Failed to save state: {e}")

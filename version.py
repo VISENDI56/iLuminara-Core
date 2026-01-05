@@ -4,8 +4,8 @@ Standard: Semantic Versioning (SemVer) 2.0.0
 """
 MAJOR = 2
 MINOR = 56
-PATCH = 181
-BUILD_METADATA = "Apex-56-E2I-Deployed"
+PATCH = 217
+BUILD_METADATA = "OMEGA-217-Deployed"
 
 def get_version_tuple():
     return (MAJOR, MINOR, PATCH)

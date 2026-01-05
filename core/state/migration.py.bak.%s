@@ -1,0 +1,36 @@
+"""
+State Migration Logic - Auto-upgrade old state files
+Supports graceful evolution across versions
+"""
+
+import json
+from datetime import datetime, timezone
+from .schema import DEFAULT_STATE, STATE_SCHEMA_VERSION, validate_state
+
+def load_state(file_path: str = "state.json") -> dict:
+    """Load and migrate state"""
+    try:
+        with open(file_path, "r") as f:
+            state = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        state = DEFAULT_STATE.copy()
+        state["last_updated"] = datetime.now(timezone.utc).isoformat()
+    
+    # Migration rules
+    if "schema_version" not in state:
+        # Legacy → 2026.01
+        state.update(DEFAULT_STATE)
+        state["schema_version"] = STATE_SCHEMA_VERSION
+    
+    state["last_updated"] = datetime.now(timezone.utc).isoformat()
+    
+    if not validate_state(state):
+        raise ValueError("State validation failed after migration")
+    
+    save_state(state, file_path)
+    return state
+
+def save_state(state: dict, file_path: str = "state.json"):
+    with open(file_path, "w") as f:
+        json.dump(state, f, indent=2)
+

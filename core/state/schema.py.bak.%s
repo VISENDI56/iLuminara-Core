@@ -1,0 +1,29 @@
+"""
+Canonical State Schema with Versioning
+Schema Version: 2026.01
+"""
+
+STATE_SCHEMA_VERSION = "2026.01"
+
+DEFAULT_STATE = {
+    "schema_version": STATE_SCHEMA_VERSION,
+    "system_status": "INITIALIZING",
+    "mode": "SOVEREIGN",
+    "last_updated": "",
+    "trust_index": 0.0,
+    "ethical_drift": 0.0,
+    "battery_level": 0,
+    "offline_mode": True,
+    "pilot_active": False
+}
+
+INVARIANT_KEYS = ["schema_version", "system_status", "mode", "last_updated"]
+
+def validate_state(state: dict) -> bool:
+    """Validate state integrity and invariants"""
+    if state.get("schema_version") != STATE_SCHEMA_VERSION:
+        return False
+    for key in INVARIANT_KEYS:
+        if key not in state:
+            return False
+    return True
