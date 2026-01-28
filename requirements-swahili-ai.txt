@@ -16,6 +16,7 @@ grpcio>=1.59.0
 
 # Existing iLuminara dependencies (if not already installed)
 # Add these to main requirements.txt if needed
-urllib3>=1.26.19 # not directly required, pinned by Snyk to avoid a vulnerability
+urllib3>=2.6.3 # not directly required, pinned by Snyk to avoid a vulnerability
 zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
 requests>=2.32.2 # not directly required, pinned by Snyk to avoid a vulnerability
+pyasn1>=0.6.2 # not directly required, pinned by Snyk to avoid a vulnerability
